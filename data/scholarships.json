@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "review_method": "Official website review on 2026-11-11 during Phase 1 implementation. Curated discovery metadata only; no eligibility rules or application deadlines are extracted or published.",
+  "schemes": [
+    {
+      "slug": "aicte-pragati-degree",
+      "name": "AICTE Pragati Scholarship for Girl Students (Technical Degree)",
+      "description": "Scholarship support for girls pursuing technical degree education through AICTE.",
+      "ministry": "Ministry of Education",
+      "department": "All India Council for Technical Education (AICTE)",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": ["name", "description", "department", "status"],
+          "verification_notes": "The AICTE section identifies Pragati's technical degree variant. Listed means present in the official directory, not confirmation of an application window. The diploma variant is a separate listing."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": ["description", "ministry", "department"],
+          "verification_notes": "The Pragati and Saksham overview identifies AICTE as implementing organization under the Ministry of Education. No thresholds or geographic coverage are copied."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-saksham-degree",
+      "name": "AICTE Saksham Scholarship for Specially Abled Students (Technical Degree)",
+      "description": "Scholarship support through AICTE for students with disabilities pursuing technical degree education.",
+      "ministry": "Ministry of Education",
+      "department": "All India Council for Technical Education (AICTE)",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": ["name", "description", "department", "status"],
+          "verification_notes": "The AICTE section identifies Saksham's technical degree variant separately from its diploma variant. Only directory presence and basic scheme identity are recorded."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": ["description", "ministry", "department"],
+          "verification_notes": "The AICTE scheme overview supports the organization, ministry, and educational purpose. Eligibility values are outside the Phase 1 dataset."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-ishan-uday",
+      "name": "Ishan Uday Special Scholarship for the North Eastern Region",
+      "description": "UGC scholarship assistance to expand access to undergraduate education for students from India's North Eastern Region.",
+      "ministry": "Ministry of Education",
+      "department": "University Grants Commission (UGC)",
+      "category": "scholarship",
+      "applicability": "states",
+      "applicable_states": ["Arunachal Pradesh", "Assam", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Sikkim", "Tripura"],
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": ["name", "department", "status"],
+          "verification_notes": "The UGC section lists Ishan Uday. Directory presence is not an eligibility decision or application deadline guarantee."
+        },
+        {
+          "url": "https://www.ugc.gov.in/Scholarships/stu_Scholarship5",
+          "title": "UGC Ishan Uday scheme overview",
+          "publisher": "University Grants Commission",
+          "is_primary": false,
+          "supported_fields": ["name", "description", "department"],
+          "verification_notes": "UGC describes the scheme's objective as widening access to higher education for students of the North Eastern Region. Financial amounts are deliberately not stored."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": ["ministry", "department", "applicability"],
+          "verification_notes": "The UGC scholarship section explicitly enumerates the eight North Eastern domicile states and identifies UGC under the Ministry of Education. This supports the discovery filter only. Official pages differ in financial benefit descriptions, so no amounts or executable rules are recorded."
+        }
+      ]
+    },
+    {
+      "slug": "pm-yasasvi-top-class-school",
+      "name": "PM YASASVI Top Class School Education for OBC, EBC and DNT Students",
+      "description": "Scholarship assistance for OBC, EBC and DNT students attending identified schools under the school education component of PM YASASVI.",
+      "ministry": "Ministry of Social Justice and Empowerment",
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": ["name", "description", "department", "status"],
+          "verification_notes": "The backward classes section lists the school component separately from the college component. The umbrella scheme is not treated as a single scholarship."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": ["description", "ministry", "department"],
+          "verification_notes": "The PM YASASVI overview identifies the responsible ministry and department and describes the school component. Its complete geographic scope has not been verified for this dataset."
+        }
+      ]
+    },
+    {
+      "slug": "pm-usp-csss",
+      "name": "PM-USP Central Sector Scholarship for College and University Students (CSSS)",
+      "description": "Higher education scholarship assistance administered by the Department of Higher Education as a component of PM-USP.",
+      "ministry": "Ministry of Education",
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": ["name", "department", "status"],
+          "verification_notes": "The Department of Higher Education section lists CSSS under PM-USP. A renewal listing does not establish whether fresh applications are open."
+        },
+        {
+          "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2294003&lang=1&reg=6",
+          "title": "Ministry of Education update on academic assistance",
+          "publisher": "Press Information Bureau, Ministry of Education",
+          "is_primary": false,
+          "supported_fields": ["name", "description", "ministry", "department"],
+          "verification_notes": "The 3 August 2026 Ministry of Education release identifies CSSS as a PM-USP scholarship administered by the Department of Higher Education. No benefit values or eligibility rules are copied."
+        }
+      ]
+    }
+  ]
+}
