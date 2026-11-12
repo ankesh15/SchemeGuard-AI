@@ -35,11 +35,31 @@ services:
       CORS_ORIGINS: ${CORS_ORIGINS:-[]}
       SEED_DATA_PATH: ${SEED_DATA_PATH:-/app/data/schemes}
       SEED_DEMO_DATA: ${SEED_DEMO_DATA:-true}
+      DOCUMENT_STORAGE_ROOT: /var/lib/schemeguard/documents
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.6-flash}
+      GEMINI_TIMEOUT: ${GEMINI_TIMEOUT:-20}
+      GEMINI_MAX_RETRIES: ${GEMINI_MAX_RETRIES:-2}
+      GEMINI_MAX_REQUESTS: ${GEMINI_MAX_REQUESTS:-6}
+      GEMINI_MAX_INPUT_CHARS: ${GEMINI_MAX_INPUT_CHARS:-20000}
+      PDF_MAX_BYTES: ${PDF_MAX_BYTES:-10485760}
+      PDF_MAX_PAGES: ${PDF_MAX_PAGES:-50}
+      PDF_PARSE_TIMEOUT: ${PDF_PARSE_TIMEOUT:-25}
+      PDF_MAX_TEXT_CHARS: ${PDF_MAX_TEXT_CHARS:-200000}
+      DOCUMENT_DOWNLOAD_TIMEOUT: ${DOCUMENT_DOWNLOAD_TIMEOUT:-15}
+      CHUNK_SIZE: ${CHUNK_SIZE:-1800}
+      CHUNK_OVERLAP: ${CHUNK_OVERLAP:-160}
+      PROCESSING_TIMEOUT: ${PROCESSING_TIMEOUT:-90}
+      ADMIN_SESSION_HOURS: ${ADMIN_SESSION_HOURS:-8}
+      ADMIN_LOGIN_LIMIT: ${ADMIN_LOGIN_LIMIT:-10}
+      ADMIN_RATE_WINDOW_SECONDS: ${ADMIN_RATE_WINDOW_SECONDS:-900}
+      ADMIN_ALLOWED_ORIGINS: ${ADMIN_ALLOWED_ORIGINS:-["http://localhost:3000"]}
     ports:
       - "127.0.0.1:${API_PORT:-8000}:8000"
     volumes:
       - ./backend:/app
       - ./data:/app/data:ro
+      - document_data:/var/lib/schemeguard/documents
     networks:
       - backend
       - ingress
@@ -67,6 +87,7 @@ services:
       INTERNAL_API_URL: http://api:8000
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
       WATCHPACK_POLLING: "true"
+      ADMIN_ALLOWED_ORIGINS: ${ADMIN_ALLOWED_ORIGINS:-["http://localhost:3000"]}
     ports:
       - "127.0.0.1:${FRONTEND_PORT:-3000}:3000"
     volumes:
@@ -91,6 +112,7 @@ volumes:
   postgres_data:
   frontend_node_modules:
   frontend_next:
+  document_data:
 
 networks:
   backend:

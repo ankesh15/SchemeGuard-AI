@@ -2132,3 +2132,211 @@ progress::-moz-progress-bar {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Administrator workspace uses the existing public typography and controls. */
+.admin-workspace {
+  max-width: 1200px;
+}
+.admin-top,
+.admin-section-heading,
+.admin-candidate-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.admin-top h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -0.045em;
+  margin: 0.5rem 0;
+}
+.admin-top > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.admin-card {
+  margin: 1.5rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 18px;
+  min-width: 0;
+}
+.admin-grid .admin-card {
+  margin: 0;
+}
+.admin-card h2 {
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+}
+.admin-card h3 {
+  font-size: 1rem;
+  margin: 1.25rem 0 0.5rem;
+}
+.admin-card p,
+.admin-card li {
+  line-height: 1.7;
+}
+.admin-card ol,
+.admin-errors {
+  padding-left: 1.25rem;
+  margin: 1rem 0;
+}
+.admin-form,
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.admin-form {
+  gap: 1.25rem;
+}
+.admin-form label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.admin-form input:not([type="checkbox"]),
+.admin-form select,
+.admin-form textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 0.75rem;
+  font: inherit;
+  background: #fff;
+  color: #152b33;
+}
+.admin-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.admin-form .admin-checkbox {
+  flex-direction: row;
+  align-items: flex-start;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.admin-checkbox input {
+  margin-top: 5px;
+  accent-color: #16775f;
+}
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.admin-stats strong {
+  display: block;
+  font-size: 2.5rem;
+  margin-top: 0.75rem;
+}
+.admin-document-list article {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.admin-document-list h3 {
+  margin: 0.5rem 0;
+}
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.admin-page-text {
+  background: #f6f8f8;
+  border: 1px solid var(--line);
+  padding: 1rem;
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+.admin-quote,
+.admin-evidence blockquote {
+  border-left: 3px solid #2b8d74;
+  padding: 0.75rem 1rem;
+  background: #f1f8f5;
+  margin: 1rem 0;
+}
+.admin-quote blockquote {
+  margin: 0 0 0.5rem;
+}
+.admin-metadata {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.admin-metadata dt {
+  color: #657477;
+  font-size: 0.8rem;
+}
+.admin-metadata dd {
+  margin: 0.35rem 0;
+}
+.admin-hash {
+  font-family: monospace;
+  overflow-wrap: anywhere;
+  font-size: 0.8rem;
+}
+.admin-table-wrap {
+  overflow-x: auto;
+}
+.admin-table-wrap table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.admin-table-wrap th,
+.admin-table-wrap td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+.admin-errors {
+  color: #8b3e24;
+  background: #fff8f1;
+  padding: 1rem 1rem 1rem 2rem;
+  border-radius: 9px;
+}
+.admin-login {
+  max-width: 500px;
+  margin: 3rem auto;
+}
+.admin-login h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.admin-login .admin-card {
+  padding: 2rem;
+}
+@media (max-width: 760px) {
+  .admin-grid,
+  .admin-metadata {
+    grid-template-columns: 1fr;
+  }
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+  .admin-document-list article {
+    flex-direction: column;
+  }
+  .admin-top > div:last-child {
+    flex-wrap: wrap;
+  }
+}

@@ -22,6 +22,37 @@ class Settings(BaseSettings):
     cors_origins: list[str] = []
     seed_data_path: Path = Path("/app/data/schemes")
     seed_demo_data: bool = False
+    document_storage_root: Path = Path("/var/lib/schemeguard/documents")
+    pdf_max_bytes: int = Field(default=10 * 1024 * 1024, ge=1024, le=25 * 1024 * 1024)
+    pdf_max_pages: int = Field(default=50, ge=1, le=200)
+    pdf_parse_timeout: float = Field(default=25, ge=1, le=60)
+    pdf_max_text_chars: int = Field(default=200_000, ge=1000, le=1_000_000)
+    document_download_timeout: float = Field(default=15, ge=1, le=30)
+    chunk_size: int = Field(default=1800, ge=200, le=6000)
+    chunk_overlap: int = Field(default=160, ge=0, le=1000)
+    gemini_api_key: SecretStr | None = None
+    gemini_model: str = Field(
+        default="gemini-3.6-flash", min_length=1, max_length=100, pattern=r"^[a-zA-Z0-9._-]+$"
+    )
+    gemini_timeout: float = Field(default=20, ge=1, le=60)
+    gemini_max_retries: int = Field(default=2, ge=0, le=4)
+    gemini_max_requests: int = Field(default=6, ge=1, le=12)
+    gemini_max_input_chars: int = Field(default=20_000, ge=1000, le=50_000)
+    processing_timeout: float = Field(default=90, ge=10, le=300)
+    admin_allowed_origins: list[str] = ["http://localhost:3000"]
+    admin_session_hours: int = Field(default=8, ge=1, le=24)
+    admin_login_limit: int = Field(default=10, ge=3, le=30)
+    admin_rate_window_seconds: int = Field(default=900, ge=60, le=3600)
+
+    @model_validator(mode="after")
+    def ingestion_limits(self) -> "Settings":
+        if self.chunk_overlap >= self.chunk_size:
+            raise ValueError("CHUNK_OVERLAP must be smaller than CHUNK_SIZE")
+        if self.app_env == "production" and any(
+            not origin.startswith("https://") for origin in self.admin_allowed_origins
+        ):
+            raise ValueError("Production admin origins must use HTTPS")
+        return self
 
     @field_validator("postgres_password")
     @classmethod
@@ -36,7 +67,7 @@ class Settings(BaseSettings):
             raise ValueError("Set POSTGRES_PASSWORD or DATABASE_URL")
         return self
 
-    @field_validator("cors_origins")
+    @field_validator("cors_origins", "admin_allowed_origins")
     @classmethod
     def explicit_cors_origins(cls, values: list[str]) -> list[str]:
         from urllib.parse import urlsplit

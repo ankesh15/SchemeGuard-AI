@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import time
 from collections.abc import AsyncIterator
@@ -16,9 +17,11 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from app.api.health import router as health_router
 from app.api.v1.router import router as v1_router
+from app.core.body_limit import AdminBodyLimit
 from app.core.config import Settings, get_settings
 from app.core.database import make_engine
 from app.core.logging import configure_logging
+from app.ingestion.validation import IngestionError
 from app.schemas.error import ErrorInfo, ErrorResponse, ValidationDetail
 
 logger = logging.getLogger("schemeguard")
@@ -47,6 +50,10 @@ class RequestLoggingMiddleware:
                     if key.lower() != b"x-request-id"
                 ]
                 message["headers"] = [*headers, (b"x-request-id", request_id.encode())]
+                if scope.get("path", "").startswith("/api/v1/admin/"):
+                    message["headers"].extend(
+                        [(b"cache-control", b"no-store"), (b"x-content-type-options", b"nosniff")]
+                    )
             await send(message)
 
         try:
@@ -92,6 +99,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.settings = settings
         app.state.engine = engine
         app.state.session_factory = async_sessionmaker(engine, expire_on_commit=False)
+        app.state.document_slots = asyncio.Semaphore(2)
+        app.state.password_slots = asyncio.Semaphore(2)
         logger.info("application_started")
         try:
             yield
@@ -101,10 +110,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(
         title="SchemeGuard AI",
-        version="0.2.0",
-        description="Source-grounded scholarship discovery and deterministic assessment of approved rules. Phase 2 uses a clearly labeled fictional policy fixture.",
+        version="0.3.0",
+        description="Source-grounded discovery, deterministic eligibility, and administrator-only document intelligence. AI candidates always remain pending review.",
         lifespan=lifespan,
     )
+    app.add_middleware(AdminBodyLimit, pdf_max_bytes=settings.pdf_max_bytes)
     app.add_middleware(RequestLoggingMiddleware)
     app.add_middleware(
         CORSMiddleware,
@@ -129,6 +139,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             for error in exc.errors()
         ]
         return error_response(request, 422, "validation_error", "Invalid request parameters", details)
+
+    @app.exception_handler(IngestionError)
+    async def ingestion_error(request: Request, exc: IngestionError) -> JSONResponse:
+        return error_response(request, exc.status, exc.code, exc.message)
 
     async def database_error(request: Request, exc: Exception) -> JSONResponse:
         logger.warning("database_unavailable", extra={"error_type": type(exc).__name__})

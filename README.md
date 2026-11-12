@@ -1,6 +1,8 @@
-# SchemeGuard AI — Curated catalog on the Phase 2 foundation
+# SchemeGuard AI — Phase 3 document intelligence
 
 A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; applicant profiles and reports are **not persisted**.
+
+Phase 3 adds an authenticated administrator workspace for official PDFs, page-aware PyMuPDF extraction, stable chunks, Gemini structured candidate extraction, evidence validation, and pending review. Candidates cannot be published in this phase. See the [Phase 3 implementation report](docs/phase3-ai-ingestion.md), [processing guide](docs/document-processing.md), and [Gemini integration guide](docs/gemini-integration.md).
 
 **The working assessment uses an explicitly fictional development scholarship.** The catalog contains 282 government schemes across 23 categories, but none has approved government eligibility rules. The fictional policy offers no award and has no official application portal.
 
@@ -17,6 +19,7 @@ docker compose up -d --wait --wait-timeout 120
 - Frontend: [localhost:3000](http://localhost:3000)
 - Backend: [localhost:8000](http://localhost:8000)
 - FastAPI documentation: [localhost:8000/docs](http://localhost:8000/docs)
+- Administrator workspace: [localhost:3000/admin](http://localhost:3000/admin)
 
 The helper creates an ignored `.env` with a generated local password and preserves an existing file. Alternatively, copy `.env.example` and replace its password placeholder. The API applies migrations before startup and, by default in this development Compose configuration, runs the insert-only government metadata seed and the fictional fixture seed. An existing PostgreSQL volume and its records are preserved.
 
@@ -37,7 +40,7 @@ docker compose exec api python -m app.seed_demo
 4. Change the synthetic age to `17` to see **Requirements not satisfied**.
 5. Leave household income blank, or request disability support without a percentage, to see **More information required** and the specific missing field.
 
-Blank answers remain unknown. Form validation checks valid input types and domains, rather than preventing profiles that fail an eligibility condition. The questionnaire uses the approved policy's field definitions and reveals dependent inputs when applicable. A report exists only in React memory; refreshing the page clears it. No names, Aadhaar numbers, contact details, document uploads, or profile-storage APIs are introduced.
+Blank answers remain unknown. Form validation checks valid input types and domains, rather than preventing profiles that fail an eligibility condition. The questionnaire uses the approved policy's field definitions and reveals dependent inputs when applicable. A report exists only in React memory; refreshing the page clears it. No citizen names, Aadhaar numbers, contact details, personal document uploads, or profile-storage APIs are introduced.
 
 ## Curated multi-category dataset
 
@@ -122,7 +125,7 @@ docker compose exec -T api mypy --cache-dir=/tmp/schemeguard-mypy app
 docker compose exec -T frontend npm test
 docker compose exec -T frontend npm run typecheck
 docker compose exec -T frontend npm run format:check
-# Recreates all three services; compares every row in all six domain tables:
+# Regression flows and persistence across all 18 tables plus original PDFs:
 python3 scripts/verify_phase2.py
 python3 scripts/verify_catalog.py
 python3 scripts/verify_persistence.py
@@ -132,6 +135,22 @@ python3 scripts/verify_persistence.py
 
 Checked-in frontend test responses and example inputs contain only authored synthetic data. Runtime questionnaire submissions and their reports are not persisted.
 
-Backend dependencies retain hash-locked Python requirements. Frontend versions are pinned in `package.json` and `package-lock.json`; Docker installs them with `npm ci`. A clean-container `npm run build` verifies frontend compilation without sharing the dev server's `.next` directory.
+Backend dependencies retain hash-locked Python requirements. Frontend versions are pinned in `package.json` and `package-lock.json`; Docker installs them with `npm ci`. A clean-container `NODE_ENV=production npm run build` verifies frontend compilation without sharing the dev server's `.next` directory.
 
-See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3, LLM processing, policy monitoring, notifications, Redis, Celery, authentication workflows, and production deployment configuration are not implemented.
+See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3 adds administration and LLM candidate extraction only. Policy monitoring, notifications, Redis, Celery, citizen authentication flows, final human publication, and production deployment configuration remain deferred.
+
+
+## Administrator setup
+
+```bash
+# Interactive hidden password prompt; no public registration endpoint:
+docker compose exec api python -m app.auth.provision --username reviewer
+# Explicit password rotation also revokes existing sessions:
+docker compose exec api python -m app.auth.provision --username reviewer --reset-password
+```
+
+Use a unique password of at least 12 characters. Sign in at `/admin/login`, authorize the exact official PDF URL for its government scheme, then upload a matching PDF or request an approved-source download. Use **Extract text only** without Gemini credentials. To enable real candidate extraction, set backend-only `GEMINI_API_KEY` in `.env` and run `docker compose up -d --force-recreate api`. Keep `GEMINI_MODEL` configurable. No key is sent to Next.js.
+
+The administrator browser uses a same-origin Next.js proxy with HttpOnly sessions, origin checks, and CSRF tokens. `ADMIN_ALLOWED_ORIGINS` must match the frontend origin. Original PDFs persist in the private `document_data` volume and are served to authenticated administrators as downloads. Do not remove that volume. Bounded processing is synchronous over async HTTP; PDF parsing runs in a resource-limited subprocess and password verification/downloads run outside the event loop. No queue service is introduced.
+
+The supervised Phase 3 demonstration uses a real historical official PDF and a clearly labeled operator-only mock provider because Gemini credentials were unavailable. It never creates executable government rules. Generated local demonstration account credentials, if present, are in ignored `.local/phase3-demo-credentials.json` with mode 0600; provision your own reviewer for regular use. Never commit that file.

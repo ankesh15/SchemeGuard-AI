@@ -1,6 +1,6 @@
-# Architecture — Phase 2 and curated catalog
+# Architecture — Phase 3
 
-SchemeGuard AI is a modular monolith with a separate Next.js frontend and PostgreSQL. Only three Docker services run: frontend, API, and database. Background workers, LLMs, policy monitoring, and notifications are deferred.
+SchemeGuard AI is a modular monolith with a separate Next.js frontend and PostgreSQL. Only three Docker services run: frontend, API, and database. Gemini performs administrator-requested candidate extraction. Background workers, policy monitoring, and notifications remain deferred.
 
 ## User and data flow
 
@@ -50,7 +50,7 @@ The API readiness check performs a live bounded database query; its process-heal
 
 PostgreSQL integration tests cover migrations, relationships, immutable history, approval/version selection, discovery, eligibility, and preservation of existing Phase 1 rows. Pure engine tests cover every supported operator and AND/OR truth table. Frontend tests use captured public/synthetic API contracts and exercise dynamic inputs, validation, conditional visibility, loading/errors, report rendering, and absence of browser-storage writes. Browser QA verifies the complete desktop/mobile journey, PASS/FAIL/UNKNOWN results, evidence disclosure, filtering, and refresh privacy behavior.
 
-Authentication workflows, production database role separation, rate limits/edge body limits, backup restoration, large-data performance, official-policy reconciliation, AI document processing, and production deployment are outside this phase. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence or administrative publication interface is introduced.
+Citizen authentication flows, production database role separation, external edge protection, backup restoration, large-data performance, official-policy reconciliation, and production deployment remain deferred. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence or administrative publication interface is introduced.
 
 ## Curated catalog import
 
@@ -59,3 +59,14 @@ Authentication workflows, production database role separation, rate limits/edge 
 The command performs no network IO. It supports any record count, direct category-file discovery, and legacy single-file input. Existing matching slugs and their source relationships are skipped rather than overwritten. Rules, documents, profiles and reports are outside this import path. See [datasets.md](datasets.md) for provenance and operating limits.
 
 Discovery exposes computed `eligibility_available` flags and an optional availability filter, based on approved effective policy presence and scheme status. Dynamic category/state facets use actual database metadata. No rule engine logic or approval workflow changed. The frontend retains its visual design, fetches direct scheme IDs independently of catalog pagination, and guards stale success/error callbacks when filters change quickly.
+
+
+## Phase 3 integration
+
+`Admin browser → same-origin Next.js proxy → authenticated FastAPI admin routes → exact-URL authorization → immutable DocumentVersion + private PDF → bounded parser subprocess → page/block records → stable chunks → Gemini structured output → typed validation and located evidence → pending-only candidates`.
+
+`app/ingestion` owns acquisition, private originals, parsing, normalization and chunking. `app/ai` owns provider abstraction, bounded structured-output schemas, safe engine mapping and grounding checks. `app/auth` owns Argon2id verification, hashed cookie sessions, CSRF/origin checks, SQL rate limits and CLI-only provisioning. The ingestion service orchestrates transactions without writing RuleSet, RuleCondition or RuleEvidence. Those existing tables remain the only executable eligibility representation. Candidates are immutable proposals for a future reviewer workflow.
+
+Admin requests use a same-origin `/api/admin/` proxy to the fixed Docker API host, forwarding only the administrator cookie and CSRF/origin/content headers. Layouts verify sessions on the server; every backend admin endpoint independently enforces the administrator role. Public discovery and synthetic-profile assessment contracts are unchanged. LLM configuration stays on the backend.
+
+PDF parsing is a Linux subprocess with memory, CPU, output, page, byte and wall-time bounds; its environment excludes application credentials. Attachments/scripts are not executed, and text is rendered as plain text. The process limit is defense in depth, not a complete hostile-native-code sandbox. Downloads validate every DNS answer, pin TLS sockets to an approved public IP with original hostname verification, use timeouts, and reject redirects. See [document processing](document-processing.md) for security boundaries and limitations.

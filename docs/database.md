@@ -1,4 +1,4 @@
-# Database design — Phase 2 and curated catalog
+# Database design — Phase 3
 
 PostgreSQL 16, SQLAlchemy 2.x, asyncpg, and Alembic remain in use. UUID domain keys and timezone-aware timestamps are preserved. No extension or future vector-search service is added.
 
@@ -52,16 +52,33 @@ python3 scripts/verify_persistence.py
 
 The seed commands acquire transaction advisory locks and preserve existing records. Fixture seeding refuses changed document bytes under an existing version. New policy contents require a new immutable document/rule version. Automatic development seeding is optional through SEED_DEMO_DATA; disabling it does not remove previously created immutable history.
 
-Tests use disposable real PostgreSQL databases, transaction rollback, full migration round trips, explicit Phase 1-to-Phase 2 preservation checks, FK/approval/history constraints, and no-profile-persistence assertions. The persistence helper compares all rows in all six domain tables before and after recreating all three Compose services. The existing named PostgreSQL volume is retained.
+Tests use disposable real PostgreSQL databases, transaction rollback, full migration round trips, explicit Phase 1-to-Phase 2 preservation checks, FK/approval/history constraints, and no-profile-persistence assertions. The persistence helper compares aggregate row hashes/counts in all 18 tables and verifies original PDF checksums before and after recreating all three Compose services. The existing named PostgreSQL volume is retained.
 
 Downgrades remove Phase 2 history and are destructive. They are exercised only in disposable test databases; normal development never downgrades or resets application data. Docker volumes are not backups, and production role separation/backup restore testing remain deferred.
 
 ## Catalog expansion without schema changes
 
-No new migration is needed: the existing variable-length text, category, state-array and source-provenance columns already support this dataset. Alembic remains at `0002_eligibility_rules` and model/schema drift checks pass. All applied migrations are unchanged.
+No new migration is needed: the existing variable-length text, category, state-array and source-provenance columns already support this dataset. The catalog expansion itself remained at `0002_eligibility_rules`; Phase 3 subsequently adds `0003_ai_ingestion`. Earlier applied migrations remain unchanged.
 
 The default curated import contains 282 government records in 23 files; the live development database contains 283 schemes and 289 scheme-source rows including the pre-existing fictional fixture. Document/rule counts remain one document, one synthetic approved rule set, six conditions and six evidence references. No government rule set was added.
 
 Import UUID5 keys use the original namespace. A transaction-scoped advisory lock serializes concurrent seed commands. Existing slugs skip every write, preserving UUIDs, timestamps, local edits, sources and immutable history; all newly inserted records and sources commit together. A full pre-import snapshot of the original six schemes and all associated source/document/rule rows was compared by ID after import. All were identical. The preservation and rollback behavior is also exercised in isolated PostgreSQL integration tests.
 
 The response-only `eligibility_available` flag and category/state facets are computed queries, not schema changes or stored applicant decisions. The importer writes only `schemes` and `scheme_sources`.
+
+
+## Phase 3 incremental migration
+
+`0003_ai_ingestion` adds 12 tables without modifying existing scheme/document/rule rows: `users`, `login_sessions`, `rate_limits`, `audit_events`, `source_authorizations`, `document_assets`, `document_pages`, `document_chunks`, `document_processing_jobs`, `extracted_rule_candidates`, `candidate_evidence`, and `extraction_errors`.
+
+`document_assets` extends the existing immutable DocumentVersion by its primary/FK ID, preserving upload filename, acquisition method, raw PDF metadata and page count. Status is mutable; source hash/size/storage/supersession remain in DocumentVersion. Existing historical text documents need no asset row and are untouched. Source authorizations pin an exact SchemeSource URL hash to the approving administrator.
+
+Pages and chunks belong to an existing document version. Composite foreign keys prevent cross-document chunk/page or candidate/evidence/job references. Page and chunk identifiers are stable UUID5 values; chunks include algorithm-tagged identity, section, page, method, bounding box, offsets and text hash. Jobs track provider/model/schema version, immutable input chunk references, status, errors and counts. A partial unique index permits one RUNNING job per document. An expired lease is marked FAILED before a subsequent extraction.
+
+Candidate expressions use the existing typed engine shape, stored only as a preview. A database check allows **PENDING only**, with separate technical validation states VALIDATED, NEEDS_REVIEW, INVALID and CONFLICT. Append-only UPDATE/DELETE/TRUNCATE guards protect candidates, page text, chunks, evidence, errors and audit events. No publication operation or candidate-to-approved-rule conversion is implemented. RuleSet, RuleCondition and RuleEvidence are reused only as the established future publication destination and existing evaluation source.
+
+Sessions store SHA-256 digests of high-entropy tokens, never raw cookies. Passwords use Argon2id. User role supports admin/citizen for future account infrastructure, but Phase 3 provisions administrators only through the operator CLI. Account/session/rate/job/status rows are operational state; evidence and rule content remain historical records. Database owners remain privileged and can bypass database guards.
+
+Current Phase 3 counts and exact preservation checks are recorded in [the Phase 3 report](phase3-ai-ingestion.md). Downgrade tests run only against disposable databases; never downgrade the development database to clean up data.
+
+`0004_least_privilege` changes only the default role for future user rows to citizen. Existing administrator roles are preserved; the provisioning CLI explicitly assigns admin. This avoids accidental privilege grants when citizen accounts are introduced later. The current migration head is `0004_least_privilege`.
