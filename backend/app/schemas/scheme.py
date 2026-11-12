@@ -15,6 +15,7 @@ class SchemeQuery(BaseModel):
     search: str | None = Field(default=None, min_length=1, max_length=200)
     category: str | None = Field(default=None, min_length=1, max_length=60, pattern=r"^[a-z][a-z0-9_-]*$")
     state: IndianState | None = None
+    eligibility_available: bool | None = None
 
     @field_validator("category", mode="before")
     @classmethod
@@ -48,6 +49,7 @@ class SchemeRead(BaseModel):
 
     id: UUID
     is_demo: bool = False
+    eligibility_available: bool = False
     slug: str
     name: str
     description: str | None
@@ -73,6 +75,11 @@ class SchemePage(BaseModel):
     page: int
     page_size: int
     pages: int
+
+
+class SchemeFilters(BaseModel):
+    categories: list[str]
+    states: list[IndianState]
 
 
 class HealthRead(BaseModel):

@@ -4,6 +4,7 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from uuid import UUID, uuid5
@@ -74,7 +75,9 @@ def load_catalog(path: Path) -> SeedCatalog:
             identity = " ".join(record.name.casefold().split())
             if identity in identities:
                 other_slug, other_file = identities[identity]
-                raise ValueError(f"Duplicate scheme name {record.name}: {other_slug} in {other_file} and {file}")
+                raise ValueError(
+                    f"Duplicate scheme name {record.name}: {other_slug} in {other_file} and {file}"
+                )
             owners[record.slug] = file
             identities[identity] = (record.slug, file)
             records.append(record)
@@ -95,7 +98,9 @@ async def seed_schemes(session: AsyncSession, manifest: SeedManifest) -> dict[st
     existing: set[str] = set()
     # Bounded query batches support catalogs larger than driver parameter limits.
     for offset in range(0, len(slugs), 1000):
-        existing.update(await session.scalars(select(Scheme.slug).where(Scheme.slug.in_(slugs[offset:offset + 1000]))))
+        existing.update(
+            await session.scalars(select(Scheme.slug).where(Scheme.slug.in_(slugs[offset : offset + 1000])))
+        )
     inserted = 0
     for record in manifest.schemes:
         if record.slug in existing:
@@ -121,24 +126,41 @@ async def seed_catalog(session: AsyncSession, catalog: SeedCatalog) -> ImportSta
     # The same transaction-level lock is reentrant and protects these counts.
     await session.execute(text("SELECT pg_advisory_xact_lock(724199173)"))
     existing = set(await session.scalars(select(Scheme.slug)))
-    source_count = sum(len(record.sources) for record in catalog.manifest.schemes if record.slug not in existing)
+    source_count = sum(
+        len(record.sources) for record in catalog.manifest.schemes if record.slug not in existing
+    )
     result = await seed_schemes(session, catalog.manifest)
     return ImportStatistics(
-        files=len(catalog.files), records=len(catalog.manifest.schemes),
-        sources_inserted=source_count, **result,
+        files=len(catalog.files),
+        records=len(catalog.manifest.schemes),
+        sources_inserted=source_count,
+        inserted=result["inserted"],
+        preserved=result["preserved"],
     )
 
 
 async def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--path", type=Path, help="Category directory or legacy manifest; defaults to SEED_DATA_PATH")
-    parser.add_argument("--validate-only", action="store_true", help="Validate all records without connecting to PostgreSQL")
+    parser.add_argument(
+        "--path", type=Path, help="Category directory or legacy manifest; defaults to SEED_DATA_PATH"
+    )
+    parser.add_argument(
+        "--validate-only", action="store_true", help="Validate all records without connecting to PostgreSQL"
+    )
     arguments = parser.parse_args()
     # Validation-only requires no secrets or database credentials.
-    path = arguments.path or (Path(__import__("os").getenv("SEED_DATA_PATH", "/app/data/schemes")))
+    path = arguments.path or (
+        Path(os.getenv("SEED_DATA_PATH", "/app/data/schemes"))
+        if arguments.validate_only
+        else get_settings().seed_data_path
+    )
     catalog = load_catalog(path)
     if arguments.validate_only:
-        print(json.dumps(asdict(ImportStatistics(len(catalog.files), len(catalog.manifest.schemes), 0, 0, 0, True))))
+        print(
+            json.dumps(
+                asdict(ImportStatistics(len(catalog.files), len(catalog.manifest.schemes), 0, 0, 0, True))
+            )
+        )
         return
     settings = get_settings()
     configure_logging(settings.log_level)

@@ -7,6 +7,7 @@ import {
   Landmark,
 } from "lucide-react";
 import type { Scheme } from "@/lib/types";
+import { categoryLabel } from "@/lib/catalog";
 import { Badge } from "./ui";
 
 export function SchemeCard({ scheme }: { scheme: Scheme }) {
@@ -27,14 +28,16 @@ export function SchemeCard({ scheme }: { scheme: Scheme }) {
         <Badge demo={scheme.is_demo} />
       </div>
       <span className="eyebrow">
-        {scheme.is_demo ? "Guided learning example" : "Scholarship"}
+        {scheme.is_demo
+          ? "Guided learning example"
+          : categoryLabel(scheme.category)}
       </span>
       <h2>
         <Link href={`/schemes/${scheme.id}`}>{scheme.name}</Link>
       </h2>
       <p className="card-description">
         {scheme.description ||
-          "Visit the official source for details about this scholarship."}
+          "Visit the official source for details about this scheme."}
       </p>
       <div className="card-meta">
         <span>
@@ -45,16 +48,22 @@ export function SchemeCard({ scheme }: { scheme: Scheme }) {
         </span>
         <span>
           <MapPin size={14} />
-          {scheme.applicable_states
-            ? `${scheme.applicable_states.length} verified states`
-            : "Geographic coverage not verified"}
+          {scheme.applicability === "national"
+            ? "National coverage"
+            : scheme.applicable_states
+              ? scheme.applicable_states.join(", ")
+              : "Geographic coverage not verified"}
         </span>
       </div>
       <div className="card-bottom">
-        <span className={scheme.is_demo ? "text-green" : "text-muted"}>
-          {scheme.is_demo
-            ? "Eligibility demo available"
-            : "Source metadata available"}
+        <span
+          className={scheme.eligibility_available ? "text-green" : "text-muted"}
+        >
+          {scheme.eligibility_available
+            ? scheme.is_demo
+              ? "Eligibility demo available"
+              : "Approved eligibility rules"
+            : "Discovery metadata only"}
         </span>
         <Link href={`/schemes/${scheme.id}`} aria-label={`View ${scheme.name}`}>
           View scheme <ArrowUpRight size={16} />

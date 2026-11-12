@@ -9,49 +9,17 @@ import {
   Info,
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
-import type { SchemePage } from "@/lib/types";
+import type { SchemePage, SchemeFilters } from "@/lib/types";
+import { categoryLabel } from "@/lib/catalog";
 import { SchemeCard } from "./scheme-card";
 import { ErrorState, LoadingState } from "./ui";
 
-const states = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttar Pradesh",
-  "Uttarakhand",
-  "West Bengal",
-  "Andaman and Nicobar Islands",
-  "Chandigarh",
-  "Dadra and Nagar Haveli and Daman and Diu",
-  "Delhi",
-  "Jammu and Kashmir",
-  "Ladakh",
-  "Lakshadweep",
-  "Puducherry",
-];
 export function Explorer() {
+  const [filters, setFilters] = useState<SchemeFilters>({
+    categories: [],
+    states: [],
+  });
+  const [filtersError, setFiltersError] = useState(false);
   const [search, setSearch] = useState("");
   const [term, setTerm] = useState("");
   const [state, setState] = useState("");
@@ -61,6 +29,18 @@ export function Explorer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    const controller = new AbortController();
+    setFiltersError(false);
+    apiFetch<SchemeFilters>("/api/v1/schemes/filters", {
+      signal: controller.signal,
+    })
+      .then(setFilters)
+      .catch((reason: Error) => {
+        if (reason.name !== "AbortError") setFiltersError(true);
+      });
+    return () => controller.abort();
+  }, [retry]);
   useEffect(() => {
     const timer = setTimeout(() => {
       setTerm(search.trim());
@@ -86,7 +66,7 @@ export function Explorer() {
       .catch((reason: Error) => {
         if (reason.name !== "AbortError") {
           setError(
-            "Please check that the scholarship service is running and try again.",
+            "Please check that the scheme service is running and try again.",
           );
           setLoading(false);
         }
@@ -106,7 +86,7 @@ export function Explorer() {
         <div className="search-input">
           <Search size={19} />
           <input
-            aria-label="Search scholarships"
+            aria-label="Search schemes"
             placeholder="Search by scheme name or keyword…"
             value={search}
             maxLength={200}
@@ -124,7 +104,11 @@ export function Explorer() {
             }}
           >
             <option value="">All categories</option>
-            <option value="scholarship">Scholarships</option>
+            {filters.categories.map((value) => (
+              <option key={value} value={value}>
+                {categoryLabel(value)}
+              </option>
+            ))}
           </select>
         </label>
         <label className="filter-select">
@@ -137,16 +121,27 @@ export function Explorer() {
             }}
           >
             <option value="">All regions</option>
-            {states.map((name) => (
+            {filters.states.map((name) => (
               <option key={name}>{name}</option>
             ))}
           </select>
         </label>
       </div>
+      {filtersError && (
+        <p className="notice" role="alert">
+          Filters could not be loaded.{" "}
+          <button
+            className="text-link"
+            onClick={() => setRetry((value) => value + 1)}
+          >
+            Retry filters
+          </button>
+        </p>
+      )}
       <div className="results-toolbar">
         <p role="status">
           {loading
-            ? "Finding scholarships…"
+            ? "Finding schemes…"
             : `${data?.total ?? 0} scheme${data?.total === 1 ? "" : "s"} to explore`}
         </p>
         {(term || state || category) && (

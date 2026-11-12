@@ -8,6 +8,7 @@ export interface Scheme {
   department: string | null;
   category: string;
   is_demo: boolean;
+  eligibility_available: boolean;
   status: string;
   applicability: string;
   applicable_states: string[] | null;
@@ -113,4 +114,9 @@ export interface EligibilityReport {
   missing_fields: { key: string; label: string }[];
   notices: string[];
   official_application_url: string | null;
+}
+
+export interface SchemeFilters {
+  categories: string[];
+  states: string[];
 }

@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, Query
 
 from app.api.dependencies import get_scheme_service
 from app.schemas.error import ErrorResponse
-from app.schemas.scheme import SchemeDetail, SchemePage, SchemeQuery
+from app.schemas.scheme import SchemeDetail, SchemeFilters, SchemePage, SchemeQuery
 from app.services.scheme import SchemeService
 
 router = APIRouter(
@@ -19,6 +19,11 @@ Service = Annotated[SchemeService, Depends(get_scheme_service)]
 @router.get("", response_model=SchemePage)
 async def list_schemes(service: Service, query: Annotated[SchemeQuery, Query()]) -> SchemePage:
     return await service.list(query)
+
+
+@router.get("/filters", response_model=SchemeFilters)
+async def scheme_filters(service: Service) -> SchemeFilters:
+    return await service.filters()
 
 
 @router.get(

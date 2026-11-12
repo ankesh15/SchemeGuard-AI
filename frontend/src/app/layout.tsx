@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | SchemeGuard AI",
   },
   description:
-    "Explore government scholarship sources and understand a deterministic eligibility assessment with a clearly labeled fictional development example.",
+    "Explore government scheme sources and understand a deterministic eligibility assessment with a clearly labeled fictional development example.",
 };
 
 export default function RootLayout({

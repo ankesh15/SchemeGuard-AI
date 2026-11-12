@@ -23,9 +23,9 @@ def request_json(path: str, payload: dict[str, Any] | None = None) -> tuple[Any,
 
 assert request_json("/health")[0]["status"] == "ok"
 assert request_json("/ready")[0]["database"] == "ok"
-schemes, _ = request_json("/api/v1/schemes?page_size=100")
+schemes, _ = request_json("/api/v1/schemes?eligibility_available=true&page_size=100")
 demo = next(scheme for scheme in schemes["items"] if scheme["is_demo"])
-real = next(scheme for scheme in schemes["items"] if not scheme["is_demo"])
+real = request_json("/api/v1/schemes?eligibility_available=false&page_size=1")[0]["items"][0]
 requirements, _ = request_json(f"/api/v1/schemes/{demo['id']}/requirements")
 assert requirements["available"] and requirements["rule_set"]["approval_status"] == "APPROVED"
 profile = {
@@ -76,7 +76,7 @@ with urllib.request.urlopen(preflight, timeout=10) as response:
 for path, expected_text in (
     ("/", "Clarity before"),
     ("/schemes", "Find a place to start"),
-    (f"/schemes/{demo['id']}", "About this scholarship"),
+    (f"/schemes/{demo['id']}", "About this scheme"),
     ("/eligibility", "A synthetic profile"),
     ("/eligibility/report", "Your next explanation starts here"),
 ):

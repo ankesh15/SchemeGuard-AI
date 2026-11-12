@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { apiFetch, ApiError, formatDate } from "@/lib/api";
 import type { Requirements, SchemeDetail } from "@/lib/types";
+import { categoryLabel } from "@/lib/catalog";
 import { ActionLink, Badge, DemoNotice } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
@@ -41,13 +42,17 @@ export default async function SchemeDetailPage({
     <div className="container page-shell">
       <Link className="back-link" href="/schemes">
         <ArrowLeft size={16} />
-        All scholarships
+        All schemes
       </Link>
       <div className="detail-heading">
         <Badge demo={scheme.is_demo} />
         <h1>{scheme.name}</h1>
         <p>
-          {scheme.department || "An authored SchemeGuard development example"}
+          {scheme.department ||
+            scheme.ministry ||
+            (scheme.is_demo
+              ? "An authored SchemeGuard development example"
+              : "Administering department not verified")}
         </p>
       </div>
       {scheme.is_demo && <DemoNotice />}
@@ -60,21 +65,27 @@ export default async function SchemeDetailPage({
           </nav>
           <section id="overview" className="detail-section">
             <span className="eyebrow">The starting point</span>
-            <h2>About this scholarship</h2>
+            <h2>About this scheme</h2>
             <p>{scheme.description}</p>
             <div className="facts-grid">
               <div>
                 <Landmark size={18} />
                 <span>Administering body</span>
                 <strong>
-                  {scheme.department || "Fictional development fixture"}
+                  {scheme.department ||
+                    scheme.ministry ||
+                    (scheme.is_demo
+                      ? "Fictional development fixture"
+                      : "Not verified")}
                 </strong>
               </div>
               <div>
                 <MapPin size={18} />
                 <span>Geographic applicability</span>
                 <strong>
-                  {scheme.applicable_states?.join(", ") || "Not verified"}
+                  {scheme.applicability === "national"
+                    ? "National coverage"
+                    : scheme.applicable_states?.join(", ") || "Not verified"}
                 </strong>
               </div>
               <div>
@@ -93,7 +104,7 @@ export default async function SchemeDetailPage({
               <div>
                 <BookOpen size={18} />
                 <span>Category</span>
-                <strong>Scholarship</strong>
+                <strong>{categoryLabel(scheme.category)}</strong>
               </div>
             </div>
           </section>
@@ -103,9 +114,9 @@ export default async function SchemeDetailPage({
             {requirements.available ? (
               <>
                 <p>
-                  These requirements belong only to the fictional test policy.
-                  View the full policy to see every invented threshold and
-                  condition.
+                  {scheme.is_demo
+                    ? "These requirements belong only to the fictional test policy. View the full policy to see every invented threshold and condition."
+                    : "These requirements come from the approved rule version. Follow the evidence references for the policy context."}
                 </p>
                 <ul className="requirement-list">
                   {requirements.requirements.map((item) => (
@@ -120,14 +131,16 @@ export default async function SchemeDetailPage({
                     </li>
                   ))}
                 </ul>
-                <a
-                  className="text-link"
-                  href="/policies/demo-policy-v1.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Read the fictional policy <ExternalLink size={15} />
-                </a>
+                {scheme.is_demo && (
+                  <a
+                    className="text-link"
+                    href="/policies/demo-policy-v1.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read the fictional policy <ExternalLink size={15} />
+                  </a>
+                )}
               </>
             ) : (
               <div className="notice">
@@ -202,7 +215,7 @@ export default async function SchemeDetailPage({
             <div className="aside-divider" />
             <p className="small-note">
               {requirements.rule_set
-                ? `Policy version ${requirements.rule_set.version_number} · Synthetic fixture approval`
+                ? `Policy version ${requirements.rule_set.version_number} · ${scheme.is_demo ? "Synthetic fixture approval" : "Approved rules"}`
                 : "No approved eligibility rules available"}
             </p>
             <p className="small-note">

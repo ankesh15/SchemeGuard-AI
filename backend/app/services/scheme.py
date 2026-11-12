@@ -4,7 +4,7 @@ from uuid import UUID
 from fastapi import HTTPException
 
 from app.repositories.scheme import SchemeRepository
-from app.schemas.scheme import SchemeDetail, SchemePage, SchemeQuery, SchemeRead
+from app.schemas.scheme import SchemeDetail, SchemeFilters, SchemePage, SchemeQuery, SchemeRead
 
 
 class SchemeService:
@@ -13,8 +13,14 @@ class SchemeService:
 
     async def list(self, query: SchemeQuery) -> SchemePage:
         schemes, total = await self.repository.list(query)
+        available = await self.repository.availability([scheme.id for scheme in schemes])
         return SchemePage(
-            items=[SchemeRead.model_validate(scheme) for scheme in schemes],
+            items=[
+                SchemeRead.model_validate(scheme).model_copy(
+                    update={"eligibility_available": scheme.id in available}
+                )
+                for scheme in schemes
+            ],
             total=total,
             page=query.page,
             page_size=query.page_size,
@@ -25,4 +31,10 @@ class SchemeService:
         scheme = await self.repository.get(scheme_id)
         if scheme is None:
             raise HTTPException(status_code=404, detail="Scheme not found")
-        return SchemeDetail.model_validate(scheme)
+        available = await self.repository.availability([scheme.id])
+        return SchemeDetail.model_validate(scheme).model_copy(
+            update={"eligibility_available": scheme.id in available}
+        )
+
+    async def filters(self) -> SchemeFilters:
+        return await self.repository.filters()

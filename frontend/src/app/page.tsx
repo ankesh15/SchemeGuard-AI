@@ -20,8 +20,13 @@ import { SchemeCard } from "@/components/scheme-card";
 
 export const dynamic = "force-dynamic";
 export default async function Home() {
-  const page = await apiFetch<SchemePage>("/api/v1/schemes?page_size=100");
-  const demo = page.items.find((scheme) => scheme.is_demo);
+  const [page, approved] = await Promise.all([
+    apiFetch<SchemePage>("/api/v1/schemes?page_size=2"),
+    apiFetch<SchemePage>(
+      "/api/v1/schemes?eligibility_available=true&page_size=100",
+    ),
+  ]);
+  const demo = approved.items.find((scheme) => scheme.is_demo);
   const featured = [
     demo,
     ...page.items.filter((scheme) => !scheme.is_demo).slice(0, 2),
@@ -41,11 +46,11 @@ export default async function Home() {
               you <em>apply.</em>
             </h1>
             <p className="hero-description">
-              Discover scholarship schemes. Understand their requirements. See
+              Discover government schemes. Understand their requirements. See
               the reasoning behind every assessment, one condition at a time.
             </p>
             <div className="hero-actions">
-              <ActionLink href="/schemes">Explore scholarships</ActionLink>
+              <ActionLink href="/schemes">Explore schemes</ActionLink>
               <ActionLink href="/eligibility" secondary arrow={false}>
                 Try the eligibility demo <ArrowUpRight size={17} />
               </ActionLink>
@@ -148,7 +153,7 @@ export default async function Home() {
               number: "01",
               icon: Search,
               title: "Find your starting point",
-              text: "Explore scholarship records with their administering bodies and official source links.",
+              text: "Explore government scheme records with their administering bodies and official source links.",
             },
             {
               number: "02",

@@ -184,7 +184,7 @@ export function Questionnaire({
     <div className="questionnaire-layout">
       <div>
         <div className="scheme-selector">
-          <label htmlFor="selected-scheme">Selected scholarship</label>
+          <label htmlFor="selected-scheme">Selected scheme</label>
           <select
             id="selected-scheme"
             value={requirements.scheme_id}
@@ -205,8 +205,8 @@ export function Questionnaire({
             <BookOpen size={32} />
             <h2>More verified information is needed.</h2>
             <p>
-              No approved rule set is available for this scholarship. Its
-              metadata alone cannot support an eligibility assessment.
+              No approved rule set is available for this scheme. Its metadata
+              alone cannot support an eligibility assessment.
             </p>
             {demo && (
               <Link

@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { apiFetch } from "@/lib/api";
-import type { Requirements, SchemePage } from "@/lib/types";
+import { apiFetch, ApiError } from "@/lib/api";
+import type { Requirements, Scheme, SchemePage } from "@/lib/types";
+import { approvedSchemeChoices } from "@/lib/catalog";
 import { Questionnaire } from "@/components/questionnaire";
 export const metadata: Metadata = { title: "Eligibility questionnaire" };
 export const dynamic = "force-dynamic";
@@ -12,11 +13,26 @@ export default async function EligibilityPage({
   searchParams: Promise<{ scheme?: string }>;
 }) {
   const { scheme } = await searchParams;
-  const data = await apiFetch<SchemePage>("/api/v1/schemes?page_size=100");
-  const selected = scheme
-    ? data.items.find((item) => item.id === scheme)
-    : data.items.find((item) => item.is_demo) || data.items[0];
+  const choices = await approvedSchemeChoices();
+  let selected: Scheme | undefined;
+  if (scheme) {
+    try {
+      selected = await apiFetch<Scheme>(
+        `/api/v1/schemes/${encodeURIComponent(scheme)}`,
+      );
+    } catch (error) {
+      if (error instanceof ApiError && [404, 422].includes(error.status))
+        notFound();
+      throw error;
+    }
+  } else {
+    selected = choices.find((item) => item.is_demo) || choices[0];
+    if (!selected)
+      selected = (await apiFetch<SchemePage>("/api/v1/schemes?page_size=1"))
+        .items[0];
+  }
   if (!selected) notFound();
+  if (!choices.some((item) => item.id === selected.id)) choices.push(selected);
   const requirements = await apiFetch<Requirements>(
     `/api/v1/schemes/${selected.id}/requirements`,
   );
@@ -33,7 +49,7 @@ export default async function EligibilityPage({
       <Questionnaire
         key={selected.id}
         requirements={requirements}
-        schemes={data.items}
+        schemes={choices}
       />
     </div>
   );

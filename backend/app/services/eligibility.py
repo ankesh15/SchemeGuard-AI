@@ -105,6 +105,23 @@ class EligibilityService:
         return notices
 
     @staticmethod
+    def application_url(scheme: Scheme) -> str | None:
+        # Only the original records have reviewed NSP application provenance.
+        # A directory listing is evidence of identity, not an application link.
+        nsp_slugs = {
+            "aicte-pragati-degree",
+            "aicte-saksham-degree",
+            "ugc-ishan-uday",
+            "pm-yasasvi-top-class-school",
+            "pm-usp-csss",
+        }
+        return (
+            "https://scholarships.gov.in/Students"
+            if not scheme.is_demo and scheme.slug in nsp_slugs
+            else None
+        )
+
+    @staticmethod
     def evidence(rule_set: RuleSet, scheme: Scheme) -> dict[str, list[EvidenceRead]]:
         document = rule_set.document
         source = document.source
@@ -145,7 +162,7 @@ class EligibilityService:
             if rule_set
             else [],
             notices=self.notices(scheme, rule_set is not None),
-            official_application_url=None if scheme.is_demo else "https://scholarships.gov.in/Students",
+            official_application_url=self.application_url(scheme),
         )
 
     async def check(self, request: EligibilityRequest) -> EligibilityReport:
@@ -194,5 +211,5 @@ class EligibilityService:
             trace=trace,
             missing_fields=missing,
             notices=self.notices(scheme, trace is not None),
-            official_application_url=None if scheme.is_demo else "https://scholarships.gov.in/Students",
+            official_application_url=self.application_url(scheme),
         )
