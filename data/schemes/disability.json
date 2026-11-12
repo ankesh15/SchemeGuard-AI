@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "category": "disability",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "adip",
+      "name": "Assistance to Disabled Persons for Purchase, Fitting of Aids, Appliances",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "disability",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"Assistance to Disabled Persons for Purchase, Fitting of Aids, Appliances\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "deen-dayal-disabled-rehabilitation",
+      "name": "Deen Dayal Disabled Rehabilitation Scheme",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "disability",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"Deen Dayal Disabled Rehabilitation Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "free-coaching-disabilities",
+      "name": "Free Coaching for Students with Disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "disability",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"Free Coaching for Students with Disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "goa-accessible-braille-library",
+      "name": "Scheme for Setting Up of Accessible Braille Library for Visually Impaired Persons",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme for Setting Up of Accessible Braille Library for Visually Impaired Persons\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-divya-niwas",
+      "name": "Divya Niwas Yojana – Residential Shelter and Care Operational Grants",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Divya Niwas Yojana – Residential Shelter and Care Operational Grants\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-divyang-bandhan",
+      "name": "Divyang Bandhan Yojana – Marriage Financial Incentive Scheme",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Divyang Bandhan Yojana – Marriage Financial Incentive Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-divyang-kaushal",
+      "name": "Divyang Kaushal Yojana – Sheltered Workshop & Skill Training Scheme",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Divyang Kaushal Yojana – Sheltered Workshop & Skill Training Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-divyang-rath",
+      "name": "Divyang Rath Mobile Outreach & Doorstep Therapy Scheme",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Divyang Rath Mobile Outreach & Doorstep Therapy Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-high-support-needs",
+      "name": "Scheme for Persons with Benchmark Disabilities Requiring High Support Needs",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme for Persons with Benchmark Disabilities Requiring High Support Needs\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-physiotherapy-centres",
+      "name": "Scheme to Provide Grants for Setting Up of Physiotherapy Centres",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme to Provide Grants for Setting Up of Physiotherapy Centres\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-spinal-cord-rehabilitation",
+      "name": "Scheme to Provide Financial Assistance to Spinal Cord Rehabilitation Centres",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme to Provide Financial Assistance to Spinal Cord Rehabilitation Centres\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-stipend-students-disabilities",
+      "name": "Scheme for Grant of Stipend to Students with Disabilities",
+      "description": "Government of Goa directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "disability",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme for Grant of Stipend to Students with Disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "national-action-plan-disability-skills",
+      "name": "National Action Plan for skill development for persons with disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this disability programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "disability",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"National Action Plan for skill development for persons with disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

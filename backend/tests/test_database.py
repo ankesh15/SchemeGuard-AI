@@ -77,7 +77,7 @@ async def test_document_versions_are_immutable_in_postgresql(session, operation)
         .where(DocumentVersion.id == version.id)
         .values(storage_key="tampered"),
         "delete": delete(DocumentVersion).where(DocumentVersion.id == version.id),
-        "truncate": text("TRUNCATE document_versions"),
+        "truncate": text("TRUNCATE document_versions CASCADE"),
     }[operation]
     with pytest.raises(IntegrityError, match="immutable"):
         async with session.begin_nested():

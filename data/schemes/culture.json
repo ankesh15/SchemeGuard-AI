@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "category": "culture",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "cultural-function-production-grant",
+      "name": "Cultural Function and Production Grant",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Cultural Function and Production Grant\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "cultural-organisations-national-presence",
+      "name": "Financial Assistance to Cultural Organisations with National Presence",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Financial Assistance to Cultural Organisations with National Presence\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "culture-junior-fellowship",
+      "name": "Award of Junior Fellowship to Outstanding Artistes/Persons in the Field of Culture",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Award of Junior Fellowship to Outstanding Artistes/Persons in the Field of Culture\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "culture-senior-fellowship",
+      "name": "Award of Senior Fellowship to Outstanding Artistes/Persons in the field of Culture",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Award of Senior Fellowship to Outstanding Artistes/Persons in the field of Culture\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "culture-young-artists-scholarship",
+      "name": "Award of Scholarships to Young Artists in different cultural fields",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Award of Scholarships to Young Artists in different cultural fields\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "repertory-grant",
+      "name": "Repertory Grant",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Repertory Grant\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "tagore-national-fellowship",
+      "name": "Award of Tagore National Fellowship for Cultural Research",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Award of Tagore National Fellowship for Cultural Research\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "veteran-artists-assistance",
+      "name": "Scheme for Financial Assistance for Veteran Artist",
+      "description": "Ministry of Culture directory record for this culture programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Culture",
+      "department": null,
+      "category": "culture",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Culture; entry titled \"Scheme for Financial Assistance for Veteran Artist\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

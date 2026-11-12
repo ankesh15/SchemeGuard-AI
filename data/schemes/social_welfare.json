@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "category": "social_welfare",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "atal-vayo-abhyuday",
+      "name": "Atal Vayo Abhyuday Yojana (AVYAY)",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Atal Vayo Abhyuday Yojana (AVYAY)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "central-assistance-civilian-victims",
+      "name": "Central Scheme for Assistance to Civilian Victims (CSACV)",
+      "description": "Department of Internal Security directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Internal Security",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Internal Security; entry titled \"Central Scheme for Assistance to Civilian Victims (CSACV)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "development-particularly-vulnerable-tribal-groups",
+      "name": "Scheme of Development of Particularly Vulnerable Tribal Groups",
+      "description": "Ministry of Tribal Affairs directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"Scheme of Development of Particularly Vulnerable Tribal Groups\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "goa-dayanand-social-security",
+      "name": "Dayanand Social Security Scheme (DSSS)",
+      "description": "Government of Goa directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Dayanand Social Security Scheme (DSSS)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-mukhyamantri-sahayata-nidhi",
+      "name": "Mukhyamantri Sahayata Nidhi Yojana – Financial Assistance as Grants to NGOs in the State of Goa",
+      "description": "Government of Goa directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Mukhyamantri Sahayata Nidhi Yojana – Financial Assistance as Grants to NGOs in the State of Goa\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-senior-citizens-palliative-homes",
+      "name": "Scheme to Provide Financial Assistance for Running Homes for Senior Citizens Suffering from Chronic and Debilitating Diseases & Palliative Care",
+      "description": "Government of Goa directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme to Provide Financial Assistance for Running Homes for Senior Citizens Suffering from Chronic and Debilitating Diseases & Palliative Care\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-shelter-home",
+      "name": "Scheme for Shelter Home – Temporary Shelter, Support and Rehabilitation for Persons in Need",
+      "description": "Government of Goa directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme for Shelter Home – Temporary Shelter, Support and Rehabilitation for Persons in Need\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-victim-compensation",
+      "name": "Goa Victim Compensation Scheme, 2012",
+      "description": "Government of Goa directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Goa Victim Compensation Scheme, 2012\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "grant-in-aid-voluntary-organisations-st",
+      "name": "Scheme of Grant in Aid to Voluntary Organizations working for welfare of STs",
+      "description": "Ministry of Tribal Affairs directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"Scheme of Grant in Aid to Voluntary Organizations working for welfare of STs\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "journalist-welfare",
+      "name": "Journalist Welfare Scheme",
+      "description": "Ministry of Information and Broadcasting directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Information and Broadcasting",
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Information and Broadcasting; entry titled \"Journalist Welfare Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "namaste",
+      "name": "NAMASTE",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"NAMASTE\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-action-plan-drug-demand-reduction",
+      "name": "National Action Plan for Drug Demand Reduction (NAPDDR)",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"National Action Plan for Drug Demand Reduction (NAPDDR)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pcr-poa-implementation",
+      "name": "Implementation of the Protection of Civil Rights Act, 1955 and the SCs and the STs (Prevention of Atrocities) Act, 1989",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Implementation of the Protection of Civil Rights Act, 1955 and the SCs and the STs (Prevention of Atrocities) Act, 1989\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-ajay",
+      "name": "Pradhan Mantri - Anusuchit Jaati Abhyuday Yojna (PM-AJAY)",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Pradhan Mantri - Anusuchit Jaati Abhyuday Yojna (PM-AJAY)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "raksha-mantri-ex-servicemen-welfare-fund",
+      "name": "Raksha Mantri Ex-servicemen Welfare Fund (RMEWF)",
+      "description": "Department of Ex Servicemen Welfare directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Ex Servicemen Welfare",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Ex Servicemen Welfare; entry titled \"Raksha Mantri Ex-servicemen Welfare Fund (RMEWF)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "rehabilitation-bonded-labour",
+      "name": "Rehabilitation Assistance under the Scheme of Rehabilitation of Bonded Labour",
+      "description": "Ministry of Labour and Employment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Rehabilitation Assistance under the Scheme of Rehabilitation of Bonded Labour\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "seed-dnt",
+      "name": "Scheme for Economic Empowerment of DNTs (SEED)",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Scheme for Economic Empowerment of DNTs (SEED)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "small-minority-population-decline",
+      "name": "Scheme for containing population decline of small minority community",
+      "description": "Ministry of Minority Affairs directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Scheme for containing population decline of small minority community\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "visvas",
+      "name": "VISVAS",
+      "description": "Department of Social Justice and Empowerment directory record for this social welfare programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "social_welfare",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"VISVAS\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

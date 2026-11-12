@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "category": "transport",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "fame-india-demand-incentives",
+      "name": "Demand Incentive Delivery Mechanism under FAME India Scheme",
+      "description": "Ministry of Heavy Industries directory record for this transport programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Heavy Industries",
+      "department": null,
+      "category": "transport",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Heavy Industries; entry titled \"Demand Incentive Delivery Mechanism under FAME India Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-e-drive",
+      "name": "PM Electric Drive Revolution in Innovative Vehicle Enhancement",
+      "description": "Ministry of Heavy Industries directory record for this transport programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Heavy Industries",
+      "department": null,
+      "category": "transport",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Heavy Industries; entry titled \"PM Electric Drive Revolution in Innovative Vehicle Enhancement\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

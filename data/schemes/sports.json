@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "category": "sports",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "assistance-national-sports-federations",
+      "name": "Assistance to National Sports Federations",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"Assistance to National Sports Federations\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "human-resource-development-sports",
+      "name": "Scheme for Human Resource Development in Sports",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"Scheme for Human Resource Development in Sports\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "khelo-india",
+      "name": "Khelo India",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"Khelo India\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-sports-awards",
+      "name": "National Sports Awards",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"National Sports Awards\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-sports-development-fund",
+      "name": "National sports development fund",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"National sports development fund\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-welfare-fund-sportspersons",
+      "name": "National welfare fund for sportspersons",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"National welfare fund for sportspersons\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pension-meritorious-sportspersons",
+      "name": "Pension to meritorious sportspersons",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"Pension to meritorious sportspersons\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "special-cash-awards-international-sports",
+      "name": "Special cash awards to medal winners in international sports events",
+      "description": "Department of Sports directory record for this sports programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Sports",
+      "category": "sports",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Sports; entry titled \"Special cash awards to medal winners in international sports events\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

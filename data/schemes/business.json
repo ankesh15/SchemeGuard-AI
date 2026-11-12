@@ -1,0 +1,665 @@
+{
+  "schema_version": 1,
+  "category": "business",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "amended-technology-upgradation-fund",
+      "name": "Amended Technology Upgradations Fund",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Amended Technology Upgradations Fund\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "assistance-training-institutions",
+      "name": "ATI Scheme (Training Component)",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"ATI Scheme (Training Component)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "coir-vikas",
+      "name": "Coir Vikas Yojana",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"Coir Vikas Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "comprehensive-handicrafts-cluster",
+      "name": "Comprehensive Handicrafts Cluster Development Programme",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Comprehensive Handicrafts Cluster Development Programme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "entrepreneurship-skill-development",
+      "name": "Entrepreneurship and Skill Develoment Programme (ESDP)",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"Entrepreneurship and Skill Develoment Programme (ESDP)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "goa-chief-minister-rojgar",
+      "name": "Chief Minister’s Rojgar Yojana (CMRY – 2023) Scheme",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Chief Minister’s Rojgar Yojana (CMRY – 2023) Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-employment-subsidy",
+      "name": "Employment Subsidy Scheme, 2017",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Employment Subsidy Scheme, 2017\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-green-investment-incentives",
+      "name": "Incentives to Green Investment Scheme, 2017",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Incentives to Green Investment Scheme, 2017\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-industrial-exit-support",
+      "name": "Goa Industrial Development Corporation Exit Support Scheme",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Goa Industrial Development Corporation Exit Support Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-industry-training-incentives",
+      "name": "Incentives to Industries for Training Prospective Employment Scheme, 2017",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Incentives to Industries for Training Prospective Employment Scheme, 2017\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-interest-subsidy",
+      "name": "Interest Subsidy Scheme, 2017",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Interest Subsidy Scheme, 2017\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-investment-incentives",
+      "name": "Goa State Incentives to Encourage Investments Scheme, 2017",
+      "description": "Government of Goa directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "business",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Goa State Incentives to Encourage Investments Scheme, 2017\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "khadi-mmda",
+      "name": "MMDA Grant to Khadi Institutions",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"MMDA Grant to Khadi Institutions\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "msme-international-cooperation",
+      "name": "IC Schemes",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"IC Schemes\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "msme-national-awards",
+      "name": "National Awards",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"National Awards\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-handicrafts-development",
+      "name": "National Handicrafts Development Programme",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"National Handicrafts Development Programme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-handloom-development",
+      "name": "National Handloom Development Programme",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"National Handloom Development Programme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-credit-powerloom-weavers",
+      "name": "Pradhan Mantri Credit Scheme for Powerloom Weavers",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Pradhan Mantri Credit Scheme for Powerloom Weavers\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-employment-generation",
+      "name": "PMEGP Prime Ministers Employment Generation Programme",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"PMEGP Prime Ministers Employment Generation Programme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-vishwakarma",
+      "name": "PM Vishwakarma",
+      "description": "Ministry of Micro Small and Medium Enterprises directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Micro Small and Medium Enterprises",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Micro Small and Medium Enterprises; entry titled \"PM Vishwakarma\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "powerloom-group-workshed",
+      "name": "Powerloom Group Workshed Scheme",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Powerloom Group Workshed Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "raw-material-supply-handloom",
+      "name": "Raw Material Supply Scheme",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Raw Material Supply Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "silk-industry-development",
+      "name": "Scheme for Development of Silk Industry",
+      "description": "Ministry of Textiles directory record for this business programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "business",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Scheme for Development of Silk Industry\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

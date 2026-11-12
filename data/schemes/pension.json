@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "category": "pension",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "atal-pension",
+      "name": "Atal Pension Yojana",
+      "description": "Department of Financial Services directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Financial Services",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Financial Services; entry titled \"Atal Pension Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "coal-mines-pension",
+      "name": "Coal Mines Pension Scheme-1998",
+      "description": "Ministry of Coal directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Coal",
+      "department": null,
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Coal; entry titled \"Coal Mines Pension Scheme-1998\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "employees-pension-scheme",
+      "name": "Employees Pension Scheme for EPF Members",
+      "description": "Ministry of Labour and Employment directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Employees Pension Scheme for EPF Members\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "indira-gandhi-national-disability-pension",
+      "name": "Indira Gandhi National Disability Pension Scheme-IGNDPS",
+      "description": "Department of Rural Development directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"Indira Gandhi National Disability Pension Scheme-IGNDPS\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "indira-gandhi-national-old-age-pension",
+      "name": "Indira Gandhi National Old Age Pension Scheme- IGNOAPS",
+      "description": "Department of Rural Development directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"Indira Gandhi National Old Age Pension Scheme- IGNOAPS\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "indira-gandhi-national-widow-pension",
+      "name": "Indira Gandhi National Widow Pension Scheme-IGNWPS",
+      "description": "Department of Rural Development directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"Indira Gandhi National Widow Pension Scheme-IGNWPS\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-pension-traders-self-employed",
+      "name": "National Pension Scheme for Traders and Self Employed Persons [erstwhile Pradhan Mantri Laghu Vyapari Maan-dhan (PM-LVM) Yojana]",
+      "description": "Ministry of Labour and Employment directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"National Pension Scheme for Traders and Self Employed Persons [erstwhile Pradhan Mantri Laghu Vyapari Maan-dhan (PM-LVM) Yojana]\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-shram-yogi-maan-dhan",
+      "name": "Pradhan Mantri Shram Yogi Maan-dhan (PM-SYM)",
+      "description": "Ministry of Labour and Employment directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Pradhan Mantri Shram Yogi Maan-dhan (PM-SYM)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-vaya-vandana",
+      "name": "Pradhan Mantri Vaya Vandana Yojana",
+      "description": "Department of Financial Services directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Financial Services",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Financial Services; entry titled \"Pradhan Mantri Vaya Vandana Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "swatantrata-sainik-samman",
+      "name": "Swatantrata sainik samman pension scheme",
+      "description": "Department of Home directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Home",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Home; entry titled \"Swatantrata sainik samman pension scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "varishtha-pension-bima",
+      "name": "Varishtha Pension Bima Yojana",
+      "description": "Department of Financial Services directory record for this pension programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Financial Services",
+      "category": "pension",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Financial Services; entry titled \"Varishtha Pension Bima Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,10 @@ from app.main import create_app
 from app.seed import load_manifest, seed_schemes
 
 BACKEND = Path(__file__).resolve().parents[1]
-MANIFEST = Path(os.getenv("SEED_DATA_PATH", str(BACKEND.parent / "data/scholarships.json")))
+DATA = BACKEND / "data" if (BACKEND / "data").exists() else BACKEND.parent / "data"
+# Keep the original five records as a stable regression fixture independently
+# of the production catalog's SEED_DATA_PATH setting.
+MANIFEST = Path(os.getenv("TEST_SEED_MANIFEST", str(DATA / "scholarships.json")))
 
 
 @pytest.fixture(scope="session")

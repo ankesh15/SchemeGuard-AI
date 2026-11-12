@@ -1,0 +1,849 @@
+{
+  "scheme_id": "f81b002c-b356-5e78-badf-a5e07079c8e5",
+  "scheme_name": "SchemeGuard Learning Scholarship (Fictional)",
+  "is_demo": true,
+  "result": "PASS",
+  "assessment": "Known conditions satisfied",
+  "reason": "EVALUATED",
+  "evaluated_at": "2026-11-11T19:18:05.746018Z",
+  "assessed_on": "2026-11-12",
+  "rule_set": {
+    "id": "db50fe4a-a038-5ff0-9c15-52ac4e881eba",
+    "version_number": 1,
+    "title": "Fictional learning scholarship policy v1",
+    "approval_status": "APPROVED",
+    "approval_basis": "synthetic_fixture",
+    "approved_at": "2026-11-11T19:00:39.151345Z",
+    "effective_from": "2026-01-01",
+    "effective_to": null,
+    "source_document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+    "source_document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+    "scope_note": "Synthetic development fixture only. All thresholds and dates are invented. No government rules have been approved or evaluated."
+  },
+  "requirements": [
+    {
+      "key": "age_requirement",
+      "label": "Age within the fictional policy range",
+      "kind": "and",
+      "result": "PASS",
+      "explanation": "All requirements must be satisfied.",
+      "missing_fields": [],
+      "evidence": [
+        {
+          "id": "6a3c36ae-90b6-5cce-8069-438ff7f2f2b1",
+          "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+          "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+          "source_title": "Fictional development policy v1",
+          "publisher": "SchemeGuard development fixture",
+          "locator": "Section 1. Age",
+          "excerpt": "Declared age must be at least 18 and at most 25, inclusive.",
+          "url": "/policies/demo-policy-v1.md",
+          "is_demo": true
+        }
+      ],
+      "children": [
+        {
+          "key": "age_minimum",
+          "label": "Age minimum",
+          "kind": "comparison",
+          "result": "PASS",
+          "explanation": "The declared value satisfies this condition (>= 18).",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "6a3c36ae-90b6-5cce-8069-438ff7f2f2b1",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 1. Age",
+              "excerpt": "Declared age must be at least 18 and at most 25, inclusive.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": []
+        },
+        {
+          "key": "age_maximum",
+          "label": "Age maximum",
+          "kind": "comparison",
+          "result": "PASS",
+          "explanation": "The declared value satisfies this condition (<= 25).",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "6a3c36ae-90b6-5cce-8069-438ff7f2f2b1",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 1. Age",
+              "excerpt": "Declared age must be at least 18 and at most 25, inclusive.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "income_requirement",
+      "label": "Household income within the test limit",
+      "kind": "comparison",
+      "result": "PASS",
+      "explanation": "The declared value satisfies this condition (<= 300000).",
+      "missing_fields": [],
+      "evidence": [
+        {
+          "id": "61169d63-52e1-5cc7-abca-f0b6bd94ac3a",
+          "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+          "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+          "source_title": "Fictional development policy v1",
+          "publisher": "SchemeGuard development fixture",
+          "locator": "Section 2. Household income",
+          "excerpt": "Declared annual household income must be at most INR 300000, inclusive.",
+          "url": "/policies/demo-policy-v1.md",
+          "is_demo": true
+        }
+      ],
+      "children": []
+    },
+    {
+      "key": "study_requirement",
+      "label": "An accepted full-time study pathway",
+      "kind": "or",
+      "result": "PASS",
+      "explanation": "At least one alternative must be satisfied.",
+      "missing_fields": [],
+      "evidence": [
+        {
+          "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+          "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+          "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+          "source_title": "Fictional development policy v1",
+          "publisher": "SchemeGuard development fixture",
+          "locator": "Section 3. Study pathway",
+          "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+          "url": "/policies/demo-policy-v1.md",
+          "is_demo": true
+        }
+      ],
+      "children": [
+        {
+          "key": "engineering_path",
+          "label": "Engineering path",
+          "kind": "and",
+          "result": "PASS",
+          "explanation": "All requirements must be satisfied.",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 3. Study pathway",
+              "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": [
+            {
+              "key": "engineering_course",
+              "label": "Engineering course",
+              "kind": "comparison",
+              "result": "PASS",
+              "explanation": "The declared value satisfies this condition (== engineering).",
+              "missing_fields": [],
+              "evidence": [
+                {
+                  "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                  "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                  "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                  "source_title": "Fictional development policy v1",
+                  "publisher": "SchemeGuard development fixture",
+                  "locator": "Section 3. Study pathway",
+                  "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                  "url": "/policies/demo-policy-v1.md",
+                  "is_demo": true
+                }
+              ],
+              "children": []
+            },
+            {
+              "key": "engineering_full_time",
+              "label": "Engineering full time",
+              "kind": "comparison",
+              "result": "PASS",
+              "explanation": "The declared value satisfies this condition (== full_time).",
+              "missing_fields": [],
+              "evidence": [
+                {
+                  "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                  "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                  "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                  "source_title": "Fictional development policy v1",
+                  "publisher": "SchemeGuard development fixture",
+                  "locator": "Section 3. Study pathway",
+                  "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                  "url": "/policies/demo-policy-v1.md",
+                  "is_demo": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "science_path",
+          "label": "Science path",
+          "kind": "and",
+          "result": "FAIL",
+          "explanation": "All requirements must be satisfied.",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 3. Study pathway",
+              "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": [
+            {
+              "key": "science_course",
+              "label": "Science course",
+              "kind": "comparison",
+              "result": "FAIL",
+              "explanation": "The declared value does not satisfy this condition (== science).",
+              "missing_fields": [],
+              "evidence": [
+                {
+                  "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                  "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                  "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                  "source_title": "Fictional development policy v1",
+                  "publisher": "SchemeGuard development fixture",
+                  "locator": "Section 3. Study pathway",
+                  "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                  "url": "/policies/demo-policy-v1.md",
+                  "is_demo": true
+                }
+              ],
+              "children": []
+            },
+            {
+              "key": "science_full_time",
+              "label": "Science full time",
+              "kind": "comparison",
+              "result": "PASS",
+              "explanation": "The declared value satisfies this condition (== full_time).",
+              "missing_fields": [],
+              "evidence": [
+                {
+                  "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                  "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                  "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                  "source_title": "Fictional development policy v1",
+                  "publisher": "SchemeGuard development fixture",
+                  "locator": "Section 3. Study pathway",
+                  "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                  "url": "/policies/demo-policy-v1.md",
+                  "is_demo": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "other_award_exclusion",
+      "label": "No other scholarship received",
+      "kind": "exclude",
+      "result": "PASS",
+      "explanation": "No exclusion established.",
+      "missing_fields": [],
+      "evidence": [
+        {
+          "id": "7321bf8c-48dd-575e-8c9f-17dc573f7d92",
+          "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+          "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+          "source_title": "Fictional development policy v1",
+          "publisher": "SchemeGuard development fixture",
+          "locator": "Section 4. Exclusion",
+          "excerpt": "An applicant receiving another scholarship is excluded from this fictional award.",
+          "url": "/policies/demo-policy-v1.md",
+          "is_demo": true
+        }
+      ],
+      "children": [
+        {
+          "key": "other_award_received",
+          "label": "Other award received",
+          "kind": "comparison",
+          "result": "FAIL",
+          "explanation": "The declared value does not satisfy this condition (== True).",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "7321bf8c-48dd-575e-8c9f-17dc573f7d92",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 4. Exclusion",
+              "excerpt": "An applicant receiving another scholarship is excluded from this fictional award.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "support_requirement",
+      "label": "Additional support requirements",
+      "kind": "if",
+      "result": "PASS",
+      "explanation": "This additional requirement does not apply to the declared profile.",
+      "missing_fields": [],
+      "evidence": [
+        {
+          "id": "29a8fe91-68dd-5e76-b4b1-6de71387ada9",
+          "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+          "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+          "source_title": "Fictional development policy v1",
+          "publisher": "SchemeGuard development fixture",
+          "locator": "Section 5. Conditional support",
+          "excerpt": "If disability support is requested, the declared certified disability percentage\nmust be at least 40, inclusive. If support is not requested, this additional\npercentage requirement does not apply. An unknown support request is UNKNOWN.",
+          "url": "/policies/demo-policy-v1.md",
+          "is_demo": true
+        }
+      ],
+      "children": [
+        {
+          "key": "support_requested",
+          "label": "Support requested",
+          "kind": "comparison",
+          "result": "FAIL",
+          "explanation": "The declared value does not satisfy this condition (== True).",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "29a8fe91-68dd-5e76-b4b1-6de71387ada9",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 5. Conditional support",
+              "excerpt": "If disability support is requested, the declared certified disability percentage\nmust be at least 40, inclusive. If support is not requested, this additional\npercentage requirement does not apply. An unknown support request is UNKNOWN.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "enrollment_requirement",
+      "label": "Enrollment within the fictional date range",
+      "kind": "and",
+      "result": "PASS",
+      "explanation": "All requirements must be satisfied.",
+      "missing_fields": [],
+      "evidence": [
+        {
+          "id": "a7603aa6-7e88-5213-a4bc-843e5f5f6677",
+          "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+          "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+          "source_title": "Fictional development policy v1",
+          "publisher": "SchemeGuard development fixture",
+          "locator": "Section 6. Enrollment date",
+          "excerpt": "The declared enrollment date must be from 2026-06-01 through 2026-12-31,\ninclusive. These dates are test inputs, not government application deadlines.",
+          "url": "/policies/demo-policy-v1.md",
+          "is_demo": true
+        }
+      ],
+      "children": [
+        {
+          "key": "enrollment_start",
+          "label": "Enrollment start",
+          "kind": "comparison",
+          "result": "PASS",
+          "explanation": "The declared value satisfies this condition (>= 2026-06-01).",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "a7603aa6-7e88-5213-a4bc-843e5f5f6677",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 6. Enrollment date",
+              "excerpt": "The declared enrollment date must be from 2026-06-01 through 2026-12-31,\ninclusive. These dates are test inputs, not government application deadlines.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": []
+        },
+        {
+          "key": "enrollment_end",
+          "label": "Enrollment end",
+          "kind": "comparison",
+          "result": "PASS",
+          "explanation": "The declared value satisfies this condition (<= 2026-12-31).",
+          "missing_fields": [],
+          "evidence": [
+            {
+              "id": "a7603aa6-7e88-5213-a4bc-843e5f5f6677",
+              "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+              "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+              "source_title": "Fictional development policy v1",
+              "publisher": "SchemeGuard development fixture",
+              "locator": "Section 6. Enrollment date",
+              "excerpt": "The declared enrollment date must be from 2026-06-01 through 2026-12-31,\ninclusive. These dates are test inputs, not government application deadlines.",
+              "url": "/policies/demo-policy-v1.md",
+              "is_demo": true
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "trace": {
+    "key": "assessment",
+    "label": "Overall assessment",
+    "kind": "and",
+    "result": "PASS",
+    "explanation": "All requirements must be satisfied.",
+    "missing_fields": [],
+    "evidence": [],
+    "children": [
+      {
+        "key": "age_requirement",
+        "label": "Age within the fictional policy range",
+        "kind": "and",
+        "result": "PASS",
+        "explanation": "All requirements must be satisfied.",
+        "missing_fields": [],
+        "evidence": [
+          {
+            "id": "6a3c36ae-90b6-5cce-8069-438ff7f2f2b1",
+            "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+            "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+            "source_title": "Fictional development policy v1",
+            "publisher": "SchemeGuard development fixture",
+            "locator": "Section 1. Age",
+            "excerpt": "Declared age must be at least 18 and at most 25, inclusive.",
+            "url": "/policies/demo-policy-v1.md",
+            "is_demo": true
+          }
+        ],
+        "children": [
+          {
+            "key": "age_minimum",
+            "label": "Age minimum",
+            "kind": "comparison",
+            "result": "PASS",
+            "explanation": "The declared value satisfies this condition (>= 18).",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "6a3c36ae-90b6-5cce-8069-438ff7f2f2b1",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 1. Age",
+                "excerpt": "Declared age must be at least 18 and at most 25, inclusive.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": []
+          },
+          {
+            "key": "age_maximum",
+            "label": "Age maximum",
+            "kind": "comparison",
+            "result": "PASS",
+            "explanation": "The declared value satisfies this condition (<= 25).",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "6a3c36ae-90b6-5cce-8069-438ff7f2f2b1",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 1. Age",
+                "excerpt": "Declared age must be at least 18 and at most 25, inclusive.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "key": "income_requirement",
+        "label": "Household income within the test limit",
+        "kind": "comparison",
+        "result": "PASS",
+        "explanation": "The declared value satisfies this condition (<= 300000).",
+        "missing_fields": [],
+        "evidence": [
+          {
+            "id": "61169d63-52e1-5cc7-abca-f0b6bd94ac3a",
+            "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+            "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+            "source_title": "Fictional development policy v1",
+            "publisher": "SchemeGuard development fixture",
+            "locator": "Section 2. Household income",
+            "excerpt": "Declared annual household income must be at most INR 300000, inclusive.",
+            "url": "/policies/demo-policy-v1.md",
+            "is_demo": true
+          }
+        ],
+        "children": []
+      },
+      {
+        "key": "study_requirement",
+        "label": "An accepted full-time study pathway",
+        "kind": "or",
+        "result": "PASS",
+        "explanation": "At least one alternative must be satisfied.",
+        "missing_fields": [],
+        "evidence": [
+          {
+            "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+            "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+            "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+            "source_title": "Fictional development policy v1",
+            "publisher": "SchemeGuard development fixture",
+            "locator": "Section 3. Study pathway",
+            "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+            "url": "/policies/demo-policy-v1.md",
+            "is_demo": true
+          }
+        ],
+        "children": [
+          {
+            "key": "engineering_path",
+            "label": "Engineering path",
+            "kind": "and",
+            "result": "PASS",
+            "explanation": "All requirements must be satisfied.",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 3. Study pathway",
+                "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": [
+              {
+                "key": "engineering_course",
+                "label": "Engineering course",
+                "kind": "comparison",
+                "result": "PASS",
+                "explanation": "The declared value satisfies this condition (== engineering).",
+                "missing_fields": [],
+                "evidence": [
+                  {
+                    "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                    "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                    "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                    "source_title": "Fictional development policy v1",
+                    "publisher": "SchemeGuard development fixture",
+                    "locator": "Section 3. Study pathway",
+                    "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                    "url": "/policies/demo-policy-v1.md",
+                    "is_demo": true
+                  }
+                ],
+                "children": []
+              },
+              {
+                "key": "engineering_full_time",
+                "label": "Engineering full time",
+                "kind": "comparison",
+                "result": "PASS",
+                "explanation": "The declared value satisfies this condition (== full_time).",
+                "missing_fields": [],
+                "evidence": [
+                  {
+                    "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                    "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                    "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                    "source_title": "Fictional development policy v1",
+                    "publisher": "SchemeGuard development fixture",
+                    "locator": "Section 3. Study pathway",
+                    "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                    "url": "/policies/demo-policy-v1.md",
+                    "is_demo": true
+                  }
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "key": "science_path",
+            "label": "Science path",
+            "kind": "and",
+            "result": "FAIL",
+            "explanation": "All requirements must be satisfied.",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 3. Study pathway",
+                "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": [
+              {
+                "key": "science_course",
+                "label": "Science course",
+                "kind": "comparison",
+                "result": "FAIL",
+                "explanation": "The declared value does not satisfy this condition (== science).",
+                "missing_fields": [],
+                "evidence": [
+                  {
+                    "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                    "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                    "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                    "source_title": "Fictional development policy v1",
+                    "publisher": "SchemeGuard development fixture",
+                    "locator": "Section 3. Study pathway",
+                    "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                    "url": "/policies/demo-policy-v1.md",
+                    "is_demo": true
+                  }
+                ],
+                "children": []
+              },
+              {
+                "key": "science_full_time",
+                "label": "Science full time",
+                "kind": "comparison",
+                "result": "PASS",
+                "explanation": "The declared value satisfies this condition (== full_time).",
+                "missing_fields": [],
+                "evidence": [
+                  {
+                    "id": "2ccba427-f42f-56dc-8a97-d4b627650cba",
+                    "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                    "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                    "source_title": "Fictional development policy v1",
+                    "publisher": "SchemeGuard development fixture",
+                    "locator": "Section 3. Study pathway",
+                    "excerpt": "The applicant must study full time in either engineering or science.\nPart-time study and other course categories do not meet this test condition.",
+                    "url": "/policies/demo-policy-v1.md",
+                    "is_demo": true
+                  }
+                ],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "other_award_exclusion",
+        "label": "No other scholarship received",
+        "kind": "exclude",
+        "result": "PASS",
+        "explanation": "No exclusion established.",
+        "missing_fields": [],
+        "evidence": [
+          {
+            "id": "7321bf8c-48dd-575e-8c9f-17dc573f7d92",
+            "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+            "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+            "source_title": "Fictional development policy v1",
+            "publisher": "SchemeGuard development fixture",
+            "locator": "Section 4. Exclusion",
+            "excerpt": "An applicant receiving another scholarship is excluded from this fictional award.",
+            "url": "/policies/demo-policy-v1.md",
+            "is_demo": true
+          }
+        ],
+        "children": [
+          {
+            "key": "other_award_received",
+            "label": "Other award received",
+            "kind": "comparison",
+            "result": "FAIL",
+            "explanation": "The declared value does not satisfy this condition (== True).",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "7321bf8c-48dd-575e-8c9f-17dc573f7d92",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 4. Exclusion",
+                "excerpt": "An applicant receiving another scholarship is excluded from this fictional award.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "key": "support_requirement",
+        "label": "Additional support requirements",
+        "kind": "if",
+        "result": "PASS",
+        "explanation": "This additional requirement does not apply to the declared profile.",
+        "missing_fields": [],
+        "evidence": [
+          {
+            "id": "29a8fe91-68dd-5e76-b4b1-6de71387ada9",
+            "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+            "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+            "source_title": "Fictional development policy v1",
+            "publisher": "SchemeGuard development fixture",
+            "locator": "Section 5. Conditional support",
+            "excerpt": "If disability support is requested, the declared certified disability percentage\nmust be at least 40, inclusive. If support is not requested, this additional\npercentage requirement does not apply. An unknown support request is UNKNOWN.",
+            "url": "/policies/demo-policy-v1.md",
+            "is_demo": true
+          }
+        ],
+        "children": [
+          {
+            "key": "support_requested",
+            "label": "Support requested",
+            "kind": "comparison",
+            "result": "FAIL",
+            "explanation": "The declared value does not satisfy this condition (== True).",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "29a8fe91-68dd-5e76-b4b1-6de71387ada9",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 5. Conditional support",
+                "excerpt": "If disability support is requested, the declared certified disability percentage\nmust be at least 40, inclusive. If support is not requested, this additional\npercentage requirement does not apply. An unknown support request is UNKNOWN.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "key": "enrollment_requirement",
+        "label": "Enrollment within the fictional date range",
+        "kind": "and",
+        "result": "PASS",
+        "explanation": "All requirements must be satisfied.",
+        "missing_fields": [],
+        "evidence": [
+          {
+            "id": "a7603aa6-7e88-5213-a4bc-843e5f5f6677",
+            "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+            "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+            "source_title": "Fictional development policy v1",
+            "publisher": "SchemeGuard development fixture",
+            "locator": "Section 6. Enrollment date",
+            "excerpt": "The declared enrollment date must be from 2026-06-01 through 2026-12-31,\ninclusive. These dates are test inputs, not government application deadlines.",
+            "url": "/policies/demo-policy-v1.md",
+            "is_demo": true
+          }
+        ],
+        "children": [
+          {
+            "key": "enrollment_start",
+            "label": "Enrollment start",
+            "kind": "comparison",
+            "result": "PASS",
+            "explanation": "The declared value satisfies this condition (>= 2026-06-01).",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "a7603aa6-7e88-5213-a4bc-843e5f5f6677",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 6. Enrollment date",
+                "excerpt": "The declared enrollment date must be from 2026-06-01 through 2026-12-31,\ninclusive. These dates are test inputs, not government application deadlines.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": []
+          },
+          {
+            "key": "enrollment_end",
+            "label": "Enrollment end",
+            "kind": "comparison",
+            "result": "PASS",
+            "explanation": "The declared value satisfies this condition (<= 2026-12-31).",
+            "missing_fields": [],
+            "evidence": [
+              {
+                "id": "a7603aa6-7e88-5213-a4bc-843e5f5f6677",
+                "document_version_id": "c2d28e96-f7a6-50d0-9ef8-b04beb6c9596",
+                "document_sha256": "168b7076266cad79f8dda549a67db7fcc5bb2d5bda6c2cdb51c4bc611f8365c0",
+                "source_title": "Fictional development policy v1",
+                "publisher": "SchemeGuard development fixture",
+                "locator": "Section 6. Enrollment date",
+                "excerpt": "The declared enrollment date must be from 2026-06-01 through 2026-12-31,\ninclusive. These dates are test inputs, not government application deadlines.",
+                "url": "/policies/demo-policy-v1.md",
+                "is_demo": true
+              }
+            ],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "missing_fields": [],
+  "notices": [
+    "FICTIONAL DEMO: this is not a government scholarship. All policy values are invented test data.",
+    "This is an assessment of known conditions, not official government approval, a funding guarantee, or an application submission.",
+    "Synthetic development profiles only. Applicant inputs and reports are not persisted."
+  ],
+  "official_application_url": null
+}

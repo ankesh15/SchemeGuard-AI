@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     database_url: SecretStr | None = None
     database_timeout_seconds: float = Field(default=3.0, gt=0, le=30)
     cors_origins: list[str] = []
-    seed_data_path: Path = Path("/app/data/scholarships.json")
+    seed_data_path: Path = Path("/app/data/schemes")
+    seed_demo_data: bool = False
 
     @field_validator("postgres_password")
     @classmethod

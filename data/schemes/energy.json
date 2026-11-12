@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "category": "energy",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "national-biogas-organic-manure",
+      "name": "New National Biogas and Organic Manure Programme (NNBOMP)",
+      "description": "Ministry of New and Renewable Energy directory record for this energy programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of New and Renewable Energy",
+      "department": null,
+      "category": "energy",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of New and Renewable Energy; entry titled \"New National Biogas and Organic Manure Programme (NNBOMP)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pahal",
+      "name": "PAHAL",
+      "description": "Ministry of Petroleum and Natural Gas directory record for this energy programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Petroleum and Natural Gas",
+      "department": null,
+      "category": "energy",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Petroleum and Natural Gas; entry titled \"PAHAL\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-kusum",
+      "name": "Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan Scheme",
+      "description": "Ministry of New and Renewable Energy directory record for this energy programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of New and Renewable Energy",
+      "department": null,
+      "category": "energy",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of New and Renewable Energy; entry titled \"Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-surya-ghar",
+      "name": "PM-SURYA GHAR MUFT BIJLI YOJANA",
+      "description": "Ministry of New and Renewable Energy directory record for this energy programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of New and Renewable Energy",
+      "department": null,
+      "category": "energy",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of New and Renewable Energy; entry titled \"PM-SURYA GHAR MUFT BIJLI YOJANA\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-ujjwala",
+      "name": "Pradhan Mantri Ujjwala Yojana",
+      "description": "Ministry of Petroleum and Natural Gas directory record for this energy programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Petroleum and Natural Gas",
+      "department": null,
+      "category": "energy",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Petroleum and Natural Gas; entry titled \"Pradhan Mantri Ujjwala Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

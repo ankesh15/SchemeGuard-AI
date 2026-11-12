@@ -1,35 +1,53 @@
-# Phase 1 architecture
+# Architecture — Phase 2
 
-The backend is a modular monolith. A single development API process serves public discovery endpoints; PostgreSQL is the only stateful service. Later background workers can reuse application services, repositories, and domain contracts without coupling jobs to HTTP handlers. No worker containers are introduced in Phase 1.
+SchemeGuard AI is a modular monolith with a separate Next.js frontend and PostgreSQL. Only three Docker services run: frontend, API, and database. Background workers, LLMs, policy monitoring, and notifications are deferred.
 
-## Request flow
+## User and data flow
 
-`HTTP → versioned router → service → repository → async SQLAlchemy session → PostgreSQL`
+`Browser → Next.js pages → FastAPI v1 → services → repositories → async SQLAlchemy → PostgreSQL`
 
-`app.main.create_app` configures the application, exception handlers, logging, and CORS. The lifespan owns a bounded, pre-ping database connection pool and disposes it on shutdown. Settings use pydantic-settings; credentials are represented by `SecretStr` and SQLAlchemy URL objects so reserved password characters are encoded correctly. Each request receives a separate async session through dependency injection; public APIs do not commit writes.
+Public discovery uses the existing scheme service and repository. Details and questionnaire pages use server-rendered reads through `INTERNAL_API_URL=http://api:8000`; explorer filtering and the questionnaire POST use the browser-reachable `NEXT_PUBLIC_API_URL=http://localhost:8000`. The frontend and API share the ingress network; only the API and database share the internal database network. PostgreSQL exposes no host port.
 
-Routers validate IDs and query objects. Services enforce not-found behavior and build typed response models. Repositories implement parameterized queries, literal substring search, verified geography filtering, eager source loading, deterministic ordering, and bounded pagination. The model layer uses SQLAlchemy 2.x typed mappings. Alembic owns schema evolution; application code never calls `create_all`.
+`Synthetic questionnaire → eligibility/check → approved effective rule version → typed program → pure engine → traces/evidence → in-memory React report`
 
-## Startup and operations
+The eligibility service owns version selection, validates the loaded configuration, maps each top-level condition to its immutable evidence, and invokes the standalone engine. The engine imports no FastAPI, SQLAlchemy, filesystem, or external service client. Pydantic discriminated unions validate the safe expression tree. Decimal and ISO date comparisons, three-valued groups, exclusions, and conditional branches are deterministic. A malformed approved program fails closed; missing values and unavailable approved rules never become an assumed pass.
 
-Compose waits for PostgreSQL's health check. The non-root API entrypoint runs `alembic upgrade head`, then executes the reload server. Migration failure prevents startup. This is suitable for one development API instance; a future scaled deployment should use an explicit migration release step with appropriate locking and database roles.
+## Module boundaries
 
-`/health` reports whether the HTTP process is running. `/ready` issues a live `SELECT 1` under a bounded timeout and reports 503 on connectivity errors. It is also the API container's health check. Readiness does not assert that seed data exists. Both services share an internal Docker network; database ports are not published. The API additionally joins an ingress network so Docker can publish its host loopback port. No requests to official government sites occur at application startup, during seeding, or while serving APIs.
+- `app/api/v1`: HTTP validation, dependency injection, typed responses, request headers.
+- `app/services`: discovery behavior and eligibility orchestration/version selection.
+- `app/repositories`: bound SQL queries and eager evidence loading.
+- `app/models`: typed SQLAlchemy tables and relationships.
+- `app/schemas`: API and seed contracts.
+- `app/eligibility`: pure typed expressions, profile validation, three-valued evaluation, and traces.
+- `app/demo_policy.py` and `seed_demo.py`: the explicitly authored development fixture and its repeatable seed.
+- `frontend/src/components`: reusable navigation, scheme cards, explorer, questionnaire, report, and memory-only report context.
+- `frontend/src/lib`: API contract types, server/browser URL selection, and form-domain validation.
 
-The PostgreSQL named volume survives service recreation. Backend files are bind-mounted for hot reload. The reviewed seed manifest is mounted read-only. The Docker image packages the same files and uses hash-locked dependencies; the development target adds test and analysis tooling.
+## Approval, provenance, and interpretation
 
-## Evidence boundaries
+The five government scheme records are unchanged discovery metadata with an added `is_demo=false` classification. No government rule set is approved. The fictional example is marked at every stage and has no official application link or award. Its source bytes, content hash, version, and section excerpts support every test condition.
 
-The seed is curated metadata verified from official websites on a fixed date. Each factual field is mapped to one or more source records through `supported_fields`. Seed validation checks official HTTPS domains, primary-source uniqueness, supported geography, and evidence coverage. This checks the manifest's structure; it does not establish authenticity of arbitrary future documents.
+Rule content and evidence are immutable. Database guards enforce draft assembly, one-way approval, evidence coverage, and distinct human-review/synthetic-fixture bases. The public HTTP API cannot create or approve rules. In future phases an authenticated reviewer must approve any government rules before publication. Neither the engine nor an LLM can declare official government approval.
 
-Unknown information remains null or explicitly `unknown`. A directory listing does not establish application availability or user eligibility. No thresholds or rule values are stored. Ishan Uday is the only seed with verified state coverage. No eligibility decision is exposed.
+The reports use exactly: Known conditions satisfied, Requirements not satisfied, and More information required. Top-level requirement outcomes are distinct from nested alternative/conditional guard traces. See rules.md for truth tables and missing-field behavior.
 
-`document_versions` stores identity, source, version number, content hash, storage locator, retrieval date, optional publication date, and same-source supersession. Database triggers reject updates, deletion, and truncation. No document snapshots are fabricated from source URLs. Future document ingestion must treat remote content as untrusted data and must add content size limits, safe fetching, file validation, and review boundaries. Any future AI-extracted rule must receive human approval before publication; an LLM must never make the final eligibility decision. No rule engine or review workflow is implemented here.
+## Privacy and security
 
-## Security and limitations
+The public eligibility request requires an explicit synthetic-profile flag and validates a bounded mapping of scalar/null inputs. Dynamic validation rejects unknown fields, invalid types, non-finite values, invalid calendar dates, and unsupported choices. Missing inputs are permitted so that the engine can report UNKNOWN. The questionnaire requests no names, contact details, Aadhaar identifiers, uploaded documents, or accounts.
 
-The four public endpoints require no authentication because they expose public metadata only. There are no HTTP mutation or administrative endpoints; the explicit seed CLI requires database access. Future administrative writes must add authentication and authorization first.
+Runtime submissions are never written to SQL, a queue, files, browser storage, URLs, or logs. Report state lives only in the client React provider and clears on refresh. Authored synthetic examples and synthetic-only API response fixtures are checked in solely for development tests. Eligibility responses use no-store caching headers and do not include raw applicant values. JSON request logs contain route templates, request IDs, statuses, duration, and safe error types, without request bodies, query strings, or raw exception messages. Validation errors omit raw inputs.
 
-Logs are JSON with timestamps, event names, request IDs, matched route templates, duration, and status. They omit request bodies, raw paths, query strings, authentication headers, SQL parameters, and exception messages. Database failures return generic 503 responses; unexpected failures return generic 500 responses. Validation errors omit raw inputs. Explicit CORS origins allow GET only, without credentials. CORS is a browser policy, not authorization.
+The backend factory owns the async connection pool and disposes it on shutdown. Sessions are injected per request; eligibility handlers perform reads only. Explicit CORS origins allow GET/POST without credentials. Backend secrets remain in ignored local configuration/environment and are never passed to the frontend. Both application containers run as non-root users.
 
-This is a development configuration. Database owner credentials, a single API process, offset pagination, and linear substring search are acceptable for the Phase 1 dataset. Production role separation, TLS, backup/restore exercises, rate limits, image digest pinning, dependency vulnerability monitoring, secret management, and deployment configuration belong to later work. No internet-facing production deployment is performed in this phase.
+## Startup and development
+
+Compose first waits for PostgreSQL health. The API applies Alembic migrations and the optional insert-only development seeds before starting. Existing records and the database volume are preserved. The frontend waits for API readiness. API and frontend have hot reload, and the frontend has dedicated dependency/cache volumes.
+
+The API readiness check performs a live bounded database query; its process-health endpoint does not require PostgreSQL. The frontend has its own lightweight health route. Image builds use locked dependencies. A frontend production-mode compile is tested in an isolated disposable container so its output cannot interfere with the running development server. This is build verification, not a production deployment configuration.
+
+## Verification boundaries and limits
+
+PostgreSQL integration tests cover migrations, relationships, immutable history, approval/version selection, discovery, eligibility, and preservation of existing Phase 1 rows. Pure engine tests cover every supported operator and AND/OR truth table. Frontend tests use captured public/synthetic API contracts and exercise dynamic inputs, validation, conditional visibility, loading/errors, report rendering, and absence of browser-storage writes. Browser QA verifies the complete desktop/mobile journey, PASS/FAIL/UNKNOWN results, evidence disclosure, filtering, and refresh privacy behavior.
+
+Authentication workflows, production database role separation, rate limits/edge body limits, backup restoration, large-data performance, official-policy reconciliation, AI document processing, and production deployment are outside this phase. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence or administrative publication interface is introduced.

@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "category": "skills",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "capacity-building-service-providers",
+      "name": "Capacity Building for Service Providers",
+      "description": "Ministry of Tourism directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tourism",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tourism; entry titled \"Capacity Building for Service Providers\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "deen-dayal-upadhyay-grameen-kaushalya",
+      "name": "Deen Dayal Upadhyay Grameen Kaushalya Yojna",
+      "description": "Department of Rural Development directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"Deen Dayal Upadhyay Grameen Kaushalya Yojna\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "futureskills-prime",
+      "name": "FutureSkills PRIME (Programme for Re-skilling/Up-skilling of IT Manpower for Employability)",
+      "description": "Ministry of Electronics and Information Technology directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Electronics and Information Technology",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Electronics and Information Technology; entry titled \"FutureSkills PRIME (Programme for Re-skilling/Up-skilling of IT Manpower for Employability)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "jan-shikshan-sansthan",
+      "name": "Jan Shikshan Sansthan",
+      "description": "Ministry of Skill Development and Entrepreneurship directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Skill Development and Entrepreneurship",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Skill Development and Entrepreneurship; entry titled \"Jan Shikshan Sansthan\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-apprenticeship-promotion",
+      "name": "National Apprenticeship Promotion Scheme",
+      "description": "Ministry of Skill Development and Entrepreneurship directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Skill Development and Entrepreneurship",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Skill Development and Entrepreneurship; entry titled \"National Apprenticeship Promotion Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-apprenticeship-training",
+      "name": "Programme for Apprenticeship",
+      "description": "Department of Higher Education directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Programme for Apprenticeship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-internship",
+      "name": "Prime Minister Internship Scheme",
+      "description": "Ministry of Corporate Affairs directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Corporate Affairs",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Corporate Affairs; entry titled \"Prime Minister Internship Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-kaushal-vikas",
+      "name": "Pradhan Mantri Kaushal Vikas Yojana",
+      "description": "Ministry of Skill Development and Entrepreneurship directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Skill Development and Entrepreneurship",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Skill Development and Entrepreneurship; entry titled \"Pradhan Mantri Kaushal Vikas Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-vikas",
+      "name": "Pradhan Mantri Virasat Ka Samvardhan",
+      "description": "Ministry of Minority Affairs directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Pradhan Mantri Virasat Ka Samvardhan\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "samarth-textiles",
+      "name": "Samarth Scheme",
+      "description": "Ministry of Textiles directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Textiles",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Textiles; entry titled \"Samarth Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "sc-st-job-seekers-training-stipend",
+      "name": "Stipend to Trainees under the Scheme of Welfare of SC ST Job-Seekers through Coaching, Guidance and Vocational Training",
+      "description": "Ministry of Labour and Employment directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Stipend to Trainees under the Scheme of Welfare of SC ST Job-Seekers through Coaching, Guidance and Vocational Training\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "vocational-rehabilitation-disability-stipend",
+      "name": "Stipend to Differently Abled Candidates under the Scheme of Vocational Rehabilitation Centres for Handicapped",
+      "description": "Ministry of Labour and Employment directory record for this skills programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "skills",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Stipend to Differently Abled Candidates under the Scheme of Vocational Rehabilitation Centres for Handicapped\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

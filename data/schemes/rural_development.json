@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "category": "rural_development",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "day-nrlm",
+      "name": "DAY-NRLM",
+      "description": "Department of Rural Development directory record for this rural development programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "rural_development",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"DAY-NRLM\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "goa-gram-samruddhi",
+      "name": "Goa Gram Samruddhi Yojana",
+      "description": "Government of Goa directory record for this rural development programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "rural_development",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Goa Gram Samruddhi Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "mahatma-gandhi-nrega",
+      "name": "Mahatma Gandhi NREGA",
+      "description": "Department of Rural Development directory record for this rural development programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "rural_development",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"Mahatma Gandhi NREGA\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-family-benefit",
+      "name": "National Family Benefit Scheme",
+      "description": "Department of Rural Development directory record for this rural development programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "rural_development",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"National Family Benefit Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

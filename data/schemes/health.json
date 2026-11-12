@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "category": "health",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "ayushman-bharat-pmjay",
+      "name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)",
+      "description": "Department of Health and Family Welfare directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Health and Family Welfare",
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Health and Family Welfare; entry titled \"Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "family-planning-compensation",
+      "name": "Family Planning Compensation schemes",
+      "description": "Department of Health and Family Welfare directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Health and Family Welfare",
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Health and Family Welfare; entry titled \"Family Planning Compensation schemes\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "international-cooperation-ayush",
+      "name": "Promotion of International Co-operation in AYUSH",
+      "description": "Ministry of AYUSH directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of AYUSH",
+      "department": null,
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of AYUSH; entry titled \"Promotion of International Co-operation in AYUSH\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "janani-shishu-suraksha",
+      "name": "Janani Shishu Suraksha Karyakram",
+      "description": "Department of Health and Family Welfare directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Health and Family Welfare",
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Health and Family Welfare; entry titled \"Janani Shishu Suraksha Karyakram\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "janani-suraksha",
+      "name": "Janani suraksha yojana",
+      "description": "Department of Health and Family Welfare directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Health and Family Welfare",
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Health and Family Welfare; entry titled \"Janani suraksha yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-ayush-mission-medicines",
+      "name": "National AYUSH Mission - Medicines under AYUSH Services",
+      "description": "Ministry of AYUSH directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of AYUSH",
+      "department": null,
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of AYUSH; entry titled \"National AYUSH Mission - Medicines under AYUSH Services\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "nikshay-nutritional-support",
+      "name": "NIKSHAY - TB patient incentive for nutritional support",
+      "description": "Department of Health and Family Welfare directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Health and Family Welfare",
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Health and Family Welfare; entry titled \"NIKSHAY - TB patient incentive for nutritional support\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-bhartiya-jan-aushadhi",
+      "name": "Pardhan Mantri Bhartiya Jan Aushadhi Pariyojana (PMBJP)",
+      "description": "Department of Pharmaceuticals directory record for this health programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Pharmaceuticals",
+      "category": "health",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Pharmaceuticals; entry titled \"Pardhan Mantri Bhartiya Jan Aushadhi Pariyojana (PMBJP)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

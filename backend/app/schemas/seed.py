@@ -20,7 +20,7 @@ class SourceSeed(BaseModel):
     def official_https_source(cls, value: HttpUrl) -> HttpUrl:
         host = value.host or ""
         official = host.endswith((".gov.in", ".nic.in")) or host in {"aicte-india.org", "www.aicte-india.org"}
-        if value.scheme != "https" or not official or value.username or value.password:
+        if value.scheme != "https" or not official or value.username or value.password or value.port != 443:
             raise ValueError("Seed sources require an official government HTTPS URL")
         return value
 
@@ -68,11 +68,15 @@ class SeedManifest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     schema_version: int = Field(ge=1, le=1)
-    review_method: str
-    schemes: list[SchemeSeed] = Field(min_length=5, max_length=5)
+    review_method: str = Field(min_length=1)
+    # Optional for the legacy Phase 1 file; category files declare and validate it.
+    category: str | None = Field(default=None, pattern=r"^[a-z][a-z0-9_-]*$", max_length=60)
+    schemes: list[SchemeSeed] = Field(min_length=1)
 
     @model_validator(mode="after")
     def unique_schemes(self) -> "SeedManifest":
         if len({scheme.slug for scheme in self.schemes}) != len(self.schemes):
             raise ValueError("Scheme slugs must be unique")
+        if self.category is not None and any(scheme.category != self.category for scheme in self.schemes):
+            raise ValueError("Every scheme must match the declared file category")
         return self

@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "category": "environment",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "green-india-mission",
+      "name": "Green India Mission National Afforestation Programme",
+      "description": "Ministry of Environment Forest and Climate Change directory record for this environment programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Environment Forest and Climate Change",
+      "department": null,
+      "category": "environment",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Environment Forest and Climate Change; entry titled \"Green India Mission National Afforestation Programme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "project-elephant",
+      "name": "Project Elephant",
+      "description": "Ministry of Environment Forest and Climate Change directory record for this environment programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Environment Forest and Climate Change",
+      "department": null,
+      "category": "environment",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Environment Forest and Climate Change; entry titled \"Project Elephant\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "project-tiger",
+      "name": "Project Tiger",
+      "description": "Ministry of Environment Forest and Climate Change directory record for this environment programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Environment Forest and Climate Change",
+      "department": null,
+      "category": "environment",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Environment Forest and Climate Change; entry titled \"Project Tiger\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "wildlife-habitats-development",
+      "name": "Integrated Development of Wild Life Habitats",
+      "description": "Ministry of Environment Forest and Climate Change directory record for this environment programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Environment Forest and Climate Change",
+      "department": null,
+      "category": "environment",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Environment Forest and Climate Change; entry titled \"Integrated Development of Wild Life Habitats\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

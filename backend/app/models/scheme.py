@@ -39,6 +39,7 @@ class Scheme(Base):
     )
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    is_demo: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("false"))
     slug: Mapped[str] = mapped_column(String(150), unique=True)
     name: Mapped[str] = mapped_column(String(300))
     description: Mapped[str | None] = mapped_column(Text)
@@ -58,6 +59,8 @@ class Scheme(Base):
 
     @property
     def official_source_url(self) -> str | None:
+        if self.is_demo:
+            return None
         return next((source.url for source in self.sources if source.is_primary), None)
 
 

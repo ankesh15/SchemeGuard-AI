@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "category": "education",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "free-coaching-sc-obc-pm-cares",
+      "name": "Free Coaching for SC, OBC and PM Care Students",
+      "description": "Department of Social Justice and Empowerment directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Free Coaching for SC, OBC and PM Care Students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "goa-infrastructure-loan-grant-education",
+      "name": "Revised Infrastructure Loan-cum-Grant to Educational Institutions",
+      "description": "Government of Goa directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "education",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Revised Infrastructure Loan-cum-Grant to Educational Institutions\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-interest-free-education-loan",
+      "name": "Interest Free Education Loan Scheme for Higher Education",
+      "description": "Government of Goa directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "education",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Interest Free Education Loan Scheme for Higher Education\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-mukhyamantri-samupadeshan",
+      "name": "Mukhyamantri Samupadeshan Yojana",
+      "description": "Government of Goa directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "education",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Mukhyamantri Samupadeshan Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-soft-loan-education-infrastructure",
+      "name": "Scheme for Soft Loan to Grant-in-Aid/Non-Grant-in-Aid Institutions for Maintenance and Upgradation of Infrastructure Facilities",
+      "description": "Government of Goa directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "education",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme for Soft Loan to Grant-in-Aid/Non-Grant-in-Aid Institutions for Maintenance and Upgradation of Infrastructure Facilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "pm-poshan",
+      "name": "Pradhan Mantri Poshan Shakti Nirman (PM-POSHAN)",
+      "description": "Department of School Education and Literacy directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of School Education and Literacy",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of School Education and Literacy; entry titled \"Pradhan Mantri Poshan Shakti Nirman (PM-POSHAN)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-shri",
+      "name": "Prime Minister School for Rising India",
+      "description": "Department of School Education and Literacy directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of School Education and Literacy",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of School Education and Literacy; entry titled \"Prime Minister School for Rising India\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-usp-central-sector-interest-subsidy",
+      "name": "Pradhan Mantri Uchchatar Shiksha Protsahan (PM -USP) Central Sector Interest Subsidy Scheme",
+      "description": "Department of Higher Education directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Pradhan Mantri Uchchatar Shiksha Protsahan (PM -USP) Central Sector Interest Subsidy Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-vidyalaxmi",
+      "name": "PRADHAN MANTRI VIDYALAXMI (PM-Vidyalaxmi) SCHEME",
+      "description": "Department of Higher Education directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"PRADHAN MANTRI VIDYALAXMI (PM-Vidyalaxmi) SCHEME\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "qip-faculty",
+      "name": "QIP for faculty deputed for M.Tech/ Ph.D studies at QIP Centers",
+      "description": "Department of Higher Education directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"QIP for faculty deputed for M.Tech/ Ph.D studies at QIP Centers\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "shreshta",
+      "name": "Scheme for Residential Education for Students in High Schools in Targeted Areas (SHRESHTA)",
+      "description": "Department of Social Justice and Empowerment directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Scheme for Residential Education for Students in High Schools in Targeted Areas (SHRESHTA)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "shreyas-obc-interest-subsidy-overseas",
+      "name": "SHREYAS (OBC) - Dr. Ambedkar Interest Subsidy on Educational Loan for Overseas Studies for OBCs and EBCs",
+      "description": "Department of Social Justice and Empowerment directory record for this education programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "education",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"SHREYAS (OBC) - Dr. Ambedkar Interest Subsidy on Educational Loan for Overseas Studies for OBCs and EBCs\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

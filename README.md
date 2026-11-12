@@ -1,104 +1,120 @@
-# SchemeGuard AI — Phase 1
+# SchemeGuard AI — Phase 2
 
-SchemeGuard AI is an Indian government scheme discovery and policy history project. Phase 1 delivers a Dockerized, typed FastAPI backend, PostgreSQL, migrations, five source-verified scholarship records, and public read-only discovery APIs. It does not determine eligibility.
+A Docker-first scholarship discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; applicant profiles and reports are **not persisted**.
 
-The existing workspace is the project root; no extra nested repository is needed.
+**The working assessment uses an explicitly fictional development scholarship.** Five government scholarship records remain available for discovery, but none has approved government eligibility rules. The fictional policy offers no award and has no official application portal.
 
-## Run
+## Start the application
 
-Prerequisites: Docker Engine with Docker Compose v2 or newer, and Python 3 for the optional environment helper. Run from this directory:
+Prerequisites: Docker Engine, Docker Compose v2+, and Python 3 for the optional environment helper. From the project root:
 
 ```bash
 python3 scripts/init_env.py
 docker compose up --build -d
-docker compose exec api alembic upgrade head
-docker compose exec api python -m app.seed
-docker compose ps
-curl --fail http://localhost:8000/health
-curl --fail http://localhost:8000/ready
-curl --fail 'http://localhost:8000/api/v1/schemes?page=1&page_size=2'
+docker compose up -d --wait --wait-timeout 120
 ```
 
-The helper creates `.env` using a generated password and preserves an existing `.env`. Alternatively, copy `.env.example` to `.env` and set `POSTGRES_PASSWORD`. Secrets must not be committed. Changing the password in `.env` does not change credentials in an existing PostgreSQL volume; rotate the database password deliberately.
+- Frontend: [localhost:3000](http://localhost:3000)
+- Backend: [localhost:8000](http://localhost:8000)
+- FastAPI documentation: [localhost:8000/docs](http://localhost:8000/docs)
 
-The API automatically applies migrations before starting the single development server. The explicit Alembic command above is safe to repeat. Seeding is explicit and insert-only: a repeat preserves existing records, descriptions, timestamps, and source records. It does not refresh verification dates or fetch external pages.
+The helper creates an ignored `.env` with a generated local password and preserves an existing file. Alternatively, copy `.env.example` and replace its password placeholder. The API applies migrations before startup and, by default in this development Compose configuration, runs the insert-only government metadata seed and the fictional fixture seed. An existing PostgreSQL volume and its records are preserved.
 
-Open [Swagger UI](http://localhost:8000/docs) or [ReDoc](http://localhost:8000/redoc). `API_PORT` defaults to `8000` and is bound to the local machine only. The development API uses hot reload through the backend bind mount. Only `api` and `db` services run. Both share an internal database network; an API-only ingress network supports the published loopback port. PostgreSQL has no host port.
+```bash
+# These commands are also safe to repeat explicitly:
+docker compose exec api alembic upgrade head
+docker compose exec api python -m app.seed
+docker compose exec api python -m app.seed_demo
+```
+
+`SEED_DEMO_DATA=false` disables automatic development seeding; it does not delete existing immutable history. Synthetic fixture seeding is rejected outside development/test environments. PostgreSQL credentials in an existing volume must be rotated in PostgreSQL as well as in `.env`; changing the environment alone does not change its stored password.
+
+## Try the complete user journey
+
+1. Open the frontend, explore schemes, and select **SchemeGuard Learning Scholarship (Fictional)**.
+2. Open its eligibility questionnaire. Select **Use a synthetic example** and submit.
+3. The report shows **Known conditions satisfied**, six requirement results, decision traces, policy evidence, and rule version 1.
+4. Change the synthetic age to `17` to see **Requirements not satisfied**.
+5. Leave household income blank, or request disability support without a percentage, to see **More information required** and the specific missing field.
+
+Blank answers remain unknown. Form validation checks valid input types and domains, rather than preventing profiles that fail an eligibility condition. The questionnaire uses the approved policy's field definitions and reveals dependent inputs when applicable. A report exists only in React memory; refreshing the page clears it. No names, Aadhaar numbers, contact details, document uploads, or profile-storage APIs are introduced.
+
+## Government sources and the fictional fallback
+
+The original five scholarship records and their eleven official evidence relationships are preserved. Their metadata was checked on 11 November 2026. Scheme status `listed` means directory presence on that date, not an application-window or eligibility guarantee. Only Ishan Uday has verified state coverage; unknown geography is excluded from state filters.
+
+Phase 2 reviewed the [Saksham guideline linked by NSP](https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf) and its [linked FAQ](https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_F.pdf). The guideline uses an inclusive INR 8 lakh income boundary, whereas the FAQ describes a strict boundary. The documents also require review alongside current [NSP notices](https://scholarships.gov.in/Students) before a coherent current policy can be approved. The implementation therefore uses the fallback permitted in the Phase 2 brief, rather than selecting an uncertain interpretation or claiming human review.
+
+The authored [fictional policy](data/policies/demo-policy-v1.md) is the sole executable fixture. All its values are invented and labeled accordingly. Its exact bytes are hashed into an immutable document version; the frontend serves an identical copy. The reserved `example.invalid` source address is explicitly synthetic. It is never presented as an official application URL.
 
 ## APIs
 
-| Method | Path | Result |
+| Method | Path | Behavior |
 | --- | --- | --- |
-| GET | `/health` | Process health; does not require a database |
-| GET | `/ready` | Live `SELECT 1`; 503 if the database is unavailable or times out |
-| GET | `/api/v1/schemes` | Paginated discovery with optional filters |
-| GET | `/api/v1/schemes/{scheme_id}` | UUID detail with field-level evidence references; 404 when absent |
+| GET | `/health` | Process health |
+| GET | `/ready` | Live database connectivity; 503 when unavailable |
+| GET | `/api/v1/schemes` | Discovery with `page`, `page_size`, `search`, `category`, and verified `state` filters |
+| GET | `/api/v1/schemes/{id}` | Scheme detail and source metadata |
+| GET | `/api/v1/schemes/{id}/requirements` | Currently effective approved version, questionnaire fields, requirement labels, and evidence; `available: false` when absent |
+| POST | `/api/v1/eligibility/check` | Stateless deterministic evaluation of the effective approved version |
 
-Listing query parameters:
-
-| Parameter | Default | Validation and meaning |
-| --- | --- | --- |
-| `page` | `1` | Integer from 1 to 100000 |
-| `page_size` | `20` | Integer from 1 to 100 |
-| `search` | omitted | 1–200 trimmed characters; case-insensitive name/description substring; `%` and `_` are literal |
-| `category` | omitted | Lowercase category token, max 60 characters; `scholarship` is the seeded category |
-| `state` | omitted | Indian state/UT name, case-insensitive; e.g. `Assam` |
-
-Filters combine with AND. Ordering is by name then UUID. The response contains `items`, `total`, `page`, `page_size`, and `pages`. Valid filters with no matches return an empty page with 200. Malformed IDs, invalid parameters, and unexpected query keys return 422. Error responses contain an error code, message, and request ID; validation errors also include safe field locations. Raw inputs and database errors are not echoed. Responses carry `X-Request-ID`.
+Pagination remains bounded (`page` 1–100000, `page_size` 1–100). Search is a case-insensitive name/description substring; SQL wildcard characters are treated literally. Category tokens and Indian state/UT names are validated. Filters combine with AND. Valid filters with no matches return 200 and an empty page. Malformed IDs/inputs return 422, absent schemes return 404, and database/configuration failures fail closed. Errors and assessment responses carry request IDs and safe messages; assessment responses use `Cache-Control: no-store`.
 
 ```bash
-curl --fail --get http://localhost:8000/api/v1/schemes \
-  --data-urlencode 'state=Assam' --data-urlencode 'category=scholarship'
-curl --fail --get http://localhost:8000/api/v1/schemes \
-  --data-urlencode 'search=Pragati'
-# Copy an id from the listing:
-curl --fail http://localhost:8000/api/v1/schemes/REPLACE_WITH_UUID
+curl --fail 'http://localhost:8000/api/v1/schemes?search=Fictional'
+# Copy its UUID into the request:
+curl --fail http://localhost:8000/api/v1/eligibility/check \
+  -H 'Content-Type: application/json' \
+  -d '{"scheme_id":"REPLACE_WITH_DEMO_UUID","synthetic_profile":true,"profile":{"age":21,"annual_income_inr":"240000","course":"engineering","study_mode":"full_time","enrollment_date":"2026-08-01","receives_other_scholarship":false,"requests_disability_support":false}}'
 ```
 
-## Source verification and unknowns
+The response contains `result`, the required assessment wording, `requirements`, the full nested `trace`, `missing_fields`, evidence references, and the evaluated `rule_set` version/document hash. It never returns or stores the raw profile. No approved policy produces UNKNOWN with `reason: NO_APPROVED_RULE_SET` and no evaluated version. Government requirements are never inferred from metadata alone. Only non-demo schemes receive the official NSP application link.
 
-The curated [seed manifest](data/scholarships.json) contains five distinct scholarship variants: AICTE Pragati (technical degree), AICTE Saksham (technical degree), UGC Ishan Uday, PM YASASVI Top Class School Education, and PM-USP CSSS. Eleven scheme/source relationships were checked on **11 November 2026**. Primary identity evidence is the [National Scholarship Portal directory](https://scholarships.gov.in/All-Scholarships). Supplementary evidence comes from [UGC](https://www.ugc.gov.in/Scholarships/stu_Scholarship5), [West Bengal's Higher Education department](https://banglaruchchashiksha.wb.gov.in/scholarship_schemes), and a [Ministry of Education PIB release](https://www.pib.gov.in/PressReleasePage.aspx?PRID=2294003&lang=1&reg=6).
+## Rule semantics and approval
 
-`listed` means the scheme was found in the official directory on the verification date. It does not mean applications are open, the scheme will remain unchanged, or a user is eligible. Category is an internal discovery taxonomy. The dataset contains no eligibility thresholds, financial amounts, deadlines, or executable rules. Differing financial benefit descriptions on official Ishan Uday pages are deliberately omitted.
+The standalone `app/eligibility` package uses typed, discriminated expressions. It supports `==`, `!=`, `>`, `<`, `>=`, `<=`, `IN`, `NOT IN`, ISO calendar dates, nested AND/OR, exclusions, and conditional branches. Stored rules never use Python `eval` or `exec`. Numbers use Decimal for comparisons; booleans are not coerced into numbers. Invalid expressions, fields, types, empty groups, duplicate keys, and excessive tree complexity are rejected.
 
-Only Ishan Uday's eight North Eastern states are recorded as verified geography. Other records use `applicability: "unknown"` and `applicable_states: null`; national coverage is not inferred from the administering body. State filters exclude unknown coverage. An empty result therefore does not prove that no scheme is applicable to a person. Future verified national coverage would match every valid state. These are discovery filters, not eligibility decisions.
+- AND: any FAIL wins; otherwise UNKNOWN wins; otherwise PASS.
+- OR: any PASS wins; otherwise UNKNOWN wins; otherwise FAIL.
+- Exclusion: invert PASS/FAIL and preserve UNKNOWN.
+- Conditional: an unknown guard yields UNKNOWN. A known guard selects the relevant branch; an absent otherwise branch means the additional requirement does not apply.
 
-Each detail response includes evidence URLs, publishers, dates, supported fields, and review notes. No document bytes were downloaded or ingested; `document_versions` is initially empty. Its table prepares for immutable, hash-addressed policy history in a later phase.
+Every missing/null comparison is UNKNOWN. A satisfied OR alternative can still establish the OR result, without requiring unrelated alternative fields. All relevant branch traces remain available for inspection.
 
-## Verify
+Rule sets begin as DRAFT. Version content, condition expressions, and evidence are immutable; approval is a one-way DRAFT → APPROVED/REJECTED transition. PostgreSQL requires evidence for every condition, same-scheme source documents, same-set condition/evidence links, and approval metadata. Synthetic approval is allowed only for a scheme classified as a demo. Government rules require the separate `human_review` basis. There is no public rule-authoring/approval endpoint, and this phase publishes no government rule set. An LLM is never involved in evaluation.
+
+## Docker and environment
+
+Compose runs exactly `frontend`, `api`, and `db`. The database and API share an internal database network; an ingress network connects the frontend and API. Only loopback ports 3000 and 8000 are published. PostgreSQL has no host port. Both application containers run as non-root users and use development hot reload.
+
+`INTERNAL_API_URL=http://api:8000` is used by Next.js server rendering. `NEXT_PUBLIC_API_URL=http://localhost:8000` is used by the browser; never set it to the Docker-only hostname. CORS permits configured explicit origins and GET/POST, without credentials. If you change host ports, update the public API URL and allowed frontend origin together. No database secret is passed to the frontend. The local `.env` is excluded from image contexts.
+
+PostgreSQL uses the existing persistent volume. Frontend node_modules and Next.js development output use separate named volumes. When intentionally changing frontend dependencies, rebuild and refresh the mounted dependency volume with `docker compose exec frontend npm ci` before verification. Do not recreate application containers while their integration-test runner is active.
+
+`docker compose down` preserves volumes. **`docker compose down -v` deletes persistent data** and is not required for normal development.
+
+## Verification commands
 
 ```bash
+# Actual PostgreSQL tests, including isolated migration and preservation checks:
 docker compose exec -T api python -m tests.run
+docker compose exec -T api alembic check
 docker compose exec -T api ruff check --no-cache app tests alembic
 docker compose exec -T api ruff format --check --no-cache app tests alembic
 docker compose exec -T api mypy --cache-dir=/tmp/schemeguard-mypy app
-docker compose exec -T api alembic check
+# Frontend validation and components:
+docker compose exec -T frontend npm test
+docker compose exec -T frontend npm run typecheck
+docker compose exec -T frontend npm run format:check
+# Recreates all three services; compares every row in all six domain tables:
+python3 scripts/verify_phase2.py
 python3 scripts/verify_persistence.py
 ```
 
-`tests.run` creates a randomly named disposable PostgreSQL database, applies real Alembic migrations, runs pytest, and drops only that generated database. No SQLite or mock-only database substitution is used. Direct pytest requires an explicit `TEST_DATABASE_URL` ending in `_test` and fails closed if it is missing. The migration round-trip test uses a second disposable database. The local database role needs permission to create test databases; this is provided by the development PostgreSQL image. Runtime and test database roles should be separated in a future production configuration.
+`tests.run` creates randomly named PostgreSQL databases, applies real migrations, and removes its test databases after completion. Missing test configuration is an error, not a skipped or SQLite-only suite. The local development database role needs CREATE DATABASE permission; production role separation is deferred.
 
-The persistence check briefly recreates this project's API and database containers and compares all metadata rows, including IDs and timestamps. It preserves the named volume. `docker compose down` also preserves the volume. **`docker compose down -v` deletes the database data** and is not needed for normal development.
+Checked-in frontend test responses and example inputs contain only authored synthetic data. Runtime questionnaire submissions and their reports are not persisted.
 
-## Layout
+Backend dependencies retain hash-locked Python requirements. Frontend versions are pinned in `package.json` and `package-lock.json`; Docker installs them with `npm ci`. A clean-container `npm run build` verifies frontend compilation without sharing the dev server's `.next` directory.
 
-```text
-backend/
-  app/{api/v1,core,models,schemas,repositories,services}/
-  app/{main,bootstrap,seed}.py
-  alembic/versions/
-  tests/
-  Dockerfile
-  pyproject.toml
-  requirements.lock
-  requirements-dev.lock
-data/scholarships.json
-docs/{architecture,database,phase1-report}.md
-scripts/{init_env.py,test.sh,verify_persistence.py}
-docker-compose.yml
-.env.example
-```
-
-Dependencies and transitive hashes are locked for Python 3.12. Docker installs them with `--require-hashes`. To intentionally refresh locks with uv, run `uv pip compile --generate-hashes --output-file requirements.lock pyproject.toml` and the equivalent command with `--extra dev --output-file requirements-dev.lock` inside `backend/` using Python 3.12. Rebuild and rerun all checks afterwards.
-
-For details, see [architecture](docs/architecture.md), [database design](docs/database.md), and the [Phase 1 implementation report](docs/phase1-report.md). Phase 1 has no frontend, LLM integration, rule engine, background worker, notification service, or public administrative writes. Production deployment configuration is deferred to the final phase.
+See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3, LLM processing, policy monitoring, notifications, Redis, Celery, authentication workflows, and production deployment configuration are not implemented.

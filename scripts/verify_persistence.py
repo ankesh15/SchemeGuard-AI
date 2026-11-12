@@ -16,7 +16,7 @@ async def main():
     try:
         async with engine.connect() as connection:
             snapshot = {}
-            for table in ('schemes', 'scheme_sources', 'document_versions'):
+            for table in ('schemes', 'scheme_sources', 'document_versions', 'rule_sets', 'rule_conditions', 'rule_evidence'):
                 rows = await connection.scalars(text(f'SELECT row_to_json(t)::text FROM {table} t ORDER BY id'))
                 snapshot[table] = [json.loads(row) for row in rows]
             assert len(snapshot['schemes']) >= 5, 'Seed the schemes first'
@@ -38,9 +38,23 @@ def snapshot() -> str:
 
 before = snapshot()
 subprocess.run(
-    ["docker", "compose", "up", "-d", "--force-recreate", "--wait", "--wait-timeout", "120", "db", "api"],
+    [
+        "docker",
+        "compose",
+        "up",
+        "-d",
+        "--force-recreate",
+        "--wait",
+        "--wait-timeout",
+        "120",
+        "db",
+        "api",
+        "frontend",
+    ],
     cwd=root,
     check=True,
 )
 assert snapshot() == before, "Metadata changed across container recreation"
-print("PASS: all scheme, source, and document metadata persisted after API and database container recreation")
+print(
+    "PASS: all six metadata/rule tables persisted after recreating the database, API, and frontend containers"
+)

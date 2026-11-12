@@ -1,0 +1,2162 @@
+{
+  "schema_version": 1,
+  "category": "scholarship",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "aicte-national-doctoral-fellowship",
+      "name": "National Doctoral Fellowship (NDF)",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"National Doctoral Fellowship (NDF)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-pg-gate-gpat",
+      "name": "P.G. Scholarship For GATE/GPAT Qualified Students For Pursuing M.Tech/ M.E./M.Pharma - AICTE",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"P.G. Scholarship For GATE/GPAT Qualified Students For Pursuing M.Tech/ M.E./M.Pharma - AICTE\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-pragati-degree",
+      "name": "AICTE Pragati Scholarship for Girl Students (Technical Degree)",
+      "description": "Scholarship support for girls pursuing technical degree education through AICTE.",
+      "ministry": "Ministry of Education",
+      "department": "All India Council for Technical Education (AICTE)",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "department",
+            "status"
+          ],
+          "verification_notes": "The AICTE section identifies Pragati's technical degree variant. Listed means present in the official directory, not confirmation of an application window. The diploma variant is a separate listing."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": [
+            "description",
+            "ministry",
+            "department"
+          ],
+          "verification_notes": "The Pragati and Saksham overview identifies AICTE as implementing organization under the Ministry of Education. No thresholds or geographic coverage are copied."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-pragati-diploma",
+      "name": "Pragati Scholarship for girls Diploma Institutes",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Pragati Scholarship for girls Diploma Institutes\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-saksham-degree",
+      "name": "AICTE Saksham Scholarship for Specially Abled Students (Technical Degree)",
+      "description": "Scholarship support through AICTE for students with disabilities pursuing technical degree education.",
+      "ministry": "Ministry of Education",
+      "department": "All India Council for Technical Education (AICTE)",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "department",
+            "status"
+          ],
+          "verification_notes": "The AICTE section identifies Saksham's technical degree variant separately from its diploma variant. Only directory presence and basic scheme identity are recorded."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": [
+            "description",
+            "ministry",
+            "department"
+          ],
+          "verification_notes": "The AICTE scheme overview supports the organization, ministry, and educational purpose. Eligibility values are outside the Phase 1 dataset."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-saksham-diploma",
+      "name": "Saksham scholarship for differently abled students of Diploma Institutes",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Saksham scholarship for differently abled students of Diploma Institutes\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-swanath-degree",
+      "name": "AICTE - Swanath Scholarship Scheme - Degree",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"AICTE - Swanath Scholarship Scheme - Degree\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "aicte-swanath-diploma",
+      "name": "AICTE - Swanath Scholarship Scheme - Diploma",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"AICTE - Swanath Scholarship Scheme - Diploma\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "begum-hazrat-mahal-national-scholarship",
+      "name": "Begum Hazrat Mahal National Scholarship Scheme",
+      "description": "Ministry of Minority Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Begum Hazrat Mahal National Scholarship Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "bsr-faculty-fellowship",
+      "name": "BSR Faculty Fellowship",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"BSR Faculty Fellowship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "bsr-fellowship",
+      "name": "BSR Fellowship",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"BSR Fellowship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "cife-institutional-fellowship",
+      "name": "FS - CIFE - Institutional Fellowship",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"FS - CIFE - Institutional Fellowship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ds-kothari-post-doctoral",
+      "name": "Dr D S Kothari Post Doctoral Fellowship",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Dr D S Kothari Post Doctoral Fellowship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "education-assistance-workers-wards",
+      "name": "Financial Assistance for Education for the Wards of Beedi, Cine, IOMC, LSDM Workers",
+      "description": "Ministry of Labour and Employment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Financial Assistance for Education for the Wards of Beedi, Cine, IOMC, LSDM Workers\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "goa-archaeological-research-fellowship",
+      "name": "The Goa Archaeological Research Fellowship Scheme",
+      "description": "Government of Goa directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "scholarship",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"The Goa Archaeological Research Fellowship Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-bursary-scheme",
+      "name": "Sant Sohirobanath Ambiye Dnyanvruddhi Shishyavrutti (Bursary Scheme)",
+      "description": "Government of Goa directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "scholarship",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Sant Sohirobanath Ambiye Dnyanvruddhi Shishyavrutti (Bursary Scheme)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-scholars",
+      "name": "Manohar Parrikar Goa Scholars Scheme, 2025",
+      "description": "Government of Goa directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "scholarship",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Manohar Parrikar Goa Scholars Scheme, 2025\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "goa-scholarship-students-disabilities",
+      "name": "Scheme for Grant of Scholarship to Students with Disabilities",
+      "description": "Government of Goa directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "scholarship",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Scheme for Grant of Scholarship to Students with Disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "iari-scholarship",
+      "name": "CS- IARI Scholarship",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"CS- IARI Scholarship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "iasri-scholarship",
+      "name": "IASRI Scholarship for MSc and PhD",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"IASRI Scholarship for MSc and PhD\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "icar-merit-cum-means",
+      "name": "AgEdn - Merit Cum Means scholarship",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AgEdn - Merit Cum Means scholarship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "icar-national-talent-pg",
+      "name": "AgEdn - National Talent Scholarship PG",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AgEdn - National Talent Scholarship PG\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "icar-national-talent-ug",
+      "name": "AgEdn - National Talent Scholarship UG",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AgEdn - National Talent Scholarship UG\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "icar-netaji-subhas-international",
+      "name": "AgEdn - Netaji Subhas ICAR International Fellowship",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AgEdn - Netaji Subhas ICAR International Fellowship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "icar-post-matric",
+      "name": "AgEdn - Post Matric Scholarship",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AgEdn - Post Matric Scholarship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "icar-students-ready",
+      "name": "AgEdn - Students READY",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AgEdn - Students READY\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "iccr-scholarship",
+      "name": "ICCR Scholarship",
+      "description": "Ministry of External Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of External Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of External Affairs; entry titled \"ICCR Scholarship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ivri-institute-scholarship",
+      "name": "AS_IVRI_Institute Scholarship for M.V.Sc. and Ph.D.",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AS_IVRI_Institute Scholarship for M.V.Sc. and Ph.D.\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "maulana-azad-national-fellowship",
+      "name": "Maulana Azad National Fellowship for Minority Student",
+      "description": "Ministry of Minority Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Maulana Azad National Fellowship for Minority Student\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "merit-cum-means-minorities",
+      "name": "Merit-cum- Means based Scholarship for professional and Technical course for minorities",
+      "description": "Ministry of Minority Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Merit-cum- Means based Scholarship for professional and Technical course for minorities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-fellowship-disabilities",
+      "name": "National Fellowship for Students with Disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"National Fellowship for Students with Disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-fellowship-obc",
+      "name": "SHREYAS (OBC) - National Fellowship for OBC Students",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"SHREYAS (OBC) - National Fellowship for OBC Students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-fellowship-sc",
+      "name": "National Fellowship for Scheduled Caste Students (NFSC)",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"National Fellowship for Scheduled Caste Students (NFSC)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-fellowship-st",
+      "name": "National Fellowship and Scholarship for Higher education for ST students (for FELLOWSHIP)",
+      "description": "Ministry of Tribal Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"National Fellowship and Scholarship for Higher education for ST students (for FELLOWSHIP)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-means-cum-merit",
+      "name": "National Means-cum-Merit Scholarship Scheme",
+      "description": "Department of School Education and Literacy directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of School Education and Literacy",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of School Education and Literacy; entry titled \"National Means-cum-Merit Scholarship Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-overseas-scholarship-disabilities",
+      "name": "National Overseas Scholarship for students with disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"National Overseas Scholarship for students with disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-overseas-scholarship-sc",
+      "name": "National Overseas Scholarship (NOS)",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"National Overseas Scholarship (NOS)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "national-overseas-scholarship-st",
+      "name": "National Overseas Scholarship Scheme",
+      "description": "Ministry of Tribal Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"National Overseas Scholarship Scheme\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ndri-institute-scholarship",
+      "name": "AS_NDRI_Institute Scholarship for M.Sc. and Ph.D.",
+      "description": "Department of Agricultural Research and Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Agricultural Research and Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Agricultural Research and Education; entry titled \"AS_NDRI_Institute Scholarship for M.Sc. and Ph.D.\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "niper-scholarship",
+      "name": "Scholarship to NIPER Students",
+      "description": "Department of Pharmaceuticals directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Pharmaceuticals",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Pharmaceuticals; entry titled \"Scholarship to NIPER Students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "north-eastern-council-student-support",
+      "name": "Scheme of North Eastern Council of Financial Support to the Student of North East Region",
+      "description": "Ministry of Development of North Eastern Region directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Development of North Eastern Region",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Development of North Eastern Region; entry titled \"Scheme of North Eastern Council of Financial Support to the Student of North East Region\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-cares-children-scholarship",
+      "name": "Special Scholarship Scheme under 'PM CARES for Children Scheme'",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Special Scholarship Scheme under 'PM CARES for Children Scheme'\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-scholarship-rpf",
+      "name": "Prime Minister's Scholarship Scheme for Railway Protection Force (RPF)",
+      "description": "Ministry of Railways directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Railways",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Railways; entry titled \"Prime Minister's Scholarship Scheme for Railway Protection Force (RPF)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-usp-csss",
+      "name": "PM-USP Central Sector Scholarship for College and University Students (CSSS)",
+      "description": "Higher education scholarship assistance administered by the Department of Higher Education as a component of PM-USP.",
+      "ministry": "Ministry of Education",
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "department",
+            "status"
+          ],
+          "verification_notes": "The Department of Higher Education section lists CSSS under PM-USP. A renewal listing does not establish whether fresh applications are open."
+        },
+        {
+          "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2294003&lang=1&reg=6",
+          "title": "Ministry of Education update on academic assistance",
+          "publisher": "Press Information Bureau, Ministry of Education",
+          "is_primary": false,
+          "supported_fields": [
+            "name",
+            "description",
+            "ministry",
+            "department"
+          ],
+          "verification_notes": "The 3 August 2026 Ministry of Education release identifies CSSS as a PM-USP scholarship administered by the Department of Higher Education. No benefit values or eligibility rules are copied."
+        }
+      ]
+    },
+    {
+      "slug": "pm-usp-jammu-kashmir-ladakh",
+      "name": "Pradhan Mantri Uchchatar Shiksha Protsahan (PM -USP) Special Scholarship Scheme for Jammu & Kashmir and Ladakh",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Pradhan Mantri Uchchatar Shiksha Protsahan (PM -USP) Special Scholarship Scheme for Jammu & Kashmir and Ladakh\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-yasasvi-post-matric",
+      "name": "PM YASASVI - Post-Matric Scholarship to OBC, EBC and DNT",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"PM YASASVI - Post-Matric Scholarship to OBC, EBC and DNT\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-yasasvi-pre-matric",
+      "name": "PM YASASVI - Pre-Matric Scholarship to OBC, EBC and DNT",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"PM YASASVI - Pre-Matric Scholarship to OBC, EBC and DNT\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-yasasvi-top-class-college",
+      "name": "PM YASASVI - Top Class College Education for OBC, EBC and DNT Students",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"PM YASASVI - Top Class College Education for OBC, EBC and DNT Students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-yasasvi-top-class-school",
+      "name": "PM YASASVI Top Class School Education for OBC, EBC and DNT Students",
+      "description": "Scholarship assistance for OBC, EBC and DNT students attending identified schools under the school education component of PM YASASVI.",
+      "ministry": "Ministry of Social Justice and Empowerment",
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "department",
+            "status"
+          ],
+          "verification_notes": "The backward classes section lists the school component separately from the college component. The umbrella scheme is not treated as a single scholarship."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": [
+            "description",
+            "ministry",
+            "department"
+          ],
+          "verification_notes": "The PM YASASVI overview identifies the responsible ministry and department and describes the school component. Its complete geographic scope has not been verified for this dataset."
+        }
+      ]
+    },
+    {
+      "slug": "post-matric-disabilities",
+      "name": "Post-matric Scholarship for Persons with Disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"Post-matric Scholarship for Persons with Disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "post-matric-minorities",
+      "name": "Post-Matric Scholarship for Minorities",
+      "description": "Ministry of Minority Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Post-Matric Scholarship for Minorities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "post-matric-sc",
+      "name": "Post-Matric Scholarships for Scheduled Caste Students",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Post-Matric Scholarships for Scheduled Caste Students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "post-matric-st",
+      "name": "Post-Matric Scholarship Scheme for ST students",
+      "description": "Ministry of Tribal Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"Post-Matric Scholarship Scheme for ST students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pre-matric-disabilities",
+      "name": "Pre-matric scholarship for Persons with disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"Pre-matric scholarship for Persons with disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pre-matric-minorities",
+      "name": "Pre- Matric Scholarship for Minorities",
+      "description": "Ministry of Minority Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Minority Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Minority Affairs; entry titled \"Pre- Matric Scholarship for Minorities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pre-matric-sc-others",
+      "name": "Pre-Matric Scholarship Scheme for Scheduled Castes and Others",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Pre-Matric Scholarship Scheme for Scheduled Castes and Others\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pre-matric-st",
+      "name": "Pre-Matric Scholarship Scheme for ST students",
+      "description": "Ministry of Tribal Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"Pre-Matric Scholarship Scheme for ST students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "prime-ministers-scholarship-ex-servicemen",
+      "name": "Prime Ministers Scholarship Scheme PMSS",
+      "description": "Department of Ex Servicemen Welfare directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Ex Servicemen Welfare",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Ex Servicemen Welfare; entry titled \"Prime Ministers Scholarship Scheme PMSS\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "s-radhakrishnan-postdoctoral",
+      "name": "Dr S Radhakrishnan Postdoctoral Fellowship in Humanities and Social Science",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Dr S Radhakrishnan Postdoctoral Fellowship in Humanities and Social Science\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "savitribai-phule-single-girl-child",
+      "name": "Savitribai Jyotirao Phule Fellowship for Single Girl Child",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Savitribai Jyotirao Phule Fellowship for Single Girl Child\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "swami-vivekananda-single-girl-child",
+      "name": "Swami Vivekananda Single Girl Child Fellowship for Research in Social Sciences",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Swami Vivekananda Single Girl Child Fellowship for Research in Social Sciences\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "top-class-education-disabilities",
+      "name": "Scholarship for Top Class Education for students with disabilities",
+      "description": "Department of Empowerment of Persons with Disabilities directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Empowerment of Persons with Disabilities",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Empowerment of Persons with Disabilities; entry titled \"Scholarship for Top Class Education for students with disabilities\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "top-class-education-sc",
+      "name": "Top Class Education for Scheduled Caste Students",
+      "description": "Department of Social Justice and Empowerment directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Social Justice and Empowerment",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Social Justice and Empowerment; entry titled \"Top Class Education for Scheduled Caste Students\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "top-class-education-st",
+      "name": "National Fellowship and Scholarship for higher education for ST students (for SCHOLARSHIP)",
+      "description": "Ministry of Tribal Affairs directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Tribal Affairs",
+      "department": null,
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Tribal Affairs; entry titled \"National Fellowship and Scholarship for higher education for ST students (for SCHOLARSHIP)\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-emeritus-fellowship",
+      "name": "Emeritus Fellowship",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Emeritus Fellowship\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-indira-gandhi-single-girl-child",
+      "name": "P.G. Indira Gandhi Scholarship For Single Girl Child",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"P.G. Indira Gandhi Scholarship For Single Girl Child\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-ishan-uday",
+      "name": "Ishan Uday Special Scholarship for the North Eastern Region",
+      "description": "UGC scholarship assistance to expand access to undergraduate education for students from India's North Eastern Region.",
+      "ministry": "Ministry of Education",
+      "department": "University Grants Commission (UGC)",
+      "category": "scholarship",
+      "applicability": "states",
+      "applicable_states": [
+        "Arunachal Pradesh",
+        "Assam",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Sikkim",
+        "Tripura"
+      ],
+      "verified_on": "2026-11-11",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://scholarships.gov.in/All-Scholarships",
+          "title": "National Scholarship Portal scheme directory",
+          "publisher": "National Scholarship Portal, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "department",
+            "status"
+          ],
+          "verification_notes": "The UGC section lists Ishan Uday. Directory presence is not an eligibility decision or application deadline guarantee."
+        },
+        {
+          "url": "https://www.ugc.gov.in/Scholarships/stu_Scholarship5",
+          "title": "UGC Ishan Uday scheme overview",
+          "publisher": "University Grants Commission",
+          "is_primary": false,
+          "supported_fields": [
+            "name",
+            "description",
+            "department"
+          ],
+          "verification_notes": "UGC describes the scheme's objective as widening access to higher education for students of the North Eastern Region. Financial amounts are deliberately not stored."
+        },
+        {
+          "url": "https://banglaruchchashiksha.wb.gov.in/scholarship_schemes",
+          "title": "West Bengal Higher Education scholarship overview",
+          "publisher": "Department of Higher Education, Government of West Bengal",
+          "is_primary": false,
+          "supported_fields": [
+            "ministry",
+            "department",
+            "applicability"
+          ],
+          "verification_notes": "The UGC scholarship section explicitly enumerates the eight North Eastern domicile states and identifies UGC under the Ministry of Education. This supports the discovery filter only. Official pages differ in financial benefit descriptions, so no amounts or executable rules are recorded."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-jrf-science-humanities-social-sciences",
+      "name": "Junior Research Fellowship in Science, Humanities and Social Sciences",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Junior Research Fellowship in Science, Humanities and Social Sciences\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-national-scholarship-post-graduate",
+      "name": "National Scholarship for Post-Graduate Studies",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"National Scholarship for Post-Graduate Studies\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-pg-gate-gpat",
+      "name": "P.G. Scholarship for GATE/GPAT qualified students for pursuing M.Tech/ M.E./M.Pharma- UGC",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"P.G. Scholarship for GATE/GPAT qualified students for pursuing M.Tech/ M.E./M.Pharma- UGC\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-pg-professional-sc-st",
+      "name": "P. G. Scholarship for Professional Courses for SC/ST candidates",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"P. G. Scholarship for Professional Courses for SC/ST candidates\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-pg-university-rank-holders",
+      "name": "P.G. Scholarship for University Rank Holders",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"P.G. Scholarship for University Rank Holders\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-post-doctoral-sc-st",
+      "name": "Post-Doctoral Fellowship for SC/ST Candidates",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Post-Doctoral Fellowship for SC/ST Candidates\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "ugc-post-doctoral-women",
+      "name": "Post Doctoral Fellowship for Women",
+      "description": "Department of Higher Education directory record for this scholarship programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Higher Education",
+      "category": "scholarship",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Higher Education; entry titled \"Post Doctoral Fellowship for Women\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

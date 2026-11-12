@@ -78,7 +78,7 @@ def error_response(
         content=ErrorResponse(
             error=ErrorInfo(code=code, message=message, details=details), request_id=request_id
         ).model_dump(mode="json", exclude_none=True),
-        headers={"X-Request-ID": request_id},
+        headers={"X-Request-ID": request_id, "Cache-Control": "no-store"},
     )
 
 
@@ -101,8 +101,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(
         title="SchemeGuard AI",
-        version="0.1.0",
-        description="Verified government scholarship metadata. No eligibility decisions are made in Phase 1.",
+        version="0.2.0",
+        description="Source-grounded scholarship discovery and deterministic assessment of approved rules. Phase 2 uses a clearly labeled fictional policy fixture.",
         lifespan=lifespan,
     )
     app.add_middleware(RequestLoggingMiddleware)
@@ -110,7 +110,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         CORSMiddleware,
         allow_origins=settings.cors_origins,
         allow_credentials=False,
-        allow_methods=["GET"],
+        allow_methods=["GET", "POST"],
         allow_headers=["Accept", "Content-Type"],
         expose_headers=["X-Request-ID"],
     )

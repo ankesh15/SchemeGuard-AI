@@ -15,4 +15,7 @@ dist/
 data/documents/
 !data/documents/.gitkeep
 .DS_Store
-
+frontend/node_modules/
+frontend/.next/
+frontend/coverage/
+*.tsbuildinfo

@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "category": "housing",
+  "review_method": "Manual review of official public directories on 12 November 2026; legacy five records retain their original evidence and verification date. Identity/listing metadata only, not approval of eligibility policy. No automated scraping or live synchronization.",
+  "schemes": [
+    {
+      "slug": "goa-atal-asra",
+      "name": "Atal Asra Yojana",
+      "description": "Government of Goa directory record for this housing programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": null,
+      "category": "housing",
+      "applicability": "states",
+      "applicable_states": [
+        "Goa"
+      ],
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://www.goa.gov.in/government/schemes/",
+          "title": "Government of Goa scheme directory",
+          "publisher": "Government of Goa",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "applicability"
+          ],
+          "verification_notes": "Locator: Government of Goa; entry titled \"Atal Asra Yojana\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed. State applicability indicates this state-government programme; no domicile or residency rule is inferred. The specific administering department has not been verified."
+        }
+      ]
+    },
+    {
+      "slug": "pm-awas-gramin",
+      "name": "Pradhan Mantri Awas Yojna Grameen",
+      "description": "Department of Rural Development directory record for this housing programme. Consult the official reference for current terms.",
+      "ministry": null,
+      "department": "Department of Rural Development",
+      "category": "housing",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "department"
+          ],
+          "verification_notes": "Locator: Department of Rural Development; entry titled \"Pradhan Mantri Awas Yojna Grameen\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "pm-awas-urban",
+      "name": "STATE AND UT GRANTS UNDER PMAY URBAN",
+      "description": "Ministry of Housing and Urban Affairs directory record for this housing programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Housing and Urban Affairs",
+      "department": null,
+      "category": "housing",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Housing and Urban Affairs; entry titled \"STATE AND UT GRANTS UNDER PMAY URBAN\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    },
+    {
+      "slug": "revised-integrated-housing-workers",
+      "name": "Revised Integrated Housing Scheme (RIHS)-2016 for Beedi, IOMC,LSDM,CINE Workes",
+      "description": "Ministry of Labour and Employment directory record for this housing programme. Consult the official reference for current terms.",
+      "ministry": "Ministry of Labour and Employment",
+      "department": null,
+      "category": "housing",
+      "applicability": "unknown",
+      "applicable_states": null,
+      "verified_on": "2026-11-12",
+      "status": "listed",
+      "sources": [
+        {
+          "url": "https://dbtbharat.gov.in/central-scheme/list",
+          "title": "DBT Bharat central scheme directory",
+          "publisher": "Direct Benefit Transfer Mission, Government of India",
+          "is_primary": true,
+          "supported_fields": [
+            "name",
+            "description",
+            "status",
+            "category",
+            "ministry"
+          ],
+          "verification_notes": "Locator: Ministry of Labour and Employment; entry titled \"Revised Integrated Housing Scheme (RIHS)-2016 for Beedi, IOMC,LSDM,CINE Workes\". Manually reviewed public directory identity on 12 November 2026. Listed means present in the cited directory, not active enrollment or an entitlement. Category is an editorial discovery classification. No eligibility, benefit amounts, or deadlines were transcribed."
+        }
+      ]
+    }
+  ]
+}

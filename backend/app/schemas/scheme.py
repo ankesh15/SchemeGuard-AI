@@ -47,6 +47,7 @@ class SchemeRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
+    is_demo: bool = False
     slug: str
     name: str
     description: str | None
