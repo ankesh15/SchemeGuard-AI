@@ -2,7 +2,10 @@ name: schemeguard-ai
 
 services:
   db:
-    image: postgres:16-alpine
+    image: schemeguard-postgres:16-pgvector-0.8.7
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-schemeguard}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env and set POSTGRES_PASSWORD}
@@ -54,6 +57,19 @@ services:
       ADMIN_LOGIN_LIMIT: ${ADMIN_LOGIN_LIMIT:-10}
       ADMIN_RATE_WINDOW_SECONDS: ${ADMIN_RATE_WINDOW_SECONDS:-900}
       ADMIN_ALLOWED_ORIGINS: ${ADMIN_ALLOWED_ORIGINS:-["http://localhost:3000"]}
+      WORKFLOW_TIMEOUT: ${WORKFLOW_TIMEOUT:-150}
+      WORKFLOW_MAX_ATTEMPTS: ${WORKFLOW_MAX_ATTEMPTS:-3}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-gemini}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-001}
+      EMBEDDING_DIMENSIONS: "768"
+      EMBEDDING_TIMEOUT: ${EMBEDDING_TIMEOUT:-20}
+      EMBEDDING_MAX_RETRIES: ${EMBEDDING_MAX_RETRIES:-2}
+      RAG_TOP_K: ${RAG_TOP_K:-5}
+      RAG_MAX_CHUNKS: ${RAG_MAX_CHUNKS:-500}
+      RAG_MIN_SIMILARITY: ${RAG_MIN_SIMILARITY:-0.3}
+      EXPLANATION_USE_GEMINI: ${EXPLANATION_USE_GEMINI:-false}
+      LANGSMITH_TRACING: "false"
+      LANGSMITH_TRACING_V2: "false"
     ports:
       - "127.0.0.1:${API_PORT:-8000}:8000"
     volumes:

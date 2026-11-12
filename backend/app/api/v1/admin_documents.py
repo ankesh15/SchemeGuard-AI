@@ -15,12 +15,14 @@ from app.core.database import get_session
 from app.ingestion.fetcher import fetch_pdf
 from app.ingestion.storage import DocumentStorage
 from app.models import (
+    AgentWorkflow,
     AuditEvent,
     CandidateEvidence,
     DocumentAsset,
     DocumentChunk,
     DocumentPage,
     ExtractionError,
+    PolicyReview,
     ProcessingJob,
     RuleCandidate,
     Scheme,
@@ -70,6 +72,10 @@ async def overview(request: Request, administrator: Admin, session: DB) -> dict[
     settings = request.app.state.settings
     return {
         "documents": await session.scalar(select(func.count()).select_from(DocumentAsset)),
+        "pending_reviews": await session.scalar(
+            select(func.count()).select_from(PolicyReview).where(PolicyReview.status == "PENDING_REVIEW")
+        ),
+        "workflows": await session.scalar(select(func.count()).select_from(AgentWorkflow)),
         "pending_candidates": await session.scalar(select(func.count()).select_from(RuleCandidate)),
         "failed_jobs": await session.scalar(
             select(func.count()).select_from(ProcessingJob).where(ProcessingJob.status == "FAILED")
@@ -84,7 +90,7 @@ async def overview(request: Request, administrator: Admin, session: DB) -> dict[
             {"key": key, "label": value[0], "value_type": value[1], "units": value[2]}
             for key, value in FIELDS.items()
         ],
-        "notice": "Candidates remain pending human review. This workspace has no publication operation.",
+        "notice": "Candidates remain pending human review. Publication requires an explicit authenticated human decision on the complete saved proposal.",
     }
 
 

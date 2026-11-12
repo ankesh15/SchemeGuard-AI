@@ -18,6 +18,10 @@ dependencies = [
     "PyMuPDF==1.28.2",
     "google-genai==3.2.0",
     "argon2-cffi==25.1.0",
+    "langgraph==1.2.21",
+    "langgraph-checkpoint-postgres==3.2.0",
+    "psycopg[binary,pool]==3.3.9",
+    "pgvector==0.5.1",
 ]
 
 [project.optional-dependencies]

@@ -9,6 +9,7 @@ import {
 } from "@/lib/admin";
 import { ErrorState, LoadingState } from "@/components/ui";
 import { EvidenceViewer } from "./evidence";
+import { WorkflowStart } from "./workflow-start";
 import { useAdmin } from "./session";
 
 export function DocumentDetail({ id }: { id: string }) {
@@ -137,6 +138,7 @@ export function DocumentDetail({ id }: { id: string }) {
           suggestions. Neither action publishes rules.
         </p>
       </section>
+      <WorkflowStart document={document} />
       <section className="admin-card">
         <h2>Processing history</h2>
         {!document.jobs?.length ? (

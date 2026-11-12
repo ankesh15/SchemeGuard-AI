@@ -35,6 +35,7 @@ export function Overview() {
         {[
           ["Original documents", data.documents],
           ["Pending candidates", data.pending_candidates],
+          ["Pending human reviews", data.pending_reviews],
           ["Failed jobs", data.failed_jobs],
         ].map(([label, value]) => (
           <article className="aside-card" key={label}>
@@ -54,12 +55,15 @@ export function Overview() {
             Extract page-aware text, then generate structured candidate rules.
           </li>
           <li>
-            Inspect every value, uncertainty, and evidence excerpt before future
-            human approval.
+            Inspect every page, revise the complete proposal, and record a human
+            approval or rejection.
           </li>
         </ol>
         <Link href="/admin/documents" className="button button-primary">
           Manage documents
+        </Link>
+        <Link href="/admin/reviews" className="button button-secondary">
+          Open human review queue
         </Link>
       </section>
       <section className="admin-card">

@@ -43,11 +43,24 @@ class Settings(BaseSettings):
     admin_session_hours: int = Field(default=8, ge=1, le=24)
     admin_login_limit: int = Field(default=10, ge=3, le=30)
     admin_rate_window_seconds: int = Field(default=900, ge=60, le=3600)
+    workflow_timeout: float = Field(default=150, ge=15, le=300)
+    workflow_max_attempts: int = Field(default=3, ge=1, le=5)
+    embedding_provider: Literal["gemini", "local_hash"] = "gemini"
+    embedding_model: str = Field(default="gemini-embedding-001", pattern=r"^[a-zA-Z0-9._-]+$", max_length=100)
+    embedding_dimensions: int = Field(default=768, ge=768, le=768)
+    embedding_timeout: float = Field(default=20, ge=1, le=60)
+    embedding_max_retries: int = Field(default=2, ge=0, le=3)
+    rag_top_k: int = Field(default=5, ge=1, le=10)
+    rag_max_chunks: int = Field(default=500, ge=1, le=1000)
+    rag_min_similarity: float = Field(default=0.3, ge=0, le=1)
+    explanation_use_gemini: bool = False
 
     @model_validator(mode="after")
     def ingestion_limits(self) -> "Settings":
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError("CHUNK_OVERLAP must be smaller than CHUNK_SIZE")
+        if self.app_env == "production" and self.embedding_provider == "local_hash":
+            raise ValueError("The local_hash fixture provider is forbidden in production")
         if self.app_env == "production" and any(
             not origin.startswith("https://") for origin in self.admin_allowed_origins
         ):

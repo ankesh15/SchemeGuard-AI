@@ -61,7 +61,10 @@ describe("eligibility questionnaire", () => {
     const fetcher = vi
       .fn()
       .mockResolvedValue(
-        new Response(JSON.stringify(reportFixture), { status: 200 }),
+        new Response(
+          JSON.stringify({ report: reportFixture, explanation: null }),
+          { status: 200 },
+        ),
       );
     vi.stubGlobal("fetch", fetcher);
     const localStorageSpy = vi.spyOn(Storage.prototype, "setItem");
@@ -78,7 +81,7 @@ describe("eligibility questionnaire", () => {
     );
     const [url, options] = fetcher.mock.calls[0];
     const body = JSON.parse(options.body);
-    expect(url).toBe("http://localhost:8000/api/v1/eligibility/check");
+    expect(url).toBe("http://localhost:8000/api/v1/eligibility/explain");
     expect(body.synthetic_profile).toBe(true);
     expect(body.profile.receives_other_scholarship).toBe(false);
     expect(body.profile).not.toHaveProperty("name");
@@ -88,9 +91,12 @@ describe("eligibility questionnaire", () => {
     const fetcher = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          ...reportFixture,
-          result: "UNKNOWN",
-          assessment: "More information required",
+          report: {
+            ...reportFixture,
+            result: "UNKNOWN",
+            assessment: "More information required",
+          },
+          explanation: null,
         }),
         { status: 200 },
       ),

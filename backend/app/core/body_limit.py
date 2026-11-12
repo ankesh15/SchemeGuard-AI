@@ -17,6 +17,8 @@ class AdminBodyLimit:
         maximum = (
             self.pdf_max_bytes
             if headers.get(b"content-type", b"").split(b";")[0] == b"application/pdf"
+            else 131_072
+            if scope["path"].startswith("/api/v1/admin/reviews/")
             else 16_000
         )
         declared = headers.get(b"content-length", b"0")

@@ -1,14 +1,18 @@
 "use client";
+import { GroundedExplanation } from "@/components/policy-evidence";
 import { BookOpen } from "lucide-react";
 import { useReport } from "@/components/report-context";
 import { EligibilityReportView } from "@/components/eligibility-report";
 import { ActionLink } from "@/components/ui";
 export default function ReportPage() {
-  const { report } = useReport();
+  const { report, explanation } = useReport();
   return (
     <div className="container page-shell">
       {report ? (
-        <EligibilityReportView report={report} />
+        <>
+          <EligibilityReportView report={report} />
+          {explanation && <GroundedExplanation explanation={explanation} />}
+        </>
       ) : (
         <div className="empty-state empty-report">
           <BookOpen size={34} />

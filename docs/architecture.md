@@ -8,7 +8,7 @@ SchemeGuard AI is a modular monolith with a separate Next.js frontend and Postgr
 
 Public discovery uses the existing scheme service and repository. Details and questionnaire pages use server-rendered reads through `INTERNAL_API_URL=http://api:8000`; explorer filtering and the questionnaire POST use the browser-reachable `NEXT_PUBLIC_API_URL=http://localhost:8000`. The frontend and API share the ingress network; only the API and database share the internal database network. PostgreSQL exposes no host port.
 
-`Synthetic questionnaire → eligibility/check → approved effective rule version → typed program → pure engine → traces/evidence → in-memory React report`
+`Synthetic questionnaire → eligibility/explain (or compatibility eligibility/check) → approved effective rule version → typed program → pure engine → traces/evidence → in-memory React report`
 
 The eligibility service owns version selection, validates the loaded configuration, maps each top-level condition to its immutable evidence, and invokes the standalone engine. The engine imports no FastAPI, SQLAlchemy, filesystem, or external service client. Pydantic discriminated unions validate the safe expression tree. Decimal and ISO date comparisons, three-valued groups, exclusions, and conditional branches are deterministic. A malformed approved program fails closed; missing values and unavailable approved rules never become an assumed pass.
 
@@ -28,7 +28,7 @@ The eligibility service owns version selection, validates the loaded configurati
 
 The original five government records are unchanged; 277 additional curated records expand discovery to 282 government schemes with `is_demo=false`. No government rule set is approved. The fictional example is marked at every stage and has no official application link or award. Its source bytes, content hash, version, and section excerpts support every test condition.
 
-Rule content and evidence are immutable. Database guards enforce draft assembly, one-way approval, evidence coverage, and distinct human-review/synthetic-fixture bases. The public HTTP API cannot create or approve rules. In future phases an authenticated reviewer must approve any government rules before publication. Neither the engine nor an LLM can declare official government approval.
+Rule content and evidence are immutable. Database guards enforce draft assembly, one-way approval, evidence coverage, and distinct human-review/synthetic-fixture bases. The public HTTP API cannot create or approve rules. Phase 4 requires an authenticated human reviewer to approve the complete saved proposal before publication. Neither the engine nor an LLM can declare official government approval.
 
 The reports use exactly: Known conditions satisfied, Requirements not satisfied, and More information required. Top-level requirement outcomes are distinct from nested alternative/conditional guard traces. See rules.md for truth tables and missing-field behavior.
 
@@ -50,7 +50,7 @@ The API readiness check performs a live bounded database query; its process-heal
 
 PostgreSQL integration tests cover migrations, relationships, immutable history, approval/version selection, discovery, eligibility, and preservation of existing Phase 1 rows. Pure engine tests cover every supported operator and AND/OR truth table. Frontend tests use captured public/synthetic API contracts and exercise dynamic inputs, validation, conditional visibility, loading/errors, report rendering, and absence of browser-storage writes. Browser QA verifies the complete desktop/mobile journey, PASS/FAIL/UNKNOWN results, evidence disclosure, filtering, and refresh privacy behavior.
 
-Citizen authentication flows, production database role separation, external edge protection, backup restoration, large-data performance, official-policy reconciliation, and production deployment remain deferred. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence or administrative publication interface is introduced.
+Citizen authentication flows, production database role separation, external edge protection, large-data performance, official-policy reconciliation, and production deployment remain deferred. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence is introduced. The Phase 4 administrator publication interface is described below.
 
 ## Curated catalog import
 
@@ -65,8 +65,18 @@ Discovery exposes computed `eligibility_available` flags and an optional availab
 
 `Admin browser → same-origin Next.js proxy → authenticated FastAPI admin routes → exact-URL authorization → immutable DocumentVersion + private PDF → bounded parser subprocess → page/block records → stable chunks → Gemini structured output → typed validation and located evidence → pending-only candidates`.
 
-`app/ingestion` owns acquisition, private originals, parsing, normalization and chunking. `app/ai` owns provider abstraction, bounded structured-output schemas, safe engine mapping and grounding checks. `app/auth` owns Argon2id verification, hashed cookie sessions, CSRF/origin checks, SQL rate limits and CLI-only provisioning. The ingestion service orchestrates transactions without writing RuleSet, RuleCondition or RuleEvidence. Those existing tables remain the only executable eligibility representation. Candidates are immutable proposals for a future reviewer workflow.
+`app/ingestion` owns acquisition, private originals, parsing, normalization and chunking. `app/ai` owns provider abstraction, bounded structured-output schemas, safe engine mapping and grounding checks. `app/auth` owns Argon2id verification, hashed cookie sessions, CSRF/origin checks, SQL rate limits and CLI-only provisioning. The ingestion service orchestrates transactions without writing RuleSet, RuleCondition or RuleEvidence. Those existing tables remain the only executable eligibility representation. Candidates remain immutable proposals; Phase 4 adds their separate review and publication workflow.
 
 Admin requests use a same-origin `/api/admin/` proxy to the fixed Docker API host, forwarding only the administrator cookie and CSRF/origin/content headers. Layouts verify sessions on the server; every backend admin endpoint independently enforces the administrator role. Public discovery and synthetic-profile assessment contracts are unchanged. LLM configuration stays on the backend.
 
 PDF parsing is a Linux subprocess with memory, CPU, output, page, byte and wall-time bounds; its environment excludes application credentials. Attachments/scripts are not executed, and text is rendered as plain text. The process limit is defense in depth, not a complete hostile-native-code sandbox. Downloads validate every DNS answer, pin TLS sockets to an approved public IP with original hostname verification, use timeouts, and reject redirects. See [document processing](document-processing.md) for security boundaries and limitations.
+
+## Phase 4 integration
+
+`Authorized document → typed LangGraph stages → Phase 3 extraction → deterministic evidence and schema checks → PostgreSQL interrupt checkpoint → immutable human revisions/decision → revalidated atomic RuleSet publication`.
+
+The existing document and rule tables remain canonical. New workflow, review, event and publication tables link them without duplicating executable rule representations. Only the publisher writes existing RuleSet/RuleCondition/RuleEvidence after a recorded human approval. Historical content is protected by existing and new database guards. Checkpoints live in `sg_checkpoints`, with strict serialization and no applicant data.
+
+`Server deterministic report → exact approved scheme/document-scoped pgvector retrieval → verified page citations + deterministic explanation`. Optional Gemini output can order existing identifiers only. Constrained questions quote approved document passages and cannot determine eligibility. The original `/eligibility/check` response contract remains supported.
+
+The three services and existing data volumes are preserved. PostgreSQL remains major 16/Alpine with a SHA-pinned pgvector build. Source-document storage is unchanged. See [agent workflows](agent-workflows.md), [RAG architecture](rag-architecture.md), and [human review](human-review.md) for recovery, security, approval and operational limits.

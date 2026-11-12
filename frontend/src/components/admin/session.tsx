@@ -64,13 +64,16 @@ export function AdminWorkspace({
         )}
         <nav className="section-tabs" aria-label="Administrator navigation">
           <Link href="/admin">Overview</Link>
+          <Link href="/admin/workflows">Workflows</Link>
+          <Link href="/admin/reviews">Human review</Link>
           <Link href="/admin/documents">Documents & sources</Link>
           <Link href="/schemes">Public explorer</Link>
         </nav>
         <div className="notice mt-5">
           <p>
-            Extracted rules are suggestions awaiting human review. This
-            workspace cannot publish them or change eligibility decisions.
+            Extracted rules remain pending until an administrator reviews the
+            complete policy. Only an explicit saved human decision can publish a
+            new immutable rule version.
           </p>
         </div>
         {children}

@@ -15,6 +15,7 @@ from starlette.exceptions import HTTPException
 from starlette.middleware.cors import CORSMiddleware
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
+from app.agents.graph import WorkflowRunner
 from app.api.health import router as health_router
 from app.api.v1.router import router as v1_router
 from app.core.body_limit import AdminBodyLimit
@@ -99,6 +100,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.settings = settings
         app.state.engine = engine
         app.state.session_factory = async_sessionmaker(engine, expire_on_commit=False)
+        app.state.workflow_runner = WorkflowRunner(settings, app.state.session_factory)
         app.state.document_slots = asyncio.Semaphore(2)
         app.state.password_slots = asyncio.Semaphore(2)
         logger.info("application_started")
@@ -110,7 +112,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(
         title="SchemeGuard AI",
-        version="0.3.0",
+        version="0.4.0",
         description="Source-grounded discovery, deterministic eligibility, and administrator-only document intelligence. AI candidates always remain pending review.",
         lifespan=lifespan,
     )

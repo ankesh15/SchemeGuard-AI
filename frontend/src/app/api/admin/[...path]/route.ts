@@ -17,6 +17,8 @@ async function proxy(
       "sources",
       "extractions",
       "overview",
+      "workflows",
+      "reviews",
       "audit",
       "schemes",
     ].includes(path[0])
@@ -56,7 +58,9 @@ async function proxy(
   if (request.method !== "GET") {
     const maximum = contentType?.startsWith("application/pdf")
       ? 10 * 1024 * 1024
-      : 16000;
+      : path[0] === "reviews"
+        ? 131072
+        : 16000;
     const reader = request.body?.getReader();
     const chunks: Uint8Array[] = [];
     let size = 0;
@@ -93,7 +97,7 @@ async function proxy(
       body,
       cache: "no-store",
       redirect: "manual",
-      signal: AbortSignal.timeout(110000),
+      signal: AbortSignal.timeout(330000),
     });
     const output = new Headers({
       "Cache-Control": "no-store",

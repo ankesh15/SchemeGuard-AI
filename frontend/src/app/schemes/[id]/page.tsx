@@ -1,3 +1,4 @@
+import { PolicyEvidence } from "@/components/policy-evidence";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -154,6 +155,10 @@ export default async function SchemeDetailPage({
               </div>
             )}
           </section>
+          <PolicyEvidence
+            schemeId={scheme.id}
+            available={requirements.available}
+          />
           <section id="sources" className="detail-section">
             <span className="eyebrow">Follow the evidence</span>
             <h2>
@@ -198,7 +203,7 @@ export default async function SchemeDetailPage({
             <h2>Understand where you stand.</h2>
             <p>
               {requirements.available
-                ? "Try a synthetic profile and see which fictional conditions are satisfied, unmet, or unknown."
+                ? `Try a synthetic profile and see which ${scheme.is_demo ? "fictional" : "approved"} conditions are satisfied, unmet, or unknown.`
                 : "A trustworthy assessment needs approved rules. Try the fictional example to see how the assessment works."}
             </p>
             <ActionLink
@@ -209,7 +214,9 @@ export default async function SchemeDetailPage({
               }
             >
               {requirements.available
-                ? "Check the demo conditions"
+                ? scheme.is_demo
+                  ? "Check the demo conditions"
+                  : "Assess known conditions"
                 : "Try the fictional demo"}
             </ActionLink>
             <div className="aside-divider" />

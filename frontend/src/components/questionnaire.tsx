@@ -1,4 +1,5 @@
 "use client";
+import type { Explanation } from "@/lib/workflow";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -114,7 +115,7 @@ export function Questionnaire({
   schemes: Scheme[];
 }) {
   const router = useRouter();
-  const { setReport } = useReport();
+  const { setReport, setExplanation } = useReport();
   const [answers, setAnswers] = useState<Answers>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [confirmed, setConfirmed] = useState(false);
@@ -146,19 +147,21 @@ export function Questionnaire({
     }
     setSubmitting(true);
     setReport(null);
+    setExplanation(null);
     try {
-      const report = await apiFetch<EligibilityReport>(
-        "/api/v1/eligibility/check",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            scheme_id: requirements.scheme_id,
-            synthetic_profile: true,
-            profile: buildProfile(requirements.fields, answers),
-          }),
-        },
-      );
-      setReport(report);
+      const data = await apiFetch<{
+        report: EligibilityReport;
+        explanation: Explanation;
+      }>("/api/v1/eligibility/explain", {
+        method: "POST",
+        body: JSON.stringify({
+          scheme_id: requirements.scheme_id,
+          synthetic_profile: true,
+          profile: buildProfile(requirements.fields, answers),
+        }),
+      });
+      setReport(data.report);
+      setExplanation(data.explanation);
       router.push("/eligibility/report");
     } catch (reason) {
       if (reason instanceof ApiError) {

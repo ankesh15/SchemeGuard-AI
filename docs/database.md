@@ -82,3 +82,13 @@ Sessions store SHA-256 digests of high-entropy tokens, never raw cookies. Passwo
 Current Phase 3 counts and exact preservation checks are recorded in [the Phase 3 report](phase3-ai-ingestion.md). Downgrade tests run only against disposable databases; never downgrade the development database to clean up data.
 
 `0004_least_privilege` changes only the default role for future user rows to citizen. Existing administrator roles are preserved; the provisioning CLI explicitly assigns admin. This avoids accidental privilege grants when citizen accounts are introduced later. The current migration head is `0004_least_privilege`.
+
+## Phase 4 additions
+
+- `0005_workflow_rag`: pgvector extension and seven tables: agent_workflows, workflow_events, policy_reviews, review_revisions, review_decisions, rule_publications, chunk_embeddings. UUID foreign keys retain document/extraction/rule provenance; review decisions, publications and chunk namespaces have uniqueness guards. Append-only history triggers prohibit update/delete/truncate; original review proposals/findings cannot be altered.
+- `0006_graph_checkpoints`: separate `sg_checkpoints` schema with the official PostgreSQL saver's checkpoint_migrations/checkpoints/checkpoint_blobs/checkpoint_writes definitions and indexes. DDL is versioned by Alembic, not SDK setup on every request.
+- `0007_workflow_provenance`: cross-entity triggers bind extraction jobs to the exact workflow document, decisions to current revisions and active administrators, and publications to matching approved rules/documents/human decisions. Workflow identity and published rule bindings are immutable.
+
+RuleSet, RuleCondition, RuleEvidence and DocumentVersion remain the sole existing executable policy/version representations. Publication appends a DRAFT parent, conditions and page evidence, then transitions it to APPROVED with reviewer metadata within one transaction and an immutable publication ledger. Per-scheme locking serializes version allocation. Prior approved versions and effective dates are never overwritten. Overlap relationships require explicit review.
+
+`chunk_embeddings.embedding` is vector(768), normalized and namespaced by provider/model; chunk SHA-256 prevents interpreting a changed chunk with an old vector. Exact cosine scans are used for this MVP. Checkpoint rows and original PDFs are included in the recreation/persistence verification script. Back up both PostgreSQL (including sg_checkpoints) and the document_data volume; neither alone is a full recovery backup.

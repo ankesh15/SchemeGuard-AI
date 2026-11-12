@@ -1,10 +1,12 @@
-# SchemeGuard AI — Phase 3 document intelligence
+# SchemeGuard AI — Phase 4 reviewed policy workflows
 
 A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; applicant profiles and reports are **not persisted**.
 
-Phase 3 adds an authenticated administrator workspace for official PDFs, page-aware PyMuPDF extraction, stable chunks, Gemini structured candidate extraction, evidence validation, and pending review. Candidates cannot be published in this phase. See the [Phase 3 implementation report](docs/phase3-ai-ingestion.md), [processing guide](docs/document-processing.md), and [Gemini integration guide](docs/gemini-integration.md).
+Phase 3 adds an authenticated administrator workspace for official PDFs, page-aware PyMuPDF extraction, stable chunks, Gemini structured candidate extraction, evidence validation, and pending review. Phase 4 adds checkpointed LangGraph workflows, authenticated human revisions and decisions, immutable publication, pgvector retrieval and grounded explanations. See the [Phase 3 implementation report](docs/phase3-ai-ingestion.md), [processing guide](docs/document-processing.md), and [Gemini integration guide](docs/gemini-integration.md).
 
 **The working assessment uses an explicitly fictional development scholarship.** The catalog contains 282 government schemes across 23 categories, but none has approved government eligibility rules. The fictional policy offers no award and has no official application portal.
+
+See the [Phase 4 implementation report](docs/phase4-langgraph.md), [workflow guide](docs/agent-workflows.md), [human review guide](docs/human-review.md) and [RAG architecture](docs/rag-architecture.md). The live official document remains pending actual human review. No real government policy approval is claimed.
 
 ## Start the application
 
@@ -154,3 +156,44 @@ Use a unique password of at least 12 characters. Sign in at `/admin/login`, auth
 The administrator browser uses a same-origin Next.js proxy with HttpOnly sessions, origin checks, and CSRF tokens. `ADMIN_ALLOWED_ORIGINS` must match the frontend origin. Original PDFs persist in the private `document_data` volume and are served to authenticated administrators as downloads. Do not remove that volume. Bounded processing is synchronous over async HTTP; PDF parsing runs in a resource-limited subprocess and password verification/downloads run outside the event loop. No queue service is introduced.
 
 The supervised Phase 3 demonstration uses a real historical official PDF and a clearly labeled operator-only mock provider because Gemini credentials were unavailable. It never creates executable government rules. Generated local demonstration account credentials, if present, are in ignored `.local/phase3-demo-credentials.json` with mode 0600; provision your own reviewer for regular use. Never commit that file.
+
+## Phase 4 operations
+
+1. Provision an administrator with `docker compose exec api python -m app.auth.provision --username reviewer`.
+2. Open `/admin/documents`, authorize an exact official source and register its PDF as in Phase 3.
+3. Start a workflow from document details. A new extraction uses Gemini; reusing an existing extraction keeps its original provider label.
+4. Open `/admin/reviews`, inspect every original page and evidence finding, revise the complete typed policy, and save notes.
+5. Only an actual human may confirm completeness/applicability and approve the exact saved revision. Approval publishes a new immutable RuleSet; rejection creates no executable rule.
+6. Index parsed chunks with the configured embedding provider. Approved versions become available to existing deterministic assessments; public questions/retrieval use only their exact source documents.
+
+| Method | Added API | Purpose |
+| --- | --- | --- |
+| POST / GET | `/api/v1/admin/workflows` | Idempotent creation / paginated workflow list |
+| GET | `/api/v1/admin/workflows/{id}` | Stage, status, history and errors |
+| POST | `/api/v1/admin/workflows/{id}/resume` or `/cancel` | Recover saved execution / safely cancel undecided work |
+| GET | `/api/v1/admin/reviews` or `/reviews/{id}` | Pending queue / original, current revision, findings, evidence |
+| POST | `/api/v1/admin/reviews/{id}/revisions` | Append a noted administrator revision |
+| POST | `/api/v1/admin/reviews/{id}/approve` or `/reject` | Single exact-revision human decision and graph resume |
+| POST | `/api/v1/admin/documents/{id}/index` | Atomic, idempotent chunk embeddings |
+| GET | `/api/v1/schemes/{id}/rule-history` | Approved policy history only |
+| POST | `/api/v1/schemes/{id}/questions` | Constrained source quotations |
+| POST | `/api/v1/eligibility/explain` | Existing server assessment plus immutable-result explanation |
+
+Configure `GEMINI_API_KEY` only in ignored backend environment. `EMBEDDING_PROVIDER=gemini`, `EMBEDDING_MODEL=gemini-embedding-001` and dimension 768 are defaults. Without credentials, extraction fails clearly, indexing returns 503, and explanations use approved rule evidence plus bounded lexical retrieval/templates. `local_hash` is an explicit development lexical fixture, not a semantic model.
+
+The database image builds pgvector 0.8.7 from a SHA-pinned official archive on **the same PostgreSQL 16 Alpine base**. It reuses `postgres_data`. Before the first upgrade of an existing installation, make a private backup and test restoration; this was performed for the implementation verification. Do not remove existing volumes. Alembic 0005–0007 add workflow/review/vector data, the official checkpoint schema and provenance guards without modifying old policy rows.
+
+```bash
+docker compose up --build -d
+docker compose exec api alembic upgrade head
+docker compose exec api alembic check
+docker compose exec api python -m tests.run -q
+docker compose exec frontend npm test
+docker compose exec frontend npm run typecheck
+# Requires the Phase 3 official demo PDF and a private local administrator login:
+python3 scripts/verify_phase4.py --credentials .local/phase3-demo-credentials.json
+# Recreates services while preserving volumes and checks all rows/checkpoints/PDFs:
+python3 scripts/verify_persistence.py
+```
+
+Processing remains bounded synchronous API work with durable checkpoints and explicit operator resume after interruption. No queue, policy monitoring, notifications or Phase 5 work is introduced.

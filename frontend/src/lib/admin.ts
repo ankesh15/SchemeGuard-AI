@@ -8,6 +8,8 @@ export interface AdminSession {
 export interface AdminOverview {
   documents: number;
   pending_candidates: number;
+  pending_reviews: number;
+  workflows: number;
   failed_jobs: number;
   gemini_configured: boolean;
   gemini_model: string;

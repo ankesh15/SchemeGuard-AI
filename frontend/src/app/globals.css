@@ -2340,3 +2340,60 @@ progress::-moz-progress-bar {
     flex-wrap: wrap;
   }
 }
+
+/* Phase 4: reuse the document workspace's light surfaces and controls. */
+.review-comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+}
+.policy-editor {
+  width: 100%;
+  min-height: 520px;
+  font: 13px/1.6 monospace;
+  tab-size: 2;
+}
+.review-condition {
+  border-top: 1px solid var(--border, #e2e8f0);
+  padding: 20px 0;
+}
+.review-condition pre,
+.workflow-history pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.review-condition blockquote {
+  padding: 12px 20px;
+  border-left: 3px solid #1b695b;
+  background: #f4f8f6;
+}
+.review-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0;
+  line-height: 1.6;
+}
+.review-check input {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.admin-card textarea,
+.admin-card select,
+.admin-card input[type="date"] {
+  max-width: 100%;
+}
+.workflow-history li {
+  padding: 16px 0;
+}
+@media (max-width: 800px) {
+  .review-comparison {
+    grid-template-columns: 1fr;
+  }
+  .policy-editor {
+    min-height: 380px;
+  }
+}

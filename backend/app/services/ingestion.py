@@ -261,11 +261,21 @@ async def process_document(
     identifier: UUID,
     mode: str,
     provider: LLMProvider | None = None,
+    job_id: UUID | None = None,
 ) -> ProcessingJob:
     document = await get_document(session, identifier)
     await recover_stale_jobs(session, settings.processing_timeout)
+    if job_id is not None:
+        previous_job = await session.get(ProcessingJob, job_id)
+        if previous_job is not None:
+            if previous_job.document_version_id != identifier:
+                raise HTTPException(409, "Processing identifier belongs to a different document")
+            if previous_job.status == "RUNNING":
+                raise HTTPException(409, "The recoverable extraction is still within its running lease")
+            return previous_job
     provider = provider or GeminiProvider(settings)
     job = ProcessingJob(
+        **({"id": job_id} if job_id is not None else {}),
         document_version_id=identifier,
         requested_by=administrator.id,
         provider="none" if mode == "parse_only" else provider.name,
