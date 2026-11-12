@@ -1,4 +1,4 @@
-# Architecture — Phase 2
+# Architecture — Phase 2 and curated catalog
 
 SchemeGuard AI is a modular monolith with a separate Next.js frontend and PostgreSQL. Only three Docker services run: frontend, API, and database. Background workers, LLMs, policy monitoring, and notifications are deferred.
 
@@ -26,7 +26,7 @@ The eligibility service owns version selection, validates the loaded configurati
 
 ## Approval, provenance, and interpretation
 
-The five government scheme records are unchanged discovery metadata with an added `is_demo=false` classification. No government rule set is approved. The fictional example is marked at every stage and has no official application link or award. Its source bytes, content hash, version, and section excerpts support every test condition.
+The original five government records are unchanged; 277 additional curated records expand discovery to 282 government schemes with `is_demo=false`. No government rule set is approved. The fictional example is marked at every stage and has no official application link or award. Its source bytes, content hash, version, and section excerpts support every test condition.
 
 Rule content and evidence are immutable. Database guards enforce draft assembly, one-way approval, evidence coverage, and distinct human-review/synthetic-fixture bases. The public HTTP API cannot create or approve rules. In future phases an authenticated reviewer must approve any government rules before publication. Neither the engine nor an LLM can declare official government approval.
 
@@ -51,3 +51,11 @@ The API readiness check performs a live bounded database query; its process-heal
 PostgreSQL integration tests cover migrations, relationships, immutable history, approval/version selection, discovery, eligibility, and preservation of existing Phase 1 rows. Pure engine tests cover every supported operator and AND/OR truth table. Frontend tests use captured public/synthetic API contracts and exercise dynamic inputs, validation, conditional visibility, loading/errors, report rendering, and absence of browser-storage writes. Browser QA verifies the complete desktop/mobile journey, PASS/FAIL/UNKNOWN results, evidence disclosure, filtering, and refresh privacy behavior.
 
 Authentication workflows, production database role separation, rate limits/edge body limits, backup restoration, large-data performance, official-policy reconciliation, AI document processing, and production deployment are outside this phase. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence or administrative publication interface is introduced.
+
+## Curated catalog import
+
+`data/schemes/*.json → load_catalog → complete Pydantic validation/deduplication → advisory-locked transaction → insert missing schemes/sources → committed import statistics`.
+
+The command performs no network IO. It supports any record count, direct category-file discovery, and legacy single-file input. Existing matching slugs and their source relationships are skipped rather than overwritten. Rules, documents, profiles and reports are outside this import path. See [datasets.md](datasets.md) for provenance and operating limits.
+
+Discovery exposes computed `eligibility_available` flags and an optional availability filter, based on approved effective policy presence and scheme status. Dynamic category/state facets use actual database metadata. No rule engine logic or approval workflow changed. The frontend retains its visual design, fetches direct scheme IDs independently of catalog pagination, and guards stale success/error callbacks when filters change quickly.

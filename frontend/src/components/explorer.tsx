@@ -35,9 +35,12 @@ export function Explorer() {
     apiFetch<SchemeFilters>("/api/v1/schemes/filters", {
       signal: controller.signal,
     })
-      .then(setFilters)
+      .then((result) => {
+        if (!controller.signal.aborted) setFilters(result);
+      })
       .catch((reason: Error) => {
-        if (reason.name !== "AbortError") setFiltersError(true);
+        if (!controller.signal.aborted && reason.name !== "AbortError")
+          setFiltersError(true);
       });
     return () => controller.abort();
   }, [retry]);
@@ -60,11 +63,12 @@ export function Explorer() {
       signal: controller.signal,
     })
       .then((result) => {
+        if (controller.signal.aborted) return;
         setData(result);
         setLoading(false);
       })
       .catch((reason: Error) => {
-        if (reason.name !== "AbortError") {
+        if (!controller.signal.aborted && reason.name !== "AbortError") {
           setError(
             "Please check that the scheme service is running and try again.",
           );

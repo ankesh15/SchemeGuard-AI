@@ -1,8 +1,8 @@
-# SchemeGuard AI — Phase 2
+# SchemeGuard AI — Curated catalog on the Phase 2 foundation
 
-A Docker-first scholarship discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; applicant profiles and reports are **not persisted**.
+A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; applicant profiles and reports are **not persisted**.
 
-**The working assessment uses an explicitly fictional development scholarship.** Five government scholarship records remain available for discovery, but none has approved government eligibility rules. The fictional policy offers no award and has no official application portal.
+**The working assessment uses an explicitly fictional development scholarship.** The catalog contains 282 government schemes across 23 categories, but none has approved government eligibility rules. The fictional policy offers no award and has no official application portal.
 
 ## Start the application
 
@@ -31,7 +31,7 @@ docker compose exec api python -m app.seed_demo
 
 ## Try the complete user journey
 
-1. Open the frontend, explore schemes, and select **SchemeGuard Learning Scholarship (Fictional)**.
+1. Open the frontend, explore schemes, search **Fictional**, and select **SchemeGuard Learning Scholarship (Fictional)**.
 2. Open its eligibility questionnaire. Select **Use a synthetic example** and submit.
 3. The report shows **Known conditions satisfied**, six requirement results, decision traces, policy evidence, and rule version 1.
 4. Change the synthetic age to `17` to see **Requirements not satisfied**.
@@ -39,9 +39,24 @@ docker compose exec api python -m app.seed_demo
 
 Blank answers remain unknown. Form validation checks valid input types and domains, rather than preventing profiles that fail an eligibility condition. The questionnaire uses the approved policy's field definitions and reveals dependent inputs when applicable. A report exists only in React memory; refreshing the page clears it. No names, Aadhaar numbers, contact details, document uploads, or profile-storage APIs are introduced.
 
+## Curated multi-category dataset
+
+`data/schemes/` contains 23 validated JSON manifests with **282 government schemes**: the original five, 224 additional central-directory records, and 53 Goa records. PostgreSQL has **283 scheme rows** including the separately labeled fictional fixture. The target of 250–300 government records is met. The seed format supports arbitrary counts and a 300-record PostgreSQL capacity test passes.
+
+The new records were manually reviewed against the [official DBT Bharat directory](https://dbtbharat.gov.in/central-scheme/list) and [Goa government scheme catalog](https://www.goa.gov.in/government/schemes/). Verification establishes identity/listing metadata, not active enrollment, financial benefits, eligibility or deadlines. Department and geographic fields remain unknown where not supported by those sources. No scraper or live synchronization runs.
+
+```bash
+# Validate all category files; no database connection:
+docker compose exec api python -m app.seed --validate-only
+# Import missing rows transactionally; existing rows/sources are preserved:
+docker compose exec api python -m app.seed
+```
+
+Repeat imports insert zero duplicates. The default `SEED_DATA_PATH=/app/data/schemes` can select a different directory or the compatible legacy `data/scholarships.json` file. Detailed provenance, deduplication decisions, how to add schemes and static-data limits are in the [dataset guide](docs/datasets.md); results are in the [expansion report](docs/dataset-expansion-report.md). The frontend loads categories from the API and labels metadata-only schemes. Its approved-policy selector no longer depends on finding a scheme in the first 100 catalog results.
+
 ## Government sources and the fictional fallback
 
-The original five scholarship records and their eleven official evidence relationships are preserved. Their metadata was checked on 11 November 2026. Scheme status `listed` means directory presence on that date, not an application-window or eligibility guarantee. Only Ishan Uday has verified state coverage; unknown geography is excluded from state filters.
+The original five scholarship records and their eleven official evidence relationships are preserved. Their metadata was checked on 11 November 2026. Scheme status `listed` means directory presence on that date, not an application-window or eligibility guarantee. The expanded catalog adds 277 official directory records, including 53 verified Goa state programmes. Unknown geography is excluded from state filters.
 
 Phase 2 reviewed the [Saksham guideline linked by NSP](https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf) and its [linked FAQ](https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_F.pdf). The guideline uses an inclusive INR 8 lakh income boundary, whereas the FAQ describes a strict boundary. The documents also require review alongside current [NSP notices](https://scholarships.gov.in/Students) before a coherent current policy can be approved. The implementation therefore uses the fallback permitted in the Phase 2 brief, rather than selecting an uncertain interpretation or claiming human review.
 
@@ -53,7 +68,8 @@ The authored [fictional policy](data/policies/demo-policy-v1.md) is the sole exe
 | --- | --- | --- |
 | GET | `/health` | Process health |
 | GET | `/ready` | Live database connectivity; 503 when unavailable |
-| GET | `/api/v1/schemes` | Discovery with `page`, `page_size`, `search`, `category`, and verified `state` filters |
+| GET | `/api/v1/schemes` | Discovery with `page`, `page_size`, `search`, `category`, verified `state`, and `eligibility_available` filters |
+| GET | `/api/v1/schemes/filters` | Categories and verified state choices from PostgreSQL |
 | GET | `/api/v1/schemes/{id}` | Scheme detail and source metadata |
 | GET | `/api/v1/schemes/{id}/requirements` | Currently effective approved version, questionnaire fields, requirement labels, and evidence; `available: false` when absent |
 | POST | `/api/v1/eligibility/check` | Stateless deterministic evaluation of the effective approved version |
@@ -68,7 +84,7 @@ curl --fail http://localhost:8000/api/v1/eligibility/check \
   -d '{"scheme_id":"REPLACE_WITH_DEMO_UUID","synthetic_profile":true,"profile":{"age":21,"annual_income_inr":"240000","course":"engineering","study_mode":"full_time","enrollment_date":"2026-08-01","receives_other_scholarship":false,"requests_disability_support":false}}'
 ```
 
-The response contains `result`, the required assessment wording, `requirements`, the full nested `trace`, `missing_fields`, evidence references, and the evaluated `rule_set` version/document hash. It never returns or stores the raw profile. No approved policy produces UNKNOWN with `reason: NO_APPROVED_RULE_SET` and no evaluated version. Government requirements are never inferred from metadata alone. Only non-demo schemes receive the official NSP application link.
+The response contains `result`, the required assessment wording, `requirements`, the full nested `trace`, `missing_fields`, evidence references, and the evaluated `rule_set` version/document hash. It never returns or stores the raw profile. No approved policy produces UNKNOWN with `reason: NO_APPROVED_RULE_SET` and no evaluated version. Government requirements are never inferred from metadata alone. Only the original five NSP-backed scholarship records retain the reviewed NSP application link. Other metadata-only schemes show their official source references without an invented application portal.
 
 ## Rule semantics and approval
 
@@ -108,6 +124,7 @@ docker compose exec -T frontend npm run typecheck
 docker compose exec -T frontend npm run format:check
 # Recreates all three services; compares every row in all six domain tables:
 python3 scripts/verify_phase2.py
+python3 scripts/verify_catalog.py
 python3 scripts/verify_persistence.py
 ```
 

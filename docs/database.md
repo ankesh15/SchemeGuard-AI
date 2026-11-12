@@ -1,4 +1,4 @@
-# Database design — Phase 2
+# Database design — Phase 2 and curated catalog
 
 PostgreSQL 16, SQLAlchemy 2.x, asyncpg, and Alembic remain in use. UUID domain keys and timezone-aware timestamps are preserved. No extension or future vector-search service is added.
 
@@ -34,7 +34,7 @@ If no version is available, requirements report available=false and assessment r
 
 ## Existing geography and source semantics
 
-Government metadata verification dates remain 11 November 2026. Only Ishan Uday has explicitly verified state coverage; other government records remain unknown. `listed` records directory presence rather than an application window. Demo classification is separate from scheme status; the fictional scheme has unknown government status and no official source/application URL.
+The original five verification dates remain 11 November 2026. The 277 new records were checked on 12 November 2026. Ishan Uday retains its eight verified states; 53 Goa state-programme records add Goa coverage. Other central coverage remains unknown. `listed` records directory presence rather than an application window. Demo classification is separate from scheme status; the fictional scheme has unknown government status and no official source/application URL.
 
 For the fictional fixture, the reserved example.invalid source is labeled synthetic. `policies/demo-policy-v1.md` contains the actual authored source bytes. Its SHA-256 and byte count are persisted; the frontend's served file is checked against that hash. No government document snapshot or approved real scholarship rule is fabricated.
 
@@ -55,3 +55,13 @@ The seed commands acquire transaction advisory locks and preserve existing recor
 Tests use disposable real PostgreSQL databases, transaction rollback, full migration round trips, explicit Phase 1-to-Phase 2 preservation checks, FK/approval/history constraints, and no-profile-persistence assertions. The persistence helper compares all rows in all six domain tables before and after recreating all three Compose services. The existing named PostgreSQL volume is retained.
 
 Downgrades remove Phase 2 history and are destructive. They are exercised only in disposable test databases; normal development never downgrades or resets application data. Docker volumes are not backups, and production role separation/backup restore testing remain deferred.
+
+## Catalog expansion without schema changes
+
+No new migration is needed: the existing variable-length text, category, state-array and source-provenance columns already support this dataset. Alembic remains at `0002_eligibility_rules` and model/schema drift checks pass. All applied migrations are unchanged.
+
+The default curated import contains 282 government records in 23 files; the live development database contains 283 schemes and 289 scheme-source rows including the pre-existing fictional fixture. Document/rule counts remain one document, one synthetic approved rule set, six conditions and six evidence references. No government rule set was added.
+
+Import UUID5 keys use the original namespace. A transaction-scoped advisory lock serializes concurrent seed commands. Existing slugs skip every write, preserving UUIDs, timestamps, local edits, sources and immutable history; all newly inserted records and sources commit together. A full pre-import snapshot of the original six schemes and all associated source/document/rule rows was compared by ID after import. All were identical. The preservation and rollback behavior is also exercised in isolated PostgreSQL integration tests.
+
+The response-only `eligibility_available` flag and category/state facets are computed queries, not schema changes or stored applicant decisions. The importer writes only `schemes` and `scheme_sources`.
