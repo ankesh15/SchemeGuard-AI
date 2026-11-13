@@ -13,6 +13,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import async_sessionmaker
 from starlette.exceptions import HTTPException
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from app.agents.graph import WorkflowRunner
@@ -128,10 +129,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(
         title="SchemeGuard AI",
-        version="0.6.0",
+        version="0.7.0",
         description="Source-grounded discovery, deterministic eligibility, and administrator-only document intelligence. AI candidates always remain pending review.",
         lifespan=lifespan,
     )
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
     app.add_middleware(AdminBodyLimit, pdf_max_bytes=settings.pdf_max_bytes)
     app.add_middleware(RequestLoggingMiddleware)
     app.add_middleware(
@@ -163,7 +165,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return error_response(request, exc.status, exc.code, exc.message)
 
     async def database_error(request: Request, exc: Exception) -> JSONResponse:
-        logger.warning("database_unavailable", extra={"error_type": type(exc).__name__})
+        logger.warning(
+            "database_unavailable",
+            extra={
+                "error_type": type(exc).__name__,
+                "request_id": getattr(request.state, "request_id", "unavailable"),
+            },
+        )
         return error_response(request, 503, "database_unavailable", "Database temporarily unavailable")
 
     app.add_exception_handler(SQLAlchemyError, database_error)
@@ -174,7 +182,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.exception_handler(Exception)
     async def unexpected_error(request: Request, exc: Exception) -> JSONResponse:
-        logger.error("unexpected_error", extra={"error_type": type(exc).__name__})
+        logger.error(
+            "unexpected_error",
+            extra={
+                "error_type": type(exc).__name__,
+                "request_id": getattr(request.state, "request_id", "unavailable"),
+            },
+        )
         return error_response(request, 500, "internal_error", "An unexpected error occurred")
 
     app.include_router(health_router)

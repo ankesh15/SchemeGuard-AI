@@ -10,8 +10,8 @@ def make_engine(settings: Settings) -> AsyncEngine:
     return create_async_engine(
         settings.sqlalchemy_url,
         pool_pre_ping=True,
-        pool_size=5,
-        max_overflow=5,
+        pool_size=settings.database_pool_size,
+        max_overflow=settings.database_max_overflow,
         pool_timeout=settings.database_timeout_seconds,
         connect_args={
             "timeout": settings.database_timeout_seconds,

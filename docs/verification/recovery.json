@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "restored_tables": 41,
+  "restored_rows": 757,
+  "database": "UUID-named non-production recovery database",
+  "documents": "PASS: restored original PDFs match preserved checksums; private profiles decrypt with separately retained key",
+  "backup_location": ".local/backups/phase7-recovery-f01abd6e1622462aa2e4c26c483b21f6",
+  "key": "Not included in backup; retained separately in existing private environment"
+}

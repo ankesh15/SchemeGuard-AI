@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "schemeguard-backend"
-version = "0.1.0"
+version = "0.7.0"
 description = "Source-grounded government scholarship discovery API"
 requires-python = ">=3.12,<3.15"
 dependencies = [
@@ -24,6 +24,7 @@ dependencies = [
     "pgvector==0.5.1",
     "celery[redis]==5.7.0",
     "cryptography==50.0.2",
+    "boto3==1.44.2",
 ]
 
 [project.optional-dependencies]
@@ -33,6 +34,7 @@ dev = [
     "httpx==0.28.1",
     "ruff==0.17.4",
     "mypy==2.4.1",
+    "pip-audit==2.10.1",
 ]
 
 [tool.setuptools.packages.find]
@@ -58,3 +60,7 @@ ignore = ["E501"]
 python_version = "3.12"
 strict = true
 packages = ["app"]
+
+[[tool.mypy.overrides]]
+module = ["boto3", "botocore.*"]
+ignore_missing_imports = true

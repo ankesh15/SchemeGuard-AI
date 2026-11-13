@@ -13,7 +13,7 @@ from app.agents.proposals import source_pages
 from app.auth.security import Administrator
 from app.core.config import Settings
 from app.ingestion.fetcher import fetch_pdf_response
-from app.ingestion.storage import DocumentStorage
+from app.ingestion.storage import document_storage
 from app.ingestion.text_processor import normalize
 from app.models import (
     AgentWorkflow,
@@ -135,7 +135,7 @@ async def monitor_document(session: AsyncSession, settings: Settings, job: Backg
         import asyncio
 
         await asyncio.to_thread(
-            DocumentStorage(settings.document_storage_root).read,
+            document_storage(settings).read,
             original.storage_key,
             original.content_sha256,
             settings.pdf_max_bytes,

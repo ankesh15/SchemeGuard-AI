@@ -13,7 +13,7 @@ from app.ai.validation import FIELDS
 from app.auth.security import Administrator, audit, limit, require_admin
 from app.core.database import get_session
 from app.ingestion.fetcher import fetch_pdf
-from app.ingestion.storage import DocumentStorage
+from app.ingestion.storage import document_storage
 from app.models import (
     AgentWorkflow,
     AuditEvent,
@@ -255,7 +255,7 @@ async def original(identifier: UUID, request: Request, administrator: Admin, ses
     item = await get_document(session, identifier)
     settings = request.app.state.settings
     content = await asyncio.to_thread(
-        DocumentStorage(settings.document_storage_root).read,
+        document_storage(settings).read,
         item.storage_key,
         item.checksum,
         settings.pdf_max_bytes,

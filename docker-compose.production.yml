@@ -1,0 +1,131 @@
+name: schemeguard-production
+x-runtime: &runtime
+  restart: unless-stopped
+  init: true
+  security_opt: [no-new-privileges:true]
+  logging:
+    driver: json-file
+    options: {max-size: "10m", max-file: "3"}
+x-backend-env: &backend-env
+  APP_ENV: production
+  POSTGRES_HOST: db
+  POSTGRES_USER: ${POSTGRES_USER:-schemeguard_app}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a runtime database password}
+  POSTGRES_DB: ${POSTGRES_DB:-schemeguard}
+  DATABASE_URL: ${DATABASE_URL:-}
+  PROFILE_ENCRYPTION_KEY: ${PROFILE_ENCRYPTION_KEY:?Set the stable encryption key}
+  ADMIN_ALLOWED_ORIGINS: ${ADMIN_ALLOWED_ORIGINS:?Set the exact HTTPS frontend origin}
+  ALLOWED_HOSTS: ${ALLOWED_HOSTS:-["api","localhost","127.0.0.1"]}
+  CORS_ORIGINS: "[]"
+  SEED_DEMO_DATA: "false"
+  REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+  DOCUMENT_STORAGE_BACKEND: ${DOCUMENT_STORAGE_BACKEND:-s3}
+  ALLOW_LOCAL_DOCUMENT_STORAGE: ${ALLOW_LOCAL_DOCUMENT_STORAGE:-false}
+  DOCUMENT_STORAGE_ROOT: /var/lib/schemeguard/documents
+  S3_BUCKET: ${S3_BUCKET:-}
+  S3_REGION: ${S3_REGION:-ap-south-1}
+  S3_PREFIX: ${S3_PREFIX:-schemeguard}
+  S3_ENDPOINT_URL: ${S3_ENDPOINT_URL:-}
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+  AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+  GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+  GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.6-flash}
+  EMBEDDING_PROVIDER: gemini
+  LANGSMITH_TRACING: "false"
+  LANGSMITH_TRACING_V2: "false"
+services:
+  db:
+    <<: *runtime
+    image: schemeguard-postgres:16-pgvector-0.8.7
+    build: {context: ., dockerfile: docker/postgres/Dockerfile}
+    environment:
+      POSTGRES_USER: ${POSTGRES_OWNER:-schemeguard_owner}
+      POSTGRES_PASSWORD: ${POSTGRES_OWNER_PASSWORD:?Set a separate migration owner password}
+      POSTGRES_DB: ${POSTGRES_DB:-schemeguard}
+    volumes: [postgres:/var/lib/postgresql/data]
+    networks: [private]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    mem_limit: 1g
+  redis:
+    <<: *runtime
+    image: redis:7.4-alpine
+    command: [redis-server, --appendonly, "yes", --maxmemory, 256mb, --maxmemory-policy, noeviction]
+    volumes: [redis:/data]
+    networks: [private]
+    healthcheck: {test: [CMD, redis-cli, ping], interval: 10s, timeout: 3s, retries: 5}
+    mem_limit: 384m
+  api:
+    <<: *runtime
+    image: ${BACKEND_IMAGE:-schemeguard-api:production}
+    build: {context: ., dockerfile: backend/Dockerfile, target: production}
+    environment: *backend-env
+    volumes: [documents:/var/lib/schemeguard/documents]
+    networks: [private, egress]
+    ports: ["127.0.0.1:${PRODUCTION_API_PORT:-18000}:8000"]
+    depends_on: {db: {condition: service_healthy}}
+    read_only: true
+    tmpfs: ["/tmp:size=128m,mode=1777"]
+    cap_drop: [ALL]
+    mem_limit: 1536m
+    cpus: 2
+  frontend:
+    <<: *runtime
+    image: ${FRONTEND_IMAGE:-schemeguard-frontend:production}
+    build: {context: ./frontend, target: production}
+    environment:
+      INTERNAL_API_URL: http://api:8000
+      ADMIN_ALLOWED_ORIGINS: ${ADMIN_ALLOWED_ORIGINS}
+    networks: [egress]
+    ports: ["127.0.0.1:${PRODUCTION_FRONTEND_PORT:-13000}:3000"]
+    depends_on: {api: {condition: service_healthy}}
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cap_drop: [ALL]
+    mem_limit: 512m
+  worker:
+    <<: *runtime
+    image: ${BACKEND_IMAGE:-schemeguard-api:production}
+    environment: *backend-env
+    command: [celery, -A, app.workers.celery_app:celery_app, worker, --loglevel=INFO, --concurrency=2, "--queues=monitoring,documents", --hostname=worker@%h]
+    volumes: [documents:/var/lib/schemeguard/documents]
+    networks: [private, egress]
+    depends_on: {api: {condition: service_healthy}, redis: {condition: service_healthy}}
+    healthcheck:
+      test: [CMD-SHELL, 'celery -A app.workers.celery_app:celery_app inspect ping --destination worker@$$HOSTNAME --timeout 4 | grep -q pong']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    stop_grace_period: 9m
+    read_only: true
+    tmpfs: ["/tmp:size=256m,mode=1777"]
+    cap_drop: [ALL]
+    mem_limit: 2g
+    cpus: 2
+  scheduler:
+    <<: *runtime
+    image: ${BACKEND_IMAGE:-schemeguard-api:production}
+    environment: *backend-env
+    command: [python, -m, app.workers.scheduler]
+    networks: [private]
+    depends_on: {api: {condition: service_healthy}, redis: {condition: service_healthy}}
+    healthcheck:
+      test: [CMD, python, -c, "import time,pathlib; assert time.time()-float(pathlib.Path('/tmp/schemeguard-beat-heartbeat').read_text())<90"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    read_only: true
+    tmpfs: ["/tmp:size=32m,mode=1777"]
+    cap_drop: [ALL]
+    mem_limit: 256m
+volumes:
+  postgres: {name: "${POSTGRES_VOLUME_NAME:-schemeguard-production-postgres}"}
+  redis: {name: "${REDIS_VOLUME_NAME:-schemeguard-production-redis}"}
+  documents: {name: "${DOCUMENT_VOLUME_NAME:-schemeguard-production-documents}"}
+networks:
+  private: {internal: true}
+  egress:

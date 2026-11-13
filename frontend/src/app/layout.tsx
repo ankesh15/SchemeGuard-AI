@@ -6,6 +6,8 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { ReportProvider } from "@/components/report-context";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     default: "SchemeGuard AI — Clarity before you apply",

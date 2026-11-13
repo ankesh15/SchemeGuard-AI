@@ -15,7 +15,7 @@ class LeaderScheduler(Scheduler):  # type: ignore[misc]
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         settings = get_settings()
         self._leader_connection = psycopg.connect(
-            settings.sqlalchemy_url.set(drivername="postgresql").render_as_string(hide_password=False),
+            settings.psycopg_dsn,
             autocommit=True,
             connect_timeout=5,
         )

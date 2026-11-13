@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "delivery": "PostgreSQL outbox -> singleton Beat -> Redis -> Celery worker",
+  "job": {
+    "id": "2a29102a-dc74-4803-a1e2-867d019d3445",
+    "status": "SUCCEEDED",
+    "attempts": 1,
+    "result": {
+      "broker": "connected",
+      "database": "connected"
+    },
+    "error": null
+  },
+  "duplicate_delivery": "no second execution"
+}

@@ -84,3 +84,9 @@ The three services and existing data volumes are preserved. PostgreSQL remains m
 ## Phases 5 and 6
 
 Opt-in source monitoring uses the existing secure fetch/parse/LangGraph review path. PostgreSQL owns durable job and policy history; Redis carries ID-only messages to bounded Celery workers. One PostgreSQL-locked Beat leader schedules due work. Human publication atomically links a new immutable rule version and reassessment outbox job. Owner-locked reassessment checks preferences/consent, runs the unchanged deterministic engine using the necessary current stored fields, and appends encrypted reports/impacts and deduplicated approved-only notifications. Next.js fixed-route proxies and server layouts reuse shared HttpOnly sessions and role/CSRF checks. The frontend never receives the encryption key or submits private profiles to Gemini/RAG. See the Phase 5/6 reports for integration and executed verification.
+
+## Phase 7 production boundary
+
+Production now has separate non-root backend and standalone Next.js images and an independent six-service Compose manifest. Only release tooling runs owner migrations; long-running processes receive a restricted runtime DB role. Browser public/private calls are same-origin and allowlisted, so cookies need no cross-origin relaxation and backend secrets stay server-only. Production HTML is dynamic with a fresh strict script nonce, host allowlists, secure cookies and bounded request bodies.
+
+DocumentStorage remains the canonical content-addressed storage contract, with a configured S3 adapter sharing the same immutable keys/checksums and a dry-run/copy verification utility. Existing filesystem originals are not silently moved. PostgreSQL/checkpoint and original-document backup/recovery were tested locally. CI and measured demonstration/evaluation artifacts are documented in testing.md and final-project-report.md. No live cloud deployment is implied.

@@ -1,4 +1,4 @@
-# SchemeGuard AI — reviewed policies and private citizen assessments
+# SchemeGuard AI — evidence-backed policies and private assessments
 
 A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; citizen profiles and explicitly saved reports use encrypted private storage. Public synthetic requests remain stateless.
 
@@ -139,7 +139,7 @@ Checked-in frontend test responses and example inputs contain only authored synt
 
 Backend dependencies retain hash-locked Python requirements. Frontend versions are pinned in `package.json` and `package-lock.json`; Docker installs them with `npm ci`. A clean-container `NODE_ENV=production npm run build` verifies frontend compilation without sharing the dev server's `.next` directory.
 
-See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3 adds administration and LLM candidate extraction only. Phases 4–6 add reviewed publication, monitoring, background jobs and private citizen accounts as described below. Production deployment configuration remains deferred.
+See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3 adds administration and LLM candidate extraction only. Phases 4–6 add reviewed publication, monitoring, background jobs and private citizen accounts as described below. Phase 7 adds separate production images, CI, security hardening and verified local release/recovery procedures; no live cloud deployment is claimed.
 
 
 ## Administrator setup
@@ -196,7 +196,7 @@ python3 scripts/verify_phase4.py --credentials .local/phase3-demo-credentials.js
 python3 scripts/verify_persistence.py
 ```
 
-Processing remains bounded synchronous API work with durable checkpoints and explicit operator resume after interruption. No queue, policy monitoring, notifications or Phase 5 work is introduced.
+Supervised administrator processing remains bounded synchronous API work with durable checkpoints and explicit operator resume after interruption. Scheduled monitoring and reassessment use the Phase 5–6 queues described below.
 
 ## Phase 5 policy monitoring
 
@@ -216,3 +216,11 @@ The six services are frontend, api, db, redis, worker and scheduler. Redis has p
 Citizens can register at `/register`, sign in at `/login`, and use `/dashboard` for encrypted profiles, saved versioned assessments, policy updates, notification preferences and account settings. Public synthetic assessment endpoints retain their existing behavior. Only approved policies can support decisions; the catalog still includes discovery-only schemes. A reviewed material policy publication can reassess explicitly authorized saved schemes through Celery, preserving original reports and notifying only affected accounts.
 
 Before upgrading, run `python3 scripts/init_env.py` to append a private-storage key to the existing ignored `.env` without replacing its credentials. Preserve and separately back up this key: replacing it makes existing encrypted private records unreadable. Run `docker compose up --build -d`; migrations apply incrementally. API and worker share the key; frontend does not. There is no configured email/password recovery service. Read [Phase 6 report](docs/phase6-user-system.md), [authentication](docs/authentication.md), [notifications](docs/notifications.md) and [reassessment](docs/reassessment.md) for endpoints, exact commands, consent and deletion/backup limitations. `python3 scripts/verify_phase6.py` exercises a synthetic private account through the real Next.js proxy, saves a fictional assessment, reproduces it and logs out.
+
+## Phase 7 production readiness and demonstration
+
+The existing application now has separate production images/Compose configuration, restricted runtime DB roles, private S3 document-storage support, nonce CSP/same-origin browser API boundaries, CI checks, Chromium end-to-end tests, a synthetic A/B/C workflow demonstration, measured reference evaluation/performance and a tested local recovery procedure. Existing data, rule/history semantics and six development services remain.
+
+Start development as before with `python3 scripts/init_env.py` and `docker compose up --build -d`. Browser APIs now use same-origin fixed proxies; a NEXT_PUBLIC_API_URL is unnecessary. Production migration is an explicit owner-only release step rather than an API startup side effect. See [Docker](docs/docker.md), [deployment/recovery](docs/deployment.md), [security](docs/security.md), [testing](docs/testing.md), [API inventory](docs/api.md) and the [final project report](docs/final-project-report.md).
+
+Actual catalog: 283 records (282 government discovery records plus one fictional demonstration), one approved fictional rule set and zero approved government rule sets. The historical official PDF remains pending real human/current-policy review. Gemini and real cloud/S3 connections remain unverified without configured access. Local production-profile verification is not a live cloud deployment. The report separates completed implementation, measured fixture results and remaining release prerequisites.

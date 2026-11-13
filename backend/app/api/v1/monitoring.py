@@ -85,7 +85,10 @@ async def check_monitor(identifier: UUID, administrator: Admin, session: DB) -> 
 
 @router.get("/admin/monitoring-runs")
 async def monitoring_runs(
-    administrator: Admin, session: DB, page: int = Query(1, ge=1), page_size: int = Query(20, ge=1, le=100)
+    administrator: Admin,
+    session: DB,
+    page: int = Query(1, ge=1, le=100_000),
+    page_size: int = Query(20, ge=1, le=100),
 ) -> dict[str, Any]:
     rows = (
         await session.execute(
@@ -176,7 +179,7 @@ async def policy_changes(
     status: str | None = Query(
         None, pattern="^(PENDING_REVIEW|APPROVED|REJECTED|CLARIFICATION|NO_POLICY_CHANGE)$"
     ),
-    page: int = Query(1, ge=1),
+    page: int = Query(1, ge=1, le=100_000),
     page_size: int = Query(20, ge=1, le=100),
 ) -> dict[str, Any]:
     statement = select(PolicyChange)
@@ -293,7 +296,7 @@ async def reject_change(
 async def published_changes(
     session: DB,
     scheme_id: UUID | None = None,
-    page: int = Query(1, ge=1),
+    page: int = Query(1, ge=1, le=100_000),
     page_size: int = Query(20, ge=1, le=100),
 ) -> dict[str, Any]:
     statement = select(PolicyChange).where(

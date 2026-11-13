@@ -53,14 +53,27 @@ async def login_common(
         session, "login-user:" + body.username, settings.admin_login_limit, settings.admin_rate_window_seconds
     )
     user = await session.scalar(select(User).where(User.username == body.username))
+    checked_hash = user.password_hash if user else DUMMY_HASH
     async with request.app.state.password_slots:
-        valid = await asyncio.to_thread(
-            verify_password, user.password_hash if user else DUMMY_HASH, body.password.get_secret_value()
-        )
+        valid = await asyncio.to_thread(verify_password, checked_hash, body.password.get_secret_value())
     if not valid or user is None or not user.is_active or (admin_only and user.role != "admin"):
         audit(session, "admin_login_failed" if admin_only else "account_login_failed", None)
         await session.commit()
         raise HTTPException(401, "Invalid administrator credentials" if admin_only else "Invalid credentials")
+    # Serialize with password changes/deletion after the expensive hash check.
+    # A password verified before a concurrent password change cannot mint a new session.
+    account = await session.scalar(
+        select(User).where(User.id == user.id).with_for_update().execution_options(populate_existing=True)
+    )
+    if (
+        not account
+        or not account.is_active
+        or account.password_hash != checked_hash
+        or (admin_only and account.role != "admin")
+    ):
+        await session.rollback()
+        raise HTTPException(401, "Credentials changed; sign in again")
+    user = account
     raw = secrets.token_urlsafe(48)
     expires = datetime.now(UTC) + timedelta(
         hours=settings.admin_session_hours if admin_only else settings.citizen_session_hours

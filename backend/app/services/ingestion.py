@@ -15,7 +15,7 @@ from app.auth.security import Administrator, audit
 from app.core.config import Settings
 from app.ingestion.chunker import chunk_pages
 from app.ingestion.pdf_parser import ParsedPage, parse_pdf
-from app.ingestion.storage import DocumentStorage
+from app.ingestion.storage import document_storage
 from app.ingestion.validation import IngestionError, filename, official_url, pdf_bytes
 from app.models import (
     CandidateEvidence,
@@ -142,7 +142,7 @@ async def register_document(
             )
         # A missing or altered original never silently counts as a valid duplicate.
         await asyncio.to_thread(
-            DocumentStorage(settings.document_storage_root).read,
+            document_storage(settings).read,
             previous.storage_key,
             previous.content_sha256,
             settings.pdf_max_bytes,
@@ -190,7 +190,7 @@ async def register_document(
     )
     # Bytes are immutable and private. A failed SQL commit can leave an unreferenced
     # original for operator reconciliation, never a partially registered version.
-    await asyncio.to_thread(DocumentStorage(settings.document_storage_root).put, source.id, content)
+    await asyncio.to_thread(document_storage(settings).put, source.id, content)
     await session.commit()
     return await get_document(session, identifier), False
 
@@ -316,7 +316,7 @@ async def process_document(
                     )
             else:
                 content = await asyncio.to_thread(
-                    DocumentStorage(settings.document_storage_root).read,
+                    document_storage(settings).read,
                     document.storage_key,
                     document.checksum,
                     settings.pdf_max_bytes,

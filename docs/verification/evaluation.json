@@ -1,0 +1,46 @@
+{
+  "dataset": "Manually inspected fictional reference conditions; never government policy",
+  "provider": "gold_fixture_validation",
+  "requested_provider": "fixture",
+  "rule_extraction_accuracy": null,
+  "extraction_ms": null,
+  "citation_location_accuracy": {
+    "located": 3,
+    "total": 3,
+    "rate": 1.0
+  },
+  "deterministic_decision_accuracy": {
+    "correct": 11,
+    "total": 11,
+    "rate": 1.0
+  },
+  "false_eligibility_rate": {
+    "false_pass": 0,
+    "negative_cases": 6,
+    "rate": 0.0
+  },
+  "missing_information": {
+    "correct": 3,
+    "total": 3,
+    "rate": 1.0
+  },
+  "change_detection": {
+    "true_positive": 3,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "human_review_agreement": null,
+  "candidate_validation_statuses": [
+    "VALIDATED",
+    "VALIDATED",
+    "VALIDATED"
+  ],
+  "limitations": [
+    "Small hand-authored synthetic reference set; not representative government-policy accuracy.",
+    "Gold fixture validation does not measure model extraction accuracy.",
+    "No independent human-review agreement dataset is available.",
+    "Live Gemini extraction was not measured; credentials missing or fixture mode selected."
+  ]
+}

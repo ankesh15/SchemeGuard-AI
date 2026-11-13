@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import time
 from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
@@ -51,6 +52,8 @@ async def execute_job(
                 )
                 if not job:
                     return "SKIPPED"
+                started = time.monotonic()
+                logger.info("durable_job_started", extra={"job_id": str(identifier), "attempt": job.attempts})
                 try:
                     if job.kind == "PROBE":
                         result = {"broker": "connected", "database": "connected"}
@@ -111,6 +114,14 @@ async def execute_job(
                     )
                 job.lease_until = None
                 await session.commit()
+                logger.info(
+                    "durable_job_completed",
+                    extra={
+                        "job_id": str(identifier),
+                        "status_code": job.status,
+                        "duration_ms": round(1000 * (time.monotonic() - started), 2),
+                    },
+                )
                 return job.status
     finally:
         await engine.dispose()

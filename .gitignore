@@ -22,3 +22,6 @@ frontend/coverage/
 
 # Private local operator credentials and demonstration artifacts
 .local/
+!.env.production.example
+frontend/test-results/
+frontend/playwright-report/

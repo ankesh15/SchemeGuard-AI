@@ -96,3 +96,9 @@ RuleSet, RuleCondition, RuleEvidence and DocumentVersion remain the sole existin
 ## Phases 5 and 6
 
 Migration 0008 adds durable background jobs, opt-in source monitors/runs, policy changes/details/review events with provenance guards. Migration 0009 adds encrypted owner-scoped profiles, preferences, immutable assessments/reassessment events, and approved-publication-only notifications. Existing users/login_sessions/audit_events are reused. Account deletion purges its private rows leaf-first while preserving policy/audit references. See phase5-policy-monitoring.md and phase6-user-system.md for schemas/APIs/tests; authentication.md documents sensitive-payload encryption and operational key/backup requirements. Never downgrade the working database.
+
+## Phase 7 release and recovery
+
+No schema change was needed; Alembic remains at 0009_citizen_system. Existing constraints/history models were reused. Migration-owner and runtime roles are now separated in production; grants reject privileged runtime accounts and disallow schema DDL and audit mutation. Managed TLS DSNs are mapped consistently for asyncpg and psycopg checkpoint connections. Query plans/index names were inspected at the actual 283-record scale; no unsupported performance index was added.
+
+The working database contains 41 public/checkpoint tables, including migration bookkeeping; the exact table list and scheme/rule/document counts are in verification/project-facts.json. The Phase 7 recovery drill restored and hashed all tables in a generated non-production DB and verified original PDF bytes and private decryption. Recovery/rollback procedures are in deployment.md. Never downgrade/reset the working database or remove its volumes during routine releases.

@@ -1,0 +1,9 @@
+# AI processing and verification agents
+
+The existing LangGraph workflow is canonical: prepare authorized original → bounded candidate extraction → source verification → typed schema/proposal validation → persisted human-review interrupt → publication of an exact approved revision. It uses PostgreSQL checkpoints, workflow events, idempotency keys and database execution locks. It reuses RuleSet/RuleCondition/RuleEvidence/DocumentVersion rather than introducing another executable-rule representation.
+
+Google GenAI structured JSON is validated by Pydantic and mapped to the existing safe AST. The LLM has no tools, credentials in its prompt or permission to execute rules. Documents are untrusted input; excerpts must be found on the stated source page, numeric values/units must be grounded, unsupported conditions remain pending, and conflicting/uncertain scope cannot become approved through a model response. Human approval requires the saved revision/digest, all page attestations and completeness/applicability/effective-date findings. A synthetic automated review is never real government approval.
+
+Only the deterministic engine evaluates eligibility. RAG and explanations do not modify its result. Monitoring reuses this graph for changed text; equivalent text may avoid an AI call while preserving the new original and a reviewable currency warning. Published versions and original documents remain immutable.
+
+`python -m app.evaluate` runs the hand-authored fictional reference set. `--provider gemini` can measure real extraction only when an authorized key is configured; failures must be reported. The current verification used gold/mock fixtures, not real Gemini. Evaluation JSON reports real extraction accuracy and human-review agreement as null when unmeasured. See verification/evaluation.json, verification/demonstration.json, agent-workflows.md, human-review.md and gemini-integration.md.

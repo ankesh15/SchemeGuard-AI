@@ -1,0 +1,9 @@
+# Policy monitoring methodology
+
+An administrator enrolls an exact authorized official PDF source with recorded access-permission notes and a daily/weekly UTC schedule. Static catalog URLs are not automatically enrolled. The existing SSRF-resistant fetcher validates public destinations, pins DNS/TLS, rejects redirects requiring new source approval, bounds time/bytes/pages and uses ETag/Last-Modified as hints with periodic unconditional checking. SHA-256 is authoritative for preserved byte identity.
+
+Unchanged documents skip parsing/AI. Changed originals become immutable versions; document changes alone are not material policy facts. Existing PyMuPDF/LangGraph processing creates pending proposals. Stable identifiers, normalized values/logical paths and page evidence distinguish formatting/wording/material/inconclusive differences. Explicit deadline/document-label changes remain sourced informational facts, not invented engine operators. Source failures/uncertainty retain the last approved version and show potentially-outdated status.
+
+The Phase 4 human review controls clarification/rejection/approval. Approved publication atomically queues consent/preference-aware citizen reassessment. Redis holds ID-only delivery messages; PostgreSQL owns durable jobs, finite retry/lease state, runs, policy details and deduplication. One PostgreSQL-locked Beat leader dispatches work, and worker-loss retries preserve prior committed results. Notifications never announce pending proposals as facts.
+
+See phase5-policy-monitoring.md, celery-architecture.md, policy-versioning.md and notifications.md. The final synthetic demonstration checks old/new originals, two rule versions, historical replay and one deduplicated notification. Live monitoring remains opt-in; no external source was enrolled just for this demonstration.

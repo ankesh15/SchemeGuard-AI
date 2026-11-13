@@ -1,0 +1,24 @@
+{
+  "tool": "pip-audit",
+  "runtime_packages_checked": 85,
+  "known_advisories": 0,
+  "ignore_list": [],
+  "npm": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 24,
+      "dev": 168,
+      "optional": 109,
+      "peer": 37,
+      "peerOptional": 0,
+      "total": 229
+    }
+  }
+}

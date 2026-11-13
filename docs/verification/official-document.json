@@ -1,0 +1,10 @@
+{
+  "status": "PARTIALLY_REVERIFIED",
+  "historical_official_source": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+  "previously_verified_sha256": "06ebed9e50a47ae76cba985ddde78cd65f19f2193b0e4c9c164fff529580474c",
+  "phase7_original_bytes_recovery": "PASS; original PDF checksums verified during recovery drill",
+  "database_pages": 4,
+  "government_rule_approval": false,
+  "optional_credential_smoke": "not executed: automatic approval review timed out; no safety reason was stated",
+  "live_gemini": "unavailable"
+}

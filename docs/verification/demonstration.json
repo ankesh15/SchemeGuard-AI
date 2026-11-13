@@ -1,0 +1,24 @@
+{
+  "workflows": {
+    "A": "PASS: source/PDF/mock AI/LangGraph/simulated human approval/publication",
+    "B": "PASS: private profile/discovery/approved evaluation/evidence/saved report",
+    "C": "PASS: changed PDF/comparison/review/new version/reassessment/notification"
+  },
+  "measurements_ms": {
+    "pdf_processing_ms": 426.927,
+    "mock_ai_extraction_ms": 0.058,
+    "administrator_review_publication_ms": 256.978,
+    "rag_retrieval_ms": 37.561,
+    "scheme_search_ms": 14.76,
+    "evaluation_and_save_ms": 39.084,
+    "monitor_parse_graph_compare_review_ms": 1255.566,
+    "background_reassessment_ms": 39.895
+  },
+  "sample_count": 1,
+  "external_AI": "mocked, not a Gemini latency/accuracy measurement",
+  "human_review": "simulated exact-revision decision, not real government approval",
+  "database": "disposable PostgreSQL; fixtures and all private data are rolled back",
+  "documents_preserved": 2,
+  "approved_fixture_versions": 2,
+  "deduplicated_notifications": 1
+}

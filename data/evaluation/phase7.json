@@ -1,0 +1,17 @@
+{
+  "title": "Manually inspected fictional reference conditions; never government policy",
+  "provenance": "Hand-authored synthetic clauses and boundary/missing profiles. Reference text and expected comparisons inspected during implementation. No independent human-review agreement or real-model accuracy is claimed.",
+  "rules": [
+    {"id":"age_minimum","text":"FICTIONAL policy: applicant age must be at least 18 years.","field":"age_years","operator":">=","value":18,"type":"number","units":"years","profiles":[{"input":{"age_years":17},"result":"FAIL"},{"input":{"age_years":18},"result":"PASS"},{"input":{"age_years":19},"result":"PASS"},{"input":{},"result":"UNKNOWN"}]},
+    {"id":"income_ceiling","text":"FICTIONAL policy: annual family income must not exceed INR 250000 per year.","field":"annual_family_income_inr","operator":"<=","value":250000,"type":"number","units":"INR_per_year","profiles":[{"input":{"annual_family_income_inr":249999},"result":"PASS"},{"input":{"annual_family_income_inr":250000},"result":"PASS"},{"input":{"annual_family_income_inr":250001},"result":"FAIL"},{"input":{"annual_family_income_inr":null},"result":"UNKNOWN"}]},
+    {"id":"disability_boundary","text":"FICTIONAL policy: disability percentage must be at least 40 percent.","field":"disability_percent","operator":">=","value":40,"type":"number","units":"percent","profiles":[{"input":{"disability_percent":39},"result":"FAIL"},{"input":{"disability_percent":40},"result":"PASS"},{"input":{},"result":"UNKNOWN"}]}
+  ],
+  "changes": [
+    {"old":250000,"new":300000,"material":true},
+    {"old":300000,"new":250000,"material":true},
+    {"old":250000,"new":250000,"material":false},
+    {"old":250000,"new":"250000.00","material":false},
+    {"old":18,"new":19,"material":true},
+    {"old":40,"new":40,"material":false}
+  ]
+}

@@ -8,9 +8,20 @@ from sqlalchemy.engine import URL, make_url
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore", hide_input_in_errors=True)
 
     app_env: Literal["development", "test", "production"] = "development"
+    allowed_hosts: list[str] = ["localhost", "127.0.0.1", "test", "testserver", "api"]
+    document_storage_backend: Literal["filesystem", "s3"] = "filesystem"
+    s3_bucket: str | None = Field(
+        default=None, min_length=3, max_length=63, pattern=r"^[a-z0-9][a-z0-9.-]+[a-z0-9]$"
+    )
+    s3_region: str = "ap-south-1"
+    s3_endpoint_url: str | None = None
+    s3_prefix: str = Field(default="schemeguard", pattern=r"^[a-zA-Z0-9_-]{1,80}$")
+    allow_local_document_storage: bool = False
+    database_pool_size: int = Field(default=5, ge=1, le=20)
+    database_max_overflow: int = Field(default=5, ge=0, le=20)
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     postgres_user: str = "schemeguard"
     postgres_password: SecretStr | None = None
@@ -70,6 +81,32 @@ class Settings(BaseSettings):
                 Fernet(self.profile_encryption_key.get_secret_value().encode())
             except (ValueError, TypeError) as error:
                 raise ValueError("PROFILE_ENCRYPTION_KEY must be a valid Fernet key") from error
+        if not self.allowed_hosts or any(
+            "*" in host or "/" in host or ":" in host for host in self.allowed_hosts
+        ):
+            raise ValueError("ALLOWED_HOSTS requires explicit hostnames without ports")
+        if self.document_storage_backend == "s3" and not self.s3_bucket:
+            raise ValueError("S3_BUCKET is required for S3 storage")
+        if self.s3_endpoint_url:
+            from urllib.parse import urlsplit
+
+            endpoint = urlsplit(self.s3_endpoint_url)
+            if (
+                endpoint.scheme != "https"
+                or not endpoint.hostname
+                or endpoint.username
+                or endpoint.password
+                or endpoint.query
+                or endpoint.fragment
+            ):
+                raise ValueError("S3 endpoint must be a trusted HTTPS operator endpoint")
+        if self.app_env == "production":
+            if not self.profile_encryption_key:
+                raise ValueError("Production requires PROFILE_ENCRYPTION_KEY")
+            if self.seed_demo_data:
+                raise ValueError("Production must not seed demonstration data")
+            if self.document_storage_backend == "filesystem" and not self.allow_local_document_storage:
+                raise ValueError("Production requires S3 or explicit persistent filesystem opt-in")
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError("CHUNK_OVERLAP must be smaller than CHUNK_SIZE")
         if self.app_env == "production" and self.embedding_provider == "local_hash":
@@ -79,6 +116,11 @@ class Settings(BaseSettings):
         ):
             raise ValueError("Production admin origins must use HTTPS")
         return self
+
+    @field_validator("database_url", "s3_bucket", "s3_endpoint_url", mode="before")
+    @classmethod
+    def optional_environment(cls, value: object) -> object:
+        return None if value == "" else value
 
     @field_validator("postgres_password")
     @classmethod
@@ -112,6 +154,14 @@ class Settings(BaseSettings):
             ):
                 raise ValueError("CORS origins must be explicit HTTP(S) origins")
         return [value.rstrip("/") for value in values]
+
+    @property
+    def psycopg_dsn(self) -> str:
+        url = self.sqlalchemy_url.set(drivername="postgresql")
+        query = dict(url.query)
+        if "ssl" in query:
+            query["sslmode"] = query.pop("ssl")
+        return url.set(query=query).render_as_string(hide_password=False)
 
     @property
     def sqlalchemy_url(self) -> URL:

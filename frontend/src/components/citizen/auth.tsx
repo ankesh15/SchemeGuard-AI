@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { citizenFetch, citizenJSON, type CitizenSession } from "@/lib/citizen";
 export function CitizenAuth({ register = false }: { register?: boolean }) {
   const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
@@ -67,7 +69,7 @@ export function CitizenAuth({ register = false }: { register?: boolean }) {
               autoComplete="username"
               maxLength={80}
               value={username}
-              disabled={busy}
+              disabled={busy || !hydrated}
               onChange={(event) => setUsername(event.target.value)}
             />
           </label>
@@ -78,7 +80,7 @@ export function CitizenAuth({ register = false }: { register?: boolean }) {
               autoComplete={register ? "new-password" : "current-password"}
               maxLength={128}
               value={password}
-              disabled={busy}
+              disabled={busy || !hydrated}
               onChange={(event) => setPassword(event.target.value)}
             />
           </label>
@@ -90,7 +92,7 @@ export function CitizenAuth({ register = false }: { register?: boolean }) {
                 autoComplete="new-password"
                 maxLength={128}
                 value={confirmation}
-                disabled={busy}
+                disabled={busy || !hydrated}
                 onChange={(event) => setConfirmation(event.target.value)}
               />
             </label>
@@ -100,7 +102,10 @@ export function CitizenAuth({ register = false }: { register?: boolean }) {
               {error}
             </p>
           )}
-          <button className="button button-primary" disabled={busy}>
+          <button
+            className="button button-primary"
+            disabled={busy || !hydrated}
+          >
             {busy ? "Please wait…" : register ? "Create account" : "Sign in"}
           </button>
         </form>

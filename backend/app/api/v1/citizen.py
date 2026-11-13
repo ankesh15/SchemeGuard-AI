@@ -115,7 +115,7 @@ async def assessments(
     request: Request,
     user: Citizen,
     session: DB,
-    page: int = Query(1, ge=1),
+    page: int = Query(1, ge=1, le=100_000),
     page_size: int = Query(20, ge=1, le=100),
 ) -> dict[str, Any]:
     statement = select(Assessment).where(Assessment.user_id == user.id)
@@ -186,7 +186,7 @@ async def update_preferences(body: Preferences, user: Citizen, session: DB) -> P
 async def notifications(
     user: Citizen,
     session: DB,
-    page: int = Query(1, ge=1),
+    page: int = Query(1, ge=1, le=100_000),
     page_size: int = Query(20, ge=1, le=100),
     unread_only: bool = False,
 ) -> dict[str, Any]:

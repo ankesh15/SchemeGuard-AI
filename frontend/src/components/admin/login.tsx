@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { adminFetch, adminJSON, type AdminSession } from "@/lib/admin";
 export function AdminLogin() {
   const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -54,7 +56,7 @@ export function AdminLogin() {
               value={username}
               maxLength={80}
               onChange={(e) => setUsername(e.target.value)}
-              disabled={busy}
+              disabled={busy || !hydrated}
             />
           </label>
           <label>
@@ -66,7 +68,7 @@ export function AdminLogin() {
               value={password}
               maxLength={1024}
               onChange={(e) => setPassword(e.target.value)}
-              disabled={busy}
+              disabled={busy || !hydrated}
             />
           </label>
           {error && (
@@ -74,7 +76,10 @@ export function AdminLogin() {
               {error}
             </div>
           )}
-          <button className="button button-primary" disabled={busy}>
+          <button
+            className="button button-primary"
+            disabled={busy || !hydrated}
+          >
             {busy ? "Signing in…" : "Sign in"}
           </button>
         </form>

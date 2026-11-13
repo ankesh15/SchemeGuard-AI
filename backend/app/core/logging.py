@@ -10,9 +10,20 @@ class JsonFormatter(logging.Formatter):
             "timestamp": datetime.now(UTC).isoformat(),
             "level": record.levelname,
             "logger": record.name,
-            "event": record.getMessage(),
+            "event": record.getMessage()
+            if record.name.startswith(("schemeguard", "alembic", "uvicorn"))
+            else "dependency_log",
         }
-        for key in ("request_id", "method", "route", "status_code", "duration_ms", "error_type"):
+        for key in (
+            "request_id",
+            "method",
+            "route",
+            "status_code",
+            "duration_ms",
+            "error_type",
+            "job_id",
+            "attempt",
+        ):
             if hasattr(record, key):
                 payload[key] = getattr(record, key)
         # Exception text, SQL, URLs, request bodies, and headers can contain secrets.

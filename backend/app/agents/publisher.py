@@ -12,7 +12,7 @@ from app.agents.proposals import proposal_digest
 from app.agents.review import validation_context
 from app.auth.security import audit
 from app.core.config import Settings
-from app.ingestion.storage import DocumentStorage
+from app.ingestion.storage import document_storage
 from app.models import (
     AgentWorkflow,
     DocumentVersion,
@@ -56,7 +56,7 @@ async def publish(session: AsyncSession, settings: Settings, workflow_id: UUID, 
         raise ValueError("The approving reviewer is no longer an active administrator")
     await approved_source(session, source.id)
     await asyncio.to_thread(
-        DocumentStorage(settings.document_storage_root).read,
+        document_storage(settings).read,
         document.storage_key,
         document.content_sha256,
         settings.pdf_max_bytes,

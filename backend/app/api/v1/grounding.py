@@ -84,7 +84,7 @@ async def rule_history(scheme_id: UUID, response: Response, session: DB) -> dict
     return {
         "scheme_id": str(scheme_id),
         "items": items,
-        "notice": "Approved version history. Assessments select the highest effective version; this is not government approval.",
+        "notice": "Approved version history. Assessments require an unambiguous effective approved version or an explicitly reviewed replacement; this is not government approval.",
     }
 
 

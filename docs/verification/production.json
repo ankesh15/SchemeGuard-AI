@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "scope": "local production-profile images behind loopback TLS verification harness",
+  "nonce_CSP": "all rendered scripts match a fresh response nonce",
+  "cookies": "Secure, HttpOnly, SameSite=Strict",
+  "auth_profile_isolation_deletion": "PASS",
+  "cloud_deployment": false,
+  "object_storage": "filesystem explicitly opted in for local test; real S3 not exercised"
+}

@@ -1,7 +1,11 @@
+from typing import Any
+
 from celery import Celery  # type: ignore[import-untyped]
+from celery.signals import setup_logging  # type: ignore[import-untyped]
 from kombu.entity import Queue
 
 from app.core.config import get_settings
+from app.core.logging import configure_logging
 
 settings = get_settings()
 celery_app = Celery(
@@ -38,3 +42,8 @@ celery_app.conf.update(
     enable_utc=True,
     worker_hijack_root_logger=False,
 )
+
+
+@setup_logging.connect  # type: ignore[untyped-decorator]
+def configure_worker_logs(**kwargs: Any) -> None:
+    configure_logging(settings.log_level)

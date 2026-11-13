@@ -1,0 +1,163 @@
+{
+  "environment": "local Docker development; sequential HTTP from host; warmup excluded",
+  "latency": {
+    "health": {
+      "samples": 20,
+      "p50_ms": 2.009,
+      "p95_ms": 2.165,
+      "max_ms": 2.299
+    },
+    "database_readiness": {
+      "samples": 20,
+      "p50_ms": 4.742,
+      "p95_ms": 5.267,
+      "max_ms": 5.318
+    },
+    "scheme_search": {
+      "samples": 20,
+      "p50_ms": 16.924,
+      "p95_ms": 18.789,
+      "max_ms": 20.787
+    },
+    "deterministic_assessment": {
+      "samples": 20,
+      "p50_ms": 18.025,
+      "p95_ms": 19.777,
+      "max_ms": 19.846
+    }
+  },
+  "postgresql": {
+    "search_plan": [
+      {
+        "Plan": {
+          "Node Type": "Limit",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 17.97,
+          "Total Cost": 18.02,
+          "Plan Rows": 20,
+          "Plan Width": 65,
+          "Actual Startup Time": 0.587,
+          "Actual Total Time": 0.591,
+          "Actual Rows": 20,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 19,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Sort",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 17.97,
+              "Total Cost": 18.11,
+              "Plan Rows": 54,
+              "Plan Width": 65,
+              "Actual Startup Time": 0.585,
+              "Actual Total Time": 0.587,
+              "Actual Rows": 20,
+              "Actual Loops": 1,
+              "Sort Key": [
+                "name",
+                "id"
+              ],
+              "Sort Method": "top-N heapsort",
+              "Sort Space Used": 28,
+              "Sort Space Type": "Memory",
+              "Shared Hit Blocks": 19,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Seq Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Relation Name": "schemes",
+                  "Alias": "schemes",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 16.54,
+                  "Plan Rows": 54,
+                  "Plan Width": 65,
+                  "Actual Startup Time": 0.015,
+                  "Actual Total Time": 0.451,
+                  "Actual Rows": 51,
+                  "Actual Loops": 1,
+                  "Filter": "((name)::text ~~* '%Scholarship%'::text)",
+                  "Rows Removed by Filter": 232,
+                  "Shared Hit Blocks": 13,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 177,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 2.414,
+        "Triggers": [],
+        "Execution Time": 0.646
+      }
+    ],
+    "reviewed_indexes": [
+      "ix_assessments_user_scheme",
+      "ix_jobs_dispatch",
+      "ix_notifications_unread",
+      "ix_rule_sets_selection",
+      "ix_rule_sets_source_document",
+      "ix_schemes_applicable_states",
+      "ix_schemes_category",
+      "ix_schemes_name_id",
+      "pk_assessments",
+      "pk_background_jobs",
+      "pk_notifications",
+      "pk_rule_sets",
+      "pk_schemes",
+      "uq_assessment_owner",
+      "uq_assessment_request",
+      "uq_background_jobs_dedupe_key",
+      "uq_notification_event",
+      "uq_rule_sets_id_document",
+      "uq_rule_sets_scheme_version",
+      "uq_schemes_slug"
+    ]
+  },
+  "limitations": [
+    "20 samples per endpoint, one sequential client; not a load/capacity/SLA claim.",
+    "PDF/mock-extraction/RAG/monitoring/reassessment measurements are in the isolated A/B/C demonstration output.",
+    "Real Gemini/S3/network latency is not measured without configured access."
+  ]
+}

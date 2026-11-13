@@ -1,0 +1,79 @@
+name: Verify SchemeGuard
+on: [push, pull_request, workflow_dispatch]
+permissions: {contents: read}
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Configure ephemeral CI environment
+        run: python3 scripts/init_env.py
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+        with:
+          context: .
+          file: backend/Dockerfile
+          target: development
+          tags: schemeguard-ai-api:latest
+          load: true
+          cache-from: type=gha,scope=backend
+          cache-to: type=gha,mode=max,scope=backend
+      - name: Build PostgreSQL image
+        run: docker compose build db
+      - name: Start database and application
+        run: docker compose up -d --wait db api redis
+      - name: Python lint, types, tests, dependency checks and reference evaluation
+        run: |
+          docker compose exec -T api ruff check --no-cache app tests alembic
+          docker compose exec -T api ruff format --check --no-cache app tests alembic
+          docker compose exec -T api mypy --cache-dir /tmp/mypy app
+          docker compose exec -T api python -m tests.run
+          docker compose exec -T api alembic check
+          docker compose exec -T api python -m pip check
+          docker compose exec -T api python -m pip_audit --disable-pip --no-deps -r requirements.lock
+          docker compose exec -T api python -m app.evaluate
+      - name: Production manifest security checks
+        run: |
+          python3 scripts/init_production_test.py
+          python3 scripts/check_deployment.py --env-file .local/phase7-production.env
+      - name: Production backend image
+        run: docker build -f backend/Dockerfile --target production -t schemeguard-api:ci .
+      - name: Failure diagnostics (no environment dump)
+        if: failure()
+        run: docker compose logs --tail 80 api db
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults: {run: {working-directory: frontend}}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with: {node-version: '24', cache: npm, cache-dependency-path: frontend/package-lock.json}
+      - run: npm ci --no-audit
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm audit --audit-level=low
+      - run: npm run build
+      - name: Production frontend image
+        run: docker build --target production -t schemeguard-frontend:ci .
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - run: python3 scripts/init_env.py
+      - run: docker compose up --build -d --wait
+      - name: Install isolated Chromium and run E2E
+        run: |
+          docker compose exec -T --user 0 frontend npx playwright install --with-deps chromium
+          docker compose exec -T --user 0 -e E2E_BASE_URL=http://localhost:3000 frontend npm run e2e
+      - name: Worker and recovery integration
+        run: |
+          python3 scripts/verify_workers.py
+          python3 scripts/verify_recovery.py
+# No deployment job: releases require explicit operator authorization.

@@ -25,7 +25,7 @@ from app.agents.publisher import publish
 from app.agents.state import PolicyWorkflowState, ReviewResume
 from app.ai.provider import GeminiProvider, LLMProvider, ProviderError
 from app.core.config import Settings
-from app.ingestion.storage import DocumentStorage
+from app.ingestion.storage import document_storage
 from app.models import (
     AgentWorkflow,
     DocumentVersion,
@@ -83,7 +83,7 @@ class WorkflowRunner:
             document = await get_document(session, workflow.document_version_id)
             await approved_source(session, document.source_id)
             await asyncio.to_thread(
-                DocumentStorage(self.settings.document_storage_root).read,
+                document_storage(self.settings).read,
                 document.storage_key,
                 document.checksum,
                 self.settings.pdf_max_bytes,

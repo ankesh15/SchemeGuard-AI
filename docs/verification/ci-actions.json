@@ -1,0 +1,18 @@
+{
+  "actions/checkout": {
+    "tag": "v7",
+    "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  "actions/setup-node": {
+    "tag": "v7",
+    "sha": "949feb2413d6458794dcd2491c4babbbce0c15c1"
+  },
+  "docker/build-push-action": {
+    "tag": "v7",
+    "sha": "c3c9e263c25d99ce0380d002d59b67737d91b0dc"
+  },
+  "docker/setup-buildx-action": {
+    "tag": "v4",
+    "sha": "f87e5991a6d7451dcb8d9637bfbc97413f497069"
+  }
+}

@@ -1,4 +1,4 @@
-"""Bound administrator request bodies before JSON decoding or route execution."""
+"""Bound all request bodies before JSON decoding; allow larger authorized PDF uploads."""
 
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
@@ -10,17 +10,7 @@ class AdminBodyLimit:
         self.app, self.pdf_max_bytes = app, pdf_max_bytes
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        private_prefixes = (
-            "/api/v1/admin/",
-            "/api/v1/auth/",
-            "/api/v1/me",
-            "/api/v1/profiles",
-            "/api/v1/assessments",
-            "/api/v1/notifications",
-            "/api/v1/notification-preferences",
-            "/api/v1/dashboard",
-        )
-        if scope["type"] != "http" or not scope.get("path", "").startswith(private_prefixes):
+        if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
         headers = dict(scope.get("headers", []))
@@ -39,7 +29,7 @@ class AdminBodyLimit:
                     "request_id": scope.get("state", {}).get("request_id"),
                     "error": {
                         "code": "request_too_large",
-                        "message": "Administrator request exceeds its byte limit",
+                        "message": "Request exceeds its byte limit",
                     },
                 },
                 status_code=413,
@@ -55,7 +45,7 @@ class AdminBodyLimit:
             if message["type"] == "http.request":
                 total += len(message.get("body", b""))
                 if total > maximum:
-                    raise HTTPException(413, "Administrator request exceeds its byte limit")
+                    raise HTTPException(413, "Request exceeds its byte limit")
             return message
 
         await self.app(scope, bounded_receive, send)
