@@ -5,6 +5,7 @@ import http.client
 import socket
 import ssl
 import time
+from dataclasses import dataclass
 from urllib.parse import unquote, urlsplit
 
 from app.ingestion.validation import IngestionError, filename, official_url, pdf_bytes, public_address
@@ -25,7 +26,26 @@ class PinnedHTTPSConnection(http.client.HTTPSConnection):
             raise
 
 
-def download(url: str, maximum: int, timeout: float) -> tuple[bytes, str]:
+@dataclass(frozen=True)
+class FetchResponse:
+    status: int
+    content: bytes
+    filename: str
+    etag: str | None = None
+    last_modified: str | None = None
+
+
+def safe_validator(value: str | None) -> str | None:
+    return (
+        value
+        if value and len(value) <= 512 and all(32 <= ord(character) < 127 for character in value)
+        else None
+    )
+
+
+def download_response(
+    url: str, maximum: int, timeout: float, etag: str | None = None, last_modified: str | None = None
+) -> FetchResponse:
     parsed = urlsplit(official_url(url))
     host = parsed.hostname or ""
     started = time.monotonic()
@@ -42,6 +62,11 @@ def download(url: str, maximum: int, timeout: float) -> tuple[bytes, str]:
             host, addresses[0], max(0.1, timeout - (time.monotonic() - started))
         )
         try:
+            conditional: dict[str, str] = {}
+            if safe_validator(etag):
+                conditional["If-None-Match"] = str(etag)
+            if safe_validator(last_modified):
+                conditional["If-Modified-Since"] = str(last_modified)
             connection.request(
                 "GET",
                 parsed.path + ("?" + parsed.query if parsed.query else ""),
@@ -49,9 +74,19 @@ def download(url: str, maximum: int, timeout: float) -> tuple[bytes, str]:
                     "Accept": "application/pdf",
                     "User-Agent": "SchemeGuard-AI/0.3 supervised-document-ingestion",
                     "Accept-Encoding": "identity",
+                    **conditional,
                 },
             )
             response = connection.getresponse()
+            if 300 <= response.status < 400 and response.status != 304:
+                raise IngestionError(
+                    "redirect_rejected",
+                    "Redirects are not followed. Approve the final official URL separately.",
+                )
+            response_etag = safe_validator(response.getheader("ETag"))
+            response_modified = safe_validator(response.getheader("Last-Modified"))
+            if response.status == 304 and conditional:
+                return FetchResponse(304, b"", "official-document.pdf", response_etag, response_modified)
             if 300 <= response.status < 400:
                 raise IngestionError(
                     "redirect_rejected",
@@ -88,13 +123,30 @@ def download(url: str, maximum: int, timeout: float) -> tuple[bytes, str]:
             basename = unquote(parsed.path.rsplit("/", 1)[-1]) or "official-document.pdf"
             if not basename.lower().endswith(".pdf"):
                 basename = "official-document.pdf"
-            return content, filename(basename)
+            return FetchResponse(200, content, filename(basename), response_etag, response_modified)
         finally:
             connection.close()
     except IngestionError:
         raise
     except (OSError, http.client.HTTPException, ValueError) as error:
         raise IngestionError("download_failed", "Official document download failed securely.", 502) from error
+
+
+def download(url: str, maximum: int, timeout: float) -> tuple[bytes, str]:
+    response = download_response(url, maximum, timeout)
+    return response.content, response.filename
+
+
+async def fetch_pdf_response(
+    url: str, maximum: int, timeout_seconds: float, etag: str | None = None, last_modified: str | None = None
+) -> FetchResponse:
+    try:
+        return await asyncio.wait_for(
+            asyncio.to_thread(download_response, url, maximum, timeout_seconds, etag, last_modified),
+            timeout=timeout_seconds + 1,
+        )
+    except TimeoutError as error:
+        raise IngestionError("download_timeout", "Official document download timed out.", 504) from error
 
 
 async def fetch_pdf(url: str, maximum: int, timeout_seconds: float) -> tuple[bytes, str]:

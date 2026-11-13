@@ -2397,3 +2397,45 @@ progress::-moz-progress-bar {
     min-height: 380px;
   }
 }
+
+/* Citizen forms reuse the established admin controls, including labels outside a form. */
+.citizen-workspace label:not(.review-check):not(.admin-checkbox) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.citizen-workspace input:not([type="checkbox"]),
+.citizen-workspace select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 0.75rem;
+  font: inherit;
+  background: #fff;
+  color: #152b33;
+}
+.citizen-workspace .admin-form {
+  margin: 1rem 0;
+}
+.citizen-workspace .review-check {
+  flex-direction: row;
+  font-weight: 400;
+}
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  min-width: 0;
+  margin: 1rem 0;
+}
+.citizen-workspace fieldset {
+  border: 0;
+  padding: 0;
+}
+@media (max-width: 700px) {
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

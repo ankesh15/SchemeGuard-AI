@@ -9,6 +9,7 @@ export interface Scheme {
   category: string;
   is_demo: boolean;
   eligibility_available: boolean;
+  policy_currency?: "APPROVED" | "POTENTIALLY_OUTDATED" | "UNVERIFIED";
   status: string;
   applicability: string;
   applicable_states: string[] | null;
@@ -100,6 +101,7 @@ export interface Trace {
   children: Trace[];
 }
 export interface EligibilityReport {
+  policy_currency?: "APPROVED" | "POTENTIALLY_OUTDATED" | "UNVERIFIED";
   scheme_id: string;
   scheme_name: string;
   is_demo: boolean;

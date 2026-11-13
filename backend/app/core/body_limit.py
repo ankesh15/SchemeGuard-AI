@@ -10,13 +10,24 @@ class AdminBodyLimit:
         self.app, self.pdf_max_bytes = app, pdf_max_bytes
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        if scope["type"] != "http" or not scope.get("path", "").startswith("/api/v1/admin/"):
+        private_prefixes = (
+            "/api/v1/admin/",
+            "/api/v1/auth/",
+            "/api/v1/me",
+            "/api/v1/profiles",
+            "/api/v1/assessments",
+            "/api/v1/notifications",
+            "/api/v1/notification-preferences",
+            "/api/v1/dashboard",
+        )
+        if scope["type"] != "http" or not scope.get("path", "").startswith(private_prefixes):
             await self.app(scope, receive, send)
             return
         headers = dict(scope.get("headers", []))
         maximum = (
             self.pdf_max_bytes
-            if headers.get(b"content-type", b"").split(b";")[0] == b"application/pdf"
+            if scope["path"].startswith("/api/v1/admin/")
+            and headers.get(b"content-type", b"").split(b";")[0] == b"application/pdf"
             else 131_072
             if scope["path"].startswith("/api/v1/admin/reviews/")
             else 16_000

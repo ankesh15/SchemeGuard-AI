@@ -17,11 +17,15 @@ InputValue = (
 ProfileKey = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]{0,63}$")]
 
 
-class EligibilityRequest(BaseModel):
+class EvaluationInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     scheme_id: UUID
-    synthetic_profile: StrictBool
+    assessed_on: date | None = None
     profile: dict[ProfileKey, InputValue] = Field(max_length=32)
+
+
+class EligibilityRequest(EvaluationInput):
+    synthetic_profile: StrictBool
 
     @field_validator("synthetic_profile")
     @classmethod
@@ -92,11 +96,13 @@ class MissingFieldRead(BaseModel):
 
 
 class EligibilityReport(BaseModel):
+    engine_version: Literal["deterministic-v1"] = "deterministic-v1"
     scheme_id: UUID
     scheme_name: str
     is_demo: bool
     result: Result
     assessment: str
+    policy_currency: Literal["APPROVED", "POTENTIALLY_OUTDATED", "UNVERIFIED"] = "UNVERIFIED"
     reason: Literal["EVALUATED", "NO_APPROVED_RULE_SET"]
     evaluated_at: datetime
     assessed_on: date

@@ -50,6 +50,7 @@ class SchemeRead(BaseModel):
     id: UUID
     is_demo: bool = False
     eligibility_available: bool = False
+    policy_currency: Literal["APPROVED", "POTENTIALLY_OUTDATED", "UNVERIFIED"] = "UNVERIFIED"
     slug: str
     name: str
     description: str | None

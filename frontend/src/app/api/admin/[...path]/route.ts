@@ -19,6 +19,9 @@ async function proxy(
       "overview",
       "workflows",
       "reviews",
+      "monitors",
+      "monitoring-runs",
+      "policy-changes",
       "audit",
       "schemes",
     ].includes(path[0])
@@ -133,3 +136,4 @@ async function proxy(
 }
 export const GET = proxy;
 export const POST = proxy;
+export const PATCH = proxy;

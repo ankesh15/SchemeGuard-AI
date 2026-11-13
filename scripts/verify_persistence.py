@@ -17,10 +17,11 @@ async def main():
     try:
         async with engine.connect() as connection:
             snapshot = {}
-            for table in ('schemes', 'scheme_sources', 'document_versions', 'rule_sets', 'rule_conditions', 'rule_evidence', 'users', 'login_sessions', 'rate_limits', 'audit_events', 'source_authorizations', 'document_assets', 'document_pages', 'document_chunks', 'document_processing_jobs', 'extracted_rule_candidates', 'candidate_evidence', 'extraction_errors', 'agent_workflows', 'workflow_events', 'policy_reviews', 'review_revisions', 'review_decisions', 'rule_publications', 'chunk_embeddings', 'sg_checkpoints.checkpoints', 'sg_checkpoints.checkpoint_blobs', 'sg_checkpoints.checkpoint_writes', 'sg_checkpoints.checkpoint_migrations'):
+            tables = list(await connection.scalars(text("SELECT schemaname || '.' || tablename FROM pg_tables WHERE schemaname IN ('public','sg_checkpoints') ORDER BY schemaname,tablename")))
+            for table in tables:
                 rows = sorted(await connection.scalars(text(f'SELECT row_to_json(t)::text FROM {table} t')))
                 snapshot[table] = {'count': len(rows), 'sha256': hashlib.sha256(json.dumps(rows).encode()).hexdigest()}
-            assert snapshot['schemes']['count'] >= 5, 'Seed the schemes first'
+            assert snapshot['public.schemes']['count'] >= 5, 'Seed the schemes first'
             from app.ingestion.storage import DocumentStorage
             storage = DocumentStorage(get_settings().document_storage_root)
             async with engine.connect() as blobs_connection:
@@ -60,11 +61,14 @@ subprocess.run(
         "db",
         "api",
         "frontend",
+        "redis",
+        "worker",
+        "scheduler",
     ],
     cwd=root,
     check=True,
 )
 assert snapshot() == before, "Metadata changed across container recreation"
 print(
-    "PASS: all 25 public metadata/rule/processing/authentication/workflow tables and 4 checkpoint tables and original PDF checksums persisted after recreating all three containers"
+    "PASS: all public/checkpoint tables and original PDF checksums persisted after recreating all six containers"
 )

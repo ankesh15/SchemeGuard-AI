@@ -224,7 +224,11 @@ async def test_only_effective_approved_versions_are_selected(session, demo_rules
     await clone_rule(session, 4, date(2026, 1, 1), date(2026, 1, 31), approve=True)
     repository = RuleRepository(session)
     assert (await repository.approved_for(DEMO_ID, today)).version_number == 1
-    assert (await repository.approved_for(DEMO_ID, today + timedelta(days=1))).version_number == 2
+    from fastapi import HTTPException
+
+    with pytest.raises(HTTPException) as ambiguous:
+        await repository.approved_for(DEMO_ID, today + timedelta(days=1))
+    assert ambiguous.value.status_code == 409
 
 
 async def test_approval_requires_evidence_and_cannot_insert_approved(session, demo_rules):

@@ -27,7 +27,13 @@ services:
       context: .
       dockerfile: backend/Dockerfile
       target: development
-    environment:
+    environment: &backend_environment
+      PROFILE_ENCRYPTION_KEY: ${PROFILE_ENCRYPTION_KEY:-}
+      CITIZEN_SESSION_HOURS: ${CITIZEN_SESSION_HOURS:-8}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      WORKER_JOB_ATTEMPTS: ${WORKER_JOB_ATTEMPTS:-4}
+      WORKER_LEASE_SECONDS: ${WORKER_LEASE_SECONDS:-600}
+      MONITORING_DISPATCH_SECONDS: ${MONITORING_DISPATCH_SECONDS:-30}
       POSTGRES_USER: ${POSTGRES_USER:-schemeguard}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: ${POSTGRES_DB:-schemeguard}
@@ -124,7 +130,68 @@ services:
     init: true
     restart: unless-stopped
 
+
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redis_data:/data
+    networks: [backend]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  worker:
+    image: schemeguard-ai-api
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: development
+    entrypoint: ["celery", "-A", "app.workers.celery_app:celery_app"]
+    command: ["worker", "--loglevel=INFO", "--concurrency=2", "--queues=monitoring,documents", "--hostname=worker@%h"]
+    environment: *backend_environment
+    volumes:
+      - ./backend:/app
+      - ./data:/app/data:ro
+      - document_data:/var/lib/schemeguard/documents
+    networks: [backend, ingress]
+    depends_on:
+      api: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A app.workers.celery_app:celery_app inspect ping --destination worker@$$HOSTNAME --timeout 4 | grep -q pong"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 5
+    stop_grace_period: 9m
+    init: true
+    restart: unless-stopped
+
+  scheduler:
+    image: schemeguard-ai-api
+    entrypoint: ["python", "-m", "app.workers.scheduler"]
+    environment: *backend_environment
+    volumes:
+      - ./backend:/app
+    networks: [backend]
+    depends_on:
+      api: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import time,pathlib; assert time.time()-float(pathlib.Path('/tmp/schemeguard-beat-heartbeat').read_text())<90"]
+      interval: 20s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    init: true
+    restart: unless-stopped
+
 volumes:
+  redis_data:
   postgres_data:
   frontend_node_modules:
   frontend_next:

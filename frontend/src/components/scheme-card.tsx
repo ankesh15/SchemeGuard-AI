@@ -59,11 +59,13 @@ export function SchemeCard({ scheme }: { scheme: Scheme }) {
         <span
           className={scheme.eligibility_available ? "text-green" : "text-muted"}
         >
-          {scheme.eligibility_available
-            ? scheme.is_demo
-              ? "Eligibility demo available"
-              : "Approved eligibility rules"
-            : "Discovery metadata only"}
+          {scheme.policy_currency === "POTENTIALLY_OUTDATED"
+            ? "Policy source needs verification"
+            : scheme.eligibility_available
+              ? scheme.is_demo
+                ? "Eligibility demo available"
+                : "Approved eligibility rules"
+              : "Discovery metadata only"}
         </span>
         <Link href={`/schemes/${scheme.id}`} aria-label={`View ${scheme.name}`}>
           View scheme <ArrowUpRight size={16} />

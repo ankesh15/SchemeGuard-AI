@@ -15,7 +15,7 @@ from app.repositories.scheme import SchemeRepository
 from app.schemas.eligibility import (
     DecisionTrace,
     EligibilityReport,
-    EligibilityRequest,
+    EvaluationInput,
     EvidenceRead,
     MissingFieldRead,
     RequirementRead,
@@ -28,8 +28,14 @@ NOT_OFFICIAL = "This is an assessment of known conditions, not official governme
 
 class EligibilityService:
     def __init__(
-        self, schemes: SchemeRepository, rules: RuleRepository, assessed_on: date | None = None
+        self,
+        schemes: SchemeRepository,
+        rules: RuleRepository,
+        assessed_on: date | None = None,
+        *,
+        rule_set_id: UUID | None = None,
     ) -> None:
+        self.rule_set_id = rule_set_id
         self.schemes = schemes
         self.rules = rules
         self.assessed_on = assessed_on or datetime.now(ZoneInfo("Asia/Kolkata")).date()
@@ -38,8 +44,18 @@ class EligibilityService:
         scheme = await self.schemes.get(scheme_id)
         if scheme is None:
             raise HTTPException(404, "Scheme not found")
-        rule_set = await self.rules.approved_for(scheme_id, self.assessed_on)
-        if rule_set is None or scheme.status == "inactive":
+        rule_set = (
+            await self.rules.by_id(self.rule_set_id)
+            if self.rule_set_id
+            else await self.rules.approved_for(scheme_id, self.assessed_on)
+        )
+        if rule_set and (
+            rule_set.scheme_id != scheme_id
+            or rule_set.effective_from > self.assessed_on
+            or (rule_set.effective_to and rule_set.effective_to < self.assessed_on)
+        ):
+            raise HTTPException(409, "Pinned rule does not apply to this scheme and assessment date")
+        if rule_set is None or (scheme.status == "inactive" and self.rule_set_id is None):
             return scheme, None, None
         if not scheme.is_demo and rule_set.approval_basis != "human_review":
             raise HTTPException(503, "Approved policy requires human review")
@@ -165,7 +181,11 @@ class EligibilityService:
             official_application_url=self.application_url(scheme),
         )
 
-    async def check(self, request: EligibilityRequest) -> EligibilityReport:
+    async def check(self, request: EvaluationInput) -> EligibilityReport:
+        if request.assessed_on is not None and request.assessed_on != self.assessed_on:
+            return await EligibilityService(
+                self.schemes, self.rules, request.assessed_on, rule_set_id=self.rule_set_id
+            ).check(request)
         scheme, rule_set, program = await self.load(request.scheme_id)
         trace: DecisionTrace | None = None
         missing: list[MissingFieldRead] = []
@@ -196,6 +216,14 @@ class EligibilityService:
             trace = with_evidence(evaluated, [])
             labels = {field.key: field.label for field in program.fields}
             missing = [MissingFieldRead(key=key, label=labels[key]) for key in trace.missing_fields]
+        from app.services.currency import outdated_schemes
+
+        outdated = bool(await outdated_schemes(self.schemes.session, [scheme.id]))
+        notices = self.notices(scheme, trace is not None)
+        if outdated:
+            notices.append(
+                "Policy currency warning: a monitored official source changed or could not be verified. The last approved policy is retained; check current official guidance."
+            )
         result = trace.result if trace else Result.UNKNOWN
         return EligibilityReport(
             scheme_id=scheme.id,
@@ -204,12 +232,13 @@ class EligibilityService:
             result=result,
             assessment=ASSESSMENTS[result],
             reason="EVALUATED" if trace else "NO_APPROVED_RULE_SET",
+            policy_currency="POTENTIALLY_OUTDATED" if outdated else "APPROVED" if rule_set else "UNVERIFIED",
             evaluated_at=datetime.now(UTC),
             assessed_on=self.assessed_on,
             rule_set=self.version(rule_set) if rule_set else None,
             requirements=trace.children if trace else [],
             trace=trace,
             missing_fields=missing,
-            notices=self.notices(scheme, trace is not None),
+            notices=notices,
             official_application_url=self.application_url(scheme),
         )

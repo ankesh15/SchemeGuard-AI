@@ -105,6 +105,16 @@ async def decide(
     if workflow.status != "PENDING_REVIEW":
         raise HTTPException(409, "Workflow is not waiting at its human review checkpoint")
     revision = await current_revision(session, review)
+    from app.models import PolicyChange
+
+    change = await session.scalar(select(PolicyChange).where(PolicyChange.workflow_id == workflow.id))
+    if (
+        isinstance(body, ApprovalRequest)
+        and change
+        and change.clarification_revision
+        and review.revision_number <= change.clarification_revision
+    ):
+        raise HTTPException(409, "Save a new revision resolving the requested clarification before approval")
     attestations: dict[str, Any] = {}
     action = "REJECT"
     if isinstance(body, ApprovalRequest):
@@ -149,6 +159,12 @@ async def decide(
         attestations=attestations,
     )
     session.add(decision)
+    if action == "REJECT" and change:
+        from app.services.monitoring import compare_change
+
+        await compare_change(session, change.id)
+        change.verification_status = "REJECTED"
+        change.reviewer_id = administrator.id
     review.status = "APPROVED" if action == "APPROVE" else "REJECTED"
     workflow.status, workflow.updated_at = "PROCESSING", datetime.now(UTC)
     audit(

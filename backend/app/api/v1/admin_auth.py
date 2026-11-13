@@ -42,8 +42,9 @@ class SessionRead(BaseModel):
     expires_at: datetime
 
 
-@router.post("/login", response_model=SessionRead)
-async def login(body: Credentials, request: Request, response: Response, session: DB) -> SessionRead:
+async def login_common(
+    body: Credentials, request: Request, response: Response, session: AsyncSession, *, admin_only: bool = True
+) -> SessionRead:
     require_origin(request)
     settings = request.app.state.settings
     ip = request.client.host if request.client else "unknown"
@@ -56,12 +57,14 @@ async def login(body: Credentials, request: Request, response: Response, session
         valid = await asyncio.to_thread(
             verify_password, user.password_hash if user else DUMMY_HASH, body.password.get_secret_value()
         )
-    if not valid or user is None or not user.is_active or user.role != "admin":
-        audit(session, "admin_login_failed", None)
+    if not valid or user is None or not user.is_active or (admin_only and user.role != "admin"):
+        audit(session, "admin_login_failed" if admin_only else "account_login_failed", None)
         await session.commit()
-        raise HTTPException(401, "Invalid administrator credentials")
+        raise HTTPException(401, "Invalid administrator credentials" if admin_only else "Invalid credentials")
     raw = secrets.token_urlsafe(48)
-    expires = datetime.now(UTC) + timedelta(hours=settings.admin_session_hours)
+    expires = datetime.now(UTC) + timedelta(
+        hours=settings.admin_session_hours if admin_only else settings.citizen_session_hours
+    )
     previous = request.cookies.get(COOKIE_NAME)
     if previous:
         await session.execute(
@@ -70,15 +73,19 @@ async def login(body: Credentials, request: Request, response: Response, session
             .values(revoked_at=datetime.now(UTC))
         )
     session.add(LoginSession(user_id=user.id, token_hash=digest(raw), expires_at=expires))
-    audit(session, "admin_login", user.id)
+    audit(session, "admin_login" if admin_only else "account_login", user.id)
     result = SessionRead(
-        user_id=str(user.id), username=user.username, csrf_token=csrf_token(raw), expires_at=expires
+        user_id=str(user.id),
+        username=user.username,
+        role=user.role,
+        csrf_token=csrf_token(raw),
+        expires_at=expires,
     )
     await session.commit()
     response.set_cookie(
         COOKIE_NAME,
         raw,
-        max_age=settings.admin_session_hours * 3600,
+        max_age=(settings.admin_session_hours if admin_only else settings.citizen_session_hours) * 3600,
         httponly=True,
         secure=settings.app_env == "production",
         samesite="strict",
@@ -86,6 +93,11 @@ async def login(body: Credentials, request: Request, response: Response, session
     )
     response.headers["Cache-Control"] = "no-store"
     return result
+
+
+@router.post("/login", response_model=SessionRead)
+async def login(body: Credentials, request: Request, response: Response, session: DB) -> SessionRead:
+    return await login_common(body, request, response, session)
 
 
 @router.get("/session", response_model=SessionRead)

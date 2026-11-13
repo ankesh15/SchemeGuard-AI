@@ -267,7 +267,7 @@ async def review_detail(identifier: UUID, administrator: Admin, session: DB) -> 
     review = await session.get(PolicyReview, identifier)
     if not review:
         raise HTTPException(404, "Policy review not found")
-    workflow = await session.get(AgentWorkflow, review.workflow_id)
+    workflow = await session.get(AgentWorkflow, review.workflow_id, populate_existing=True)
     assert workflow is not None
     revision = await current_revision(session, review)
     draft = PolicyDraft.model_validate(revision.proposal)

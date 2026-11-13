@@ -1,4 +1,19 @@
 from app.models.base import Base
+from app.models.citizen import (
+    Assessment,
+    CitizenProfile,
+    Notification,
+    NotificationPreference,
+    ReassessmentEvent,
+)
+from app.models.monitoring import (
+    BackgroundJob,
+    ChangeReviewEvent,
+    MonitoringRun,
+    PolicyChange,
+    PolicyChangeDetail,
+    SourceMonitor,
+)
 from app.models.rule import RuleCondition, RuleEvidence, RuleSet
 from app.models.scheme import DocumentVersion, Scheme, SchemeSource
 from app.models.workflow import (
@@ -49,3 +64,14 @@ __all__ += [
     "RulePublication",
     "ChunkEmbedding",
 ]
+
+__all__ += [
+    "BackgroundJob",
+    "SourceMonitor",
+    "MonitoringRun",
+    "PolicyChange",
+    "PolicyChangeDetail",
+    "ChangeReviewEvent",
+]
+
+__all__ += ["Assessment", "CitizenProfile", "Notification", "NotificationPreference", "ReassessmentEvent"]

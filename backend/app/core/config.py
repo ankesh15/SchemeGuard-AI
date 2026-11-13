@@ -43,6 +43,12 @@ class Settings(BaseSettings):
     admin_session_hours: int = Field(default=8, ge=1, le=24)
     admin_login_limit: int = Field(default=10, ge=3, le=30)
     admin_rate_window_seconds: int = Field(default=900, ge=60, le=3600)
+    profile_encryption_key: SecretStr | None = None
+    citizen_session_hours: int = Field(default=8, ge=1, le=24)
+    redis_url: str = "redis://redis:6379/0"
+    worker_job_attempts: int = Field(default=4, ge=1, le=8)
+    worker_lease_seconds: int = Field(default=600, ge=60, le=1800)
+    monitoring_dispatch_seconds: int = Field(default=30, ge=10, le=300)
     workflow_timeout: float = Field(default=150, ge=15, le=300)
     workflow_max_attempts: int = Field(default=3, ge=1, le=5)
     embedding_provider: Literal["gemini", "local_hash"] = "gemini"
@@ -57,6 +63,13 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def ingestion_limits(self) -> "Settings":
+        if self.profile_encryption_key:
+            from cryptography.fernet import Fernet
+
+            try:
+                Fernet(self.profile_encryption_key.get_secret_value().encode())
+            except (ValueError, TypeError) as error:
+                raise ValueError("PROFILE_ENCRYPTION_KEY must be a valid Fernet key") from error
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError("CHUNK_OVERLAP must be smaller than CHUNK_SIZE")
         if self.app_env == "production" and self.embedding_provider == "local_hash":

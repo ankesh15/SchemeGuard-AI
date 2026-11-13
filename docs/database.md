@@ -52,7 +52,7 @@ python3 scripts/verify_persistence.py
 
 The seed commands acquire transaction advisory locks and preserve existing records. Fixture seeding refuses changed document bytes under an existing version. New policy contents require a new immutable document/rule version. Automatic development seeding is optional through SEED_DEMO_DATA; disabling it does not remove previously created immutable history.
 
-Tests use disposable real PostgreSQL databases, transaction rollback, full migration round trips, explicit Phase 1-to-Phase 2 preservation checks, FK/approval/history constraints, and no-profile-persistence assertions. The persistence helper compares aggregate row hashes/counts in all 18 tables and verifies original PDF checksums before and after recreating all three Compose services. The existing named PostgreSQL volume is retained.
+Tests use disposable real PostgreSQL databases, transaction rollback, full migration round trips, explicit Phase 1-to-Phase 2 preservation checks, FK/approval/history constraints, and public-stateless-profile assertions and private owner-isolation checks. The persistence helper compares aggregate row hashes/counts in all discovered public/checkpoint tables and verifies original PDF checksums before and after recreating all six Compose services. The existing named PostgreSQL volume is retained.
 
 Downgrades remove Phase 2 history and are destructive. They are exercised only in disposable test databases; normal development never downgrades or resets application data. Docker volumes are not backups, and production role separation/backup restore testing remain deferred.
 
@@ -92,3 +92,7 @@ Current Phase 3 counts and exact preservation checks are recorded in [the Phase 
 RuleSet, RuleCondition, RuleEvidence and DocumentVersion remain the sole existing executable policy/version representations. Publication appends a DRAFT parent, conditions and page evidence, then transitions it to APPROVED with reviewer metadata within one transaction and an immutable publication ledger. Per-scheme locking serializes version allocation. Prior approved versions and effective dates are never overwritten. Overlap relationships require explicit review.
 
 `chunk_embeddings.embedding` is vector(768), normalized and namespaced by provider/model; chunk SHA-256 prevents interpreting a changed chunk with an old vector. Exact cosine scans are used for this MVP. Checkpoint rows and original PDFs are included in the recreation/persistence verification script. Back up both PostgreSQL (including sg_checkpoints) and the document_data volume; neither alone is a full recovery backup.
+
+## Phases 5 and 6
+
+Migration 0008 adds durable background jobs, opt-in source monitors/runs, policy changes/details/review events with provenance guards. Migration 0009 adds encrypted owner-scoped profiles, preferences, immutable assessments/reassessment events, and approved-publication-only notifications. Existing users/login_sessions/audit_events are reused. Account deletion purges its private rows leaf-first while preserving policy/audit references. See phase5-policy-monitoring.md and phase6-user-system.md for schemas/APIs/tests; authentication.md documents sensitive-payload encryption and operational key/backup requirements. Never downgrade the working database.

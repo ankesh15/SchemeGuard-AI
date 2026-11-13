@@ -96,7 +96,7 @@ async def test_migrations_upgrade_downgrade_and_match_models(test_settings):
             async with engine.connect() as connection:
                 assert (
                     await connection.scalar(text("SELECT version_num FROM alembic_version"))
-                    == "0007_workflow_provenance"
+                    == "0009_citizen_system"
                 )
                 tables = set(
                     await connection.scalars(

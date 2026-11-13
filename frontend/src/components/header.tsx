@@ -10,6 +10,7 @@ export function Header() {
   const links = [
     { href: "/schemes", label: "Explore schemes" },
     { href: "/#how-it-works", label: "How it works" },
+    { href: "/dashboard", label: "My workspace" },
     { href: "/admin", label: "Admin" },
   ];
   return (

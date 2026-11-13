@@ -31,7 +31,7 @@ import type {
 import { useReport } from "./report-context";
 import { DemoNotice } from "./ui";
 
-function QuestionField({
+export function QuestionField({
   field,
   value,
   error,

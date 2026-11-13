@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   async headers() {
-    return ["/admin/:path*", "/api/admin/:path*"].map((source) => ({
+    return [
+      "/admin/:path*",
+      "/api/admin/:path*",
+      "/dashboard/:path*",
+      "/api/account/:path*",
+      "/login",
+      "/register",
+    ].map((source) => ({
       source,
       headers: [
         { key: "X-Frame-Options", value: "DENY" },

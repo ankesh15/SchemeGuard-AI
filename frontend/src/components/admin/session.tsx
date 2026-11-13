@@ -64,8 +64,12 @@ export function AdminWorkspace({
         )}
         <nav className="section-tabs" aria-label="Administrator navigation">
           <Link href="/admin">Overview</Link>
+          <Link href="/admin/schemes">Schemes & versions</Link>
+          <Link href="/admin/audit">Audit logs</Link>
           <Link href="/admin/workflows">Workflows</Link>
           <Link href="/admin/reviews">Human review</Link>
+          <Link href="/admin/monitors">Monitoring</Link>
+          <Link href="/admin/policy-changes">Policy changes</Link>
           <Link href="/admin/documents">Documents & sources</Link>
           <Link href="/schemes">Public explorer</Link>
         </nav>

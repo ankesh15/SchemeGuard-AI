@@ -51,7 +51,23 @@ class RequestLoggingMiddleware:
                     if key.lower() != b"x-request-id"
                 ]
                 message["headers"] = [*headers, (b"x-request-id", request_id.encode())]
-                if scope.get("path", "").startswith("/api/v1/admin/"):
+                if scope.get("path", "").startswith(
+                    (
+                        "/api/v1/admin/",
+                        "/api/v1/auth/",
+                        "/api/v1/me",
+                        "/api/v1/profiles",
+                        "/api/v1/assessments",
+                        "/api/v1/notifications",
+                        "/api/v1/notification-preferences",
+                        "/api/v1/dashboard",
+                    )
+                ):
+                    message["headers"] = [
+                        (k, v)
+                        for k, v in message["headers"]
+                        if k.lower() not in {b"cache-control", b"x-content-type-options"}
+                    ]
                     message["headers"].extend(
                         [(b"cache-control", b"no-store"), (b"x-content-type-options", b"nosniff")]
                     )
@@ -112,7 +128,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(
         title="SchemeGuard AI",
-        version="0.4.0",
+        version="0.6.0",
         description="Source-grounded discovery, deterministic eligibility, and administrator-only document intelligence. AI candidates always remain pending review.",
         lifespan=lifespan,
     )

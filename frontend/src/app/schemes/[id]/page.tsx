@@ -219,6 +219,19 @@ export default async function SchemeDetailPage({
                   : "Assess known conditions"
                 : "Try the fictional demo"}
             </ActionLink>
+            {requirements.available && (
+              <ActionLink
+                href={`/dashboard/assessments/new?scheme=${scheme.id}`}
+              >
+                Save a private assessment
+              </ActionLink>
+            )}
+            {scheme.policy_currency === "POTENTIALLY_OUTDATED" && (
+              <p role="status" className="notice">
+                The source needs verification. The last approved policy remains
+                available; review official sources before applying.
+              </p>
+            )}
             <div className="aside-divider" />
             <p className="small-note">
               {requirements.rule_set

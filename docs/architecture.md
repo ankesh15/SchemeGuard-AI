@@ -50,7 +50,7 @@ The API readiness check performs a live bounded database query; its process-heal
 
 PostgreSQL integration tests cover migrations, relationships, immutable history, approval/version selection, discovery, eligibility, and preservation of existing Phase 1 rows. Pure engine tests cover every supported operator and AND/OR truth table. Frontend tests use captured public/synthetic API contracts and exercise dynamic inputs, validation, conditional visibility, loading/errors, report rendering, and absence of browser-storage writes. Browser QA verifies the complete desktop/mobile journey, PASS/FAIL/UNKNOWN results, evidence disclosure, filtering, and refresh privacy behavior.
 
-Citizen authentication flows, production database role separation, external edge protection, large-data performance, official-policy reconciliation, and production deployment remain deferred. A database owner can bypass triggers and must be treated as privileged. No personal-profile persistence is introduced. The Phase 4 administrator publication interface is described below.
+Production database role separation, external edge protection, large-data performance, official-policy reconciliation and production deployment remain deferred. A database owner can bypass triggers and must be treated as privileged. Phase 6 adds encrypted private profile/assessment storage through the shared authentication system. The Phase 4 administrator publication interface is described below.
 
 ## Curated catalog import
 
@@ -80,3 +80,7 @@ The existing document and rule tables remain canonical. New workflow, review, ev
 `Server deterministic report → exact approved scheme/document-scoped pgvector retrieval → verified page citations + deterministic explanation`. Optional Gemini output can order existing identifiers only. Constrained questions quote approved document passages and cannot determine eligibility. The original `/eligibility/check` response contract remains supported.
 
 The three services and existing data volumes are preserved. PostgreSQL remains major 16/Alpine with a SHA-pinned pgvector build. Source-document storage is unchanged. See [agent workflows](agent-workflows.md), [RAG architecture](rag-architecture.md), and [human review](human-review.md) for recovery, security, approval and operational limits.
+
+## Phases 5 and 6
+
+Opt-in source monitoring uses the existing secure fetch/parse/LangGraph review path. PostgreSQL owns durable job and policy history; Redis carries ID-only messages to bounded Celery workers. One PostgreSQL-locked Beat leader schedules due work. Human publication atomically links a new immutable rule version and reassessment outbox job. Owner-locked reassessment checks preferences/consent, runs the unchanged deterministic engine using the necessary current stored fields, and appends encrypted reports/impacts and deduplicated approved-only notifications. Next.js fixed-route proxies and server layouts reuse shared HttpOnly sessions and role/CSRF checks. The frontend never receives the encryption key or submits private profiles to Gemini/RAG. See the Phase 5/6 reports for integration and executed verification.

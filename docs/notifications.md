@@ -1,0 +1,11 @@
+# Citizen notifications
+
+Only reviewed, APPROVED policy changes linked to a published rule version can generate notifications. No discovery metadata, pending AI extraction, rejected proposal or unverified document is announced as policy fact. PostgreSQL enforces this provenance on insert/update. Affected accounts are selected through their saved assessments for the changed scheme, never broadcast to all users.
+
+Categories are `ELIGIBILITY_CONDITION_CHANGED`, `NEW_INFORMATION_REQUIRED`, `APPLICATION_DEADLINE_CHANGED`, `POLICY_UPDATE_PUBLISHED`, and `PREVIOUS_ASSESSMENT_AFFECTED`. A single event receives its most actionable category; deadline changes require the Phase 5 explicitly sourced fact comparison, not an inferred date. Notifications contain a general summary and links, not income, age or identifying profile values. Detailed impact is encrypted and visible only through the owner's assessment.
+
+Each account/change/latest assessment has a deterministic event and notification key, protected by PostgreSQL uniqueness. Retries and duplicate broker delivery do not send duplicates. In-app preferences, policy-update preferences and automatic-reassessment preferences are stored per account. Automatic reassessment additionally requires explicit consent on the original saved assessment, unchecked by default in the UI. Disabling notifications does not erase old messages or disable the separately controlled reassessment preference.
+
+APIs: GET `/api/v1/notifications` supports validated pagination and `unread_only`; its response includes unread_count. POST `/notifications/{id}/read` is idempotent; POST `/notifications/read-all` affects only the authenticated owner's rows. GET/PUT `/notification-preferences` exposes three booleans: `in_app`, `automatic_reassessment`, `policy_updates`. Every endpoint requires a citizen session; writes require Origin and CSRF. Foreign notification IDs return 404. `/dashboard/notifications` provides empty/error/loading states, mark-read controls and links to the associated historical report and scheme.
+
+No email is sent and no email consent is collected in this phase. There is no notification polling/tracking service; unread counts refresh when the dashboard or notification list is loaded or a read action completes. Notifications are durable PostgreSQL records, not Redis result messages.

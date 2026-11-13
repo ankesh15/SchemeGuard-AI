@@ -1,6 +1,6 @@
-# SchemeGuard AI — Phase 4 reviewed policy workflows
+# SchemeGuard AI — reviewed policies and private citizen assessments
 
-A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; applicant profiles and reports are **not persisted**.
+A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; citizen profiles and explicitly saved reports use encrypted private storage. Public synthetic requests remain stateless.
 
 Phase 3 adds an authenticated administrator workspace for official PDFs, page-aware PyMuPDF extraction, stable chunks, Gemini structured candidate extraction, evidence validation, and pending review. Phase 4 adds checkpointed LangGraph workflows, authenticated human revisions and decisions, immutable publication, pgvector retrieval and grounded explanations. See the [Phase 3 implementation report](docs/phase3-ai-ingestion.md), [processing guide](docs/document-processing.md), and [Gemini integration guide](docs/gemini-integration.md).
 
@@ -127,7 +127,7 @@ docker compose exec -T api mypy --cache-dir=/tmp/schemeguard-mypy app
 docker compose exec -T frontend npm test
 docker compose exec -T frontend npm run typecheck
 docker compose exec -T frontend npm run format:check
-# Regression flows and persistence across all 18 tables plus original PDFs:
+# Regression flows and persistence across all discovered public/checkpoint tables plus original PDFs:
 python3 scripts/verify_phase2.py
 python3 scripts/verify_catalog.py
 python3 scripts/verify_persistence.py
@@ -135,11 +135,11 @@ python3 scripts/verify_persistence.py
 
 `tests.run` creates randomly named PostgreSQL databases, applies real migrations, and removes its test databases after completion. Missing test configuration is an error, not a skipped or SQLite-only suite. The local development database role needs CREATE DATABASE permission; production role separation is deferred.
 
-Checked-in frontend test responses and example inputs contain only authored synthetic data. Runtime questionnaire submissions and their reports are not persisted.
+Checked-in frontend test responses and example inputs contain only authored synthetic data. Public synthetic questionnaire submissions and reports remain stateless. Citizen workspace submissions are saved privately with explicit reassessment consent.
 
 Backend dependencies retain hash-locked Python requirements. Frontend versions are pinned in `package.json` and `package-lock.json`; Docker installs them with `npm ci`. A clean-container `NODE_ENV=production npm run build` verifies frontend compilation without sharing the dev server's `.next` directory.
 
-See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3 adds administration and LLM candidate extraction only. Policy monitoring, notifications, Redis, Celery, citizen authentication flows, final human publication, and production deployment configuration remain deferred.
+See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3 adds administration and LLM candidate extraction only. Phases 4–6 add reviewed publication, monitoring, background jobs and private citizen accounts as described below. Production deployment configuration remains deferred.
 
 
 ## Administrator setup
@@ -153,7 +153,7 @@ docker compose exec api python -m app.auth.provision --username reviewer --reset
 
 Use a unique password of at least 12 characters. Sign in at `/admin/login`, authorize the exact official PDF URL for its government scheme, then upload a matching PDF or request an approved-source download. Use **Extract text only** without Gemini credentials. To enable real candidate extraction, set backend-only `GEMINI_API_KEY` in `.env` and run `docker compose up -d --force-recreate api`. Keep `GEMINI_MODEL` configurable. No key is sent to Next.js.
 
-The administrator browser uses a same-origin Next.js proxy with HttpOnly sessions, origin checks, and CSRF tokens. `ADMIN_ALLOWED_ORIGINS` must match the frontend origin. Original PDFs persist in the private `document_data` volume and are served to authenticated administrators as downloads. Do not remove that volume. Bounded processing is synchronous over async HTTP; PDF parsing runs in a resource-limited subprocess and password verification/downloads run outside the event loop. No queue service is introduced.
+The administrator browser uses a same-origin Next.js proxy with HttpOnly sessions, origin checks, and CSRF tokens. `ADMIN_ALLOWED_ORIGINS` must match the frontend origin. Original PDFs persist in the private `document_data` volume and are served to authenticated administrators as downloads. Do not remove that volume. Bounded processing is synchronous over async HTTP; PDF parsing runs in a resource-limited subprocess and password verification/downloads run outside the event loop. Phase 5 adds independently running Celery workers for monitoring and verified policy reassessment; supervised administrator document processing remains bounded as described above.
 
 The supervised Phase 3 demonstration uses a real historical official PDF and a clearly labeled operator-only mock provider because Gemini credentials were unavailable. It never creates executable government rules. Generated local demonstration account credentials, if present, are in ignored `.local/phase3-demo-credentials.json` with mode 0600; provision your own reviewer for regular use. Never commit that file.
 
@@ -197,3 +197,22 @@ python3 scripts/verify_persistence.py
 ```
 
 Processing remains bounded synchronous API work with durable checkpoints and explicit operator resume after interruption. No queue, policy monitoring, notifications or Phase 5 work is introduced.
+
+## Phase 5 policy monitoring
+
+Opt-in monitoring, PostgreSQL durable jobs, Redis/Celery workers and a singleton Beat scheduler extend the existing ingestion/review pipeline. No catalog URL is automatically monitored. Approve the exact official PDF source, verify its access conditions, then configure `/admin/monitors`. Inspect proposed old/new policy differences at `/admin/policy-changes`; publication still requires the complete Phase 4 human review. `/api/v1/policy-updates` exposes only approved published changes.
+
+```bash
+docker compose up --build -d
+docker compose exec api alembic upgrade head
+docker compose logs -f worker scheduler
+python3 scripts/verify_workers.py
+```
+
+The six services are frontend, api, db, redis, worker and scheduler. Redis has persistent AOF and no public port. PostgreSQL remains authoritative for jobs/history; Redis loss does not erase policy or job records. Restart worker/scheduler after Python edits. See [Phase 5 report](docs/phase5-policy-monitoring.md), [Celery architecture](docs/celery-architecture.md), and [version selection](docs/policy-versioning.md).
+
+## Phase 6 citizen workspace
+
+Citizens can register at `/register`, sign in at `/login`, and use `/dashboard` for encrypted profiles, saved versioned assessments, policy updates, notification preferences and account settings. Public synthetic assessment endpoints retain their existing behavior. Only approved policies can support decisions; the catalog still includes discovery-only schemes. A reviewed material policy publication can reassess explicitly authorized saved schemes through Celery, preserving original reports and notifying only affected accounts.
+
+Before upgrading, run `python3 scripts/init_env.py` to append a private-storage key to the existing ignored `.env` without replacing its credentials. Preserve and separately back up this key: replacing it makes existing encrypted private records unreadable. Run `docker compose up --build -d`; migrations apply incrementally. API and worker share the key; frontend does not. There is no configured email/password recovery service. Read [Phase 6 report](docs/phase6-user-system.md), [authentication](docs/authentication.md), [notifications](docs/notifications.md) and [reassessment](docs/reassessment.md) for endpoints, exact commands, consent and deletion/backup limitations. `python3 scripts/verify_phase6.py` exercises a synthetic private account through the real Next.js proxy, saves a fictional assessment, reproduces it and logs out.

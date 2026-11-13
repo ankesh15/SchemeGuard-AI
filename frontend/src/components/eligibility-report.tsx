@@ -111,6 +111,15 @@ export function EligibilityReportView({
         <p>{report.scheme_name}</p>
       </div>
       {report.is_demo && <DemoNotice />}
+      {report.policy_currency === "POTENTIALLY_OUTDATED" && (
+        <div className="notice" role="status">
+          <p>
+            Policy currency warning: a monitored source changed or could not be
+            verified. This assessment retains the last approved rules; check the
+            latest official guidance.
+          </p>
+        </div>
+      )}
       <div className="report-layout">
         <div>
           <section className={`assessment-panel ${status.className}`}>

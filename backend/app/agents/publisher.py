@@ -138,6 +138,9 @@ async def publish(session: AsyncSession, settings: Settings, workflow_id: UUID, 
             applicability_note=draft.applicability_note + "\n" + draft.replacement_notes,
         )
     )
+    from app.services.monitoring import record_publication
+
+    await record_publication(session, workflow.id, rule_set, reviewer.id)
     workflow.published_rule_set_id = identifier
     audit(
         session,

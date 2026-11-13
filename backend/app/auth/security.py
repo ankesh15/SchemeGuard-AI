@@ -29,6 +29,7 @@ class Administrator:
     username: str
     expires_at: datetime
     csrf_token: str
+    role: str = "admin"
 
 
 def digest(value: str) -> str:
@@ -83,7 +84,7 @@ async def limit(session: AsyncSession, key: str, maximum: int, seconds: int) -> 
         )
 
 
-async def require_admin(
+async def require_user(
     request: Request, session: Annotated[AsyncSession, Depends(get_session)]
 ) -> Administrator:
     raw = request.cookies.get(COOKIE_NAME, "")
@@ -104,9 +105,7 @@ async def require_admin(
     if row is None:
         raise HTTPException(401, "Administrator sign-in required")
     user, login = row
-    if user.role != "admin":
-        raise HTTPException(403, "Administrator role required")
-    administrator = Administrator(user.id, user.username, login.expires_at, csrf_token(raw))
+    administrator = Administrator(user.id, user.username, login.expires_at, csrf_token(raw), user.role)
     if request.method not in {"GET", "HEAD", "OPTIONS"}:
         require_origin(request)
         if not hmac.compare_digest(request.headers.get("x-csrf-token", ""), administrator.csrf_token):
@@ -114,3 +113,15 @@ async def require_admin(
     # Release read transaction before reading uploads or waiting on extraction.
     await session.commit()
     return administrator
+
+
+async def require_admin(user: Annotated[Administrator, Depends(require_user)]) -> Administrator:
+    if user.role != "admin":
+        raise HTTPException(403, "Administrator role required")
+    return user
+
+
+async def require_citizen(user: Annotated[Administrator, Depends(require_user)]) -> Administrator:
+    if user.role != "citizen":
+        raise HTTPException(403, "Citizen role required")
+    return user
