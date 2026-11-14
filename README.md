@@ -1,229 +1,265 @@
-# SchemeGuard AI — evidence-backed policies and private assessments
+# SchemeGuard AI
 
-A Docker-first, profile-first government scheme recommendation project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; citizen profiles and explicitly saved reports use encrypted private storage. Public demonstration assessments remain stateless.
+**Profile-first government scheme discovery, explainable assessments, and evidence-backed policy review.**
 
-Phase 3 adds an authenticated administrator workspace for official PDFs, page-aware PyMuPDF extraction, stable chunks, Gemini structured candidate extraction, evidence validation, and pending review. Phase 4 adds checkpointed LangGraph workflows, authenticated human revisions and decisions, immutable publication, pgvector retrieval and grounded explanations. See the [Phase 3 implementation report](docs/phase3-ai-ingestion.md), [processing guide](docs/document-processing.md), and [Gemini integration guide](docs/gemini-integration.md).
+SchemeGuard AI is a final-year B.Tech project that helps people discover Indian government schemes based on their interests and profile. It combines a Next.js frontend, a modular FastAPI backend, deterministic eligibility evaluation, AI-assisted document processing, and human-reviewed policy updates.
 
-**The primary journey starts with your details and interests, then ranks the 282-record government catalog.** Applicable human-reviewed policies take precedence. For 225 discovery records across 14 categories, nine separate project-authored templates provide illustrative assessments; 57 records remain explicitly unsupported. These templates are not approved government policies. The legacy learning fixture and all historical records remain available internally, but are excluded from the default public catalog/selection. No government policy has yet been approved in the working database.
+Recommendations and illustrative assessments are informational demonstrations, not government eligibility determinations, application submissions, or approval guarantees.
 
-See the [Phase 4 implementation report](docs/phase4-langgraph.md), [workflow guide](docs/agent-workflows.md), [human review guide](docs/human-review.md) and [RAG architecture](docs/rag-architecture.md). The live official document remains pending actual human review. No real government policy approval is claimed.
+## Main user journey
 
-## Start the application
+**Home → Enter details → Find relevant schemes → Personalized results → Scheme details → Available assessment**
 
-Prerequisites: Docker Engine, Docker Compose v2+, and Python 3 for the optional environment helper. From the project root:
+1. Select **Find My Schemes** on the homepage. No scheme grid loads automatically.
+2. Complete any of five optional steps: age/state, education, employment, annual family income, and interests. Unknown answers are allowed; no name, Aadhaar number, or identity document is required for recommendations.
+3. Explore ranked recommendations with matching reasons, missing information, category filters, and pagination.
+4. Open a scheme to inspect its official sources and assessment options. Compatible questionnaire answers are prefilled.
+5. Review the explainable result, return to recommendations, or edit your details.
+
+Guests can use this flow without registering. Their answers and public reports remain in React memory; reloading clears them. Citizens can prefill their own encrypted profile and explicitly save updates. Approved-policy assessments support private saving, historical reports, and reproducibility.
+
+The primary `/schemes` route follows this personalized flow. Manual search and browsing remain available at `/schemes/all`.
+
+[Homepage screenshot](docs/verification/profile-first/home-desktop.png) · [Recommended schemes on desktop](docs/verification/profile-first/results-desktop.png) · [Mobile results](docs/verification/profile-first/results-mobile.png)
+
+## Features
+
+- **Personalized discovery:** one deterministic recommendation service for guests, citizens, and the dashboard. Ranking considers category interests, occupation/student/employment signals, verified geography, and applicable approved rules. Relevance is not an eligibility percentage.
+- **Deterministic assessments:** typed comparisons, nested AND/OR, exclusions, date comparisons, and conditional requirements produce PASS, FAIL, or UNKNOWN with decision traces. Missing information never defaults to PASS.
+- **Citizen workspace:** shared secure authentication, encrypted optional profiles, saved assessments, version-pinned history, notification preferences, and in-app notifications.
+- **Document intelligence:** approved-source PDF ingestion, original preservation, SHA-256 checksums, page-aware PyMuPDF extraction, stable chunks, and Gemini structured candidate extraction.
+- **Human review and RAG:** checkpointed LangGraph workflows, evidence validation, administrator revisions, immutable rule publication, and source-citing retrieval through pgvector.
+- **Policy monitoring:** selected official-source checks, document/version comparison, structured rule differences, human-reviewed policy changes, and background reassessment of affected saved reports.
+- **Operational foundations:** Docker development and production configurations, health/readiness checks, structured logs, audit events, CI checks, and documented backup/recovery procedures.
+
+AI-extracted rules remain pending until human approval. An LLM never makes or overrides the final deterministic eligibility decision. Illustrative category templates remain separate from approved government policies and do not supply numerical recommendation thresholds.
+
+## Technology stack
+
+| Area | Technologies |
+|---|---|
+| Frontend | Next.js, React, TypeScript, Tailwind CSS |
+| Backend | Python, FastAPI, Pydantic, SQLAlchemy, Alembic |
+| Data | PostgreSQL, pgvector, encrypted private profile/report payloads |
+| AI and documents | Google GenAI SDK/Gemini, LangGraph, PyMuPDF |
+| Background processing | Celery workers, Redis broker, singleton Celery Beat scheduler |
+| Infrastructure and testing | Docker Compose, GitHub Actions, pytest, HTTPX, Vitest, Testing Library, Playwright |
+
+## Run locally
+
+Prerequisites: Docker Engine, Docker Compose v2+, and Python 3 for the environment helper. From the repository root:
 
 ```bash
 python3 scripts/init_env.py
-docker compose up --build -d
-docker compose up -d --wait --wait-timeout 120
+docker compose up --build -d --wait --wait-timeout 120
+docker compose ps
 ```
 
-- Frontend: [localhost:3000](http://localhost:3000)
-- Backend: [localhost:8000](http://localhost:8000)
-- FastAPI documentation: [localhost:8000/docs](http://localhost:8000/docs)
-- Administrator workspace: [localhost:3000/admin](http://localhost:3000/admin)
+The helper creates a private, ignored `.env` with generated local credentials and a profile-encryption key. It preserves existing values. An existing PostgreSQL volume and application records are retained. Alternatively, configure `.env` from [.env.example](.env.example) with your own private values.
 
-The helper creates an ignored `.env` with a generated local password and preserves an existing file. Alternatively, copy `.env.example` and replace its password placeholder. The API applies migrations before startup and, by default in this development Compose configuration, runs the insert-only government metadata seed and the fictional fixture seed. An existing PostgreSQL volume and its records are preserved.
+| Page or service | Local URL |
+|---|---|
+| Homepage | [localhost:3000](http://localhost:3000) |
+| Questionnaire | [localhost:3000/find-schemes](http://localhost:3000/find-schemes) |
+| Manual scheme catalog | [localhost:3000/schemes/all](http://localhost:3000/schemes/all) |
+| Citizen workspace | [localhost:3000/dashboard](http://localhost:3000/dashboard) |
+| Administrator login | [localhost:3000/admin/login](http://localhost:3000/admin/login) |
+| Backend API documentation | [localhost:8000/docs](http://localhost:8000/docs) |
+| API health / database readiness | [localhost:8000/health](http://localhost:8000/health) / [localhost:8000/ready](http://localhost:8000/ready) |
+
+Development startup applies incremental Alembic migrations. With `SEED_DEMO_DATA=true`, it also runs insert-only catalog and legacy demonstration seeding. Setting this flag to `false` disables automatic seeding without deleting existing records. The demonstration seed is restricted to development/test environments.
 
 ```bash
-# These commands are also safe to repeat explicitly:
+# Inspect migrations and schema drift:
+docker compose exec api alembic current
+docker compose exec api alembic check
+
+# Apply migrations explicitly when needed:
 docker compose exec api alembic upgrade head
-docker compose exec api python -m app.seed
-docker compose exec api python -m app.seed_demo
+
+# Restart without removing persistent data:
+docker compose restart
+
+# Inspect application and background-job logs:
+docker compose logs --tail=100 api worker scheduler
+
+# Stop services while retaining volumes:
+docker compose stop
 ```
 
-`SEED_DEMO_DATA=false` disables automatic development seeding; it does not delete existing immutable history. Synthetic fixture seeding is rejected outside development/test environments. PostgreSQL credentials in an existing volume must be rotated in PostgreSQL as well as in `.env`; changing the environment alone does not change its stored password.
-
-## Profile-first discovery
-
-1. Open [the homepage](http://localhost:3000). It displays no scheme grid or catalog request.
-2. Select **Find My Schemes** to open `/find-schemes`. Complete any of the five optional steps: age/state, education, employment, income, and interests. Unknown answers are allowed.
-3. Select **Find Relevant Schemes**. `/schemes/recommended` displays paginated, explainable matches from PostgreSQL with category filtering and relevance/name sorting.
-4. Open **View Details**, inspect official references and the recommendation reasons, then continue to an available assessment. Compatible answers are prefilled; unknown information stays unknown.
-5. Return to recommendations or **Edit Details**. Guests’ answers and reports exist only in React memory, never browser storage or URLs. Reloading clears them.
-6. Citizens can reuse their authorized encrypted profile and explicitly opt to save changes. Registration can carry a guest's in-memory answers back to the questionnaire, but does not automatically store them. Approved-policy assessments retain the existing private save/history/reproduction flow.
-
-`/schemes` and `/dashboard/schemes` resolve to this journey. The manual searchable catalog remains at `/schemes/all`; direct `/eligibility` selection remains available for existing links. Unsupported schemes display **Detailed assessment criteria are not yet available for this scheme.** Illustrative category assessments are clearly distinct from reviewed government rules and are never published or saved as approved policies.
-
-Recommendations use category interests, explicit occupation/student/employment signals and verified geography. Age/income/education criteria can refine matches only through existing human-approved rules; missing metadata or inputs never imply failure. There are no LLM calls or new policy thresholds in matching. See the [implementation and verification report](docs/profile-first-recommendations.md) for the full algorithm, API examples, file list, actual counts and browser evidence.
-
-## Curated multi-category dataset
-
-`data/schemes/` contains 23 validated JSON manifests with **282 government schemes**: the original five, 224 additional central-directory records, and 53 Goa records. PostgreSQL has **283 scheme rows** including the separately labeled fictional fixture. The target of 250–300 government records is met. The seed format supports arbitrary counts and a 300-record PostgreSQL capacity test passes.
-
-The new records were manually reviewed against the [official DBT Bharat directory](https://dbtbharat.gov.in/central-scheme/list) and [Goa government scheme catalog](https://www.goa.gov.in/government/schemes/). Verification establishes identity/listing metadata, not active enrollment, financial benefits, eligibility or deadlines. Department and geographic fields remain unknown where not supported by those sources. No scraper or live synchronization runs.
-
-```bash
-# Validate all category files; no database connection:
-docker compose exec api python -m app.seed --validate-only
-# Import missing rows transactionally; existing rows/sources are preserved:
-docker compose exec api python -m app.seed
-```
-
-Repeat imports insert zero duplicates. The default `SEED_DATA_PATH=/app/data/schemes` can select a different directory or the compatible legacy `data/scholarships.json` file. Detailed provenance, deduplication decisions, how to add schemes and static-data limits are in the [dataset guide](docs/datasets.md); results are in the [expansion report](docs/dataset-expansion-report.md). The frontend loads categories from the API and labels metadata-only schemes. Its approved-policy selector no longer depends on finding a scheme in the first 100 catalog results.
-
-## Government sources and the fictional fallback
-
-The original five scholarship records and their eleven official evidence relationships are preserved. Their metadata was checked on 11 November 2026. Scheme status `listed` means directory presence on that date, not an application-window or eligibility guarantee. The expanded catalog adds 277 official directory records, including 53 verified Goa state programmes. Unknown geography is excluded from state filters.
-
-Phase 2 reviewed the [Saksham guideline linked by NSP](https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf) and its [linked FAQ](https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_F.pdf). The guideline uses an inclusive INR 8 lakh income boundary, whereas the FAQ describes a strict boundary. The documents also require review alongside current [NSP notices](https://scholarships.gov.in/Students) before a coherent current policy can be approved. The implementation therefore uses the fallback permitted in the Phase 2 brief, rather than selecting an uncertain interpretation or claiming human review.
-
-The authored [fictional policy](data/policies/demo-policy-v1.md) is the sole executable fixture. All its values are invented and labeled accordingly. Its exact bytes are hashed into an immutable document version; the frontend serves an identical copy. The reserved `example.invalid` source address is explicitly synthetic. It is never presented as an official application URL.
-
-## APIs
-
-| Method | Path | Behavior |
-| --- | --- | --- |
-| GET | `/health` | Process health |
-| GET | `/ready` | Live database connectivity; 503 when unavailable |
-| GET | `/api/v1/schemes` | Discovery with `page`, `page_size`, `search`, `category`, verified `state`, and `eligibility_available` filters |
-| GET | `/api/v1/schemes/filters` | Categories and verified state choices from PostgreSQL |
-| GET | `/api/v1/schemes/{id}` | Scheme detail and source metadata |
-| GET | `/api/v1/schemes/{id}/requirements` | Currently effective approved version, questionnaire fields, requirement labels, and evidence; `available: false` when absent |
-| POST | `/api/v1/eligibility/check` | Stateless deterministic evaluation of the effective approved version |
-
-Pagination remains bounded (`page` 1–100000, `page_size` 1–100). Search is a case-insensitive name/description substring; SQL wildcard characters are treated literally. Category tokens and Indian state/UT names are validated. Filters combine with AND. Valid filters with no matches return 200 and an empty page. Malformed IDs/inputs return 422, absent schemes return 404, and database/configuration failures fail closed. Errors and assessment responses carry request IDs and safe messages; assessment responses use `Cache-Control: no-store`.
-
-```bash
-curl --fail 'http://localhost:8000/api/v1/schemes?search=Fictional'
-# Copy its UUID into the request:
-curl --fail http://localhost:8000/api/v1/eligibility/check \
-  -H 'Content-Type: application/json' \
-  -d '{"scheme_id":"REPLACE_WITH_DEMO_UUID","synthetic_profile":true,"profile":{"age":21,"annual_income_inr":"240000","course":"engineering","study_mode":"full_time","enrollment_date":"2026-08-01","receives_other_scholarship":false,"requests_disability_support":false}}'
-```
-
-The response contains `result`, the required assessment wording, `requirements`, the full nested `trace`, `missing_fields`, evidence references, and the evaluated `rule_set` version/document hash. It never returns or stores the raw profile. No approved policy produces UNKNOWN with `reason: NO_APPROVED_RULE_SET` and no evaluated version. Government requirements are never inferred from metadata alone. Only the original five NSP-backed scholarship records retain the reviewed NSP application link. Other metadata-only schemes show their official source references without an invented application portal.
-
-## Rule semantics and approval
-
-The standalone `app/eligibility` package uses typed, discriminated expressions. It supports `==`, `!=`, `>`, `<`, `>=`, `<=`, `IN`, `NOT IN`, ISO calendar dates, nested AND/OR, exclusions, and conditional branches. Stored rules never use Python `eval` or `exec`. Numbers use Decimal for comparisons; booleans are not coerced into numbers. Invalid expressions, fields, types, empty groups, duplicate keys, and excessive tree complexity are rejected.
-
-- AND: any FAIL wins; otherwise UNKNOWN wins; otherwise PASS.
-- OR: any PASS wins; otherwise UNKNOWN wins; otherwise FAIL.
-- Exclusion: invert PASS/FAIL and preserve UNKNOWN.
-- Conditional: an unknown guard yields UNKNOWN. A known guard selects the relevant branch; an absent otherwise branch means the additional requirement does not apply.
-
-Every missing/null comparison is UNKNOWN. A satisfied OR alternative can still establish the OR result, without requiring unrelated alternative fields. All relevant branch traces remain available for inspection.
-
-Rule sets begin as DRAFT. Version content, condition expressions, and evidence are immutable; approval is a one-way DRAFT → APPROVED/REJECTED transition. PostgreSQL requires evidence for every condition, same-scheme source documents, same-set condition/evidence links, and approval metadata. Synthetic approval is allowed only for a scheme classified as a demo. Government rules require the separate `human_review` basis. There is no public rule-authoring/approval endpoint, and this phase publishes no government rule set. An LLM is never involved in evaluation.
-
-## Docker and environment
-
-Compose runs exactly `frontend`, `api`, and `db`. The database and API share an internal database network; an ingress network connects the frontend and API. Only loopback ports 3000 and 8000 are published. PostgreSQL has no host port. Both application containers run as non-root users and use development hot reload.
-
-`INTERNAL_API_URL=http://api:8000` is used by Next.js server rendering. `NEXT_PUBLIC_API_URL=http://localhost:8000` is used by the browser; never set it to the Docker-only hostname. CORS permits configured explicit origins and GET/POST, without credentials. If you change host ports, update the public API URL and allowed frontend origin together. No database secret is passed to the frontend. The local `.env` is excluded from image contexts.
-
-PostgreSQL uses the existing persistent volume. Frontend node_modules and Next.js development output use separate named volumes. When intentionally changing frontend dependencies, rebuild and refresh the mounted dependency volume with `docker compose exec frontend npm ci` before verification. Do not recreate application containers while their integration-test runner is active.
-
-`docker compose down` preserves volumes. **`docker compose down -v` deletes persistent data** and is not required for normal development.
-
-## Verification commands
-
-```bash
-# Actual PostgreSQL tests, including isolated migration and preservation checks:
-docker compose exec -T api python -m tests.run
-docker compose exec -T api alembic check
-docker compose exec -T api ruff check --no-cache app tests alembic
-docker compose exec -T api ruff format --check --no-cache app tests alembic
-docker compose exec -T api mypy --cache-dir=/tmp/schemeguard-mypy app
-# Frontend validation and components:
-docker compose exec -T frontend npm test
-docker compose exec -T frontend npm run typecheck
-docker compose exec -T frontend npm run format:check
-# Regression flows and persistence across all discovered public/checkpoint tables plus original PDFs:
-python3 scripts/verify_phase2.py
-python3 scripts/verify_catalog.py
-python3 scripts/verify_persistence.py
-```
-
-`tests.run` creates randomly named PostgreSQL databases, applies real migrations, and removes its test databases after completion. Missing test configuration is an error, not a skipped or SQLite-only suite. The local development database role needs CREATE DATABASE permission; production role separation is deferred.
-
-Checked-in frontend test responses and example inputs contain only authored synthetic data. Public synthetic questionnaire submissions and reports remain stateless. Citizen workspace submissions are saved privately with explicit reassessment consent.
-
-Backend dependencies retain hash-locked Python requirements. Frontend versions are pinned in `package.json` and `package-lock.json`; Docker installs them with `npm ci`. A clean-container `NODE_ENV=production npm run build` verifies frontend compilation without sharing the dev server's `.next` directory.
-
-See [Phase 2 report](docs/phase2-report.md), [architecture](docs/architecture.md), [database](docs/database.md), and [rule authoring/semantics](docs/rules.md). The [Phase 1 report](docs/phase1-report.md) is retained as historical verification. Phase 3 adds administration and LLM candidate extraction only. Phases 4–6 add reviewed publication, monitoring, background jobs and private citizen accounts as described below. Phase 7 adds separate production images, CI, security hardening and verified local release/recovery procedures; no live cloud deployment is claimed.
-
+Preserve the PostgreSQL/document volumes and `PROFILE_ENCRYPTION_KEY`. Replacing the encryption key makes existing encrypted records unreadable. Changing a password in `.env` does not rotate the password stored in an existing PostgreSQL volume.
 
 ## Administrator setup
 
+Administrator accounts are provisioned through the CLI, not public registration. Choose your own username and enter the password at the hidden prompt:
+
 ```bash
-# Interactive hidden password prompt; no public registration endpoint:
 docker compose exec api python -m app.auth.provision --username reviewer
-# Explicit password rotation also revokes existing sessions:
+```
+
+Use a password of at least 12 characters, then open [the administrator login](http://localhost:3000/admin/login). Existing accounts can sign in directly; provisioning does not overwrite them. Explicit password rotation revokes that administrator's existing sessions:
+
+```bash
 docker compose exec api python -m app.auth.provision --username reviewer --reset-password
 ```
 
-Use a unique password of at least 12 characters. Sign in at `/admin/login`, authorize the exact official PDF URL for its government scheme, then upload a matching PDF or request an approved-source download. Use **Extract text only** without Gemini credentials. To enable real candidate extraction, set backend-only `GEMINI_API_KEY` in `.env` and run `docker compose up -d --force-recreate api`. Keep `GEMINI_MODEL` configurable. No key is sent to Next.js.
+Passwords are hashed with Argon2id. Browser sessions use HttpOnly cookies; private writes require CSRF and exact-origin checks. Citizen registration cannot select or grant an administrator role. Login credentials, API keys, and private `.env` files must not be committed.
 
-The administrator browser uses a same-origin Next.js proxy with HttpOnly sessions, origin checks, and CSRF tokens. `ADMIN_ALLOWED_ORIGINS` must match the frontend origin. Original PDFs persist in the private `document_data` volume and are served to authenticated administrators as downloads. Do not remove that volume. Bounded processing is synchronous over async HTTP; PDF parsing runs in a resource-limited subprocess and password verification/downloads run outside the event loop. Phase 5 adds independently running Celery workers for monitoring and verified policy reassessment; supervised administrator document processing remains bounded as described above.
-
-The supervised Phase 3 demonstration uses a real historical official PDF and a clearly labeled operator-only mock provider because Gemini credentials were unavailable. It never creates executable government rules. Generated local demonstration account credentials, if present, are in ignored `.local/phase3-demo-credentials.json` with mode 0600; provision your own reviewer for regular use. Never commit that file.
-
-## Phase 4 operations
-
-1. Provision an administrator with `docker compose exec api python -m app.auth.provision --username reviewer`.
-2. Open `/admin/documents`, authorize an exact official source and register its PDF as in Phase 3.
-3. Start a workflow from document details. A new extraction uses Gemini; reusing an existing extraction keeps its original provider label.
-4. Open `/admin/reviews`, inspect every original page and evidence finding, revise the complete typed policy, and save notes.
-5. Only an actual human may confirm completeness/applicability and approve the exact saved revision. Approval publishes a new immutable RuleSet; rejection creates no executable rule.
-6. Index parsed chunks with the configured embedding provider. Approved versions become available to existing deterministic assessments; public questions/retrieval use only their exact source documents.
-
-| Method | Added API | Purpose |
-| --- | --- | --- |
-| POST / GET | `/api/v1/admin/workflows` | Idempotent creation / paginated workflow list |
-| GET | `/api/v1/admin/workflows/{id}` | Stage, status, history and errors |
-| POST | `/api/v1/admin/workflows/{id}/resume` or `/cancel` | Recover saved execution / safely cancel undecided work |
-| GET | `/api/v1/admin/reviews` or `/reviews/{id}` | Pending queue / original, current revision, findings, evidence |
-| POST | `/api/v1/admin/reviews/{id}/revisions` | Append a noted administrator revision |
-| POST | `/api/v1/admin/reviews/{id}/approve` or `/reject` | Single exact-revision human decision and graph resume |
-| POST | `/api/v1/admin/documents/{id}/index` | Atomic, idempotent chunk embeddings |
-| GET | `/api/v1/schemes/{id}/rule-history` | Approved policy history only |
-| POST | `/api/v1/schemes/{id}/questions` | Constrained source quotations |
-| POST | `/api/v1/eligibility/explain` | Existing server assessment plus immutable-result explanation |
-
-Configure `GEMINI_API_KEY` only in ignored backend environment. `EMBEDDING_PROVIDER=gemini`, `EMBEDDING_MODEL=gemini-embedding-001` and dimension 768 are defaults. Without credentials, extraction fails clearly, indexing returns 503, and explanations use approved rule evidence plus bounded lexical retrieval/templates. `local_hash` is an explicit development lexical fixture, not a semantic model.
-
-The database image builds pgvector 0.8.7 from a SHA-pinned official archive on **the same PostgreSQL 16 Alpine base**. It reuses `postgres_data`. Before the first upgrade of an existing installation, make a private backup and test restoration; this was performed for the implementation verification. Do not remove existing volumes. Alembic 0005–0007 add workflow/review/vector data, the official checkpoint schema and provenance guards without modifying old policy rows.
+For document processing, authorize the exact official source for the correct scheme, register/upload its PDF, and inspect extracted pages and evidence. Text extraction can run without Gemini. To enable real AI extraction, configure backend-only `GEMINI_API_KEY` and `GEMINI_MODEL` in `.env`, then recreate the relevant backend services:
 
 ```bash
-docker compose up --build -d
-docker compose exec api alembic upgrade head
-docker compose exec api alembic check
-docker compose exec api python -m tests.run -q
+docker compose up -d --force-recreate api worker scheduler
+```
+
+Candidates are reviewed in the protected workspace before publication. Source monitoring is enabled individually by administrators; it does not automatically fetch the entire catalog. See [document processing](docs/document-processing.md), [Gemini configuration](docs/gemini-integration.md), and [human review](docs/human-review.md).
+
+## Catalog and assessment coverage
+
+The recorded verification snapshot contains **282 government scheme records** across **23 category manifests** in `data/schemes/`. PostgreSQL has **283 scheme rows** including one separately marked legacy demonstration scheme.
+
+Each curated record includes an official-source reference and verification metadata. Directory presence establishes discovery metadata, not current enrollment, financial benefits, deadlines, or complete eligibility. Unverified fields remain unknown; there is no automated catalog scraping or live synchronization.
+
+```bash
+# Validate all manifests without importing records:
+docker compose exec api python -m app.seed --validate-only
+
+# Transactionally insert missing records and preserve existing IDs/data:
+docker compose exec api python -m app.seed
+```
+
+The seed command supports arbitrary record counts, validates category files, detects duplicate slugs, maintains source relationships, and skips existing records. Its default path is `/app/data/schemes`; the legacy `data/scholarships.json` format remains supported. See [dataset organization and provenance](docs/datasets.md) and the [expansion report](docs/dataset-expansion-report.md).
+
+At the last recorded verification, **no government rule set was approved**. One approved rule set belongs to the legacy demonstration only. Nine project-authored templates provide clearly identified illustrative assessments for 225 government discovery records across 14 populated categories; 57 records have no supported assessment. These templates are not government policy and are not published or saved as approved-policy assessments. Applicable human-reviewed policies take precedence when available.
+
+Recommendations use unknown geography conservatively: unverified coverage remains discoverable, while an explicitly verified state mismatch can exclude a result. The manual catalog's state filter returns only verified coverage. Precise age/income/course restrictions are never inferred from catalog descriptions.
+
+## Architecture and Docker services
+
+The backend is a **modular monolith with independently running workers**. PostgreSQL holds durable job status, policy history, accounts, and encrypted private data. Redis delivers background tasks; it is not the authoritative policy store.
+
+| Service | Responsibility |
+|---|---|
+| `frontend` | Next.js interface and fixed same-origin API proxies |
+| `api` | FastAPI routes, authentication, discovery, assessment, and document/review services |
+| `db` | PostgreSQL with pgvector and persistent data |
+| `redis` | Internal Celery message broker |
+| `worker` | Bounded monitoring/document/reassessment background execution |
+| `scheduler` | Celery Beat scheduling with singleton leadership |
+
+Only frontend/API loopback ports 3000 and 8000 are published. PostgreSQL and Redis have no public host ports. API/worker share persistent original-document storage. The development frontend and backend support hot reload; application containers run as non-root users.
+
+Browser requests use same-origin Next.js proxies. `INTERNAL_API_URL` is server-only; a public browser API URL is unnecessary. Set `ADMIN_ALLOWED_ORIGINS` to the exact frontend origin, and keep database, Gemini, storage, and encryption credentials out of frontend environment variables.
+
+```text
+backend/
+  app/
+    api/v1/                 # HTTP contracts and authorization
+    auth/                   # Shared authentication and encrypted storage
+    assessment/             # Separate illustrative assessment templates
+    eligibility/            # Typed deterministic rule engine
+    ingestion/              # Secure PDF ingestion, parsing, and chunks
+    ai/ agents/ rag/         # Providers, LangGraph workflows, retrieval
+    models/ schemas/        # Database and validated API contracts
+    repositories/ services/ # Data access and application behavior
+    workers/                # Celery tasks and scheduler
+  alembic/                  # Incremental database migrations
+  tests/                    # Unit and PostgreSQL integration tests
+frontend/
+  src/app/                  # Public, citizen, and administrator routes
+  src/components/           # Reusable forms, reports, cards, workspaces
+  e2e/                      # Browser journeys
+  tests/                    # Component and request-boundary tests
+data/schemes/               # Curated category-based manifests
+docs/                       # Architecture, operations, phase reports, evidence
+scripts/                    # Environment, verification, release, recovery tools
+```
+
+## Main APIs
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/health`, `/ready` | Process health and live database readiness |
+| POST | `/api/v1/recommendations` | Transient profile-based recommendations, paging, and filtering |
+| GET | `/api/v1/recommendations/options` | Catalog-derived interests/categories and state input choices |
+| POST | `/api/v1/me/recommendations` | Recommendations from the authenticated citizen's own saved profile |
+| GET | `/api/v1/schemes`, `/api/v1/schemes/filters` | Manual catalog search, pagination, and filters |
+| GET | `/api/v1/schemes/{id}` | Scheme metadata and source references |
+| GET | `/api/v1/schemes/{id}/assessment-requirements` | Available assessment basis and typed questionnaire |
+| POST | `/api/v1/assessment/check` | Explainable approved-policy or explicitly illustrative assessment |
+| GET | `/api/v1/schemes/{id}/requirements` | Strict approved-policy requirements |
+| POST | `/api/v1/eligibility/check` | Existing strict, approved-rule evaluation contract |
+
+Private profile, assessment history, notification, document, workflow, review, and monitoring endpoints are listed in [the API inventory](docs/api.md) and live [OpenAPI documentation](http://localhost:8000/docs). Existing API contracts remain available.
+
+Recommendation profile inputs belong in POST bodies, never URL query parameters. The public proxy does not forward account cookies or persist guest profiles. For example, using sample data:
+
+```bash
+curl --fail http://localhost:3000/api/v1/recommendations \
+  -H 'Content-Type: application/json' \
+  -d '{"age_years":21,"state":"Assam","course_level":"undergraduate","current_student":true,"occupation":"student","interests":["education"],"page":1,"page_size":9}'
+```
+
+Results include scheme metadata, relevance labels, matching reasons, missing information, assessment availability/basis, and pagination. A high relevance label does not mean the applicant is eligible.
+
+## Testing and recorded verification
+
+```bash
+# Disposable PostgreSQL integration database; existing application data is preserved:
+docker compose exec api python -m tests.run
+
+# Backend checks:
+docker compose exec api ruff check --no-cache app tests alembic
+docker compose exec api ruff format --check --no-cache app tests alembic
+docker compose exec api mypy --cache-dir=/tmp/schemeguard-mypy app
+
+# Frontend checks:
 docker compose exec frontend npm test
 docker compose exec frontend npm run typecheck
-# Requires the Phase 3 official demo PDF and a private local administrator login:
-python3 scripts/verify_phase4.py --credentials .local/phase3-demo-credentials.json
-# Recreates services while preserving volumes and checks all rows/checkpoints/PDFs:
-python3 scripts/verify_persistence.py
+docker compose exec frontend npm run lint
 ```
 
-Supervised administrator processing remains bounded synchronous API work with durable checkpoints and explicit operator resume after interruption. Scheduled monitoring and reassessment use the Phase 5–6 queues described below.
+The backend runner requires PostgreSQL and creates/removes only its own randomly named test databases. The development database role needs permission to create databases; production uses separate restricted runtime credentials.
 
-## Phase 5 policy monitoring
+Browser journeys are under `frontend/e2e/`. On a host with frontend dependencies and the matching Playwright Chromium installed, run `npm run e2e` from `frontend/`. Local verification also used installed Chrome with the project's pinned Playwright packages. Repeated account-registration tests should use isolated test databases so existing authentication rate limits remain enabled.
 
-Opt-in monitoring, PostgreSQL durable jobs, Redis/Celery workers and a singleton Beat scheduler extend the existing ingestion/review pipeline. No catalog URL is automatically monitored. Approve the exact official PDF source, verify its access conditions, then configure `/admin/monitors`. Inspect proposed old/new policy differences at `/admin/policy-changes`; publication still requires the complete Phase 4 human review. `/api/v1/policy-updates` exposes only approved published changes.
+Last recorded implementation verification, **14 November 2026**:
 
-```bash
-docker compose up --build -d
-docker compose exec api alembic upgrade head
-docker compose logs -f worker scheduler
-python3 scripts/verify_workers.py
-```
+| Check | Recorded result |
+|---|---|
+| Backend regression, including PostgreSQL integration | 491 passed |
+| Frontend regression | 84 passed across 13 files |
+| Browser regression | 9 passed; final desktop/mobile journeys rerun with 4 passed |
+| Ruff, mypy, TypeScript, frontend lint | Passed |
+| Alembic | `0009_citizen_system`; no detected schema drift |
+| Development and production images | Built successfully |
+| Development Compose services | All six healthy at verification |
 
-The six services are frontend, api, db, redis, worker and scheduler. Redis has persistent AOF and no public port. PostgreSQL remains authoritative for jobs/history; Redis loss does not erase policy or job records. Restart worker/scheduler after Python edits. See [Phase 5 report](docs/phase5-policy-monitoring.md), [Celery architecture](docs/celery-architecture.md), and [version selection](docs/policy-versioning.md).
+These are recorded results, not a claim that every test was rerun for this README edit. Full details, sample results, screenshots, and limitations are in the [profile-first implementation report](docs/profile-first-recommendations.md) and [machine-readable verification](docs/verification/profile-first-verification.json).
 
-## Phase 6 citizen workspace
+## Production and limitations
 
-Citizens can register at `/register`, sign in at `/login`, and use `/dashboard` for encrypted profiles, saved versioned assessments, policy updates, notification preferences and account settings. Public synthetic assessment endpoints retain their existing behavior. Only approved policies can support decisions; the catalog still includes discovery-only schemes. A reviewed material policy publication can reassess explicitly authorized saved schemes through Celery, preserving original reports and notifying only affected accounts.
+Production uses the separate `docker-compose.production.yml` with production Dockerfile targets. It includes Next.js standalone output, non-root containers, restricted runtime database roles, health checks, and explicit migration/release procedures. Prepare a private production environment, HTTPS origins, a stable encryption key, and durable document storage before release. Never reuse development credentials or reset existing deployment volumes.
 
-Before upgrading, run `python3 scripts/init_env.py` to append a private-storage key to the existing ignored `.env` without replacing its credentials. Preserve and separately back up this key: replacing it makes existing encrypted private records unreadable. Run `docker compose up --build -d`; migrations apply incrementally. API and worker share the key; frontend does not. There is no configured email/password recovery service. Read [Phase 6 report](docs/phase6-user-system.md), [authentication](docs/authentication.md), [notifications](docs/notifications.md) and [reassessment](docs/reassessment.md) for endpoints, exact commands, consent and deletion/backup limitations. `python3 scripts/verify_phase6.py` exercises a synthetic private account through the real Next.js proxy, saves a fictional assessment, reproduces it and logs out.
+Follow [Docker operations](docs/docker.md), [deployment and recovery](docs/deployment.md), and [security](docs/security.md). The [GitHub Actions workflow](.github/workflows/ci.yml) runs configured build/test/security checks; it does not automatically deploy to production.
 
-## Phase 7 production readiness and demonstration
+Current limitations:
 
-The existing application now has separate production images/Compose configuration, restricted runtime DB roles, private S3 document-storage support, nonce CSP/same-origin browser API boundaries, CI checks, Chromium end-to-end tests, a synthetic A/B/C workflow demonstration, measured reference evaluation/performance and a tested local recovery procedure. Existing data, rule/history semantics and six development services remain.
+- Most schemes have discovery metadata rather than complete approved eligibility policies. Relevance matching cannot determine every individual or institutional target group.
+- Static source metadata can become outdated. Monitoring is opt-in for approved sources, and material changes require human review.
+- Real Gemini processing requires configured credentials. Mocked AI regressions do not establish live-model accuracy or current government-policy approval.
+- In-app notifications are implemented; email delivery, password-reset delivery, MFA, and identity verification are not provided by this MVP.
+- Guest answers are intentionally lost on reload. Saved private data requires the stable encryption key and a separate backup/recovery procedure.
+- Local production-profile verification is not a live cloud deployment. Real cloud/S3 connectivity and any deployment must be verified separately.
 
-Start development as before with `python3 scripts/init_env.py` and `docker compose up --build -d`. Browser APIs now use same-origin fixed proxies; a NEXT_PUBLIC_API_URL is unnecessary. Production migration is an explicit owner-only release step rather than an API startup side effect. See [Docker](docs/docker.md), [deployment/recovery](docs/deployment.md), [security](docs/security.md), [testing](docs/testing.md), [API inventory](docs/api.md) and the [final project report](docs/final-project-report.md).
+## Documentation
 
-Actual catalog: 283 records (282 government discovery records plus one fictional demonstration), one approved fictional rule set and zero approved government rule sets. The historical official PDF remains pending real human/current-policy review. Gemini and real cloud/S3 connections remain unverified without configured access. Local production-profile verification is not a live cloud deployment. The report separates completed implementation, measured fixture results and remaining release prerequisites.
+| Topic | Guides |
+|---|---|
+| Current user flow | [Profile-first recommendations](docs/profile-first-recommendations.md), [illustrative assessments](docs/demonstration-assessments.md) |
+| System and data | [Architecture](docs/architecture.md), [database](docs/database.md), [datasets](docs/datasets.md), [API](docs/api.md) |
+| Rules and evidence | [Eligibility engine](docs/eligibility-engine.md), [rule semantics](docs/rules.md), [human review](docs/human-review.md) |
+| AI and documents | [Document processing](docs/document-processing.md), [Gemini](docs/gemini-integration.md), [AI agents](docs/ai-agents.md), [RAG](docs/rag.md) |
+| Policies and users | [Policy monitoring](docs/policy-monitoring.md), [versioning](docs/policy-versioning.md), [authentication](docs/authentication.md), [reassessment](docs/reassessment.md), [notifications](docs/notifications.md) |
+| Verification and release | [Testing](docs/testing.md), [Docker](docs/docker.md), [deployment/recovery](docs/deployment.md), [security](docs/security.md), [final project report](docs/final-project-report.md) |
+
+Historical phase reports remain under `docs/`; the current user flow and verification reports supersede their older descriptions where behavior has changed.
