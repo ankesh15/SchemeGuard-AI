@@ -9,6 +9,8 @@ export interface Scheme {
   category: string;
   is_demo: boolean;
   eligibility_available: boolean;
+  assessment_available?: boolean;
+  assessment_mode?: AssessmentMode;
   policy_currency?: "APPROVED" | "POTENTIALLY_OUTDATED" | "UNVERIFIED";
   status: string;
   applicability: string;
@@ -101,6 +103,17 @@ export interface Trace {
   children: Trace[];
 }
 export interface EligibilityReport {
+  assessment_mode?: AssessmentMode;
+  category?: string;
+  official_source_url?: string | null;
+  template?: AssessmentTemplate | null;
+  criteria_token?: string;
+  criteria_notes?: Record<string, string>;
+  applicant_details?: {
+    key: string;
+    label: string;
+    value: string | number | boolean | null;
+  }[];
   policy_currency?: "APPROVED" | "POTENTIALLY_OUTDATED" | "UNVERIFIED";
   scheme_id: string;
   scheme_name: string;
@@ -116,6 +129,25 @@ export interface EligibilityReport {
   missing_fields: { key: string; label: string }[];
   notices: string[];
   official_application_url: string | null;
+}
+
+export type AssessmentMode = "APPROVED_POLICY" | "ILLUSTRATIVE" | "UNSUPPORTED";
+export interface AssessmentTemplate {
+  id: string;
+  version: number;
+  title: string;
+  description: string;
+  basis: "project_authored_illustration";
+  content_sha256: string;
+}
+export interface AssessmentRequirements extends Requirements {
+  assessment_mode: AssessmentMode;
+  category: string;
+  official_source_url: string | null;
+  template: AssessmentTemplate | null;
+  criteria_token: string;
+  criteria_notes: Record<string, string>;
+  sample_profile: Record<string, string | number | boolean | null>;
 }
 
 export interface SchemeFilters {

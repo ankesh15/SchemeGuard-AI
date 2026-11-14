@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -6,7 +5,6 @@ import {
   ArrowUpRight,
   BookOpen,
   CalendarDays,
-  Check,
   CheckCircle2,
   CircleHelp,
   ExternalLink,
@@ -15,16 +13,29 @@ import {
   ShieldCheck,
   XCircle,
 } from "lucide-react";
-import { formatDate } from "@/lib/api";
 import type { EligibilityReport, Result, Trace } from "@/lib/types";
-import { DemoNotice } from "./ui";
-
+import { formatDate } from "@/lib/api";
+import { categoryLabel } from "@/lib/catalog";
+import { assessmentLabels, criteriaText, schemeName } from "@/lib/presentation";
+import { ProjectDisclaimer } from "./ui";
 const statuses = {
-  PASS: { label: "Satisfied", icon: CheckCircle2, className: "result-pass" },
-  FAIL: { label: "Not satisfied", icon: XCircle, className: "result-fail" },
-  UNKNOWN: { label: "Unknown", icon: CircleHelp, className: "result-unknown" },
+  PASS: {
+    label: "Criteria matched",
+    icon: CheckCircle2,
+    className: "result-pass",
+  },
+  FAIL: {
+    label: "Criteria not matched",
+    icon: XCircle,
+    className: "result-fail",
+  },
+  UNKNOWN: {
+    label: "Additional information required",
+    icon: CircleHelp,
+    className: "result-unknown",
+  },
 };
-function ReasonTree({ trace }: { trace: Trace }) {
+function ReasonTree({ trace, legacy }: { trace: Trace; legacy: boolean }) {
   const status = statuses[trace.result];
   const Icon = status.icon;
   return (
@@ -32,21 +43,31 @@ function ReasonTree({ trace }: { trace: Trace }) {
       <div className="reason-tree-node">
         <Icon size={15} className={status.className} />
         <div>
-          <strong>{trace.label}</strong>
-          <p>{trace.explanation}</p>
+          <strong>{criteriaText(trace.label, legacy)}</strong>
+          <p>{criteriaText(trace.explanation, legacy)}</p>
         </div>
       </div>
       {trace.children.length > 0 && (
         <ul>
           {trace.children.map((child) => (
-            <ReasonTree key={child.key} trace={child} />
+            <ReasonTree key={child.key} trace={child} legacy={legacy} />
           ))}
         </ul>
       )}
     </li>
   );
 }
-function RequirementDecision({ requirement }: { requirement: Trace }) {
+function RequirementDecision({
+  requirement,
+  note,
+  showEvidence,
+  legacy,
+}: {
+  requirement: Trace;
+  note?: string;
+  showEvidence: boolean;
+  legacy: boolean;
+}) {
   const status = statuses[requirement.result];
   const Icon = status.icon;
   return (
@@ -56,46 +77,69 @@ function RequirementDecision({ requirement }: { requirement: Trace }) {
           <Icon size={20} />
         </span>
         <div>
-          <h3>{requirement.label}</h3>
-          <p>{requirement.explanation}</p>
+          <h3>{criteriaText(requirement.label, legacy)}</h3>
+          <p>{note || criteriaText(requirement.explanation, legacy)}</p>
         </div>
         <span className={`decision-label ${status.className}`}>
           {status.label}
         </span>
       </div>
       <details>
-        <summary>View reasoning & evidence</summary>
+        <summary>
+          {showEvidence ? "View reasoning & evidence" : "View reasoning"}
+        </summary>
         <div className="decision-details">
           <ul className="reason-tree">
-            <ReasonTree trace={requirement} />
+            <ReasonTree trace={requirement} legacy={legacy} />
           </ul>
-          {requirement.evidence.map((evidence) => (
-            <div className="evidence-quote" key={evidence.id}>
-              <span className="eyebrow">
-                {evidence.is_demo
-                  ? "Fictional policy evidence"
-                  : "Policy evidence"}{" "}
-                · {evidence.locator}
-              </span>
-              <p>{evidence.excerpt}</p>
-              <a href={evidence.url} target="_blank" rel="noopener noreferrer">
-                {evidence.source_title} <ExternalLink size={13} />
-              </a>
-            </div>
-          ))}
+          {showEvidence &&
+            requirement.evidence.map((evidence) => (
+              <div className="evidence-quote" key={evidence.id}>
+                <span className="eyebrow">
+                  Policy evidence · {evidence.locator}
+                </span>
+                <p>{evidence.excerpt}</p>
+                <a
+                  href={evidence.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {evidence.source_title} <ExternalLink size={13} />
+                </a>
+              </div>
+            ))}
         </div>
       </details>
     </article>
   );
 }
-
+function detailValue(value: string | number | boolean | null): string {
+  return value === null
+    ? "Not provided"
+    : typeof value === "boolean"
+      ? value
+        ? "Yes"
+        : "No"
+      : typeof value === "number"
+        ? value.toLocaleString("en-IN")
+        : value.replaceAll("_", " ");
+}
 export function EligibilityReportView({
   report,
+  saved = false,
 }: {
   report: EligibilityReport;
+  saved?: boolean;
 }) {
   const status = statuses[report.result];
   const Icon = status.icon;
+  const illustrative =
+    report.assessment_mode === "ILLUSTRATIVE" || report.is_demo;
+  const approved = !!report.rule_set && !illustrative;
+  const name = schemeName(report.scheme_name, report.is_demo);
+  const overall = illustrative
+    ? assessmentLabels[report.result]
+    : report.assessment;
   return (
     <>
       <Link
@@ -106,35 +150,53 @@ export function EligibilityReportView({
         Start a new check
       </Link>
       <div className="page-heading report-page-heading">
-        <span className="eyebrow">Your eligibility report</span>
+        <span className="eyebrow">
+          Assessment Result
+          {report.category ? ` · ${categoryLabel(report.category)}` : ""}
+        </span>
         <h1>Your assessment, explained.</h1>
-        <p>{report.scheme_name}</p>
+        <p>{name}</p>
+        <ProjectDisclaimer />
       </div>
-      {report.is_demo && <DemoNotice />}
       {report.policy_currency === "POTENTIALLY_OUTDATED" && (
         <div className="notice" role="status">
           <p>
             Policy currency warning: a monitored source changed or could not be
-            verified. This assessment retains the last approved rules; check the
-            latest official guidance.
+            verified. Check current official guidance before applying.
           </p>
         </div>
       )}
       <div className="report-layout">
         <div>
+          <div className="assessment-basis">
+            <span className="eyebrow">
+              {illustrative
+                ? "Illustrative assessment"
+                : approved
+                  ? "Reviewed policy assessment"
+                  : "Assessment unavailable"}
+            </span>
+            <p>
+              {illustrative
+                ? "This estimate uses project-authored assessment criteria. Official scheme sources do not verify these criteria."
+                : approved
+                  ? "Conditions are evaluated against the recorded approved policy version. Evidence is attached to the supported conditions."
+                  : "A suitable assessment template or applicable reviewed policy is not available for this scheme."}
+            </p>
+          </div>
           <section className={`assessment-panel ${status.className}`}>
             <Icon size={32} />
             <div>
               <span className="eyebrow">Overall assessment</span>
-              <h2>{report.assessment}</h2>
+              <h2>{overall}</h2>
               <p>
                 {report.reason === "NO_APPROVED_RULE_SET"
-                  ? "No effective approved policy is available. An assessment cannot be made from scheme metadata alone."
+                  ? "No assessment can be produced from scheme information alone."
                   : report.result === "PASS"
-                    ? "The declared synthetic profile satisfies the known conditions in this policy version. This is not an award or official approval."
+                    ? "Your provided details match the assessment criteria. This does not guarantee government eligibility, funding or approval."
                     : report.result === "FAIL"
-                      ? "One or more known conditions are not satisfied. The breakdown below explains which requirements need attention."
-                      : "Some required information is missing. The known conditions are assessed below, and unknown requirements stay unresolved."}
+                      ? "One or more criteria do not match your provided details. Review the breakdown below."
+                      : "Some required information is missing. The report shows what is needed to resolve the remaining criteria."}
               </p>
             </div>
           </section>
@@ -157,14 +219,28 @@ export function EligibilityReportView({
               );
             })}
           </div>
+          {!!report.applicant_details?.length && (
+            <section className="applicant-summary">
+              <span className="eyebrow">Your details</span>
+              <h2>Details used in this assessment</h2>
+              <dl className="applicant-grid">
+                {report.applicant_details.map((field) => (
+                  <div key={field.key}>
+                    <dt>{field.label}</dt>
+                    <dd>{detailValue(field.value)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
           {report.missing_fields.length > 0 && (
             <section className="missing-panel">
               <CircleHelp size={22} />
               <div>
-                <h2>Here’s what’s still missing</h2>
+                <h2>Additional information required</h2>
                 <p>
                   These unanswered details are needed to resolve the remaining
-                  conditions.
+                  criteria.
                 </p>
                 <ul>
                   {report.missing_fields.map((field) => (
@@ -174,28 +250,31 @@ export function EligibilityReportView({
               </div>
             </section>
           )}
-          <div className="section-heading compact">
-            <div>
-              <span className="eyebrow">One requirement at a time</span>
-              <h2>The reasoning behind the result.</h2>
+          {!!report.requirements.length && (
+            <div className="section-heading compact">
+              <div>
+                <span className="eyebrow">One criterion at a time</span>
+                <h2>The reasoning behind the result.</h2>
+              </div>
             </div>
-          </div>
+          )}
           <div className="decisions-list">
             {report.requirements.map((requirement) => (
               <RequirementDecision
                 key={requirement.key}
                 requirement={requirement}
+                note={report.criteria_notes?.[requirement.key]}
+                showEvidence={approved}
+                legacy={report.is_demo}
               />
             ))}
           </div>
           <div className="notice mt-6">
             <Info size={19} className="shrink-0" />
             <p>
-              {report.notices.find((notice) =>
-                notice.startsWith("This is an assessment"),
-              )}{" "}
-              Your report exists only in this browser session’s memory and
-              disappears on refresh.
+              {saved
+                ? "This saved assessment retains its original version and result. Later policy changes do not overwrite it."
+                : "This assessment is kept only in this browser page’s memory. Refreshing clears the report; it is not saved to your account."}
             </p>
           </div>
         </div>
@@ -204,34 +283,32 @@ export function EligibilityReportView({
             <span className="aside-icon">
               <FileText size={26} />
             </span>
-            <h2>
-              The policy behind
-              <br />
-              this assessment.
-            </h2>
+            <h2>The criteria behind this assessment.</h2>
             <dl className="report-facts">
               <div>
                 <dt>
                   <BookOpen size={15} />
-                  Rule version
+                  {illustrative ? "Criteria version" : "Policy version"}
                 </dt>
                 <dd>
-                  {report.rule_set
-                    ? `Version ${report.rule_set.version_number}`
-                    : "No version evaluated"}
+                  {report.template
+                    ? `${report.template.title} · Version ${report.template.version}`
+                    : report.rule_set
+                      ? `Version ${report.rule_set.version_number}`
+                      : "No criteria evaluated"}
                 </dd>
               </div>
               <div>
                 <dt>
                   <ShieldCheck size={15} />
-                  Review basis
+                  Assessment basis
                 </dt>
                 <dd>
-                  {report.rule_set?.approval_basis === "synthetic_fixture"
-                    ? "Synthetic development fixture"
-                    : report.rule_set
-                      ? "Human-reviewed rules"
-                      : "Awaiting approved rules"}
+                  {illustrative
+                    ? "Project-authored illustration"
+                    : approved
+                      ? "Human-reviewed policy rules"
+                      : "Not supported"}
                 </dd>
               </div>
               <div>
@@ -241,40 +318,56 @@ export function EligibilityReportView({
                 </dt>
                 <dd>{formatDate(report.assessed_on)}</dd>
               </div>
+              <div>
+                <dt>Assessment timestamp (IST)</dt>
+                <dd>
+                  {new Date(report.evaluated_at).toLocaleString("en-IN", {
+                    timeZone: "Asia/Kolkata",
+                  })}
+                </dd>
+              </div>
             </dl>
-            {report.rule_set && (
+            {approved && report.rule_set && (
               <p className="small-note">{report.rule_set.scope_note}</p>
             )}
-            {report.is_demo ? (
-              <a
-                className="button button-secondary mt-6"
-                href="/policies/demo-policy-v1.md"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read the fictional policy <ArrowUpRight size={16} />
-              </a>
-            ) : (
-              report.official_application_url && (
+            {report.template && (
+              <p className="small-note">
+                The criteria version identifies this category template, not a
+                government policy version.
+              </p>
+            )}
+            {report.official_source_url && (
+              <>
+                <div className="aside-divider" />
+                <h3>About this scheme</h3>
+                <p className="small-note">
+                  {illustrative
+                    ? "This official reference identifies the scheme. It is not supporting evidence for the illustrative criteria above."
+                    : "Consult the official source for current guidance."}
+                </p>
                 <a
-                  className="button button-primary mt-6"
-                  href={report.official_application_url}
+                  className="text-link mt-4"
+                  href={report.official_source_url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Official application portal <ArrowUpRight size={16} />
+                  Visit official scheme source <ArrowUpRight size={15} />
                 </a>
-              )
+              </>
             )}
-            {report.is_demo && (
-              <p className="small-note mt-4">
-                This fictional scholarship has no application portal or
-                financial award.
-              </p>
+            {approved && report.official_application_url && (
+              <a
+                className="button button-primary mt-6"
+                href={report.official_application_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Official application portal <ArrowUpRight size={16} />
+              </a>
             )}
             <div className="aside-divider" />
             <Link className="text-link" href="/eligibility">
-              Try another synthetic profile <ArrowRight size={15} />
+              Check another scheme <ArrowRight size={15} />
             </Link>
             <Link className="text-link mt-4" href="/schemes">
               Explore government sources <ArrowUpRight size={15} />

@@ -1,0 +1,108 @@
+{
+  "id": "agriculture",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Livelihood assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "agriculture",
+    "fisheries"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "age_years",
+        "label": "Age",
+        "value_type": "number",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 130,
+        "integer": true
+      },
+      {
+        "key": "annual_family_income_inr",
+        "label": "Annual family income (INR)",
+        "value_type": "number",
+        "section": "Household",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 1000000000000,
+        "integer": false
+      },
+      {
+        "key": "occupation",
+        "label": "Primary livelihood",
+        "value_type": "string",
+        "section": "Livelihood",
+        "help_text": "Leave blank if this information is unavailable.",
+        "choices": [
+          {
+            "value": "farmer",
+            "label": "Farming"
+          },
+          {
+            "value": "fisher",
+            "label": "Fishing"
+          },
+          {
+            "value": "agricultural_worker",
+            "label": "Agricultural work"
+          },
+          {
+            "value": "other",
+            "label": "Other"
+          }
+        ]
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "adult_applicant",
+          "label": "Adult applicant",
+          "field": "age_years",
+          "operator": ">=",
+          "value_type": "number",
+          "value": 18
+        },
+        {
+          "kind": "comparison",
+          "key": "livelihood",
+          "label": "Agriculture or fisheries activity",
+          "field": "occupation",
+          "operator": "IN",
+          "value_type": "string",
+          "value": [
+            "farmer",
+            "fisher",
+            "agricultural_worker"
+          ]
+        },
+        {
+          "kind": "comparison",
+          "key": "income_limit",
+          "label": "Family income range",
+          "field": "annual_family_income_inr",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 600000
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "adult_applicant": "Illustrative criterion: age is at least 18.",
+    "livelihood": "Illustrative criterion: farming, fishing or agricultural work.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 600,000."
+  },
+  "sample_profile": {
+    "age_years": 32,
+    "annual_family_income_inr": 240000,
+    "occupation": "farmer"
+  }
+}

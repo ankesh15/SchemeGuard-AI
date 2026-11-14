@@ -1,6 +1,8 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 import Link from "next/link";
+import { useOptionalReport } from "@/components/report-context";
+import { useOptionalDiscovery } from "@/components/discovery-context";
 import { useRouter } from "next/navigation";
 import { citizenFetch, citizenJSON, type CitizenSession } from "@/lib/citizen";
 const SessionContext = createContext<CitizenSession | null>(null);
@@ -17,6 +19,8 @@ export function CitizenWorkspace({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const discovery = useOptionalDiscovery();
+  const transientReport = useOptionalReport();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   return (
@@ -41,6 +45,9 @@ export function CitizenWorkspace({
                   "auth/logout",
                   citizenJSON({}, session.csrf_token),
                 );
+                discovery?.clear();
+                transientReport?.setReport(null);
+                transientReport?.setExplanation(null);
                 router.replace("/login");
                 router.refresh();
               } catch (reason) {

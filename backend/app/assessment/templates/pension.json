@@ -1,0 +1,90 @@
+{
+  "id": "pension",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Later-life support assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "pension"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "age_years",
+        "label": "Age",
+        "value_type": "number",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 130,
+        "integer": true
+      },
+      {
+        "key": "annual_family_income_inr",
+        "label": "Annual family income (INR)",
+        "value_type": "number",
+        "section": "Household",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 1000000000000,
+        "integer": false
+      },
+      {
+        "key": "receives_pension",
+        "label": "Already receive this type of pension?",
+        "value_type": "boolean",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable."
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "age_range",
+          "label": "Later-life age range",
+          "field": "age_years",
+          "operator": ">=",
+          "value_type": "number",
+          "value": 60
+        },
+        {
+          "kind": "comparison",
+          "key": "income_limit",
+          "label": "Family income range",
+          "field": "annual_family_income_inr",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 400000
+        },
+        {
+          "kind": "exclude",
+          "key": "existing_pension",
+          "label": "Existing pension support",
+          "expression": {
+            "kind": "comparison",
+            "key": "existing_pension_check",
+            "label": "Existing pension support",
+            "field": "receives_pension",
+            "operator": "==",
+            "value_type": "boolean",
+            "value": true
+          }
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "age_range": "Illustrative criterion: age is at least 60.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 400,000.",
+    "existing_pension": "Illustrative exclusion: existing support of the same kind does not match this template."
+  },
+  "sample_profile": {
+    "age_years": 65,
+    "annual_family_income_inr": 180000,
+    "receives_pension": false
+  }
+}

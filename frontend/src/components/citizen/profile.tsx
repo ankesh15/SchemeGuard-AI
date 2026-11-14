@@ -6,6 +6,7 @@ import {
   type ProfileRead,
   type ProfileData,
 } from "@/lib/citizen";
+import { useOptionalDiscovery } from "@/components/discovery-context";
 import { useCitizen } from "./session";
 import { ErrorState, LoadingState } from "@/components/ui";
 import { QuestionField } from "@/components/questionnaire";
@@ -17,6 +18,7 @@ interface Options {
 }
 export function CitizenProfile() {
   const session = useCitizen();
+  const discovery = useOptionalDiscovery();
   const [data, setData] = useState<ProfileRead | null>(null);
   const [options, setOptions] = useState<Options>({ states: [], fields: [] });
   const [state, setState] = useState("");
@@ -33,6 +35,7 @@ export function CitizenProfile() {
   const [confirmDelete, setConfirmDelete] = useState(false);
   function fill(value: ProfileRead) {
     setData(value);
+    discovery?.setProfile(value.profile, session.user_id);
     const profile = value.profile;
     setState(profile.state || "");
     setAge(profile.age_years === null ? "" : String(profile.age_years));
@@ -64,7 +67,22 @@ export function CitizenProfile() {
       .then(([profile, fields]) => {
         if (!controller.signal.aborted) {
           fill(profile);
-          setOptions(fields);
+          setOptions({
+            ...fields,
+            fields: fields.fields.map((field) =>
+              ["course", "requests_disability_support"].includes(field.key)
+                ? {
+                    ...field,
+                    section: "Learning assessment fields",
+                    label:
+                      field.key === "course"
+                        ? "Learning assessment course"
+                        : "Requesting additional support?",
+                    help_text: "Used only by the project learning assessment.",
+                  }
+                : field,
+            ),
+          });
         }
       })
       .catch((reason: Error) => {
@@ -93,6 +111,7 @@ export function CitizenProfile() {
       return;
     }
     const profile: ProfileData = {
+      ...data?.profile,
       state: state || null,
       age_years: age ? Number(age) : null,
       annual_family_income_inr: income ? Number(income) : null,

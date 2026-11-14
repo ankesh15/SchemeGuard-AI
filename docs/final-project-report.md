@@ -1,4 +1,8 @@
+> Latest user-flow update (2026-11-14): the primary journey is profile-first recommendations, with manual browsing retained at `/schemes/all`. See [implementation, modified files and final verification](profile-first-recommendations.md). Earlier phase measurements below remain historical.
+
 # SchemeGuard AI — final implementation and verification report
+
+This is the Phase 7 verification record. Subsequent scheme-based demonstration assessment work, verified on 14 November 2026, is documented in [the assessment implementation report](demonstration-assessments.md), including current coverage and regression results. Historical Phase 7 measurements below are retained as originally executed.
 
 ## Problem and solution
 

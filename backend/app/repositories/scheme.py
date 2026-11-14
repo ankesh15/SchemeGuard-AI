@@ -51,6 +51,8 @@ class SchemeRepository:
 
     async def list(self, query: SchemeQuery) -> tuple[list[Scheme], int]:
         statement = select(Scheme)
+        if query.is_demo is not None:
+            statement = statement.where(Scheme.is_demo == query.is_demo)
         if query.eligibility_available is not None:
             predicate = self.available_rules()
             statement = statement.where(predicate if query.eligibility_available else ~predicate)

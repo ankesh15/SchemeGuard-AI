@@ -3,6 +3,7 @@ from uuid import UUID
 
 from fastapi import HTTPException
 
+from app.assessment.templates import assessment_mode
 from app.repositories.scheme import SchemeRepository
 from app.schemas.scheme import SchemeDetail, SchemeFilters, SchemePage, SchemeQuery, SchemeRead
 from app.services.currency import outdated_schemes
@@ -21,6 +22,9 @@ class SchemeService:
                 SchemeRead.model_validate(scheme).model_copy(
                     update={
                         "eligibility_available": scheme.id in available,
+                        "assessment_available": assessment_mode(scheme, scheme.id in available)
+                        != "UNSUPPORTED",
+                        "assessment_mode": assessment_mode(scheme, scheme.id in available),
                         "policy_currency": "POTENTIALLY_OUTDATED"
                         if scheme.id in outdated
                         else "APPROVED"
@@ -45,6 +49,8 @@ class SchemeService:
         return SchemeDetail.model_validate(scheme).model_copy(
             update={
                 "eligibility_available": scheme.id in available,
+                "assessment_available": assessment_mode(scheme, scheme.id in available) != "UNSUPPORTED",
+                "assessment_mode": assessment_mode(scheme, scheme.id in available),
                 "policy_currency": "POTENTIALLY_OUTDATED"
                 if scheme.id in outdated
                 else "APPROVED"

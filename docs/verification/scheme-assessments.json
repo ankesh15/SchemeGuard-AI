@@ -1,0 +1,57 @@
+{
+  "verified_date": "2026-11-14",
+  "government_discovery_records": 282,
+  "preserved_legacy_scheme_records": 1,
+  "template_count": 9,
+  "supported_populated_categories": 14,
+  "illustrative_schemes": 225,
+  "unsupported_schemes": 57,
+  "backend_tests": {
+    "passed": 458,
+    "seconds": 61.51,
+    "database": "disposable real PostgreSQL"
+  },
+  "frontend_tests": {
+    "passed": 73,
+    "files": 12,
+    "seconds": 3.16
+  },
+  "browser_tests": {
+    "passed": 5,
+    "seconds": 13.5,
+    "runner": "project-pinned Playwright with isolated installed Chrome",
+    "container_browser_install": "failed on mirror/DNS timeout; not claimed as successful"
+  },
+  "checks": {
+    "ruff": "PASS",
+    "mypy": "PASS, 106 modules",
+    "typescript": "PASS",
+    "frontend_formatting": "PASS",
+    "migration_drift": "PASS",
+    "production_backend_build": "PASS",
+    "production_frontend_build": "PASS",
+    "development_images_build": "PASS",
+    "development_services": "PASS, all six healthy after rebuild",
+    "production_template_assets": "PASS, nine validated templates in a read-only network-isolated image",
+    "rebuilt_frontend_to_database_smoke": "PASS"
+  },
+  "new_schema_migrations": [],
+  "migration_head": "0009_citizen_system",
+  "new_approved_government_policies": 0,
+  "illustrative_condition_citations": 0,
+  "illustrative_assessment_persistence": false,
+  "new_cloud_resources": false,
+  "limitations": [
+    "Category templates are illustrative, not government policy.",
+    "57 discovery records have no suitable template.",
+    "Public illustrative reports are not saved and do not trigger notifications.",
+    "An initial failed browser run left one generated e2e test account/sample history; later test cleanup uses normal authentication and deletion."
+  ],
+  "preserved_database": {
+    "schemes": 283,
+    "approved_legacy_fixture_rule_sets": 1,
+    "approved_government_rule_sets": 0,
+    "document_versions": 2
+  },
+  "api_operations": 72
+}

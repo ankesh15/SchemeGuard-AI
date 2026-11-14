@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+import { useOptionalDiscovery } from "@/components/discovery-context";
 import { GroundedExplanation } from "@/components/policy-evidence";
 import { BookOpen } from "lucide-react";
 import { useReport } from "@/components/report-context";
@@ -6,12 +8,25 @@ import { EligibilityReportView } from "@/components/eligibility-report";
 import { ActionLink } from "@/components/ui";
 export default function ReportPage() {
   const { report, explanation } = useReport();
+  const discovery = useOptionalDiscovery();
   return (
     <div className="container page-shell">
       {report ? (
         <>
           <EligibilityReportView report={report} />
-          {explanation && <GroundedExplanation explanation={explanation} />}
+          {discovery?.profile && (
+            <Link
+              href="/schemes/recommended"
+              className="button button-secondary"
+            >
+              Back to recommendations
+            </Link>
+          )}
+          {explanation &&
+            !report.is_demo &&
+            report.assessment_mode !== "ILLUSTRATIVE" && (
+              <GroundedExplanation explanation={explanation} />
+            )}
         </>
       ) : (
         <div className="empty-state empty-report">

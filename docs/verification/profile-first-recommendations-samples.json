@@ -1,0 +1,167 @@
+{
+  "student": {
+    "input": {
+      "age_years": 21,
+      "state": "Assam",
+      "course_level": "undergraduate",
+      "current_student": true,
+      "occupation": "student",
+      "annual_family_income_inr": 240000,
+      "interests": [
+        "education",
+        "scholarship"
+      ]
+    },
+    "total": 78,
+    "top_results": [
+      {
+        "id": "cabed386-c911-5a9d-97a9-fcad3713a479",
+        "name": "Ishan Uday Special Scholarship for the North Eastern Region",
+        "category": "scholarship",
+        "relevance": "HIGH",
+        "matching_reasons": [
+          "Matches your interest in scholarship",
+          "Related to your occupation or employment interests",
+          "Relevant to your student status",
+          "Verified scheme coverage includes your state",
+          "An illustrative category assessment is available; it does not verify government eligibility"
+        ],
+        "missing_information": [
+          "Scheme-specific verified eligibility conditions"
+        ],
+        "assessment_mode": "ILLUSTRATIVE",
+        "ranking_factors": {
+          "interest_category": 60,
+          "occupation_or_employment": 20,
+          "student_status": 20,
+          "verified_geography": 8
+        }
+      },
+      {
+        "id": "676d65a3-1f40-59cc-9f9e-e010a0fec576",
+        "name": "AgEdn - Merit Cum Means scholarship",
+        "category": "scholarship",
+        "relevance": "HIGH",
+        "matching_reasons": [
+          "Matches your interest in scholarship",
+          "Related to your occupation or employment interests",
+          "Relevant to your student status",
+          "An illustrative category assessment is available; it does not verify government eligibility"
+        ],
+        "missing_information": [
+          "State coverage has not been verified; the scheme remains discoverable",
+          "Scheme-specific verified eligibility conditions"
+        ],
+        "assessment_mode": "ILLUSTRATIVE",
+        "ranking_factors": {
+          "interest_category": 60,
+          "occupation_or_employment": 20,
+          "student_status": 20
+        }
+      }
+    ]
+  },
+  "agriculture": {
+    "input": {
+      "state": "Assam",
+      "interests": [
+        "agriculture"
+      ]
+    },
+    "total": 21,
+    "top_results": [
+      {
+        "id": "2b12836e-57d7-5d0e-8901-dbf7906cd219",
+        "name": "Agri Clinics and Agri Business Centres ACABC",
+        "category": "agriculture",
+        "relevance": "POTENTIAL",
+        "matching_reasons": [
+          "Matches your interest in agriculture",
+          "An illustrative category assessment is available; it does not verify government eligibility"
+        ],
+        "missing_information": [
+          "State coverage has not been verified; the scheme remains discoverable",
+          "Scheme-specific verified eligibility conditions"
+        ],
+        "assessment_mode": "ILLUSTRATIVE",
+        "ranking_factors": {
+          "interest_category": 60
+        }
+      },
+      {
+        "id": "1b7d00a9-32bf-5406-99a6-e4045dc6af3b",
+        "name": "Agriculture Technology Management Agency (ATMA)- Farmers",
+        "category": "agriculture",
+        "relevance": "POTENTIAL",
+        "matching_reasons": [
+          "Matches your interest in agriculture",
+          "An illustrative category assessment is available; it does not verify government eligibility"
+        ],
+        "missing_information": [
+          "State coverage has not been verified; the scheme remains discoverable",
+          "Scheme-specific verified eligibility conditions"
+        ],
+        "assessment_mode": "ILLUSTRATIVE",
+        "ranking_factors": {
+          "interest_category": 60
+        }
+      }
+    ]
+  },
+  "employment": {
+    "input": {
+      "occupation": "unemployed",
+      "interests": [
+        "employment"
+      ]
+    },
+    "total": 12,
+    "top_results": [
+      {
+        "id": "44780a53-c77d-5e0d-97bc-6e6026f92171",
+        "name": "Capacity Building for Service Providers",
+        "category": "skills",
+        "relevance": "HIGH",
+        "matching_reasons": [
+          "Matches your interest in skills",
+          "Related to your occupation or employment interests",
+          "An illustrative category assessment is available; it does not verify government eligibility"
+        ],
+        "missing_information": [
+          "State coverage has not been verified; the scheme remains discoverable",
+          "Scheme-specific verified eligibility conditions"
+        ],
+        "assessment_mode": "ILLUSTRATIVE",
+        "ranking_factors": {
+          "interest_category": 60,
+          "occupation_or_employment": 20
+        }
+      },
+      {
+        "id": "3d1da04e-041d-58ab-bf32-94f35be5b2a5",
+        "name": "Deen Dayal Upadhyay Grameen Kaushalya Yojna",
+        "category": "skills",
+        "relevance": "HIGH",
+        "matching_reasons": [
+          "Matches your interest in skills",
+          "Related to your occupation or employment interests",
+          "An illustrative category assessment is available; it does not verify government eligibility"
+        ],
+        "missing_information": [
+          "State coverage has not been verified; the scheme remains discoverable",
+          "Scheme-specific verified eligibility conditions"
+        ],
+        "assessment_mode": "ILLUSTRATIVE",
+        "ranking_factors": {
+          "interest_category": 60,
+          "occupation_or_employment": 20
+        }
+      }
+    ]
+  },
+  "incomplete": {
+    "input": {},
+    "total": 0,
+    "top_results": []
+  }
+}

@@ -53,3 +53,59 @@ describe("production request boundaries", () => {
     );
   });
 });
+
+it("allows stateless assessment routes without forwarding sessions or exposing private saving", async () => {
+  const fetcher = vi.fn(async (_url: string, _options?: RequestInit) =>
+    Response.json({ result: "UNKNOWN" }),
+  );
+  vi.stubGlobal("fetch", fetcher);
+  const response = await POST(
+    new NextRequest("http://localhost/api/v1/assessment/check", {
+      method: "POST",
+      headers: {
+        Cookie: "schemeguard_session=synthetic",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        scheme_id: "11111111-1111-4111-8111-111111111111",
+        profile: {},
+      }),
+    }),
+    { params: Promise.resolve({ path: ["assessment", "check"] }) },
+  );
+  expect(response.status).toBe(200);
+  expect(fetcher.mock.calls[0]?.[1]?.headers).toEqual({
+    "Content-Type": "application/json",
+  });
+  const rejected = await POST(
+    new NextRequest("http://localhost/api/v1/assessments", { method: "POST" }),
+    { params: Promise.resolve({ path: ["assessments"] }) },
+  );
+  expect(rejected.status).toBe(404);
+});
+
+it("proxies recommendations as transient POST without citizen credentials and bounds input", async () => {
+  const fetcher = vi.fn(async (_url: string, _options?: RequestInit) =>
+    Response.json({ items: [] }),
+  );
+  vi.stubGlobal("fetch", fetcher);
+  const response = await POST(
+    new NextRequest("http://localhost/api/v1/recommendations", {
+      method: "POST",
+      headers: { Cookie: "schemeguard_session=private" },
+      body: JSON.stringify({ interests: ["education"] }),
+    }),
+    { params: Promise.resolve({ path: ["recommendations"] }) },
+  );
+  expect(response.status).toBe(200);
+  expect(response.headers.get("cache-control")).toBe("no-store");
+  expect(fetcher.mock.calls[0][1]?.headers).not.toHaveProperty("Cookie");
+  const large = await POST(
+    new NextRequest("http://localhost/api/v1/recommendations", {
+      method: "POST",
+      body: "x".repeat(16001),
+    }),
+    { params: Promise.resolve({ path: ["recommendations"] }) },
+  );
+  expect(large.status).toBe(413);
+});

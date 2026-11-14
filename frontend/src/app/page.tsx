@@ -1,121 +1,94 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowUpRight,
-  Check,
   CheckCheck,
+  CircleHelp,
   FileText,
   Fingerprint,
+  HeartHandshake,
+  LockKeyhole,
   Search,
   ShieldCheck,
+  SlidersHorizontal,
   Sparkles,
-  CircleHelp,
-  LockKeyhole,
-  BookOpen,
 } from "lucide-react";
-import { apiFetch } from "@/lib/api";
-import type { SchemePage } from "@/lib/types";
-import { ActionLink } from "@/components/ui";
-import { SchemeCard } from "@/components/scheme-card";
+import { ActionLink, ProjectDisclaimer } from "@/components/ui";
 
-export const dynamic = "force-dynamic";
-export default async function Home() {
-  const [page, approved] = await Promise.all([
-    apiFetch<SchemePage>("/api/v1/schemes?page_size=2"),
-    apiFetch<SchemePage>(
-      "/api/v1/schemes?eligibility_available=true&page_size=100",
-    ),
-  ]);
-  const demo = approved.items.find((scheme) => scheme.is_demo);
-  const featured = [
-    demo,
-    ...page.items.filter((scheme) => !scheme.is_demo).slice(0, 2),
-  ].filter((scheme) => scheme !== undefined);
+export default function Home() {
   return (
     <>
-      <section className="hero">
+      <section className="hero profile-first-hero">
         <div className="container hero-grid">
           <div className="hero-copy">
             <span className="hero-kicker">
-              <span className="status-dot" /> A clearer path to educational
-              opportunity
+              <span className="status-dot" />A little about you. A world of
+              possibilities.
             </span>
             <h1>
-              Clarity before
-              <br />
-              you <em>apply.</em>
+              Discover Government Schemes <em>Made for You</em>
             </h1>
             <p className="hero-description">
-              Discover government schemes. Understand their requirements. See
-              the reasoning behind every assessment, one condition at a time.
+              Tell us a little about yourself, and SchemeGuard AI will help you
+              discover government schemes that match your profile and interests.
             </p>
             <div className="hero-actions">
-              <ActionLink href="/schemes">Explore schemes</ActionLink>
-              <ActionLink href="/eligibility" secondary arrow={false}>
-                Try the eligibility demo <ArrowUpRight size={17} />
+              <ActionLink href="/find-schemes">Find My Schemes</ActionLink>
+              <ActionLink href="#how-it-works" secondary arrow={false}>
+                How It Works
               </ActionLink>
             </div>
             <div className="hero-footnote">
-              <ShieldCheck size={16} />
-              <span>Official source references</span>
-              <span className="dot-divider">·</span>
+              <LockKeyhole size={16} />
               <span>No sign-up needed</span>
+              <span className="dot-divider">·</span>
+              <span>Every answer is optional</span>
             </div>
+            <ProjectDisclaimer />
           </div>
           <div
-            className="hero-visual"
-            aria-label="Illustration of an explainable fictional assessment"
+            className="hero-visual discovery-visual"
+            aria-label="Illustration of profile-based discovery"
           >
             <div className="visual-orbit orbit-one" />
             <div className="visual-orbit orbit-two" />
             <span className="floating-note">
-              <FileText size={17} /> Every condition has a source
+              <Fingerprint size={18} />
+              Your interests lead the way
             </span>
-            <div className="preview-report">
-              <div className="preview-heading">
-                <span className="preview-icon">
-                  <ShieldCheck size={23} />
-                </span>
-                <div>
-                  <strong>Your next step, explained</strong>
-                  <span>Fictional scholarship · Sample report</span>
-                </div>
-                <span className="preview-dots">•••</span>
-              </div>
-              <div className="preview-result">
-                <span className="eyebrow">Assessment snapshot</span>
-                <h2>
-                  Known conditions
-                  <br />
-                  satisfied <span>↗</span>
-                </h2>
-                <p>
-                  A result you can understand, with the evidence to explore.
-                </p>
-              </div>
-              <div className="preview-conditions">
-                {["Age requirement", "Study pathway", "Income requirement"].map(
+            <div className="discovery-preview">
+              <span className="preview-icon">
+                <HeartHandshake size={26} />
+              </span>
+              <span className="eyebrow">Your next opportunity</span>
+              <h2>
+                Start with you.
+                <br />
+                <em>Explore with clarity.</em>
+              </h2>
+              <p>
+                One profile. Relevant possibilities.
+                <br />
+                Clear reasons for every match.
+              </p>
+              <div className="preview-interest-list">
+                {["Education", "Growing a business", "Building new skills"].map(
                   (label) => (
-                    <div key={label}>
-                      <span>
-                        <Check size={14} />
-                      </span>
+                    <span key={label}>
+                      <CheckCheck size={15} />
                       {label}
-                      <small>Satisfied</small>
-                    </div>
+                    </span>
                   ),
                 )}
               </div>
-              <div className="preview-report-footer">
-                <BookOpen size={15} />
-                <span>Policy v1</span>
-                <span className="ml-auto">
-                  View the reasoning <ArrowRight size={14} />
-                </span>
+              <div className="discovery-preview-footer">
+                <Sparkles size={17} />
+                Personalized discovery
+                <ArrowRight size={17} />
               </div>
             </div>
             <span className="floating-note note-bottom">
-              <Fingerprint size={18} /> Synthetic inputs. No profile storage.
+              <ShieldCheck size={18} />
+              Official sources. Informed next steps.
             </span>
           </div>
         </div>
@@ -123,57 +96,65 @@ export default async function Home() {
       <div className="principle-strip">
         <div className="container principles">
           <span>
-            <FileText size={18} /> Source-grounded discovery
+            <SlidersHorizontal size={18} />
+            Built around your needs
           </span>
           <span>
-            <CheckCheck size={18} /> Deterministic decisions
+            <FileText size={18} />
+            Official source references
           </span>
           <span>
-            <CircleHelp size={18} /> Unknown stays unknown
+            <CircleHelp size={18} />
+            Unknown stays unknown
           </span>
           <span>
-            <LockKeyhole size={18} /> Your profile isn’t saved
+            <LockKeyhole size={18} />
+            Private by choice
           </span>
         </div>
       </div>
       <section className="section container" id="how-it-works">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">Less guesswork. More understanding.</span>
-            <h2>A little clarity goes a long way.</h2>
+            <span className="eyebrow">
+              From your interests to your next step
+            </span>
+            <h2>A clearer way to discover.</h2>
           </div>
           <p>
-            From finding a scheme to understanding an assessment, the reasoning
-            stays in view.
+            You do not need to search hundreds of schemes. Start with the
+            details you know.
           </p>
         </div>
-        <div className="steps-grid">
+        <div className="steps-grid discovery-steps">
           {[
             {
-              number: "01",
+              icon: Fingerprint,
+              title: "Tell Us About Yourself",
+              text: "Share your interests and a few optional details. No names or identity documents needed.",
+            },
+            {
               icon: Search,
-              title: "Find your starting point",
-              text: "Explore government scheme records with their administering bodies and official source links.",
+              title: "Discover Relevant Schemes",
+              text: "Explore recommendations with clear reasons based on your profile and the scheme catalog.",
             },
             {
-              number: "02",
               icon: FileText,
-              title: "Check the known conditions",
-              text: "Try a synthetic profile against the approved fictional policy. Leave anything unknown blank.",
+              title: "Explore and Check Requirements",
+              text: "Read official sources and continue to an available reviewed or illustrative assessment.",
             },
             {
-              number: "03",
-              icon: Sparkles,
-              title: "Understand every result",
-              text: "See satisfied, unmet, and unknown requirements, with the policy version and evidence attached.",
+              icon: CheckCheck,
+              title: "Understand Your Assessment",
+              text: "See satisfied, unmet and unknown conditions. Results inform your next step, not government approval.",
             },
-          ].map(({ number, icon: Icon, title, text }) => (
-            <article className="step-card" key={number}>
+          ].map(({ icon: Icon, title, text }, index) => (
+            <article className="step-card" key={title}>
               <div>
                 <span className="step-icon">
                   <Icon size={23} />
                 </span>
-                <span className="step-number">{number}</span>
+                <span className="step-number">0{index + 1}</span>
               </div>
               <h3>{title}</h3>
               <p>{text}</p>
@@ -181,48 +162,24 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="section section-tinted">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Start exploring</span>
-              <h2>Opportunities worth understanding.</h2>
-            </div>
-            <Link href="/schemes" className="text-link">
-              View all schemes <ArrowRight size={17} />
-            </Link>
-          </div>
-          <div className="scheme-grid">
-            {featured.map((scheme) => (
-              <SchemeCard key={scheme.id} scheme={scheme} />
-            ))}
-          </div>
-          <p className="section-note">
-            <CircleHelp size={16} /> Government records are discovery metadata.
-            The eligibility check currently uses one clearly labeled fictional
-            policy.
-          </p>
-        </div>
-      </section>
       <section className="container section">
         <div className="closing-panel">
           <div>
-            <span className="eyebrow">An assessment you can follow</span>
+            <span className="eyebrow">Your next step starts here</span>
             <h2>
-              Every answer deserves
+              Good opportunities
               <br />
-              an explanation.
+              begin with your needs.
             </h2>
             <p>
-              Try the working example and see how missing information,
-              exclusions, and policy conditions affect a result.
+              Find the schemes worth exploring, then understand their
+              requirements at your own pace.
             </p>
+            <Link className="text-link" href="/schemes/all">
+              Prefer to browse the full catalog? →
+            </Link>
           </div>
-          <ActionLink
-            href={demo ? `/eligibility?scheme=${demo.id}` : "/eligibility"}
-          >
-            Try a synthetic profile
-          </ActionLink>
+          <ActionLink href="/find-schemes">Find My Schemes</ActionLink>
         </div>
       </section>
     </>

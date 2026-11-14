@@ -310,12 +310,22 @@ async def test_private_request_size_and_input_vocabulary(client, citizen_context
     ).status_code == 422
 
 
-async def test_dashboard_discovery_uses_only_verified_geography(client, citizen_context):
+async def test_dashboard_discovery_uses_profile_relevance_and_verified_geography(client, citizen_context):
     _, headers = await signup(client)
-    await client.put("/api/v1/profiles/me", headers=headers, json={"state": "Assam", "age_years": 25})
+    await client.put(
+        "/api/v1/profiles/me",
+        headers=headers,
+        json={"state": "Assam", "age_years": 25, "interests": ["education"]},
+    )
     response = await client.get("/api/v1/dashboard")
     assert response.status_code == 200, response.text
     body = response.json()
-    assert body["relevant_schemes"] and "do not establish eligibility" in body["discovery_notice"]
+    assert (
+        body["relevant_schemes"] and "not government eligibility determinations" in body["discovery_notice"]
+    )
     for scheme in body["relevant_schemes"]:
-        assert scheme["applicability"] == "national" or "Assam" in scheme["applicable_states"]
+        if scheme["applicability"] == "states":
+            assert "Assam" in scheme["applicable_states"]
+        elif scheme["applicability"] == "unknown":
+            assert any("coverage has not been verified" in note for note in scheme["missing_information"])
+        assert scheme["matching_reasons"]

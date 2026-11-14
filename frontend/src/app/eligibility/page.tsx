@@ -1,10 +1,12 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { apiFetch, ApiError } from "@/lib/api";
-import type { Requirements, Scheme, SchemePage } from "@/lib/types";
-import { approvedSchemeChoices } from "@/lib/catalog";
+import { categoryLabel } from "@/lib/catalog";
+import type { AssessmentRequirements, SchemeDetail } from "@/lib/types";
 import { Questionnaire } from "@/components/questionnaire";
-export const metadata: Metadata = { title: "Eligibility questionnaire" };
+import { Explorer } from "@/components/explorer";
+import { ProjectDisclaimer } from "@/components/ui";
+export const metadata: Metadata = { title: "Eligibility Assessment" };
 export const dynamic = "force-dynamic";
 
 export default async function EligibilityPage({
@@ -13,43 +15,49 @@ export default async function EligibilityPage({
   searchParams: Promise<{ scheme?: string }>;
 }) {
   const { scheme } = await searchParams;
-  const choices = await approvedSchemeChoices();
-  let selected: Scheme | undefined;
-  if (scheme) {
-    try {
-      selected = await apiFetch<Scheme>(
-        `/api/v1/schemes/${encodeURIComponent(scheme)}`,
-      );
-    } catch (error) {
-      if (error instanceof ApiError && [404, 422].includes(error.status))
-        notFound();
-      throw error;
-    }
-  } else {
-    selected = choices.find((item) => item.is_demo) || choices[0];
-    if (!selected)
-      selected = (await apiFetch<SchemePage>("/api/v1/schemes?page_size=1"))
-        .items[0];
+  if (!scheme)
+    return (
+      <div className="container page-shell">
+        <div className="page-heading">
+          <span className="eyebrow">Eligibility Assessment</span>
+          <h1>Choose your starting point.</h1>
+          <p>
+            Find a government scheme, add your details, and understand the
+            assessment criteria.
+          </p>
+          <ProjectDisclaimer />
+        </div>
+        <Explorer assessment />
+      </div>
+    );
+  let selected: SchemeDetail;
+  let requirements: AssessmentRequirements;
+  try {
+    [selected, requirements] = await Promise.all([
+      apiFetch<SchemeDetail>(`/api/v1/schemes/${encodeURIComponent(scheme)}`),
+      apiFetch<AssessmentRequirements>(
+        `/api/v1/schemes/${encodeURIComponent(scheme)}/assessment-requirements`,
+      ),
+    ]);
+  } catch (error) {
+    if (error instanceof ApiError && [404, 422].includes(error.status))
+      notFound();
+    throw error;
   }
-  if (!selected) notFound();
-  if (!choices.some((item) => item.id === selected.id)) choices.push(selected);
-  const requirements = await apiFetch<Requirements>(
-    `/api/v1/schemes/${selected.id}/requirements`,
-  );
+  if (selected.is_demo) redirect("/eligibility");
   return (
     <div className="container page-shell">
       <div className="page-heading">
-        <span className="eyebrow">The eligibility check</span>
-        <h1>Let’s make the requirements clear.</h1>
-        <p>
-          A few synthetic details. A transparent assessment. Every condition
-          explained.
-        </p>
+        <span className="eyebrow">
+          Eligibility Assessment · {categoryLabel(selected.category)}
+        </span>
+        <h1>{selected.name}</h1>
+        <p>{selected.description}</p>
+        <ProjectDisclaimer />
       </div>
       <Questionnaire
-        key={selected.id}
+        key={`${selected.id}:${requirements.criteria_token}`}
         requirements={requirements}
-        schemes={choices}
       />
     </div>
   );

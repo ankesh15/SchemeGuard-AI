@@ -14,7 +14,7 @@ import { categoryLabel } from "@/lib/catalog";
 import { SchemeCard } from "./scheme-card";
 import { ErrorState, LoadingState } from "./ui";
 
-export function Explorer() {
+export function Explorer({ assessment = false }: { assessment?: boolean }) {
   const [filters, setFilters] = useState<SchemeFilters>({
     categories: [],
     states: [],
@@ -55,7 +55,11 @@ export function Explorer() {
     const controller = new AbortController();
     setLoading(true);
     setError("");
-    const query = new URLSearchParams({ page: String(page), page_size: "6" });
+    const query = new URLSearchParams({
+      page: String(page),
+      page_size: "6",
+      is_demo: "false",
+    });
     if (term) query.set("search", term);
     if (state) query.set("state", state);
     if (category) query.set("category", category);
@@ -163,7 +167,11 @@ export function Explorer() {
       ) : data?.items.length ? (
         <div className="scheme-grid">
           {data.items.map((scheme) => (
-            <SchemeCard key={scheme.id} scheme={scheme} />
+            <SchemeCard
+              key={scheme.id}
+              scheme={scheme}
+              assessment={assessment}
+            />
           ))}
         </div>
       ) : (

@@ -2,11 +2,15 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { citizenFetch, citizenJSON, type Preferences } from "@/lib/citizen";
+import { useOptionalReport } from "@/components/report-context";
+import { useOptionalDiscovery } from "@/components/discovery-context";
 import { useCitizen } from "./session";
 import { LoadingState } from "@/components/ui";
 export function CitizenSettings() {
   const session = useCitizen();
   const router = useRouter();
+  const discovery = useOptionalDiscovery();
+  const transientReport = useOptionalReport();
   const [prefs, setPrefs] = useState<Preferences | null>(null);
   const [username, setUsername] = useState(session.username);
   const [current, setCurrent] = useState("");
@@ -41,6 +45,9 @@ export function CitizenSettings() {
     try {
       await citizenFetch(path, citizenJSON(body, session.csrf_token, method));
       if (leave) {
+        discovery?.clear();
+        transientReport?.setReport(null);
+        transientReport?.setExplanation(null);
         router.replace("/login");
         router.refresh();
       } else {

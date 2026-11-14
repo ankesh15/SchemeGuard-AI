@@ -1,0 +1,134 @@
+{
+  "scheme_id": "a2491d14-3c04-5c25-b534-87742eae086c",
+  "scheme_name": "AICTE Pragati Scholarship for Girl Students (Technical Degree)",
+  "is_demo": false,
+  "available": true,
+  "rule_set": null,
+  "fields": [
+    {
+      "choices": [],
+      "minimum": 0,
+      "maximum": 130,
+      "integer": true,
+      "visible_when": null,
+      "key": "age_years",
+      "label": "Age",
+      "value_type": "number",
+      "section": "Your details",
+      "help_text": "Leave blank if this information is unavailable."
+    },
+    {
+      "choices": [],
+      "minimum": 0,
+      "maximum": 1000000000000,
+      "integer": false,
+      "visible_when": null,
+      "key": "annual_family_income_inr",
+      "label": "Annual family income (INR)",
+      "value_type": "number",
+      "section": "Household",
+      "help_text": "Leave blank if this information is unavailable."
+    },
+    {
+      "choices": [],
+      "minimum": null,
+      "maximum": null,
+      "integer": false,
+      "visible_when": null,
+      "key": "current_student",
+      "label": "Currently a student?",
+      "value_type": "boolean",
+      "section": "Education",
+      "help_text": "Leave blank if this information is unavailable."
+    },
+    {
+      "choices": [
+        {
+          "value": "higher_secondary",
+          "label": "Higher secondary"
+        },
+        {
+          "value": "diploma",
+          "label": "Diploma"
+        },
+        {
+          "value": "undergraduate",
+          "label": "Undergraduate"
+        },
+        {
+          "value": "postgraduate",
+          "label": "Postgraduate"
+        },
+        {
+          "value": "other",
+          "label": "Other"
+        }
+      ],
+      "minimum": null,
+      "maximum": null,
+      "integer": false,
+      "visible_when": null,
+      "key": "course_level",
+      "label": "Education level",
+      "value_type": "string",
+      "section": "Education",
+      "help_text": "Leave blank if this information is unavailable."
+    }
+  ],
+  "requirements": [
+    {
+      "key": "minimum_age",
+      "label": "Minimum assessment age",
+      "evidence": []
+    },
+    {
+      "key": "maximum_age",
+      "label": "Maximum assessment age",
+      "evidence": []
+    },
+    {
+      "key": "income_limit",
+      "label": "Family income range",
+      "evidence": []
+    },
+    {
+      "key": "student_status",
+      "label": "Current student status",
+      "evidence": []
+    },
+    {
+      "key": "study_level",
+      "label": "Education pathway",
+      "evidence": []
+    }
+  ],
+  "notices": [
+    "SchemeGuard AI is a project demonstration. Results are estimates and do not determine government eligibility."
+  ],
+  "official_application_url": null,
+  "official_source_url": "https://scholarships.gov.in/All-Scholarships",
+  "category": "scholarship",
+  "assessment_mode": "ILLUSTRATIVE",
+  "template": {
+    "id": "education",
+    "version": 1,
+    "title": "Education assessment",
+    "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+    "basis": "project_authored_illustration",
+    "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "criteria_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "criteria_notes": {
+    "minimum_age": "Illustrative criterion: age is at least 16.",
+    "maximum_age": "Illustrative criterion: age is no more than 30.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 500,000.",
+    "student_status": "Illustrative criterion: currently studying.",
+    "study_level": "Illustrative criterion: higher secondary, diploma, undergraduate or postgraduate study."
+  },
+  "sample_profile": {
+    "age_years": 21,
+    "annual_family_income_inr": 240000,
+    "current_student": true,
+    "course_level": "undergraduate"
+  }
+}

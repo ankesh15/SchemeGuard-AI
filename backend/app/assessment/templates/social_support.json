@@ -1,0 +1,66 @@
+{
+  "id": "social_support",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Social support assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "social_welfare",
+    "food_security",
+    "disability"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "annual_family_income_inr",
+        "label": "Annual family income (INR)",
+        "value_type": "number",
+        "section": "Household",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 1000000000000,
+        "integer": false
+      },
+      {
+        "key": "requests_support",
+        "label": "Seeking household support?",
+        "value_type": "boolean",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable."
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "support_requested",
+          "label": "Household support requested",
+          "field": "requests_support",
+          "operator": "==",
+          "value_type": "boolean",
+          "value": true
+        },
+        {
+          "kind": "comparison",
+          "key": "income_limit",
+          "label": "Family income range",
+          "field": "annual_family_income_inr",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 400000
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "support_requested": "Illustrative criterion: household support is requested. This does not verify any disability, entitlement or identity.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 400,000."
+  },
+  "sample_profile": {
+    "annual_family_income_inr": 180000,
+    "requests_support": true
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "healthcare",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Healthcare support assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "health"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "annual_family_income_inr",
+        "label": "Annual family income (INR)",
+        "value_type": "number",
+        "section": "Household",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 1000000000000,
+        "integer": false
+      },
+      {
+        "key": "needs_health_support",
+        "label": "Seeking healthcare support?",
+        "value_type": "boolean",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable."
+      },
+      {
+        "key": "has_health_cover",
+        "label": "Already covered for this support?",
+        "value_type": "boolean",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable."
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "support_requested",
+          "label": "Healthcare support requested",
+          "field": "needs_health_support",
+          "operator": "==",
+          "value_type": "boolean",
+          "value": true
+        },
+        {
+          "kind": "comparison",
+          "key": "income_limit",
+          "label": "Family income range",
+          "field": "annual_family_income_inr",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 500000
+        },
+        {
+          "kind": "exclude",
+          "key": "existing_cover",
+          "label": "Existing support coverage",
+          "expression": {
+            "kind": "comparison",
+            "key": "existing_cover_check",
+            "label": "Existing support coverage",
+            "field": "has_health_cover",
+            "operator": "==",
+            "value_type": "boolean",
+            "value": true
+          }
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "support_requested": "Illustrative criterion: healthcare support is requested. No diagnosis or medical records are needed.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 500,000.",
+    "existing_cover": "Illustrative exclusion: existing coverage for the same support does not match this template."
+  },
+  "sample_profile": {
+    "annual_family_income_inr": 240000,
+    "needs_health_support": true,
+    "has_health_cover": false
+  }
+}

@@ -1,10 +1,14 @@
 "use client";
 import Link from "next/link";
+import { useOptionalReport } from "@/components/report-context";
+import { useOptionalDiscovery } from "@/components/discovery-context";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, type FormEvent } from "react";
 import { citizenFetch, citizenJSON, type CitizenSession } from "@/lib/citizen";
 export function CitizenAuth({ register = false }: { register?: boolean }) {
   const router = useRouter();
+  const discovery = useOptionalDiscovery();
+  const transientReport = useOptionalReport();
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
   const [username, setUsername] = useState("");
@@ -35,9 +39,20 @@ export function CitizenAuth({ register = false }: { register?: boolean }) {
         register ? "auth/register" : "auth/login",
         citizenJSON({ username, password }),
       );
+      const continueGuest =
+        register && discovery?.profile && !discovery.ownerId;
+      if (!continueGuest) discovery?.clear();
+      transientReport?.setReport(null);
+      transientReport?.setExplanation(null);
       setPassword("");
       setConfirmation("");
-      router.replace(session.role === "admin" ? "/admin" : "/dashboard");
+      router.replace(
+        session.role === "admin"
+          ? "/admin"
+          : continueGuest
+            ? "/find-schemes"
+            : "/dashboard",
+      );
       router.refresh();
     } catch (reason) {
       setError(

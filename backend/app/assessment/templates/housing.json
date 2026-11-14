@@ -1,0 +1,90 @@
+{
+  "id": "housing",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Housing support assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "housing"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "age_years",
+        "label": "Age",
+        "value_type": "number",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 130,
+        "integer": true
+      },
+      {
+        "key": "annual_family_income_inr",
+        "label": "Annual family income (INR)",
+        "value_type": "number",
+        "section": "Household",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 1000000000000,
+        "integer": false
+      },
+      {
+        "key": "owns_home",
+        "label": "Already own a home?",
+        "value_type": "boolean",
+        "section": "Housing",
+        "help_text": "Leave blank if this information is unavailable."
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "adult_applicant",
+          "label": "Adult applicant",
+          "field": "age_years",
+          "operator": ">=",
+          "value_type": "number",
+          "value": 18
+        },
+        {
+          "kind": "comparison",
+          "key": "income_limit",
+          "label": "Family income range",
+          "field": "annual_family_income_inr",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 800000
+        },
+        {
+          "kind": "exclude",
+          "key": "home_ownership",
+          "label": "Home ownership",
+          "expression": {
+            "kind": "comparison",
+            "key": "home_ownership_check",
+            "label": "Home ownership",
+            "field": "owns_home",
+            "operator": "==",
+            "value_type": "boolean",
+            "value": true
+          }
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "adult_applicant": "Illustrative criterion: age is at least 18.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 800,000.",
+    "home_ownership": "Illustrative exclusion: existing home ownership does not match this template."
+  },
+  "sample_profile": {
+    "age_years": 28,
+    "annual_family_income_inr": 360000,
+    "owns_home": false
+  }
+}

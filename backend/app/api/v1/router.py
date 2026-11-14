@@ -8,6 +8,7 @@ from app.api.v1.citizen_auth import router as citizen_auth_router
 from app.api.v1.eligibility import router as eligibility_router
 from app.api.v1.grounding import router as grounding_router
 from app.api.v1.monitoring import router as monitoring_router
+from app.api.v1.recommendations import router as recommendation_router
 from app.api.v1.schemes import router as scheme_router
 
 router = APIRouter(prefix="/api/v1")
@@ -23,3 +24,5 @@ router.include_router(monitoring_router)
 
 router.include_router(citizen_router)
 router.include_router(citizen_auth_router)
+
+router.include_router(recommendation_router)

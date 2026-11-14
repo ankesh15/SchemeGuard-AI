@@ -250,16 +250,17 @@ async def dashboard(request: Request, user: Citizen, session: DB) -> dict[str, A
     )
     updates = await related_updates(user, session)
     profile_info = await profile_read(session, request.app.state.settings, user.id)
-    from app.repositories.scheme import SchemeRepository
-    from app.schemas.scheme import SchemeQuery
-    from app.services.scheme import SchemeService
+    from app.schemas.recommendations import RecommendationOptions
+    from app.services.recommendations import RecommendationService
 
-    discovery = await SchemeService(SchemeRepository(session)).list(
-        SchemeQuery.model_validate({"state": profile_info["profile"]["state"], "page_size": 3})
+    discovery = await RecommendationService(session).recommend(
+        ProfileData.model_validate(profile_info["profile"]), RecommendationOptions(page_size=3)
     )
     return {
         "relevant_schemes": [item.model_dump(mode="json") for item in discovery.items],
-        "discovery_notice": "Geographical discovery metadata only; these suggestions do not establish eligibility.",
+        "discovery_notice": discovery.notice,
+        "recommendation_categories": discovery.categories,
+        "recommendation_total": discovery.total,
         "username": user.username,
         "profile": profile_info,
         "recent_assessments": saved["items"],

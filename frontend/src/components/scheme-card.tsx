@@ -9,8 +9,15 @@ import {
 import type { Scheme } from "@/lib/types";
 import { categoryLabel } from "@/lib/catalog";
 import { Badge } from "./ui";
+import { schemeName } from "@/lib/presentation";
 
-export function SchemeCard({ scheme }: { scheme: Scheme }) {
+export function SchemeCard({
+  scheme,
+  assessment = false,
+}: {
+  scheme: Scheme;
+  assessment?: boolean;
+}) {
   return (
     <article
       className={`scheme-card ${scheme.is_demo ? "scheme-card-demo" : ""}`}
@@ -33,17 +40,21 @@ export function SchemeCard({ scheme }: { scheme: Scheme }) {
           : categoryLabel(scheme.category)}
       </span>
       <h2>
-        <Link href={`/schemes/${scheme.id}`}>{scheme.name}</Link>
+        <Link href={`/schemes/${scheme.id}`}>
+          {schemeName(scheme.name, scheme.is_demo)}
+        </Link>
       </h2>
       <p className="card-description">
-        {scheme.description ||
+        {(scheme.is_demo
+          ? "A project learning assessment with illustrative criteria."
+          : scheme.description) ||
           "Visit the official source for details about this scheme."}
       </p>
       <div className="card-meta">
         <span>
           <Landmark size={14} />
           {scheme.is_demo
-            ? "SchemeGuard development fixture"
+            ? "SchemeGuard learning example"
             : scheme.department || scheme.ministry || "Department not verified"}
         </span>
         <span>
@@ -65,10 +76,24 @@ export function SchemeCard({ scheme }: { scheme: Scheme }) {
               ? scheme.is_demo
                 ? "Eligibility demo available"
                 : "Approved eligibility rules"
-              : "Discovery metadata only"}
+              : scheme.assessment_mode === "ILLUSTRATIVE"
+                ? "Illustrative assessment available"
+                : "Discovery metadata only"}
         </span>
-        <Link href={`/schemes/${scheme.id}`} aria-label={`View ${scheme.name}`}>
-          View scheme <ArrowUpRight size={16} />
+        <Link
+          href={
+            assessment
+              ? `/eligibility?scheme=${scheme.id}`
+              : `/schemes/${scheme.id}`
+          }
+          aria-label={
+            assessment
+              ? `Assess ${schemeName(scheme.name, scheme.is_demo)}`
+              : `View ${schemeName(scheme.name, scheme.is_demo)}`
+          }
+        >
+          {assessment ? "Select scheme" : "View scheme"}{" "}
+          <ArrowUpRight size={16} />
         </Link>
       </div>
     </article>

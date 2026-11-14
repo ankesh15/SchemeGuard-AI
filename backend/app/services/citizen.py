@@ -33,7 +33,9 @@ async def active_owner(session: AsyncSession, user_id: UUID) -> User:
 def profile_values(data: ProfileData) -> dict[str, Any]:
     result = {
         key: value
-        for key, value in data.model_dump(mode="json", exclude={"attributes"}, exclude_none=True).items()
+        for key, value in data.model_dump(
+            mode="json", exclude={"attributes", "interests", "field_of_study"}, exclude_none=True
+        ).items()
     }
     result.update(data.attributes)
     # Explicit compatibility aliases for the authored Phase 2 fixture only.

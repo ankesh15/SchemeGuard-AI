@@ -1,10 +1,10 @@
 # SchemeGuard AI — evidence-backed policies and private assessments
 
-A Docker-first government scheme discovery project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; citizen profiles and explicitly saved reports use encrypted private storage. Public synthetic requests remain stateless.
+A Docker-first, profile-first government scheme recommendation project with a deterministic, explainable eligibility engine and a responsive Next.js interface. The backend is a modular monolith. PostgreSQL stores public scheme metadata and immutable policy/rule history; citizen profiles and explicitly saved reports use encrypted private storage. Public demonstration assessments remain stateless.
 
 Phase 3 adds an authenticated administrator workspace for official PDFs, page-aware PyMuPDF extraction, stable chunks, Gemini structured candidate extraction, evidence validation, and pending review. Phase 4 adds checkpointed LangGraph workflows, authenticated human revisions and decisions, immutable publication, pgvector retrieval and grounded explanations. See the [Phase 3 implementation report](docs/phase3-ai-ingestion.md), [processing guide](docs/document-processing.md), and [Gemini integration guide](docs/gemini-integration.md).
 
-**The working assessment uses an explicitly fictional development scholarship.** The catalog contains 282 government schemes across 23 categories, but none has approved government eligibility rules. The fictional policy offers no award and has no official application portal.
+**The primary journey starts with your details and interests, then ranks the 282-record government catalog.** Applicable human-reviewed policies take precedence. For 225 discovery records across 14 categories, nine separate project-authored templates provide illustrative assessments; 57 records remain explicitly unsupported. These templates are not approved government policies. The legacy learning fixture and all historical records remain available internally, but are excluded from the default public catalog/selection. No government policy has yet been approved in the working database.
 
 See the [Phase 4 implementation report](docs/phase4-langgraph.md), [workflow guide](docs/agent-workflows.md), [human review guide](docs/human-review.md) and [RAG architecture](docs/rag-architecture.md). The live official document remains pending actual human review. No real government policy approval is claimed.
 
@@ -34,15 +34,18 @@ docker compose exec api python -m app.seed_demo
 
 `SEED_DEMO_DATA=false` disables automatic development seeding; it does not delete existing immutable history. Synthetic fixture seeding is rejected outside development/test environments. PostgreSQL credentials in an existing volume must be rotated in PostgreSQL as well as in `.env`; changing the environment alone does not change its stored password.
 
-## Try the complete user journey
+## Profile-first discovery
 
-1. Open the frontend, explore schemes, search **Fictional**, and select **SchemeGuard Learning Scholarship (Fictional)**.
-2. Open its eligibility questionnaire. Select **Use a synthetic example** and submit.
-3. The report shows **Known conditions satisfied**, six requirement results, decision traces, policy evidence, and rule version 1.
-4. Change the synthetic age to `17` to see **Requirements not satisfied**.
-5. Leave household income blank, or request disability support without a percentage, to see **More information required** and the specific missing field.
+1. Open [the homepage](http://localhost:3000). It displays no scheme grid or catalog request.
+2. Select **Find My Schemes** to open `/find-schemes`. Complete any of the five optional steps: age/state, education, employment, income, and interests. Unknown answers are allowed.
+3. Select **Find Relevant Schemes**. `/schemes/recommended` displays paginated, explainable matches from PostgreSQL with category filtering and relevance/name sorting.
+4. Open **View Details**, inspect official references and the recommendation reasons, then continue to an available assessment. Compatible answers are prefilled; unknown information stays unknown.
+5. Return to recommendations or **Edit Details**. Guests’ answers and reports exist only in React memory, never browser storage or URLs. Reloading clears them.
+6. Citizens can reuse their authorized encrypted profile and explicitly opt to save changes. Registration can carry a guest's in-memory answers back to the questionnaire, but does not automatically store them. Approved-policy assessments retain the existing private save/history/reproduction flow.
 
-Blank answers remain unknown. Form validation checks valid input types and domains, rather than preventing profiles that fail an eligibility condition. The questionnaire uses the approved policy's field definitions and reveals dependent inputs when applicable. A report exists only in React memory; refreshing the page clears it. No citizen names, Aadhaar numbers, contact details, personal document uploads, or profile-storage APIs are introduced.
+`/schemes` and `/dashboard/schemes` resolve to this journey. The manual searchable catalog remains at `/schemes/all`; direct `/eligibility` selection remains available for existing links. Unsupported schemes display **Detailed assessment criteria are not yet available for this scheme.** Illustrative category assessments are clearly distinct from reviewed government rules and are never published or saved as approved policies.
+
+Recommendations use category interests, explicit occupation/student/employment signals and verified geography. Age/income/education criteria can refine matches only through existing human-approved rules; missing metadata or inputs never imply failure. There are no LLM calls or new policy thresholds in matching. See the [implementation and verification report](docs/profile-first-recommendations.md) for the full algorithm, API examples, file list, actual counts and browser evidence.
 
 ## Curated multi-category dataset
 

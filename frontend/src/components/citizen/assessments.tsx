@@ -15,6 +15,7 @@ import { EligibilityReportView } from "@/components/eligibility-report";
 import { QuestionField } from "@/components/questionnaire";
 import { buildProfile, validateAnswers, type Answers } from "@/lib/form";
 import { useCitizen } from "./session";
+import { criteriaText, schemeName } from "@/lib/presentation";
 export function SavedAssessments() {
   const [data, setData] = useState<{
     items: SavedAssessment[];
@@ -57,8 +58,8 @@ export function SavedAssessments() {
         <LoadingState message="Loading private history…" />
       ) : !data.items.length ? (
         <p>
-          No assessments saved. You can still use the public synthetic demo
-          without an account.
+          No assessments saved. You can still use the public assessment without
+          an account.
         </p>
       ) : (
         <>
@@ -66,7 +67,7 @@ export function SavedAssessments() {
             {data.items.map((item) => (
               <article key={item.id}>
                 <div>
-                  <strong>{item.scheme_name}</strong>
+                  <strong>{schemeName(item.scheme_name)}</strong>
                   <p>
                     {item.assessment} · Version{" "}
                     {item.rule_version ?? "unavailable"}
@@ -197,10 +198,13 @@ export function SavedAssessmentDetail({ id }: { id: string }) {
         {replay && <p role="status">{replay}</p>}
         {error && <p role="alert">{error}</p>}
       </section>
-      {data.report && <EligibilityReportView report={data.report} />}
+      {data.report && <EligibilityReportView report={data.report} saved />}
     </>
   );
 }
+import { useOptionalDiscovery } from "@/components/discovery-context";
+import { assessmentPrefill } from "@/lib/recommendations";
+
 export function NewAssessment({
   initialScheme = "",
 }: {
@@ -208,6 +212,8 @@ export function NewAssessment({
 }) {
   const session = useCitizen();
   const router = useRouter();
+  const discovery = useOptionalDiscovery();
+  const currentProfile = discovery?.profile;
   const [schemes, setSchemes] = useState<SchemePage | null>(null);
   const [id, setId] = useState(initialScheme);
   const [requirements, setRequirements] = useState<Requirements | null>(null);
@@ -226,7 +232,8 @@ export function NewAssessment({
       .then((value) => {
         if (!controller.signal.aborted) {
           setSchemes(value);
-          if (!initialScheme) setId(value.items[0]?.id || "");
+          if (!initialScheme)
+            setId(value.items.find((item) => !item.is_demo)?.id || "");
         }
       })
       .catch((reason: Error) => {
@@ -250,33 +257,15 @@ export function NewAssessment({
       .then(([rules, profile]) => {
         if (controller.signal.aborted) return;
         setRequirements(rules);
-        const values = {
-          ...profile.profile,
-          ...profile.profile.attributes,
-          ...(profile.profile.age_years !== null
-            ? { age: profile.profile.age_years }
-            : {}),
-          ...(profile.profile.annual_family_income_inr !== null
-            ? { annual_income_inr: profile.profile.annual_family_income_inr }
-            : {}),
-        };
         setAnswers(
-          Object.fromEntries(
-            rules.fields.map((field) => [
-              field.key,
-              (values as Record<string, unknown>)[field.key] === null ||
-              (values as Record<string, unknown>)[field.key] === undefined
-                ? ""
-                : String((values as Record<string, unknown>)[field.key]),
-            ]),
-          ),
+          assessmentPrefill(rules.fields, currentProfile || profile.profile),
         );
       })
       .catch((reason: Error) => {
         if (!controller.signal.aborted) setError(reason.message);
       });
     return () => controller.abort();
-  }, [id]);
+  }, [id, currentProfile]);
   async function submit(event: FormEvent) {
     event.preventDefault();
     if (!requirements?.available) return;
@@ -338,12 +327,14 @@ export function NewAssessment({
           {initialScheme &&
             !schemes?.items.some((item) => item.id === initialScheme) && (
               <option value={initialScheme}>
-                {requirements?.scheme_name || "Selected scheme"}
+                {requirements?.scheme_name
+                  ? schemeName(requirements.scheme_name)
+                  : "Selected scheme"}
               </option>
             )}
           {schemes?.items.map((item) => (
             <option key={item.id} value={item.id}>
-              {item.name}
+              {schemeName(item.name, item.is_demo)}
             </option>
           ))}
         </select>
@@ -357,8 +348,9 @@ export function NewAssessment({
         <LoadingState message="Loading supported schemes…" />
       ) : !id ? (
         <p>
-          No approved schemes are available.{" "}
-          <Link href="/schemes">Browse discovery metadata</Link>.
+          Select a reviewed policy to save an assessment.{" "}
+          <Link href="/eligibility">Use the public scheme assessment</Link> for
+          illustrative criteria.
         </p>
       ) : !requirements ? (
         <LoadingState message="Loading the approved questionnaire…" />
@@ -376,14 +368,14 @@ export function NewAssessment({
           noValidate
         >
           <p>
-            {requirements.scheme_name} · Rule version{" "}
-            {requirements.rule_set?.version_number}
+            {schemeName(requirements.scheme_name, requirements.is_demo)} · Rule
+            version {requirements.rule_set?.version_number}
           </p>
           {requirements.is_demo && (
             <div className="notice">
               <p>
-                Fictional development policy. All thresholds are invented and no
-                government award is offered.
+                Project-authored learning criteria. This is an illustration, not
+                verified government eligibility.
               </p>
             </div>
           )}
@@ -391,7 +383,15 @@ export function NewAssessment({
             {requirements.fields.map((field) => (
               <QuestionField
                 key={field.key}
-                field={field}
+                field={
+                  requirements.is_demo
+                    ? {
+                        ...field,
+                        label: criteriaText(field.label, true),
+                        help_text: criteriaText(field.help_text, true),
+                      }
+                    : field
+                }
                 value={answers[field.key] || ""}
                 answers={answers}
                 error={errors[field.key]}

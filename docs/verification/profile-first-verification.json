@@ -1,0 +1,75 @@
+{
+  "verified_on": "2026-11-14",
+  "scope": "profile-first recommendation redesign",
+  "backend": {
+    "passed": 491,
+    "failed": 0,
+    "seconds": 66.61,
+    "postgresql_integration": true,
+    "new_cases": 33
+  },
+  "frontend": {
+    "passed": 84,
+    "failed": 0,
+    "files": 13,
+    "seconds": 2.33
+  },
+  "browser": {
+    "full_regression_passed": 9,
+    "full_regression_seconds": 35.7,
+    "final_journey_rerun_passed": 4,
+    "final_journey_seconds": 22.8,
+    "desktop_width": 1280,
+    "mobile_width": 390,
+    "browser": "isolated installed Chrome with pinned project Playwright",
+    "final_citizen_database": "isolated QA tmpfs PostgreSQL",
+    "guest_runtime_errors": 0,
+    "guest_browser_storage_entries": 0
+  },
+  "checks": {
+    "ruff": "passed",
+    "mypy": "passed: 109 modules",
+    "typescript": "passed",
+    "frontend_lint": "passed",
+    "schema_drift": "none",
+    "development_images": "built",
+    "production_images": "built; no deployment"
+  },
+  "database": {
+    "schemes": 283,
+    "government_schemes": 282,
+    "scheme_sources": 290,
+    "approved_rule_sets": 1,
+    "approved_government_rule_sets": 0,
+    "document_versions": 2,
+    "profiles": 4,
+    "assessments": 4,
+    "monitoring_runs": 0,
+    "notifications": 0,
+    "users_including_closed_test_tombstones": 11,
+    "active_citizens": 4,
+    "alembic": "0009_citizen_system"
+  },
+  "apis": {
+    "new": [
+      "POST /api/v1/recommendations",
+      "GET /api/v1/recommendations/options",
+      "POST /api/v1/me/recommendations"
+    ],
+    "total_openapi_operations": 75
+  },
+  "limitations": [
+    "Category relevance is not verified government eligibility.",
+    "No approved government rule set exists in the live database.",
+    "Illustrative criteria remain separate from real policy; their thresholds never rank recommendations.",
+    "No real Gemini call or production deployment was performed for this change.",
+    "Shared-proxy rate quotas are preserved; repeated citizen browser checks used an isolated database.",
+    "Four generated development QA accounts were closed through normal account deletion; existing user data and histories were preserved."
+  ],
+  "artifacts": [
+    "profile-first/home-desktop.png",
+    "profile-first/results-desktop.png",
+    "profile-first/results-mobile.png",
+    "profile-first-recommendations-samples.json"
+  ]
+}

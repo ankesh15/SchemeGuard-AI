@@ -1,0 +1,99 @@
+{
+  "id": "business",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Business assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "business"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "age_years",
+        "label": "Age",
+        "value_type": "number",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 130,
+        "integer": true
+      },
+      {
+        "key": "business_stage",
+        "label": "Business stage",
+        "value_type": "string",
+        "section": "Business",
+        "help_text": "Leave blank if this information is unavailable.",
+        "choices": [
+          {
+            "value": "planning",
+            "label": "Planning a business"
+          },
+          {
+            "value": "operating",
+            "label": "Operating a business"
+          },
+          {
+            "value": "not_applicable",
+            "label": "Not applicable"
+          }
+        ]
+      },
+      {
+        "key": "has_business_plan",
+        "label": "Have a business plan?",
+        "value_type": "boolean",
+        "section": "Business",
+        "help_text": "Leave blank if this information is unavailable."
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "adult_applicant",
+          "label": "Adult applicant",
+          "field": "age_years",
+          "operator": ">=",
+          "value_type": "number",
+          "value": 18
+        },
+        {
+          "kind": "comparison",
+          "key": "business_stage",
+          "label": "Business activity",
+          "field": "business_stage",
+          "operator": "IN",
+          "value_type": "string",
+          "value": [
+            "planning",
+            "operating"
+          ]
+        },
+        {
+          "kind": "comparison",
+          "key": "business_plan",
+          "label": "Business planning",
+          "field": "has_business_plan",
+          "operator": "==",
+          "value_type": "boolean",
+          "value": true
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "adult_applicant": "Illustrative criterion: age is at least 18.",
+    "business_stage": "Illustrative criterion: planning or operating a business.",
+    "business_plan": "Illustrative criterion: a business plan is available. No business documents are uploaded."
+  },
+  "sample_profile": {
+    "age_years": 29,
+    "business_stage": "planning",
+    "has_business_plan": true
+  }
+}

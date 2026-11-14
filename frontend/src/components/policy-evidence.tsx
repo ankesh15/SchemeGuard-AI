@@ -149,8 +149,8 @@ export function PolicyEvidence({
           <h3>Ask the approved document</h3>
           <p>
             Ask about requirements, income, documents, benefits or applications.
-            Answers quote the source and cannot decide eligibility. Use
-            synthetic information only.
+            Answers quote the source and cannot decide eligibility. Do not
+            include personal information in your question.
           </p>
           <label htmlFor="policy-question">Your document question</label>
           <input

@@ -1,3 +1,5 @@
+> Current public journey: Home → optional five-step details → shared recommendation service → personalized results → source-backed scheme details → existing assessment engine. The original phase descriptions below are historical; [profile-first recommendations](profile-first-recommendations.md) describes the latest discovery integration.
+
 # Architecture — Phase 3
 
 SchemeGuard AI is a modular monolith with a separate Next.js frontend and PostgreSQL. Only three Docker services run: frontend, API, and database. Gemini performs administrator-requested candidate extraction. Background workers, policy monitoring, and notifications remain deferred.
@@ -90,3 +92,16 @@ Opt-in source monitoring uses the existing secure fetch/parse/LangGraph review p
 Production now has separate non-root backend and standalone Next.js images and an independent six-service Compose manifest. Only release tooling runs owner migrations; long-running processes receive a restricted runtime DB role. Browser public/private calls are same-origin and allowlisted, so cookies need no cross-origin relaxation and backend secrets stay server-only. Production HTML is dynamic with a fresh strict script nonce, host allowlists, secure cookies and bounded request bodies.
 
 DocumentStorage remains the canonical content-addressed storage contract, with a configured S3 adapter sharing the same immutable keys/checksums and a dry-run/copy verification utility. Existing filesystem originals are not silently moved. PostgreSQL/checkpoint and original-document backup/recovery were tested locally. CI and measured demonstration/evaluation artifacts are documented in testing.md and final-project-report.md. No live cloud deployment is implied.
+
+## Scheme-based demonstration assessments
+
+The public selection UI uses the existing PostgreSQL scheme APIs with `is_demo=false`. `app.assessment` contains nine validated, versioned project-authored templates, separate from SQLAlchemy policy models. `AssessmentService` first delegates approved policy selection/validation to the existing eligibility service. Only when no applicable approved rule exists does an explicit category mapping supply an illustrative Program to the same deterministic engine. Ambiguous or invalid approved policies fail closed; templates cannot hide those failures.
+
+The report records the assessment mode and criteria fingerprint. Illustrative traces never borrow government evidence or RuleSet IDs and do not invoke Gemini/RAG, write saved reports, enqueue monitoring/reassessment, or notify users. Authenticated saving and worker paths continue to use only the original approved-policy eligibility service. No schema migration or change to immutable history was needed.
+
+
+## Profile-first discovery boundary
+
+`DiscoveryProvider` holds transient answers and recommendation explanations in per-tab React memory. It never writes to browser storage. The homepage has no database fetch. Guests POST a bounded ProfileData-compatible body through the fixed public Next.js proxy; no cookies are forwarded. Citizens may explicitly save that same data through the existing CSRF-protected encrypted profile API. Login, logout and account deletion clear transient private state; guest registration may carry unsaved guest answers to the consent form.
+
+`RecommendationService` reads the current non-demo, non-inactive PostgreSQL catalog, combines explicit category/occupation/student/employment signals, considers verified geography and optionally calls the existing approved-rule version selector and typed engine. Unverified coverage remains discoverable. Demonstration templates provide assessment availability only and never numeric ranking requirements. The dashboard and authenticated saved-profile endpoint reuse this service. No new tables, cache, worker queue, AI pipeline or incompatible profile store is introduced.

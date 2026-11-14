@@ -1,5 +1,4 @@
 "use client";
-import type { Explanation } from "@/lib/workflow";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -8,29 +7,28 @@ import {
   BookOpen,
   Check,
   ChevronRight,
-  FlaskConical,
   Info,
   LoaderCircle,
   LockKeyhole,
   RotateCcw,
+  Sparkles,
 } from "lucide-react";
 import { apiFetch, ApiError } from "@/lib/api";
 import {
   buildProfile,
-  exampleAnswers,
   isVisible,
   validateAnswers,
   type Answers,
 } from "@/lib/form";
+import { categoryLabel } from "@/lib/catalog";
 import type {
+  AssessmentRequirements,
   EligibilityReport,
   ProfileField,
-  Requirements,
-  Scheme,
 } from "@/lib/types";
+import { assessmentPrefill } from "@/lib/recommendations";
+import { useOptionalDiscovery } from "./discovery-context";
 import { useReport } from "./report-context";
-import { DemoNotice } from "./ui";
-
 export function QuestionField({
   field,
   value,
@@ -109,37 +107,33 @@ export function QuestionField({
 
 export function Questionnaire({
   requirements,
-  schemes,
 }: {
-  requirements: Requirements;
-  schemes: Scheme[];
+  requirements: AssessmentRequirements;
 }) {
   const router = useRouter();
   const { setReport, setExplanation } = useReport();
-  const [answers, setAnswers] = useState<Answers>({});
+  const discovery = useOptionalDiscovery();
+  const [answers, setAnswers] = useState<Answers>(() =>
+    assessmentPrefill(requirements.fields, discovery?.profile || null),
+  );
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [confirmed, setConfirmed] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const sections = [
     ...new Set(requirements.fields.map((field) => field.section)),
   ];
-  const demo = schemes.find((scheme) => scheme.is_demo);
-  const answered = requirements.fields.filter(
-    (field) => isVisible(field, answers) && answers[field.key]?.trim(),
-  ).length;
-  const visibleCount = requirements.fields.filter((field) =>
+  const illustrative = requirements.assessment_mode === "ILLUSTRATIVE";
+  const visible = requirements.fields.filter((field) =>
     isVisible(field, answers),
-  ).length;
+  );
+  const answered = visible.filter((field) => answers[field.key]?.trim()).length;
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting || !requirements.available) return;
     setError("");
     const validation = validateAnswers(requirements.fields, answers);
     setErrors(validation);
-    if (!confirmed) {
-      setError("Confirm that you are using synthetic information.");
-      return;
-    }
     if (Object.keys(validation).length) {
       setError("Please correct the highlighted fields before continuing.");
       document.getElementById(Object.keys(validation)[0])?.focus();
@@ -149,19 +143,18 @@ export function Questionnaire({
     setReport(null);
     setExplanation(null);
     try {
-      const data = await apiFetch<{
-        report: EligibilityReport;
-        explanation: Explanation;
-      }>("/api/v1/eligibility/explain", {
-        method: "POST",
-        body: JSON.stringify({
-          scheme_id: requirements.scheme_id,
-          synthetic_profile: true,
-          profile: buildProfile(requirements.fields, answers),
-        }),
-      });
-      setReport(data.report);
-      setExplanation(data.explanation);
+      const report = await apiFetch<EligibilityReport>(
+        "/api/v1/assessment/check",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            scheme_id: requirements.scheme_id,
+            criteria_token: requirements.criteria_token,
+            profile: buildProfile(requirements.fields, answers),
+          }),
+        },
+      );
+      setReport(report);
       router.push("/eligibility/report");
     } catch (reason) {
       if (reason instanceof ApiError) {
@@ -172,63 +165,58 @@ export function Questionnaire({
         });
         setErrors(fieldErrors);
         setError(
-          reason.status === 422
-            ? "Please check the highlighted fields and try again."
-            : "The assessment service is unavailable. Your information has not been saved. Please try again.",
+          reason.status === 409
+            ? "The assessment criteria changed. Reload this questionnaire before trying again."
+            : reason.status === 422
+              ? "Please check the highlighted fields and try again."
+              : "The assessment service is unavailable. Your details have not been saved. Please try again.",
         );
       } else
         setError(
-          "We couldn’t reach the assessment service. Your information has not been saved. Please try again.",
+          "We couldn’t reach the assessment service. Your details have not been saved. Please try again.",
         );
+    } finally {
       setSubmitting(false);
     }
   }
   return (
     <div className="questionnaire-layout">
       <div>
-        <div className="scheme-selector">
-          <label htmlFor="selected-scheme">Selected scheme</label>
-          <select
-            id="selected-scheme"
-            value={requirements.scheme_id}
-            disabled={submitting}
-            onChange={(event) =>
-              router.push(`/eligibility?scheme=${event.target.value}`)
-            }
-          >
-            {schemes.map((scheme) => (
-              <option key={scheme.id} value={scheme.id}>
-                {scheme.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Link className="back-link" href="/eligibility">
+          Choose another scheme
+        </Link>
         {!requirements.available ? (
           <div className="empty-state">
             <BookOpen size={32} />
-            <h2>More verified information is needed.</h2>
+            <h2>Assessment not available yet.</h2>
             <p>
-              No approved rule set is available for this scheme. Its metadata
-              alone cannot support an eligibility assessment.
+              No applicable reviewed policy or suitable assessment template is
+              available for this scheme. We don’t substitute unrelated criteria.
             </p>
-            {demo && (
-              <Link
-                className="button button-primary"
-                href={`/eligibility?scheme=${demo.id}`}
-              >
-                Try the fictional scholarship <ArrowRight size={17} />
-              </Link>
-            )}
+            <Link className="button button-primary" href="/eligibility">
+              Explore other schemes <ArrowRight size={17} />
+            </Link>
           </div>
         ) : (
           <>
-            {requirements.is_demo && <DemoNotice />}
+            <div className="assessment-basis">
+              <span className="eyebrow">
+                {illustrative
+                  ? "Illustrative assessment"
+                  : "Reviewed policy assessment"}
+              </span>
+              <p>
+                {illustrative
+                  ? "Uses project-authored criteria for this category. These are not verified government requirements."
+                  : "Uses the applicable approved policy version and its supporting evidence."}
+              </p>
+            </div>
             <div className="form-intro">
               <div>
-                <h2>A synthetic profile, at your pace.</h2>
+                <h2>Your details</h2>
                 <p>
-                  Answer what you know. Blank answers become unknown, never an
-                  assumed pass.
+                  Answer what you know. Leave anything unavailable blank;
+                  missing answers remain unresolved.
                 </p>
               </div>
               <button
@@ -236,14 +224,19 @@ export function Questionnaire({
                 type="button"
                 disabled={submitting}
                 onClick={() => {
-                  setAnswers({ ...exampleAnswers });
-                  setConfirmed(true);
+                  setAnswers(
+                    Object.fromEntries(
+                      Object.entries(requirements.sample_profile)
+                        .filter(([, value]) => value !== null)
+                        .map(([key, value]) => [key, String(value)]),
+                    ),
+                  );
                   setErrors({});
                   setError("");
                 }}
               >
-                <FlaskConical size={15} />
-                Use a synthetic example
+                <Sparkles size={15} />
+                Use Sample Details
               </button>
             </div>
             <form onSubmit={submit} noValidate>
@@ -282,30 +275,21 @@ export function Questionnaire({
                   </section>
                 ))}
               </div>
-              <div className="form-confirm">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={confirmed}
-                    disabled={submitting}
-                    onChange={(event) => {
-                      setConfirmed(event.target.checked);
-                      setError("");
-                    }}
-                  />
-                  <span>
-                    I’m using fictional information for this development check.
-                  </span>
-                </label>
-                <p>
-                  <LockKeyhole size={14} />
-                  No name, Aadhaar number, contact details, or documents are
-                  requested. This profile and its report are not saved.
-                </p>
-              </div>
+              <p className="assessment-privacy small-note">
+                <LockKeyhole size={15} />
+                No name, Aadhaar number, contact details or documents are
+                requested. This assessment is not saved to your account.
+              </p>
               {error && (
                 <div className="form-error" role="alert">
                   {error}
+                  <button
+                    className="text-link"
+                    type="button"
+                    onClick={() => router.refresh()}
+                  >
+                    Reload questionnaire
+                  </button>
                 </div>
               )}
               <div className="form-actions">
@@ -317,7 +301,6 @@ export function Questionnaire({
                     setAnswers({});
                     setErrors({});
                     setError("");
-                    setConfirmed(false);
                   }}
                 >
                   <RotateCcw size={15} />
@@ -331,11 +314,11 @@ export function Questionnaire({
                   {submitting ? (
                     <>
                       <LoaderCircle size={17} className="animate-spin" />
-                      Assessing conditions…
+                      Assessing criteria…
                     </>
                   ) : (
                     <>
-                      See my assessment
+                      Check Eligibility
                       <ArrowRight size={17} />
                     </>
                   )}
@@ -347,7 +330,9 @@ export function Questionnaire({
       </div>
       <aside className="question-aside">
         <div className="aside-card">
-          <span className="eyebrow">Your check, explained</span>
+          <span className="eyebrow">
+            {categoryLabel(requirements.category)}
+          </span>
           <h2>
             A few details.
             <br />A clearer picture.
@@ -355,16 +340,18 @@ export function Questionnaire({
           <div className="answer-progress">
             <div>
               <span>
-                {answered} of {visibleCount} answered
+                {answered} of {visible.length} answered
               </span>
               <span>
-                {visibleCount ? Math.round((answered / visibleCount) * 100) : 0}
+                {visible.length
+                  ? Math.round((answered / visible.length) * 100)
+                  : 0}
                 %
               </span>
             </div>
             <progress
               value={answered}
-              max={visibleCount || 1}
+              max={visible.length || 1}
               aria-label="Questionnaire answers completed"
             />
           </div>
@@ -372,30 +359,50 @@ export function Questionnaire({
             <li>
               <Check size={17} />
               <span>
-                <strong>Consistent by design</strong>The same policy and profile
-                produce the same assessment.
+                <strong>Consistent by design</strong>The same criteria and
+                details produce the same result.
               </span>
             </li>
             <li>
               <Info size={17} />
               <span>
-                <strong>Honest about unknowns</strong>Missing information is
-                shown clearly in your report.
+                <strong>Clear about missing details</strong>Additional
+                information is identified in your report.
               </span>
             </li>
             <li>
               <BookOpen size={17} />
               <span>
-                <strong>Evidence within reach</strong>Every requirement links to
-                its policy section.
+                <strong>Understand each criterion</strong>
+                {illustrative
+                  ? "The report explains the illustrative criteria used."
+                  : "Reviewed conditions retain their policy evidence."}
               </span>
             </li>
           </ul>
+          {requirements.requirements.length > 0 && (
+            <details className="criteria-preview">
+              <summary>View assessment criteria</summary>
+              <ul>
+                {requirements.requirements.map((item) => (
+                  <li key={item.key}>
+                    <strong>{item.label}</strong>
+                    <p>
+                      {requirements.criteria_notes[item.key] ||
+                        item.evidence[0]?.excerpt}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
           <div className="aside-divider" />
           <p className="small-note">
-            {requirements.rule_set
-              ? `Policy v${requirements.rule_set.version_number} · ${requirements.is_demo ? "Fictional development fixture" : "Approved rules"}`
-              : "No effective approved rules"}
+            {requirements.template
+              ? `${requirements.template.title} · Criteria version ${requirements.template.version}`
+              : requirements.rule_set
+                ? `Reviewed policy version ${requirements.rule_set.version_number}`
+                : "Assessment criteria unavailable"}
           </p>
           <Link
             className="text-link mt-4"

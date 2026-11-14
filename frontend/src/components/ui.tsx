@@ -12,7 +12,7 @@ export function Badge({ demo = false }: { demo?: boolean }) {
   return (
     <span className={`badge ${demo ? "badge-demo" : "badge-verified"}`}>
       {demo ? <FlaskConical size={13} /> : <ShieldCheck size={13} />}
-      {demo ? "Fictional demo" : "Official source linked"}
+      {demo ? "Project example" : "Official source linked"}
     </span>
   );
 }
@@ -38,15 +38,14 @@ export function ActionLink({
   );
 }
 export function DemoNotice({ compact = false }: { compact?: boolean }) {
+  return <ProjectDisclaimer compact={compact} />;
+}
+export function ProjectDisclaimer({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="notice notice-demo">
-      <FlaskConical size={18} className="shrink-0" />
-      <p>
-        <strong>A fictional scholarship. A real explanation.</strong>
-        {!compact &&
-          " This learning example uses invented policy values. It is not a government scheme and offers no award. Use synthetic information only."}
-      </p>
-    </div>
+    <p className={`small-note project-disclaimer${compact ? " compact" : ""}`}>
+      SchemeGuard AI is a project demonstration. Results are estimates and do
+      not determine government eligibility.
+    </p>
   );
 }
 export function LoadingState({

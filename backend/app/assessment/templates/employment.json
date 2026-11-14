@@ -1,0 +1,115 @@
+{
+  "id": "employment",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Work and training assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "skills",
+    "employment",
+    "youth"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "age_years",
+        "label": "Age",
+        "value_type": "number",
+        "section": "Your details",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 130,
+        "integer": true
+      },
+      {
+        "key": "employment_status",
+        "label": "Employment status",
+        "value_type": "string",
+        "section": "Work and training",
+        "help_text": "Leave blank if this information is unavailable.",
+        "choices": [
+          {
+            "value": "unemployed",
+            "label": "Not currently employed"
+          },
+          {
+            "value": "part_time",
+            "label": "Working part time"
+          },
+          {
+            "value": "full_time",
+            "label": "Working full time"
+          },
+          {
+            "value": "other",
+            "label": "Other"
+          }
+        ]
+      },
+      {
+        "key": "seeking_training",
+        "label": "Seeking work or training?",
+        "value_type": "boolean",
+        "section": "Work and training",
+        "help_text": "Leave blank if this information is unavailable."
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "minimum_age",
+          "label": "Minimum assessment age",
+          "field": "age_years",
+          "operator": ">=",
+          "value_type": "number",
+          "value": 18
+        },
+        {
+          "kind": "comparison",
+          "key": "maximum_age",
+          "label": "Maximum assessment age",
+          "field": "age_years",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 45
+        },
+        {
+          "kind": "comparison",
+          "key": "employment_status",
+          "label": "Employment situation",
+          "field": "employment_status",
+          "operator": "IN",
+          "value_type": "string",
+          "value": [
+            "unemployed",
+            "part_time"
+          ]
+        },
+        {
+          "kind": "comparison",
+          "key": "training_interest",
+          "label": "Work or training interest",
+          "field": "seeking_training",
+          "operator": "==",
+          "value_type": "boolean",
+          "value": true
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "minimum_age": "Illustrative criterion: age is at least 18.",
+    "maximum_age": "Illustrative criterion: age is no more than 45.",
+    "employment_status": "Illustrative criterion: not currently employed or working part time.",
+    "training_interest": "Illustrative criterion: seeking work or training."
+  },
+  "sample_profile": {
+    "age_years": 24,
+    "employment_status": "unemployed",
+    "seeking_training": true
+  }
+}

@@ -20,6 +20,7 @@ export function ReportProvider({ children }: { children: ReactNode }) {
     </ReportContext.Provider>
   );
 }
+export const useOptionalReport = () => useContext(ReportContext);
 export function useReport() {
   const context = useContext(ReportContext);
   if (!context) throw new Error("Report provider is required");

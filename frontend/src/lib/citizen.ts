@@ -15,6 +15,9 @@ export interface ProfileData {
   course_level: string | null;
   current_student: boolean | null;
   occupation: string | null;
+  interests?: string[];
+  employment_status?: string | null;
+  field_of_study?: string | null;
   attributes: Record<string, string | number | boolean | null>;
 }
 export interface ProfileRead {

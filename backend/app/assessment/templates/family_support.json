@@ -1,0 +1,81 @@
+{
+  "id": "family_support",
+  "version": 1,
+  "basis": "project_authored_illustration",
+  "title": "Family support assessment",
+  "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+  "categories": [
+    "women_child"
+  ],
+  "program": {
+    "fields": [
+      {
+        "key": "annual_family_income_inr",
+        "label": "Annual family income (INR)",
+        "value_type": "number",
+        "section": "Household",
+        "help_text": "Leave blank if this information is unavailable.",
+        "minimum": 0,
+        "maximum": 1000000000000,
+        "integer": false
+      },
+      {
+        "key": "family_support_type",
+        "label": "Type of family support",
+        "value_type": "string",
+        "section": "Family support",
+        "help_text": "Leave blank if this information is unavailable.",
+        "choices": [
+          {
+            "value": "child_care",
+            "label": "Child care"
+          },
+          {
+            "value": "maternal_support",
+            "label": "Maternal support"
+          },
+          {
+            "value": "other",
+            "label": "Other"
+          }
+        ]
+      }
+    ],
+    "expression": {
+      "kind": "and",
+      "key": "assessment",
+      "label": "Overall assessment",
+      "children": [
+        {
+          "kind": "comparison",
+          "key": "support_type",
+          "label": "Family support requested",
+          "field": "family_support_type",
+          "operator": "IN",
+          "value_type": "string",
+          "value": [
+            "child_care",
+            "maternal_support"
+          ]
+        },
+        {
+          "kind": "comparison",
+          "key": "income_limit",
+          "label": "Family income range",
+          "field": "annual_family_income_inr",
+          "operator": "<=",
+          "value_type": "number",
+          "value": 500000
+        }
+      ]
+    }
+  },
+  "criteria_notes": {
+    "support_type": "Illustrative criterion: child care or maternal support is requested. No identifying or medical information is collected.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 500,000."
+  },
+  "sample_profile": {
+    "annual_family_income_inr": 240000,
+    "family_support_type": "child_care"
+  }
+}

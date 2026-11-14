@@ -10,11 +10,11 @@ async function proxy(
   const valid =
     request.method === "GET"
       ? new RegExp(
-          `^(schemes|schemes/filters|schemes/${uuid}(/(requirements|rule-history))?|policy-updates)$`,
+          `^(recommendations/options|schemes|schemes/filters|schemes/${uuid}(/(requirements|assessment-requirements|rule-history))?|policy-updates)$`,
         ).test(target)
       : request.method === "POST" &&
         new RegExp(
-          `^(eligibility/(check|explain)|schemes/${uuid}/questions)$`,
+          `^(recommendations|assessment/check|eligibility/(check|explain)|schemes/${uuid}/questions)$`,
         ).test(target);
   if (!valid)
     return Response.json(

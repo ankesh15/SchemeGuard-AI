@@ -7,10 +7,17 @@ import {
   type SavedAssessment,
   type PolicyUpdate,
 } from "@/lib/citizen";
-import type { Scheme } from "@/lib/types";
-import { SchemeCard } from "@/components/scheme-card";
+import type { Recommendation } from "@/lib/recommendations";
+import { RecommendationCard } from "@/components/recommendations";
+import { useOptionalDiscovery } from "@/components/discovery-context";
+import { categoryLabel } from "@/lib/catalog";
 import { ErrorState, LoadingState } from "@/components/ui";
+import { useCitizen } from "./session";
+import { schemeName } from "@/lib/presentation";
 export function CitizenDashboard() {
+  const discovery = useOptionalDiscovery();
+  const session = useCitizen();
+  const remember = discovery?.remember;
   const [data, setData] = useState<{
     username: string;
     profile: ProfileRead;
@@ -18,7 +25,9 @@ export function CitizenDashboard() {
     assessment_count: number;
     unread_count: number;
     policy_updates: PolicyUpdate[];
-    relevant_schemes: Scheme[];
+    relevant_schemes: Recommendation[];
+    recommendation_categories: string[];
+    recommendation_total: number;
     discovery_notice: string;
   } | null>(null);
   const [error, setError] = useState("");
@@ -27,13 +36,16 @@ export function CitizenDashboard() {
     const controller = new AbortController();
     citizenFetch<typeof data>("dashboard", { signal: controller.signal })
       .then((value) => {
-        if (!controller.signal.aborted) setData(value);
+        if (!controller.signal.aborted) {
+          setData(value);
+          if (value) remember?.(value.relevant_schemes);
+        }
       })
       .catch((reason: Error) => {
         if (!controller.signal.aborted) setError(reason.message);
       });
     return () => controller.abort();
-  }, [retry]);
+  }, [retry, remember]);
   if (error)
     return (
       <ErrorState
@@ -68,11 +80,17 @@ export function CitizenDashboard() {
           unknown.
         </p>
         <div className="admin-actions">
-          <Link className="button button-primary" href="/dashboard/profile">
-            Update my profile
+          <Link
+            className="button button-primary"
+            href="/find-schemes"
+            onClick={() =>
+              discovery?.setProfile(data.profile.profile, session.user_id)
+            }
+          >
+            Find Schemes for Me
           </Link>
-          <Link className="button button-secondary" href="/dashboard/schemes">
-            Explore schemes
+          <Link className="button button-secondary" href="/dashboard/profile">
+            Manage private profile
           </Link>
           <Link className="text-link" href="/dashboard/assessments/new">
             Create an assessment →
@@ -80,15 +98,34 @@ export function CitizenDashboard() {
         </div>
       </section>
       <section className="admin-card">
-        <h2>Scheme discovery for your next step</h2>
+        <h2>Recommended schemes for you</h2>
         <p>{data.discovery_notice}</p>
-        <div className="scheme-grid">
-          {data.relevant_schemes?.map((scheme) => (
-            <SchemeCard key={scheme.id} scheme={scheme} />
+        {!data.relevant_schemes?.length && (
+          <p>
+            Complete the questionnaire with an interest, occupation or student
+            status to discover relevant schemes.
+          </p>
+        )}
+        <div className="profile-interest-tags">
+          {data.recommendation_categories?.map((category) => (
+            <span key={category}>{categoryLabel(category)}</span>
           ))}
         </div>
-        <Link className="text-link" href="/dashboard/schemes">
-          Browse the complete catalog →
+        <div className="scheme-grid">
+          {data.relevant_schemes
+            ?.filter((scheme) => !scheme.is_demo)
+            .map((scheme) => (
+              <RecommendationCard key={scheme.id} item={scheme} />
+            ))}
+        </div>
+        <Link
+          className="text-link"
+          href="/schemes"
+          onClick={() =>
+            discovery?.setProfile(data.profile.profile, session.user_id)
+          }
+        >
+          View personalized recommendations →
         </Link>
       </section>
       <section className="admin-card">
@@ -98,7 +135,7 @@ export function CitizenDashboard() {
         ) : (
           data.recent_assessments.map((item) => (
             <article key={item.id} className="review-condition">
-              <strong>{item.scheme_name}</strong>
+              <strong>{schemeName(item.scheme_name)}</strong>
               <p>
                 {item.assessment} · Policy {item.rule_version ?? "unavailable"}{" "}
                 · {new Date(item.created_at).toLocaleDateString("en-IN")}

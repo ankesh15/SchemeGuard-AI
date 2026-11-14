@@ -1,6 +1,7 @@
+import { RecommendationReason } from "@/components/recommendations";
 import { PolicyEvidence } from "@/components/policy-evidence";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -14,10 +15,9 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { apiFetch, ApiError, formatDate } from "@/lib/api";
-import type { Requirements, SchemeDetail } from "@/lib/types";
+import type { AssessmentRequirements, SchemeDetail } from "@/lib/types";
 import { categoryLabel } from "@/lib/catalog";
-import { ActionLink, Badge, DemoNotice } from "@/components/ui";
-
+import { ActionLink, Badge, ProjectDisclaimer } from "@/components/ui";
 export const dynamic = "force-dynamic";
 export default async function SchemeDetailPage({
   params,
@@ -26,12 +26,12 @@ export default async function SchemeDetailPage({
 }) {
   const { id } = await params;
   let scheme: SchemeDetail;
-  let requirements: Requirements;
+  let requirements: AssessmentRequirements;
   try {
     [scheme, requirements] = await Promise.all([
       apiFetch<SchemeDetail>(`/api/v1/schemes/${encodeURIComponent(id)}`),
-      apiFetch<Requirements>(
-        `/api/v1/schemes/${encodeURIComponent(id)}/requirements`,
+      apiFetch<AssessmentRequirements>(
+        `/api/v1/schemes/${encodeURIComponent(id)}/assessment-requirements`,
       ),
     ]);
   } catch (error) {
@@ -39,30 +39,31 @@ export default async function SchemeDetailPage({
       notFound();
     throw error;
   }
+  if (scheme.is_demo) redirect("/eligibility");
+  const illustrative = requirements.assessment_mode === "ILLUSTRATIVE";
+  const approved = requirements.assessment_mode === "APPROVED_POLICY";
   return (
     <div className="container page-shell">
       <Link className="back-link" href="/schemes">
         <ArrowLeft size={16} />
-        All schemes
+        Your scheme discovery
       </Link>
       <div className="detail-heading">
-        <Badge demo={scheme.is_demo} />
+        <Badge />
         <h1>{scheme.name}</h1>
         <p>
           {scheme.department ||
             scheme.ministry ||
-            (scheme.is_demo
-              ? "An authored SchemeGuard development example"
-              : "Administering department not verified")}
+            "Administering department not verified"}
         </p>
       </div>
-      {scheme.is_demo && <DemoNotice />}
+      <RecommendationReason schemeId={scheme.id} />
       <div className="detail-layout">
         <div>
           <nav className="section-tabs" aria-label="Scheme sections">
             <a href="#overview">Overview</a>
-            <a href="#requirements">Requirements</a>
-            <a href="#sources">Evidence & sources</a>
+            <a href="#requirements">Assessment criteria</a>
+            <a href="#sources">Sources</a>
           </nav>
           <section id="overview" className="detail-section">
             <span className="eyebrow">The starting point</span>
@@ -73,11 +74,7 @@ export default async function SchemeDetailPage({
                 <Landmark size={18} />
                 <span>Administering body</span>
                 <strong>
-                  {scheme.department ||
-                    scheme.ministry ||
-                    (scheme.is_demo
-                      ? "Fictional development fixture"
-                      : "Not verified")}
+                  {scheme.department || scheme.ministry || "Not verified"}
                 </strong>
               </div>
               <div>
@@ -91,15 +88,11 @@ export default async function SchemeDetailPage({
               </div>
               <div>
                 <CalendarDays size={18} />
-                <span>
-                  {scheme.is_demo ? "Policy type" : "Metadata checked"}
-                </span>
+                <span>Metadata checked</span>
                 <strong>
-                  {scheme.is_demo
-                    ? "Authored test policy"
-                    : scheme.verified_on
-                      ? formatDate(scheme.verified_on)
-                      : "Unknown"}
+                  {scheme.verified_on
+                    ? formatDate(scheme.verified_on)
+                    : "Unknown"}
                 </strong>
               </div>
               <div>
@@ -111,14 +104,21 @@ export default async function SchemeDetailPage({
           </section>
           <section id="requirements" className="detail-section">
             <span className="eyebrow">Know what’s being checked</span>
-            <h2>Requirements, with context.</h2>
+            <h2>Assessment criteria, with context.</h2>
             {requirements.available ? (
               <>
-                <p>
-                  {scheme.is_demo
-                    ? "These requirements belong only to the fictional test policy. View the full policy to see every invented threshold and condition."
-                    : "These requirements come from the approved rule version. Follow the evidence references for the policy context."}
-                </p>
+                <div className="assessment-basis">
+                  <span className="eyebrow">
+                    {illustrative
+                      ? "Illustrative assessment"
+                      : "Reviewed policy assessment"}
+                  </span>
+                  <p>
+                    {illustrative
+                      ? "The following criteria are project-authored examples for this category. They are not verified government requirements."
+                      : "These conditions come from the applicable approved policy version. Read their evidence for context."}
+                  </p>
+                </div>
                 <ul className="requirement-list">
                   {requirements.requirements.map((item) => (
                     <li key={item.key}>
@@ -127,45 +127,35 @@ export default async function SchemeDetailPage({
                       </span>
                       <div>
                         <strong>{item.label}</strong>
-                        <small>{item.evidence[0]?.locator}</small>
+                        <small>
+                          {requirements.criteria_notes[item.key] ||
+                            item.evidence[0]?.locator}
+                        </small>
                       </div>
                     </li>
                   ))}
                 </ul>
-                {scheme.is_demo && (
-                  <a
-                    className="text-link"
-                    href="/policies/demo-policy-v1.md"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Read the fictional policy <ExternalLink size={15} />
-                  </a>
-                )}
               </>
             ) : (
               <div className="notice">
                 <FileText size={20} />
                 <p>
-                  <strong>Rules are awaiting verified review.</strong> The
-                  government metadata is available, but no approved eligibility
-                  rule set is effective for this scheme. We won’t infer a
-                  decision from incomplete information.
+                  Detailed assessment criteria are not yet available for this
+                  scheme. You can still explore the official scheme information.
                 </p>
               </div>
             )}
           </section>
-          <PolicyEvidence
-            schemeId={scheme.id}
-            available={requirements.available}
-          />
+          <PolicyEvidence schemeId={scheme.id} available={approved} />
           <section id="sources" className="detail-section">
-            <span className="eyebrow">Follow the evidence</span>
-            <h2>
-              {scheme.is_demo
-                ? "The authored policy"
-                : "Official source references"}
-            </h2>
+            <span className="eyebrow">Follow the source</span>
+            <h2>Official scheme references</h2>
+            {illustrative && (
+              <p className="small-note">
+                These references establish scheme information. They are not
+                evidence for the illustrative assessment criteria above.
+              </p>
+            )}
             <div className="source-list">
               {scheme.sources.map((source) => (
                 <article key={source.id} className="source-card">
@@ -176,17 +166,11 @@ export default async function SchemeDetailPage({
                     <p className="source-notes">{source.verification_notes}</p>
                     <a
                       className="text-link"
-                      href={
-                        scheme.is_demo
-                          ? "/policies/demo-policy-v1.md"
-                          : source.url
-                      }
+                      href={source.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {scheme.is_demo
-                        ? "Read fictional policy"
-                        : "Visit official source"}
+                      Visit official source
                       <ArrowUpRight size={15} />
                     </a>
                   </div>
@@ -202,9 +186,11 @@ export default async function SchemeDetailPage({
             </span>
             <h2>Understand where you stand.</h2>
             <p>
-              {requirements.available
-                ? `Try a synthetic profile and see which ${scheme.is_demo ? "fictional" : "approved"} conditions are satisfied, unmet, or unknown.`
-                : "A trustworthy assessment needs approved rules. Try the fictional example to see how the assessment works."}
+              {illustrative
+                ? "Add your details for an illustrative, category-based assessment with a clear explanation of each criterion."
+                : approved
+                  ? "Compare your details with reviewed conditions and explore their source evidence."
+                  : "An assessment is not available here yet. Explore another scheme or consult the official source."}
             </p>
             <ActionLink
               href={
@@ -214,12 +200,10 @@ export default async function SchemeDetailPage({
               }
             >
               {requirements.available
-                ? scheme.is_demo
-                  ? "Check the demo conditions"
-                  : "Assess known conditions"
-                : "Try the fictional demo"}
+                ? "Check Eligibility"
+                : "Choose another scheme"}
             </ActionLink>
-            {requirements.available && (
+            {approved && (
               <ActionLink
                 href={`/dashboard/assessments/new?scheme=${scheme.id}`}
               >
@@ -228,20 +212,19 @@ export default async function SchemeDetailPage({
             )}
             {scheme.policy_currency === "POTENTIALLY_OUTDATED" && (
               <p role="status" className="notice">
-                The source needs verification. The last approved policy remains
-                available; review official sources before applying.
+                The source needs verification. Review current official guidance
+                before applying.
               </p>
             )}
             <div className="aside-divider" />
             <p className="small-note">
-              {requirements.rule_set
-                ? `Policy version ${requirements.rule_set.version_number} · ${scheme.is_demo ? "Synthetic fixture approval" : "Approved rules"}`
-                : "No approved eligibility rules available"}
+              {requirements.template
+                ? `${requirements.template.title} · Criteria version ${requirements.template.version}`
+                : requirements.rule_set
+                  ? `Reviewed policy version ${requirements.rule_set.version_number}`
+                  : "Assessment criteria unavailable"}
             </p>
-            <p className="small-note">
-              An assessment is not official approval or an application
-              submission.
-            </p>
+            <ProjectDisclaimer />
             {requirements.official_application_url && (
               <a
                 className="text-link mt-5"

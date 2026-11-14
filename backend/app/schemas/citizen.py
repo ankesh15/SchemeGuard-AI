@@ -41,10 +41,25 @@ class ProfileData(BaseModel):
     )
     course_level: str | None = Field(default=None, min_length=1, max_length=80)
     current_student: StrictBool | None = None
+    employment_status: (
+        Literal["unemployed", "part_time", "full_time", "self_employed", "retired", "other"] | None
+    ) = None
+    field_of_study: str | None = Field(default=None, min_length=1, max_length=80)
+    interests: list[str] = Field(default_factory=list, max_length=24)
     occupation: Literal["student", "employed", "self_employed", "unemployed", "retired", "other"] | None = (
         None
     )
     attributes: dict[ProfileKey, InputValue] = Field(default_factory=dict, max_length=24)
+
+    @field_validator("interests")
+    @classmethod
+    def interest_names(cls, values: list[str]) -> list[str]:
+        import re
+
+        normalized = [value.strip().lower().replace("-", "_") for value in values]
+        if any(not re.fullmatch(r"[a-z][a-z0-9_]{0,59}", value) for value in normalized):
+            raise ValueError("Interests must use category identifiers")
+        return list(dict.fromkeys(normalized))
 
     @field_validator("attributes")
     @classmethod

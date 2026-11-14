@@ -1,3 +1,5 @@
+> Profile-first redesign: no schema migration is required. Existing `profiles.encrypted_data` carries backward-compatible optional `interests`, `employment_status` and `field_of_study` fields. They default safely when older ciphertext is decoded. Discovery never rewrites RuleSets, documents, saved assessments or monitoring history. See [the current implementation report](profile-first-recommendations.md).
+
 # Database design — Phase 3
 
 PostgreSQL 16, SQLAlchemy 2.x, asyncpg, and Alembic remain in use. UUID domain keys and timezone-aware timestamps are preserved. No extension or future vector-search service is added.
@@ -102,3 +104,6 @@ Migration 0008 adds durable background jobs, opt-in source monitors/runs, policy
 No schema change was needed; Alembic remains at 0009_citizen_system. Existing constraints/history models were reused. Migration-owner and runtime roles are now separated in production; grants reject privileged runtime accounts and disallow schema DDL and audit mutation. Managed TLS DSNs are mapped consistently for asyncpg and psycopg checkpoint connections. Query plans/index names were inspected at the actual 283-record scale; no unsupported performance index was added.
 
 The working database contains 41 public/checkpoint tables, including migration bookkeeping; the exact table list and scheme/rule/document counts are in verification/project-facts.json. The Phase 7 recovery drill restored and hashed all tables in a generated non-production DB and verified original PDF bytes and private decryption. Recovery/rollback procedures are in deployment.md. Never downgrade/reset the working database or remove its volumes during routine releases.
+## Stateless demonstration template boundary
+
+The scheme-based assessment enhancement adds no database columns or tables. `assessment_mode` and `assessment_available` are computed response metadata. Project-authored template JSON assets live outside policy storage; their versions/fingerprints are not RuleSet, RuleCondition, RuleEvidence or DocumentVersion records. Public illustrative reports are transient and never enter assessments/reassessment/notification tables. Existing approved policies and saved history remain unchanged. See [the implementation report](demonstration-assessments.md).

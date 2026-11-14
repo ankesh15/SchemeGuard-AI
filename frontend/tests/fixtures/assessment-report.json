@@ -1,0 +1,172 @@
+{
+  "scheme_id": "a2491d14-3c04-5c25-b534-87742eae086c",
+  "scheme_name": "AICTE Pragati Scholarship for Girl Students (Technical Degree)",
+  "is_demo": false,
+  "rule_set": null,
+  "notices": [
+    "SchemeGuard AI is a project demonstration. Results are estimates and do not determine government eligibility."
+  ],
+  "official_application_url": null,
+  "official_source_url": "https://scholarships.gov.in/All-Scholarships",
+  "category": "scholarship",
+  "assessment_mode": "ILLUSTRATIVE",
+  "template": {
+    "id": "education",
+    "version": 1,
+    "title": "Education assessment",
+    "description": "A project-authored category illustration. These criteria are not verified government policy and do not determine actual eligibility.",
+    "basis": "project_authored_illustration",
+    "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "criteria_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "criteria_notes": {
+    "minimum_age": "Illustrative criterion: age is at least 16.",
+    "maximum_age": "Illustrative criterion: age is no more than 30.",
+    "income_limit": "Illustrative criterion: annual family income is no more than INR 500,000.",
+    "student_status": "Illustrative criterion: currently studying.",
+    "study_level": "Illustrative criterion: higher secondary, diploma, undergraduate or postgraduate study."
+  },
+  "engine_version": "deterministic-v1",
+  "result": "PASS",
+  "assessment": "Criteria matched",
+  "policy_currency": "UNVERIFIED",
+  "reason": "EVALUATED",
+  "evaluated_at": "2026-11-14T10:00:00Z",
+  "assessed_on": "2026-11-14",
+  "requirements": [
+    {
+      "key": "minimum_age",
+      "label": "Minimum assessment age",
+      "kind": "comparison",
+      "result": "PASS",
+      "explanation": "Illustrative criterion: age is at least 16.",
+      "missing_fields": [],
+      "evidence": [],
+      "children": []
+    },
+    {
+      "key": "maximum_age",
+      "label": "Maximum assessment age",
+      "kind": "comparison",
+      "result": "PASS",
+      "explanation": "Illustrative criterion: age is no more than 30.",
+      "missing_fields": [],
+      "evidence": [],
+      "children": []
+    },
+    {
+      "key": "income_limit",
+      "label": "Family income range",
+      "kind": "comparison",
+      "result": "PASS",
+      "explanation": "Illustrative criterion: annual family income is no more than INR 500,000.",
+      "missing_fields": [],
+      "evidence": [],
+      "children": []
+    },
+    {
+      "key": "student_status",
+      "label": "Current student status",
+      "kind": "comparison",
+      "result": "PASS",
+      "explanation": "Illustrative criterion: currently studying.",
+      "missing_fields": [],
+      "evidence": [],
+      "children": []
+    },
+    {
+      "key": "study_level",
+      "label": "Education pathway",
+      "kind": "comparison",
+      "result": "PASS",
+      "explanation": "Illustrative criterion: higher secondary, diploma, undergraduate or postgraduate study.",
+      "missing_fields": [],
+      "evidence": [],
+      "children": []
+    }
+  ],
+  "trace": {
+    "key": "assessment",
+    "label": "Overall assessment",
+    "kind": "and",
+    "result": "PASS",
+    "explanation": "All requirements must be satisfied.",
+    "missing_fields": [],
+    "evidence": [],
+    "children": [
+      {
+        "key": "minimum_age",
+        "label": "Minimum assessment age",
+        "kind": "comparison",
+        "result": "PASS",
+        "explanation": "Illustrative criterion: age is at least 16.",
+        "missing_fields": [],
+        "evidence": [],
+        "children": []
+      },
+      {
+        "key": "maximum_age",
+        "label": "Maximum assessment age",
+        "kind": "comparison",
+        "result": "PASS",
+        "explanation": "Illustrative criterion: age is no more than 30.",
+        "missing_fields": [],
+        "evidence": [],
+        "children": []
+      },
+      {
+        "key": "income_limit",
+        "label": "Family income range",
+        "kind": "comparison",
+        "result": "PASS",
+        "explanation": "Illustrative criterion: annual family income is no more than INR 500,000.",
+        "missing_fields": [],
+        "evidence": [],
+        "children": []
+      },
+      {
+        "key": "student_status",
+        "label": "Current student status",
+        "kind": "comparison",
+        "result": "PASS",
+        "explanation": "Illustrative criterion: currently studying.",
+        "missing_fields": [],
+        "evidence": [],
+        "children": []
+      },
+      {
+        "key": "study_level",
+        "label": "Education pathway",
+        "kind": "comparison",
+        "result": "PASS",
+        "explanation": "Illustrative criterion: higher secondary, diploma, undergraduate or postgraduate study.",
+        "missing_fields": [],
+        "evidence": [],
+        "children": []
+      }
+    ]
+  },
+  "missing_fields": [],
+  "applicant_details": [
+    {
+      "key": "age_years",
+      "label": "Age",
+      "value": 21
+    },
+    {
+      "key": "annual_family_income_inr",
+      "label": "Annual family income (INR)",
+      "value": 240000
+    },
+    {
+      "key": "current_student",
+      "label": "Currently a student?",
+      "value": true
+    },
+    {
+      "key": "course_level",
+      "label": "Education level",
+      "value": "undergraduate"
+    }
+  ]
+}

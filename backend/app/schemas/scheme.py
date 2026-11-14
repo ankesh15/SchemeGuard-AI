@@ -16,6 +16,7 @@ class SchemeQuery(BaseModel):
     category: str | None = Field(default=None, min_length=1, max_length=60, pattern=r"^[a-z][a-z0-9_-]*$")
     state: IndianState | None = None
     eligibility_available: bool | None = None
+    is_demo: bool | None = None
 
     @field_validator("category", mode="before")
     @classmethod
@@ -50,6 +51,8 @@ class SchemeRead(BaseModel):
     id: UUID
     is_demo: bool = False
     eligibility_available: bool = False
+    assessment_available: bool = False
+    assessment_mode: Literal["APPROVED_POLICY", "ILLUSTRATIVE", "UNSUPPORTED"] = "UNSUPPORTED"
     policy_currency: Literal["APPROVED", "POTENTIALLY_OUTDATED", "UNVERIFIED"] = "UNVERIFIED"
     slug: str
     name: str

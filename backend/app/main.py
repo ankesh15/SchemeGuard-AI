@@ -62,6 +62,7 @@ class RequestLoggingMiddleware:
                         "/api/v1/notifications",
                         "/api/v1/notification-preferences",
                         "/api/v1/dashboard",
+                        "/api/v1/recommendations",
                     )
                 ):
                     message["headers"] = [
