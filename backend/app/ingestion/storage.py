@@ -5,6 +5,7 @@ import os
 from functools import cached_property
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 from uuid import UUID
 
 from app.core.config import Settings
@@ -104,16 +105,22 @@ class S3DocumentStorage:
 
         checksum = hashlib.sha256(content).hexdigest()
         key = f"pdf/{source_id.hex}/{checksum}.pdf"
+        put_arguments: dict[str, Any] = {
+            "Bucket": self.bucket,
+            "Key": self.object_key(key),
+            "Body": content,
+            "ContentType": "application/pdf",
+            "IfNoneMatch": "*",
+            "Metadata": {"sha256": checksum},
+        }
+        endpoint = self.settings.s3_endpoint_url
+        endpoint_host = urlsplit(endpoint).hostname if endpoint else None
+        # R2 encrypts objects at rest automatically and does not support the
+        # x-amz-server-side-encryption header accepted by AWS S3.
+        if not endpoint_host or not endpoint_host.endswith(".r2.cloudflarestorage.com"):
+            put_arguments["ServerSideEncryption"] = "AES256"
         try:
-            self.client.put_object(
-                Bucket=self.bucket,
-                Key=self.object_key(key),
-                Body=content,
-                ContentType="application/pdf",
-                IfNoneMatch="*",
-                ServerSideEncryption="AES256",
-                Metadata={"sha256": checksum},
-            )
+            self.client.put_object(**put_arguments)
         except ClientError as error:
             if error.response.get("Error", {}).get("Code") in {
                 "PreconditionFailed",

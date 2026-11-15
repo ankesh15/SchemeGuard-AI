@@ -30,8 +30,6 @@ services:
     environment: &backend_environment
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-["localhost","127.0.0.1","test","testserver","api"]}
       DOCUMENT_STORAGE_BACKEND: ${DOCUMENT_STORAGE_BACKEND:-filesystem}
-      S3_BUCKET: ${S3_BUCKET:-}
-      S3_REGION: ${S3_REGION:-ap-south-1}
       PROFILE_ENCRYPTION_KEY: ${PROFILE_ENCRYPTION_KEY:-}
       CITIZEN_SESSION_HOURS: ${CITIZEN_SESSION_HOURS:-8}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}

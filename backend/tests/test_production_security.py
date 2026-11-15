@@ -41,6 +41,7 @@ def test_production_configuration_and_managed_tls(test_settings):
         {"allow_local_document_storage": False},
         {"document_storage_backend": "s3", "s3_bucket": None},
         {"s3_endpoint_url": "http://internal.local"},
+        {"s3_endpoint_url": "https://storage.example.com/schemeguard"},
     ]:
         with pytest.raises(ValidationError):
             production(test_settings, **updates)
@@ -93,6 +94,27 @@ def test_s3_content_addressing_checksums_and_duplicate_write(test_settings, monk
         store.read(key, checksum, 100)
     with pytest.raises(IngestionError):
         store.read("../private", checksum, 100)
+
+
+def test_r2_storage_omits_unsupported_server_side_encryption_header(test_settings):
+    settings = test_settings.model_copy(
+        update={
+            "document_storage_backend": "s3",
+            "s3_bucket": "schemeguard",
+            "s3_region": "auto",
+            "s3_endpoint_url": "https://account-id.r2.cloudflarestorage.com",
+        }
+    )
+    store = S3DocumentStorage(settings)
+    client = Mock()
+    store.__dict__["client"] = client
+
+    store.put(uuid4(), b"synthetic PDF bytes")
+
+    arguments = client.put_object.call_args.kwargs
+    assert arguments["Bucket"] == "schemeguard"
+    assert arguments["Key"].startswith("schemeguard/pdf/")
+    assert "ServerSideEncryption" not in arguments
 
 
 async def test_password_change_cannot_race_in_flight_login(client, session, citizen_context, monkeypatch):

@@ -96,10 +96,11 @@ class Settings(BaseSettings):
                 or not endpoint.hostname
                 or endpoint.username
                 or endpoint.password
+                or endpoint.path not in {"", "/"}
                 or endpoint.query
                 or endpoint.fragment
             ):
-                raise ValueError("S3 endpoint must be a trusted HTTPS operator endpoint")
+                raise ValueError("S3 endpoint must be a trusted HTTPS origin without a bucket path")
         if self.app_env == "production":
             if not self.profile_encryption_key:
                 raise ValueError("Production requires PROFILE_ENCRYPTION_KEY")

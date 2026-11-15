@@ -6,7 +6,7 @@ Production uses **only** `docker-compose.production.yml`, not an overlay on the 
 
 Production database/Redis networks are internal. Frontend/API ports bind only to host loopback for a trusted HTTPS reverse proxy. Container-to-container traffic uses fixed service names; no browser-only localhost API URL is embedded. Public and private browser requests use fixed-route same-origin Next proxies. Private proxies forward only the session cookie and CSRF/Origin headers; public proxies never forward cookies.
 
-Copy `.env.production.example` to private `.env.production`, mode 0600, and supply independent random owner/runtime database passwords, a stable Fernet key and the exact HTTPS frontend origin. Prefer IAM workload credentials for S3. Production startup rejects missing encryption, automatic demo seeding, wildcard hosts, HTTP origins, local fixture embeddings and missing S3 configuration. Persistent local storage requires an explicit operator opt-in and a backed-up shared document volume. S3 configuration never silently migrates local originals; copy and verify them first.
+Copy `.env.production.example` to private `.env.production`, mode 0600, and supply independent random owner/runtime database passwords, a stable Fernet key and the exact HTTPS frontend origin. Production startup rejects missing encryption, automatic demo seeding, wildcard hosts, HTTP origins and local fixture embeddings. Document originals use the persistent `documents` volume, which is shared by the API and worker in this Compose deployment; keep it backed up with the database and encryption key.
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.production.yml build

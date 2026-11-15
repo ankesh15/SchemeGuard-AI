@@ -1,0 +1,410 @@
+{
+  "pdf": "SchemeGuard_Project_Report.pdf",
+  "preliminary_pages": 14,
+  "body_pages": 56,
+  "total_pages": 70,
+  "headings": [
+    [
+      0,
+      "1  Introduction",
+      1
+    ],
+    [
+      1,
+      "1.1  Background",
+      1
+    ],
+    [
+      1,
+      "1.2  Motivation",
+      1
+    ],
+    [
+      1,
+      "1.3  Problem Statement",
+      2
+    ],
+    [
+      1,
+      "1.4  Objectives",
+      2
+    ],
+    [
+      1,
+      "1.5  Scope and Limitations",
+      3
+    ],
+    [
+      1,
+      "1.6  Organisation of the Report",
+      4
+    ],
+    [
+      0,
+      "2  Literature Survey",
+      5
+    ],
+    [
+      1,
+      "2.1  Government Scheme Discovery Platforms",
+      5
+    ],
+    [
+      1,
+      "2.2  Retrieval-Augmented Generation",
+      6
+    ],
+    [
+      1,
+      "2.3  Agent Reasoning and Controlled Workflows",
+      6
+    ],
+    [
+      1,
+      "2.4  Structured Document Extraction",
+      7
+    ],
+    [
+      1,
+      "2.5  Decision Models and Data Provenance",
+      7
+    ],
+    [
+      1,
+      "2.6  Comparative Summary",
+      8
+    ],
+    [
+      1,
+      "2.7  Research Gap",
+      9
+    ],
+    [
+      0,
+      "3  Problem Formulation and Proposed Methodology",
+      10
+    ],
+    [
+      1,
+      "3.1  Problem Formulation",
+      10
+    ],
+    [
+      1,
+      "3.2  Overview of the Proposed System",
+      11
+    ],
+    [
+      1,
+      "3.3  Data Collection and Pre-processing",
+      12
+    ],
+    [
+      1,
+      "3.4  Explainable Profile-based Recommendations",
+      13
+    ],
+    [
+      1,
+      "3.5  Deterministic Eligibility Evaluation",
+      14
+    ],
+    [
+      1,
+      "3.6  Secure PDF Ingestion and Chunking",
+      16
+    ],
+    [
+      1,
+      "3.7  Candidate Extraction and Human Verification",
+      18
+    ],
+    [
+      1,
+      "3.8  Source-grounded Retrieval and Explanation",
+      19
+    ],
+    [
+      1,
+      "3.9  Policy Change Detection and Comparison",
+      20
+    ],
+    [
+      1,
+      "3.10  Reassessment, Notifications and Privacy",
+      22
+    ],
+    [
+      0,
+      "4  System Design and Implementation",
+      23
+    ],
+    [
+      1,
+      "4.1  Technology Stack",
+      23
+    ],
+    [
+      1,
+      "4.2  Module Description",
+      24
+    ],
+    [
+      1,
+      "4.3  Individual Contributions",
+      25
+    ],
+    [
+      1,
+      "4.4  User Interface and Primary Journey",
+      26
+    ],
+    [
+      1,
+      "4.5  Frontend State, Routing and Session Boundaries",
+      29
+    ],
+    [
+      1,
+      "4.6  Database Design and Canonical Relationships",
+      30
+    ],
+    [
+      1,
+      "4.7  Incremental Migrations and Data Preservation",
+      32
+    ],
+    [
+      1,
+      "4.8  API Design and Integration",
+      33
+    ],
+    [
+      1,
+      "4.9  Authentication, Authorization and Private Data",
+      35
+    ],
+    [
+      1,
+      "4.10  Application and AI Security Controls",
+      36
+    ],
+    [
+      1,
+      "4.11  Background Job Reliability and Monitoring",
+      37
+    ],
+    [
+      1,
+      "4.12  Docker, Deployment and Observability",
+      38
+    ],
+    [
+      1,
+      "4.13  Backup, Recovery and Release Procedure",
+      40
+    ],
+    [
+      0,
+      "5  Results and Discussion",
+      41
+    ],
+    [
+      1,
+      "5.1  Experimental Setup",
+      41
+    ],
+    [
+      1,
+      "5.2  Automated Test Results",
+      42
+    ],
+    [
+      1,
+      "5.3  Recommendation Samples and Ranking Behavior",
+      44
+    ],
+    [
+      1,
+      "5.4  End-to-end Policy Workflow Demonstration",
+      45
+    ],
+    [
+      1,
+      "5.5  Performance Measurements",
+      46
+    ],
+    [
+      1,
+      "5.6  AI Reliability and Decision Evaluation",
+      47
+    ],
+    [
+      1,
+      "5.7  Security, Persistence and Recovery Results",
+      48
+    ],
+    [
+      1,
+      "5.8  Discussion and Acceptance Status",
+      49
+    ],
+    [
+      0,
+      "6  Conclusion and Future Work",
+      50
+    ],
+    [
+      1,
+      "6.1  Conclusion",
+      50
+    ],
+    [
+      1,
+      "6.2  Future Work",
+      51
+    ],
+    [
+      0,
+      "References",
+      52
+    ],
+    [
+      0,
+      "A  Plagiarism and AI-Content Reports",
+      55
+    ],
+    [
+      0,
+      "B  Biographical sketch",
+      56
+    ]
+  ],
+  "figures": [
+    [
+      "3.1  Overall architecture of SchemeGuard",
+      11
+    ],
+    [
+      "3.2  Document-to-policy workflow with a human publication gate",
+      16
+    ],
+    [
+      "3.3  Approved-source monitoring through reassessment",
+      20
+    ],
+    [
+      "4.1  Profile-first citizen journey",
+      26
+    ],
+    [
+      "4.2  Cropped desktop recommendation cards from the recorded browser verification",
+      27
+    ],
+    [
+      "4.3  Mobile recommendation card, cropped from the archived 390-pixel browser view",
+      28
+    ],
+    [
+      "4.4  Core entity relationships and evidence lineage",
+      30
+    ],
+    [
+      "4.5  Production topology and private data services",
+      38
+    ]
+  ],
+  "tables": [
+    [
+      "1  Project objectives and measurable completion evidence",
+      2
+    ],
+    [
+      "2  Recorded dataset and executable-policy scope",
+      3
+    ],
+    [
+      "3  Related approaches and their relevance to SchemeGuard",
+      8
+    ],
+    [
+      "4  Catalog provenance and verification scope",
+      12
+    ],
+    [
+      "5  Implemented additive relevance factors",
+      13
+    ],
+    [
+      "6  Three-valued AND and OR semantics",
+      14
+    ],
+    [
+      "7  Configured PDF and extraction limits",
+      17
+    ],
+    [
+      "8  Change classification and activation behavior",
+      21
+    ],
+    [
+      "9  Implemented technology stack",
+      23
+    ],
+    [
+      "10  Backend modules and responsibility boundaries",
+      24
+    ],
+    [
+      "11  Implemented work packages for contribution review",
+      25
+    ],
+    [
+      "12  Tables grouped by implemented responsibility",
+      31
+    ],
+    [
+      "13  Applied Alembic revisions and their purpose",
+      32
+    ],
+    [
+      "14  Representative public and private API contracts",
+      33
+    ],
+    [
+      "15  Threats, implemented controls and residual limits",
+      36
+    ],
+    [
+      "16  Docker services and durable responsibilities",
+      39
+    ],
+    [
+      "17  Latest recorded regression and static verification",
+      42
+    ],
+    [
+      "18  Recorded profile-first API sample outcomes",
+      44
+    ],
+    [
+      "19  Isolated synthetic A/B/C integration results",
+      45
+    ],
+    [
+      "20  Recorded local sequential API latency in milliseconds",
+      46
+    ],
+    [
+      "21  Measured fixture evaluation counts and unavailable metrics",
+      47
+    ],
+    [
+      "22  Completed, demonstrated and unverified functionality",
+      49
+    ]
+  ],
+  "snapshot_date": "2026-11-14",
+  "branding": "SchemeGuard",
+  "source_format_pages": 31
+}

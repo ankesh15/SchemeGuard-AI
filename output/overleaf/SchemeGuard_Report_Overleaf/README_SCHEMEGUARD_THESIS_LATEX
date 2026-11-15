@@ -1,0 +1,25 @@
+SchemeGuard Thesis Report Bundle
+================================
+
+Main file: Final_Thesis_All.tex
+Compiler: pdfLaTeX on Overleaf
+
+The report source uses a neutral standard LaTeX report layout. It does not use
+the NIT Agartala thesis class or any HireMate screenshots, author details or
+branding. The SchemeGuard report name is used throughout.
+
+Folder map
+----------
+source/report_content.py   Editable report narrative and structure
+source/create_assets.py    Rebuild the SchemeGuard PNG/SVG illustrations
+build_overleaf.py          Generate Final_Thesis_All.tex in place
+submission.json            Editable, confirmed front-matter metadata
+bib/mybib.bib              Editable BibTeX references
+images/                    SchemeGuard artwork and interface figures
+pic1.png                   Document-to-policy workflow figure
+schemeguardthesis.cls      Optional neutral report class
+*.sty                      Reusable LaTeX support packages with notices
+
+Upload the complete folder to Overleaf, then set Final_Thesis_All.tex as the
+main document. The report source includes vector fallbacks for key figures.
+See README.md for the full file inventory, update commands and evidence limits.

@@ -1,0 +1,21 @@
+{
+  "checks_passed": true,
+  "pages": 70,
+  "preliminary_pages": 14,
+  "body_pages": 56,
+  "word_count": 13110,
+  "figures": 8,
+  "tables": 22,
+  "numbered_references": 19,
+  "all_heading_page_targets_checked": true,
+  "pdf_links": 100,
+  "roman_and_arabic_page_labels": true,
+  "all_pages_a4": true,
+  "forbidden_brand_instances": 0,
+  "missing_glyph_markers": 0,
+  "report_authoring_only_no_application_tests_rerun": true,
+  "visual_qa": "All 70 pages rendered and reviewed in contact sheets; detailed rechecks of contents, diagrams, tables and both screenshot pages after layout correction.",
+  "pending": "Confirmed academic identity/supervision details and institutional sign-off/reports.",
+  "text_page_bounds": "passed all 70 pages",
+  "embedded_images_within_text_margins": true
+}
