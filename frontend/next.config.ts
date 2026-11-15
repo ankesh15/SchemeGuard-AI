@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Vercel manages its own output packaging; Docker uses Next's standalone
+  // server artifact for the existing production container.
+  output: process.env.VERCEL ? undefined : "standalone",
   poweredByHeader: false,
   experimental: {
     // The Docker volume survives restarts; keep each dev HMR graph fresh.

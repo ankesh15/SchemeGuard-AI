@@ -167,6 +167,11 @@ class Settings(BaseSettings):
     def sqlalchemy_url(self) -> URL:
         if self.database_url:
             url = make_url(self.database_url.get_secret_value())
+            # Railway and several managed PostgreSQL providers expose the
+            # standard ``postgresql://`` (or legacy ``postgres://``) URL.
+            # SQLAlchemy's async engine needs the asyncpg driver explicitly.
+            if url.drivername in {"postgresql", "postgres"}:
+                url = url.set(drivername="postgresql+asyncpg")
             if url.drivername != "postgresql+asyncpg":
                 raise ValueError("DATABASE_URL must use postgresql+asyncpg")
             return url

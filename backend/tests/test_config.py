@@ -29,3 +29,14 @@ def test_sqlite_is_not_a_supported_backend():
     settings = Settings(database_url="sqlite+aiosqlite:///test.db")
     with pytest.raises(ValueError, match="postgresql"):
         _ = settings.sqlalchemy_url
+
+
+@pytest.mark.parametrize("driver", ["postgresql", "postgres"])
+def test_managed_postgres_urls_are_normalized_for_async_engine(driver):
+    settings = Settings(database_url=f"{driver}://schemeguard:secret@db.internal:5432/schemeguard")
+    assert settings.sqlalchemy_url.drivername == "postgresql+asyncpg"
+
+
+def test_async_postgres_url_is_preserved():
+    settings = Settings(database_url="postgresql+asyncpg://schemeguard:secret@db.internal/schemeguard")
+    assert settings.sqlalchemy_url.drivername == "postgresql+asyncpg"

@@ -1,5 +1,8 @@
 import { NextRequest } from "next/server";
 export const dynamic = "force-dynamic";
+// Document extraction can take longer than an ordinary API proxy request.
+// Keep within Vercel's maximum supported function duration.
+export const maxDuration = 300;
 const cookieName = "schemeguard_session";
 
 async function proxy(
@@ -60,7 +63,7 @@ async function proxy(
   let body: Uint8Array<ArrayBuffer> | undefined;
   if (request.method !== "GET") {
     const maximum = contentType?.startsWith("application/pdf")
-      ? 10 * 1024 * 1024
+      ? 4 * 1024 * 1024
       : path[0] === "reviews"
         ? 131072
         : 16000;
@@ -100,7 +103,7 @@ async function proxy(
       body,
       cache: "no-store",
       redirect: "manual",
-      signal: AbortSignal.timeout(330000),
+      signal: AbortSignal.timeout(280000),
     });
     const output = new Headers({
       "Cache-Control": "no-store",
